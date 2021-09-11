@@ -1,0 +1,152 @@
+<%- include(viewpath+ '/layouts/m-header'); %>
+<style>
+  .tags-results {
+    font: 400 15px/25px Arial;
+    color: #333;
+    text-align: center;
+}
+.tags-total-result {
+    font: 700 18px/25px Arial;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.health-title{display:flex;justify-content:space-between;align-items:center;padding:5px 10px}.health-title .title{font-family:"Alegreya Sans",sans-serif;font-size:18px;text-transform:capitalize}.health-title .powered-by{display:flex;align-items:center}.health-title .powered-by span{font-size:10px;color:#666;font-family:"Alegreya Sans",sans-serif;font-style:italic;margin-right:10px;text-transform:capitalize}.health-title .powered-by img{max-width:84px}.health-hero-thumb{background:#000;padding-top:10px;margin-top:-10px}.health-hero-thumb .section-hero-div{border:none;background:#000}.health-hero-thumb .section-hero-div a{color:#fff!important}.health-hero-thumb .section-hero-div img{border-radius:0}.common-widget-section.black-border{border-color:transparent!important}.health-article-list-title{font-size:18px;font-weight:700;color:#00a0a3;font-family:"Alegreya Sans",sans-serif;margin:0 10px 15px;padding-bottom:5px;border-bottom:#00a0a3 solid 1px;text-transform:capitalize}.latest-news{margin-bottom:20px}.latest-news ul li,.most-popular ul li,.trending ul li{border-bottom:none!important}.load-more-wrap{display:flex;justify-content:center;align-items:center}.load-more-wrap .btn{font-family:"Alegreya Sans",sans-serif;font-size:16px;text-transform:uppercase;color:#00a0a3;padding:9px 20px;border-radius:20px;border:#00a0a3 solid 1px;font-weight:700}.most-popular{border:#00a0a3 solid 1px;margin:0 10px 20px}.most-popular-title{font-family:"Alegreya Sans",sans-serif;font-size:18px;font-weight:700;background:#00a0a3;text-align:center;padding:10px 0;color:#fff;text-transform:uppercase}.trending{background:#00a0a3;margin:0 10px}.trending .trending-title{font-family:"Alegreya Sans",sans-serif;font-size:18px;font-weight:700;background:#4fbb7f;text-align:center;padding:10px 0;color:#fff;text-transform:uppercase;margin-bottom:15px}.trending-hero{margin:0 10px 20px;padding-bottom:20px;border-bottom:#abfcc1 solid 1px}.trending-hero img{width:100%}.trending-hero .hashtag{font-size:16px;color:#abfcc1;text-transform:capitalize;margin:10px 0;font-family:"Alegreya Sans",sans-serif}.trending-hero .copy{font-size:21px;color:#fff;text-transform:capitalize;margin:10px 0 0 0;font-family:"Alegreya Sans",sans-serif;font-weight:300}.trending .thumb-one .copy{color:#fff!important}.trending .thumb-one .tag{color:#abfcc1;font-size:14px;text-transform:capitalize;font-weight:300;font-family:"Alegreya Sans",sans-serif}
+    /* Board Results */
+.board_default h3{font-size:20px;font-family:'Open sans',sans-serif;color:#707070;margin-top:0}.board_default .title{font-family:'Open sans',sans-serif;font-size:14px;color:#333;margin:0}.board-flex-wrap{display:flex;justify-content:space-between;flex-wrap:wrap}.board_default{width:32%;border:1px solid #f2f2f2;padding:20px;margin:10px 0}.board_default:hover{box-shadow:0 3px 6px 0 #d6d6d6;background:#f2f2f2;-webkit-transition:all .5s ease;-moz-transition:all .5s ease;-ms-transition:all .5s ease;-o-transition:all .5s ease;transition:all .5s ease}.board-flex.align-items{display:flex;justify-content:space-between;align-items:center}.board-flex img{width:50px;margin-right:10px}.view-details{font-size:14px;padding:5px 10px;border-radius:10px;text-decoration:underline;margin:10px auto 0;display:inline-block}.board_default:hover .view-details{-webkit-transition:all .5s ease;-moz-transition:all .5s ease;-ms-transition:all .5s ease;-o-transition:all .5s ease;transition:all .5s ease;opacity:1;color:#fff;font-size:14px;background:#da4432;text-decoration:none}#boardresults{width:100%;height:360px;margin:0 auto;display:block}#iframe2{width:99%;height:441px;margin:0 auto;display:block}@media screen and (max-width:767px){#iframe2{height:500px}}@media screen and (max-width:480px){.board_default{width:90%;margin:10px auto}#boardresults{width:92%;height:615px}}
+.page-title {margin: 0 0 15px;padding: 2px;text-align: center;text-transform: uppercase;border-bottom: 1px solid #707070;position: relative;}
+/* Board Results */
+</style>
+<!-- schema for reference, place it in header if required -->
+
+   <!--cricket-ticker-wrap-->
+        <%-/* include(viewpath+ '/widgets/m-cricketscore_strip'); */%>
+    <!--cricket-ticker-wrap-->
+
+   <!--cricket-ticker-wrap-->
+   <% if (typeof ads  !== 'undefined' && typeof ads['ATF_320']  !== 'undefined'){%>
+      <div class="ad-center">
+        <%-common.displayAds(ads['ATF_320'][0]) %>
+      </div>
+    <% } %> 
+   <%-/* include(viewpath+ '/widgets/breadCrumbs'); */%>
+
+  <div class="main-story-thumb-wrap">
+      <h1 class="main-story-title">
+        <a href="javascript:void(0);">Board Exam Results 2020</a>
+        <span></span>
+      </h1>
+      <div class="board_results_iframe">
+          <%-boardTopIframeUrl%>
+      </div>
+      <div class="health-title">
+        <h2 class="title">Board Results</h2>
+      </div>
+      <div class="board-flex-wrap">
+        <% for (const [list_key, list_val] of Object.entries(boardData)) { %>
+        <div class="board_default">
+            <h3><%- list_val['name']['english']%></h3>
+            <a href="<%=constant.SITE_URL%>board-results/<%- list_val['name']['english'].replace(/\s+/g,'-').toLowerCase() %>-exam-result" class="board-flex align-items cust_link">
+                <figure><img src="<%- list_val['logo']%>" alt="<%- list_val['name']['english']%>"></figure>
+                <p class="duration title"><%- list_val['message']['english']%></p>
+            </a>
+            <a href="<%=constant.SITE_URL%>board-results/<%- list_val['name']['english'].replace(/\s+/g,'-').toLowerCase() %>-exam-result" class="view-details">View Details</a>
+        </div>
+        <% } %>
+      </div>
+
+      <% if((pgNo == '1' || typeof pgNo =='undefined') && rankingData !== null && typeof rankingData !== 'undefined') { %>
+      <% for (const [mainRanking_key, mainRanking_val] of Object.entries(rankingData['main_ranking'])) { %>
+      <div class="big-thumb">
+          <a href="<%- mainRanking_val['post_url']%>" class="thumb-img">
+            <img src="<%-constant.PLACEHOLDER_IMG_640x362 %>" class="fp-lazy" data-src="<%-common.firstpost_imageOptimization(mainRanking_val['desktop_img'], 640, 362, '') %>" alt="<%- mainRanking_val['post_title']%>" title="<%- mainRanking_val['post_title']%>">
+          </a>
+          <div class="title-wrap">
+                <a href="<%=constant.SITE_URL%>category/<%- mainRanking_val['category'].replace(/\s+/g, '-').toLowerCase()%>" class="category-name"><%- mainRanking_val['category']%></a>
+                </a>
+                <h3 class="main-title">
+                  <a href="<%- mainRanking_val['post_url']%>"><%= mainRanking_val['post_title']%></a>
+                </h3>
+                <p class="copy">
+                  <%= mainRanking_val['post_excerpt']%>
+                </p>
+                <% var shareArr = []; 
+                  shareArr['shareTitle'] = mainRanking_val['post_title'];
+                  shareArr['shareUrl'] = mainRanking_val['post_url']; 
+                %>
+                <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+          </div>
+      </div>
+      <% } %>
+      <% } %>
+
+      <% if((pgNo == '1' || typeof pgNo =='undefined') && rankingData !== null && typeof rankingData !== 'undefined') { %>
+      <% for (const [relatedRanking_key, relatedRanking_val] of Object.entries(rankingData['related_ranking'])) { %>
+      <div class="big-thumb">
+          <a href="<%- relatedRanking_val['post_url']%>" class="thumb-img">
+            <img src="<%-constant.PLACEHOLDER_IMG_640x362 %>" class="fp-lazy" data-src="<%-common.firstpost_imageOptimization(relatedRanking_val['post_image'], 640, 362, '') %>" alt="<%- relatedRanking_val['post_title']%>" title="<%- relatedRanking_val['post_title']%>">
+          </a>
+          <div class="title-wrap">
+              <a href="<%=constant.SITE_URL%>category/<%- relatedRanking_val['category'].replace(/\s+/g, '-').toLowerCase()%>" class="category-name"><%- relatedRanking_val['category']%></a>
+              </a>
+              <h3 class="main-title">
+                <a href="<%- relatedRanking_val['post_url']%>"><%= relatedRanking_val['post_title']%></a>
+              </h3>
+              <p class="copy">
+                <%= relatedRanking_val['post_excerpt']%>
+              </p>
+              <% var shareArr = []; 
+                shareArr['shareTitle'] = relatedRanking_val['post_title'];
+                shareArr['shareUrl'] = relatedRanking_val['post_url']; 
+              %>
+              <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+          </div>
+      </div>
+      <% } %>
+      <% } %>
+
+      <section class="news-section">
+        <h2 class="page-title"><span>Latest News</span></h2>
+      <% if(tag_name != '') { %>
+      <% for (const [tagData_key, tagData_val] of Object.entries(tagData['solarResults'])) { %>
+          <div class="big-thumb">
+            <a href="<%- tagData_val['url']%>" class="thumb-img">
+            <img src="<%-constant.PLACEHOLDER_IMG_320x180 %>" class="fp-lazy" data-src="<%-common.firstpost_imageOptimization(tagData_val['image'], 320, 180, '') %>" alt="<%- tagData_val['title']%>" title="<%- tagData_val['title']%>">
+            </a>
+            <div class="title-wrap">
+               <a href="<%=constant.SITE_URL%>category/<%- tagData_val['category'].replace(/\s+/g, '-').toLowerCase()%>" class="category-name"><%- tagData_val['category']%></a>
+               <h3 class="main-title">
+                  <a href="<%- tagData_val['url']%>"><%= tagData_val['title']%></a>
+               </h3>
+               <p class="copy">
+                  <%= tagData_val['description']%>
+               </p>
+               <% var shareArr = []; 
+                  shareArr['shareTitle'] = tagData_val['title'];
+                  shareArr['shareUrl'] = tagData_val['url']; 
+               %>
+               <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+            </div>
+          </div>
+      <% } %>
+      <% } %>
+      </section>
+   <!--main-story-thumb-->
+   <!--big-thumb-->
+    <%- include(viewpath+ '/widgets/paginationDefault'); %>
+    <% if (typeof ads  !== 'undefined' && typeof ads['ATF_300']  !== 'undefined'){%>
+      <div class="ad-center">
+          <%-common.displayAds(ads['ATF_300'][0]) %>
+      </div>
+    <% } %>
+    <%- include(viewpath+ '/widgets/most_read_widget'); %>
+    <% if (typeof ads  !== 'undefined' && typeof ads['BTF_300']  !== 'undefined'){%>
+      <div class="ad-center">
+          <%-common.displayAds(ads['BTF_300'][0]) %>
+      </div>
+    <% } %>
+  </div>
+<!--wrapper-->
+
+<%- include(viewpath + '/layouts/m-footer'); %>
+

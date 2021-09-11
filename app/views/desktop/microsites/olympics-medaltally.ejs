@@ -1,0 +1,60 @@
+<%- include(viewpath+ '/desktop/microsites/olympics-header'); %>
+    <div class="wrapper">
+        <div class="breadcrumbs">
+            <ul>
+                <li><a href="<%=constant.SITE_URL%>sports/olympics/">Olympic 2020</a></li>
+                <li><span>medals tally</span></li>
+            </ul>
+        </div>
+        <div class="cont-wrap">
+            <div class="left-section">
+                <div class="photos-wrap">
+                    <h1 class="pgttl">
+                        <span>Tokyo Olympics 2020 Medals Tally</span>
+                    </h1>
+                    <div class="medal-wrap">
+                        <div class="">
+                            <table cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                    <th width="5%">Rank</th>
+                                    <th width="45%">Country</th>
+                                    <th width="10%"><img src="<%-constant.SITE_URL %>static/images/olympics/gold.png" alt="" /></th>
+                                    <th width="10%"><img src="<%-constant.SITE_URL %>static/images/olympics/silver.png" alt="" /></th>
+                                    <th width="10%"><img src="<%-constant.SITE_URL %>static/images/olympics/bronze.png" alt="" /></th>
+                                    <th width="20%">total</th>
+                                </tr>
+                                <% if(templateVars && templateVars['medalData'] && templateVars['medalData']['medals_tally'] ) { %>
+                                <% const medalLeaderboard = templateVars['medalData']['medals_tally'] %>      
+                                <% medalLeaderboard.forEach((data, index) => { 
+                                    const {rank,team_name,gold_count,silver_count,bronze_count,medals_count} = data
+                                    const serialNo = index+1 %>
+                                <tr class="<% if(team_name == 'India'){%>active<%}%>">
+                                    <td><%- rank %></td>
+                                    <td>
+                                        <span><%- team_name %></span>
+                                    </td>
+                                    <td><%- gold_count %></td>
+                                    <td><%- silver_count %></td>
+                                    <td><%- bronze_count %></td>
+                                    <td><%- medals_count %></td>
+                                </tr>
+                                <% }) %>
+                                <% } %>
+                            </table>
+                        </div>
+
+                        <!-- <div class="center"><a href="javascript:void(0);" class="read-more" id="readmore">read more</a></div> -->
+                        <p>
+                            Tokyo Olympics 2020 will be held in Japan from 23 July to 8 August, followed by the Tokyo Paralympics from 24 August to 5 September. The Games were deferred by a year in 2020 due to the coronavirus pandemic. This will be the 32nd edition of the modern Olympics. This is the first edition of the Games to have been postponed (previous editions of the Olympics have been cancelled due to the World Wars).
+
+                            While the Indian men’s hockey team has won multiple golds, rifle shooter Abhinav Bindra remains the only Indian athlete before the start of the Tokyo Olympics to have won an individual gold medal (he won the 10m air rifle gold at Beijing 2008). India won two Olympic medals at the Rio Games five years ago, while London 2012 saw the Indian contingent return home with their best-ever medal tally: six medals. Before the Games started, India’s sports ministry and the Indian Olympic Association had set high hopes from the Indian contingent travelling to Tokyo, with talk of India crossing the double-digit medal haul at Tokyo.
+
+                            There will be 339 medal events at Tokyo Olympics. Here’s the Tokyo Olympics medal tally:
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <%- include(viewpath+ '/desktop/microsites/olympics-rhs'); %>
+        </div>
+    </div>
+<%- include(viewpath+ '/desktop/microsites/olympics-footer'); %>        

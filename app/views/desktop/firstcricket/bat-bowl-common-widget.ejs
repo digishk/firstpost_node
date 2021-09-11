@@ -1,0 +1,91 @@
+<div class="score-text-wrp">
+    <div class="score-div-flex">
+        <div class="score-value-txt">
+            <h4 class="score-val">
+            <%= scoreData[inningArr[i]]['Equation']['Total']%>/<%= scoreData[inningArr[i]]['Equation']['Wickets'] %>
+            </h4>
+        </div>
+        <div class="score-other-div">
+            <div class="score-item">
+                <h6 class="score-ttl">Overs</h6>
+                <h3 class="score-item-val"><%= scoreData[inningArr[i]]['Equation']['Overs']%></h3>
+            </div>
+            <div class="score-item">
+                <h6 class="score-ttl">Fours</h6>
+                <h3 class="score-item-val"><%= scoreData[inningArr[i]]['Equation']['Fours']%></h3>
+            </div>
+            <div class="score-item">
+                <h6 class="score-ttl">Sixes</h6>
+                <h3 class="score-item-val"><%= scoreData[inningArr[i]]['Equation']['Sixes']%></h3>
+            </div>      
+            <div class="score-item">
+                <h6 class="score-ttl">Extras</h6>
+                <h3 class="score-item-val"><%= scoreData[inningArr[i]]['Equation']['extra']%></h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+                        <!--Score Tabs Widget-->
+
+<!--Batting Table-->
+<table class="score-big-tbl">
+    <thead>
+        <tr>
+            <th>Batsman</th>
+            <th>Status</th>
+            <th>R</th>
+            <th>B</th>
+            <th>4s</th>
+            <th>6s</th>
+        </tr>
+    </thead>
+    <tbody>                                
+<%                               
+for (const [bat_Key, bat_val] of Object.entries(scoreData[inningArr[i]]['batsmen']['list'])) { 
+    var batSName = bat_val['name'].toLowerCase().replace(" (c)","").replace(" (w)","").replace(/\ /g,"-"); 
+    var BatUrl = deFUrl+batSName+'-'+bat_val['id'];
+    if(bat_val['Howout'].toLowerCase() == "batting" || bat_val['Howout'].toLowerCase() == "not out"){
+%>
+        <tr <% if(bat_val['Striker'].toLowerCase() == "yes"){ %>class="current"<% } %>>
+            <td><a href="<%= BatUrl %>"><%= bat_val['name'] %></a></td>
+            <td><%= bat_val['Howout'] %></td>
+            <td><%= bat_val['Runs'] %></td>
+            <td><%= bat_val['BallsFaced'] %></td>
+            <td><%= bat_val['four'] %></td>
+            <td><%= bat_val['six'] %></td>
+        </tr>  
+        <% } } %>                              
+    </tbody>
+</table>
+<!--Batting Table-->
+
+<!--Bowling Table-->
+<table class="score-big-tbl">
+    <thead>
+        <tr>
+            <th>Bowling</th>
+            <th>0</th>
+            <th>M</th>
+            <th>R</th>
+            <th>W</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for (const [bowl_Key, bowl_val] of Object.entries(scoreData[inningArr[i]]['bowler']['list'])) { %>
+    <% if(bowl_Key < 2) { 
+        var bowlName = bowl_val['name'].toLowerCase().replace(" (c)","").replace(" (w)","").replace(/\ /g,"-"); 
+        var bowlUrl = deFUrl+bowlName+'-'+bowl_val['id'];
+    %>
+        <tr>
+            <td <% if(bowl_val['Bowling'] == "yes"){ %>class="current"<% } %>>
+                <a href="<%= bowlUrl %>"><%= bowl_val['name'] %></a></td>
+            <td><%= bowl_val['Over'] %></td>
+            <td><%= bowl_val['Maiden'] %></td>
+            <td><%= bowl_val['Runs'] %></td>
+            <td><%= bowl_val['Wicket'] %></td>
+        </tr>
+        <% } } %>                                
+    </tbody>
+</table>
+<!--Bowling Table-->

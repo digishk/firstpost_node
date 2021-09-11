@@ -1,0 +1,316 @@
+@font-face {
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''), url(/static/fonts/playfair-display-v20-latin-regular.woff2) format('woff2'), url(/static/fonts/playfair-display-v20-latin-regular.woff) format('woff')
+}
+
+@font-face {
+    font-family: 'Playfair Display';
+    font-style: normal;
+    font-weight: 700;
+    src: local(''), url(/static/fonts/playfair-display-v20-latin-700.woff2) format('woff2'), url(/static/fonts/playfair-display-v20-latin-700.woff) format('woff')
+}
+
+@font-face {
+    font-family: 'SFPro Display';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''), url(/static/fonts/SFProDisplay-regular.woff2) format('woff2'), url(/static/fonts/SFProDisplay-regular.woff) format('woff')
+}
+
+@font-face {
+    font-family: 'SFPro Display';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''), url(/static/fonts/SFProDisplay-Black.woff2) format('woff2'), url(/static/fonts/SFProDisplay-Black.woff) format('woff')
+}
+
+@font-face {
+    font-family: 'SFPro Display';
+    font-style: normal;
+    font-weight: 700;
+    src: local(''), url(/static/fonts/SFProDisplay-Bold.woff2) format('woff2'), url(/static/fonts/SFProDisplay-Bold.woff) format('woff')
+}
+@font-face {
+    font-family: 'Segoe UI';
+    font-style: normal;
+    font-weight: 700;
+    src: local(''), url(/static/fonts/Segoe-UI.woff2) format('woff2'), url(/static/fonts/Segoe-UI.woff) format('woff')
+}
+
+a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,
+samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;font:inherit;vertical-align:baseline}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}
+/*html{scroll-behavior:smooth;}*/
+*{box-sizing:border-box}
+body{line-height:1;font-family:'Playfair Display'}
+ol,ul{list-style:none;padding:0;margin:0}
+blockquote,q{quotes:none}
+blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}
+table{border-collapse:collapse;border-spacing:0}
+a {text-decoration:none;color:#000}
+.transition{-webkit-transition:all 500ms ease;-moz-transition:all 500ms ease;-ms-transition:all 500ms ease;-o-transition:all 500ms ease;transition:all 500ms ease}
+.glide{position:relative;width:100%;box-sizing:border-box}
+.glide *{box-sizing:inherit}
+.glide__track{overflow:hidden}
+.glide__slides{position:relative;width:100%;list-style:none;backface-visibility:hidden;transform-style:preserve-3d;touch-action:pan-Y;overflow:hidden;padding:0;white-space:nowrap;display:flex;flex-wrap:nowrap;will-change:transform}
+.glide__slides--dragging{user-select:none}
+.glide__slide{width:100%;height:100%;flex-shrink:0;white-space:normal;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
+.glide__slide a{user-select:none;-webkit-user-drag:none;-moz-user-select:none;-ms-user-select:none}
+.glide__arrows,.glide__bullets{-webkit-touch-callout:none;user-select:none}
+.glide--rtl{direction:rtl}
+.top-container{width:960px;margin:25px auto;display:flex;justify-content:space-between}
+.left-column{display:flex;justify-content:space-around}
+.addbanner-170{width:170px;height:90px;background:#fff;border:1px solid #c1c1c1;align-items:center;font:400 14px/17px Roboto;color:#272727;display:flex;justify-content:center}
+.fp-logo-wrap{display:flex}
+.fp-logo-wrap .vertext{font:400 11px/13px Roboto;color:#272727;writing-mode:vertical-lr;text-orientation:upright;margin-top:-7px;padding:0 8px}
+.fp-logo-wrap img{vertical-align:top}
+.fp-logo-wrap .toktext{color:#f53442;font:400 36px/30px SFPro Display}
+.fp-logo-wrap .toktext p em{font-style:normal;font:400 36px/30px SFPro Display;color:#000}
+#dsktopright{display:flex;}
+#mbtopright{display:none}
+#mbtopleft{display:none}
+#dsktopleft{display:flex;}
+.right-column{display:flex;justify-content:space-between;padding-top:11px;width:450px}
+.right-column .box{width:105px;height:45px;display:flex;align-items:center;justify-content:center;font:400 12px/37px Montserrat;color:#919191;margin-right:7px;flex-shrink:0}
+.right-column .box:last-child{margin-right:0}
+.right-column .box a{margin-top: 5px;}
+.right-column .part-ttl{font:400 11px/13px Roboto;color:#000;padding-bottom:9px}
+.right-column .flex-wrap{display:flex;justify-content:flex-start;position:relative;}
+/*.right-column #copartner .flex-wrap::after{position:absolute;content:'';width:1px;height:45px;background:#cbcbcb;margin:22px 0;right:-8px;top:-22px;}*/
+.right-column .glide__slide:first-child{width:51%}
+.right-column .glide__slide{width:49%}
+.right-column .partner-box:first-child{margin-right:10px}
+header{width:100%;background:#000;padding:10px 0;position:sticky;top:0;z-index:999}
+.header-wrap{width:1000px;margin:0 auto;display:flex;justify-content:space-between}
+.menu{display:flex;align-items:center}
+.menu a{font:400 11px/14px Montserrat;color:#fff;text-transform:uppercase;padding-right:10px}
+.menu a.active{color:#ffe79a;font-weight:700}
+.menu a:hover{color: #ffe79a;font-weight:700}
+.menu a:last-child{padding-right:0}
+.rt-social-wrap{display:flex;justify-content:space-between;align-items:center}
+.rt-social-wrap ul{width:100px}
+.rt-social-wrap .ic-social{background:url('../images/olympics/ic-social-sprite.png') no-repeat 0 0;display:inline-block;width:20px;height:20px;text-indent:-9999px}
+.rt-social-wrap .ic-social a{display:block}
+.rt-social-wrap .fb{background-position:0 0}
+.rt-social-wrap .twt{background-position:-20px 0}
+.rt-social-wrap .insta{background-position:-40px 0}
+.rt-social-wrap .ytube{background-position:-60px 0}
+.back-wrap{display:flex;flex-direction:column}
+.back-wrap a{font:300 10px/13px Montserrat;color:#fff;padding-left:4px}
+.tracker-wrap{width:100%;background:#fad65f;padding-top:12px;padding-bottom:25px}
+.container{width:960px;margin:0 auto}
+.flag-wrap{display:flex;align-items:center;margin-bottom:7px}
+.flag-wrap span{font:700 17px/20px Montserrat;color:#fff;margin-top:-6px;margin-left:5px}
+.tracker-wrap .slider__arrow{background-color:#fff;position:absolute;top:40%;z-index:1;width:32px;height:32px;margin-top:-16px;border-radius:50%;-webkit-transition:all .2s ease-in-out;transition:all .2s ease-in-out;border:0}
+.tracker-wrap .slider__arrow--prev{left:-12px;top:50%;z-index:99}
+.tracker-wrap .glide__arrow--next{right:-5px;top:50%;z-index:99}
+.tracker-wrap .slider__arrow:focus{outline:0}
+.tracker-wrap .slider__arrow svg{margin-left:-3px;margin-top:2px}
+.left-section .tracker-wrap{margin-top:-12px;margin-bottom:20px}
+.left-section .tracker-wrap .container{width:calc(100% - 20px);padding:0 9px 0 10px;}
+.left-section .tracker-cont{padding-bottom:50px}
+.left-section .tracker-wrap .glide__arrow--next{right:-10px}
+.left-section .tracker-cont .profile{text-align:center;}
+.left-section .tracker-cont .profile .athname{padding:11px 14px;color:#000;font:700 28px/30px Montserrat;}
+.left-section .tracker-cont .profile p{font:500 20px/24px Montserrat;color:#707070;}
+.left-section .tracker-cont .subttl{color:#FFCF2E;font: 700 24px/45px Montserrat;padding-top:30px}
+.left-section .tracker-cont p{font:400 20px/27px Segoe UI;color:#707070;}
+.container{width:960px;margin:0 auto;position:relative}
+.horizontal-share{display:flex;padding-right:6px}
+.wrapper{width:960px;margin:12px auto}
+.breadcrumbs ul{display:flex;justify-content:flex-start;margin-bottom:15px}
+.breadcrumbs ul li{font:400 11px/14px Montserrat;padding:0 15px 0 0}
+.breadcrumbs ul li a{color:#ffcf2e;position:relative}
+.breadcrumbs ul li a::after{content:'/';position:absolute;right:-10px;top:0;color:#999}
+.breadcrumbs ul li span{color:#999}
+.cont-wrap{display:flex;justify-content:space-between;width:960px;margin:0 auto}
+.left-section{width:640px}
+.right-section{width:300px}
+.rt-banner, .olym-tweet{margin-bottom:12px; text-align: center;}
+.olym-tweet img{width:100%}
+.pgttl{margin:0 0 30px;padding:2px;text-align:center;text-transform:uppercase;border-bottom:1px solid #707070;position:relative}
+.pgttl span{text-align:left;font:700 27px/45px Montserrat;letter-spacing:0;color:#000;opacity:1;padding:2px}
+.pgttl::after{content:"";width:83px;height:6px;background:#fad65f;position:absolute;bottom:-3px;left:0;right:0;margin:0 auto;border-left:10px solid #ffff;border-right:10px solid #fff}
+.phgallery-wrap{display:flex;flex-wrap:wrap;justify-content:space-between}
+.photo-box{position:relative;width:30%;box-shadow:0 3px 6px rgba(0, 0, 0, .16);padding:0 0 35px;margin-bottom:30px}
+.photo-box .image-wrap{position:relative}
+.photo-box .image-wrap img{width:100%}
+.phgallery-wrap .photo-box .image-wrap .icon-photo{position:absolute;bottom:10px;left:10px;background:#fff;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center}
+.photo-box .icon-photo svg{margin:2px 0 0}
+.photo-box .image-wrap .icon-video{position:absolute;bottom:-8px;left:-5px}
+.photo-box .photo-content{padding:8px 10px 10px;margin:0 0 10px}
+.photo-box .photo-content a{display:block}
+.photo-box .photo-content .ph-ttl a{font:700 15px/20px 'Playfair Display';letter-spacing:0;color:#000;max-height:78px;min-height:78px;overflow:hidden}
+.photo-box .share-wrap{position:absolute;bottom:25px;right:0;cursor:pointer}
+.thumb-social-wrap{position:relative;top:4px;right:10px}
+.thumb-social-wrap .thumb-social{background:url(../images/social-bg.png) no-repeat;width:60px;position:absolute;bottom:30px;left:-24px;height:0;overflow:hidden;-webkit-transition:all 500ms ease;-moz-transition:all 500ms ease;-ms-transition:all 500ms ease;-o-transition:all 500ms ease;transition:all 500ms ease}
+.thumb-social-wrap .thumb-social li:first-child{padding-top:8px}
+.thumb-social-wrap .thumb-social li{padding:4px 0;border-bottom:#ddd solid 1px;display:flex;justify-content:center}
+.thumb-social-wrap .thumb-social a{width:26px;height:26px}
+.photo-box .share-wrap svg{fill:#000;width:15px;height:15px}
+.thump-social-wrap .button-social svg{width:14px;cursor:pointer}
+.thumb-social-wrap .thumb-social.open{height:167px;-webkit-transition:all 500ms ease;-moz-transition:all 500ms ease;-ms-transition:all 500ms ease;-o-transition:all 500ms ease;transition:all 500ms ease;padding:10px 8px}
+.sc-icon{width:26px;height:26px;display:inline-block;background:url(../images/m-sprite.png)}
+.fb{background-position-x:0}.tw{background-position-x:-28px}
+.wa{background-position-x:-56px}
+.ev{background-position-x:-83px}
+.sports-wrap{background:#fff;width:300px;margin-bottom:20px}
+.sport-ttl{background:#fad65f;font:700 16px/19px Montserrat;color:#fff;padding:12px 16px}
+.sport-cont{padding:20px 6px;border:1px solid #c9c9c9;border-top:0}
+.sport-cont img{width:50px;height:48px}
+.sport-cont ul{display:flex;justify-content:space-between}
+.sport-cont ul li{width:50px;margin:0 auto;text-align:center;}
+.sport-cont ul li .spname{color:#000;font:700 11px/15px Playfair Display;text-align:center;padding-top:10px;width:50px;margin:0 auto}
+.sport-cont .slider__arrow{position:absolute;top:40%;z-index:1;width:32px;height:32px;margin-top:-9px;border-radius:50%;background-color:#e8e8e8;-webkit-transition:all .2s ease-in-out;transition:all .2s ease-in-out;border:0}
+.sport-cont .slider__arrow--prev{left:.3rem}
+.sport-cont .glide__arrow--next{right:1%}
+.sport-cont .glide__track{margin:0 30px}
+.sport-cont .slider__arrow:focus{outline:0}
+.sport-cont .slider__arrow svg{margin-left:-3px}
+.list-wrap {display:flex;flex-wrap:wrap;justify-content:flex-start}
+.list-wrap li{text-align:center;margin:0 0 40px;width:160px}
+.list-wrap li img{width:120px;height:114px}
+.list-wrap li .icname{display:block;color:#000;font:700 17px/22px Playfair Display;margin-top:20px}
+.countdown-wrap{border:1px solid #b7b7b7;padding:10px;margin-bottom:20px}
+.cnt-ttl {font:600 12px/15px Montserrat;color:#000;padding-bottom:8px}
+.timer {background:#fff;text-align:center;color:#fff;padding:6px 0}
+.bb-flex {display:flex;justify-content:space-between;color:#fff;width:280px;margin:0 auto}
+.bb-flex div {color:#fff;background:#fad65f;width:85px}
+.bb-flex .cd-top{font:700 35px/35px Montserrat}
+.bb-flex .cd-bottom {font:400 12px/15px Montserrat}
+.countdown-wrap .flexwrap {display:flex;align-items:center;flex-direction:column;margin-right:10px;justify-content:center;height:72px}
+.countdown-wrap .flexwrap:last-child{margin-right:0}
+.main-wrap{margin:25px auto}
+.topspace{margin-top:65px}
+#top-slider{margin:0 0 40px}
+#top-slider .glide__bullets{margin:10px 0 0;display:flex;justify-content:center}
+#top-slider .glide__bullets .glide__bullet{background:#d6d6d6;border:0;width:30px;height:6px;margin:0 2px;cursor:pointer;outline:0}
+#top-slider .glide__bullets .glide__bullet.glide__bullet--active{background:#f04f38}
+#home-section .top-image-wrap{position:relative}
+#home-section .top-image-wrap .main-title-div{position:absolute;background-color:#fff;right:15px;left:15px;bottom:15px;display:flex;align-items:flex-start;padding:10px}
+#home-section .top-image-wrap .main-title-wrap{margin:0 20px 0 0}
+#home-section .top-image-wrap .main-title-wrap a{font:700 26px/30px 'Playfair Display';letter-spacing:0;color:#000}
+#home-section .top-image-wrap .share-wrap{top:-10px;right:-10px}
+#home-section .top-image-wrap .share-wrap .button-social svg{width:20px;height:30px}
+#menunav-wrap{opacity:0;display:none}
+.anchor-wrap{padding:15px 0;margin-bottom:20px;border-bottom:1px solid #FAD65F;display:flex;justify-content:flex-start;;flex-wrap:wrap;}
+.anchor-wrap a{border:1px solid #FAD65F;padding:5px 10px;margin:0 3px 3px 0;font:400 14px/16px Playfair Display;}
+.anchor-wrap a:hover{background:#FAD65F;color:#fff}
+.history-box:focus{outline:none}
+.history-box{background:url('../images/olympics/bg-img.jpg') repeat 0 0;width:100%;padding:35px 16px;margin-bottom:20px}
+.history-box.history-box-gray{background:#F5F5F5;}
+.history-box.history-box-gray .flex-box .thumb-wrap img{border:10px solid #AAA}
+.history-box.history-box-gray .flex-box .cont h2{color:#000}
+.history-box.history-box-gray .flex-box .cont p{color:#000}
+.history-box .flex-box{clear:both;}
+.history-box .flex-box .thumb-wrap{padding:28px 20px 20px 0;float:left;}
+.history-box .flex-box .thumb-wrap img{border:10px solid #fff;border-radius:50%}
+.history-box .flex-box .cont{width:100%}
+.history-box .flex-box .cont h2{color:#fff;font:700 30px/40px Playfair Display;padding-bottom:20px}
+.history-box .flex-box .cont p{color:#fff;font:400 14px/23px Playfair Display;padding-bottom:10px}
+.medaltally-wrap{margin:20px 0}
+.medaltally-wrap img{width:100%}
+.history-box .flex-box .mbttl{display:none}
+.history-box .flex-box .cont .showtext{display:block}
+.quiz-wrap{border:1px solid #E5E5E5;padding:25px;margin-bottom:25px}
+li.glide__slide.slide-nav {
+    height: 100vh;
+    overflow: auto;
+}
+
+@media screen and (max-width:980px) {
+    .top-container{width: calc(100% - 20px);flex-direction: column;margin:25px 10px}
+    .container{width:100%}
+    .wrapper{width:100%}
+    .breadcrumbs{margin:0 10px}
+    .cont-wrap{width:calc(100% - 20px);flex-direction:column;}
+    .pgttl{margin:0 -10px 40px}
+    .header-wrap{width:100%}
+    .left-section{width:100%;position:relative;}
+    .right-section {width: 100%;max-width:360px;margin:0 auto;}
+    .right-column{width:100%;justify-content:flex-start;}
+    .right-column #copartner .flex-wrap::after{display:none;}
+    .right-column .box:last-child{margin-right:7px}
+    #dsktopright{display:none}
+    #mbtopright{display:flex;width:100%;max-width:360px}
+    #mbtopleft{display:flex;justify-content:flex-start;}
+    #dsktopleft{display:none;}
+    .right-column .box{width:84px;height:36px;flex-shrink:1}
+    .addbanner-170{width:105px;height:45px;flex-shrink:0}
+    .fp-logo-wrap .vertext{font:400 6px/8px Roboto;padding:0 5px}
+    .fp-logo-wrap img{width:45px;height:13px}
+    .fp-logo-wrap .toktext{font:400 16px/16px SFPro Display;}
+    .fp-logo-wrap .toktext p em{font:400 16px/16px SFPro Display;}
+    .rt-social-wrap{margin-left:20px}
+    .menu{margin-left:10px}
+    .hamburger{margin:10px 10px 0 0}
+    header {overflow:auto;white-space:nowrap}
+    .mbnav{display:flex;flex-direction:column;padding:5px;}
+    .mbnav span{width:22px;height:2px;margin-bottom:3px;background:#000;}
+    .slider-wrap .glide__arrow--next{right:0}
+    .videos-slider .glide__arrow.glide__arrow--right{right:0}
+    .sports-wrap{width:100%;margin-top:20px}
+    .rt-banner img{width:100%}
+    .olym-tweet img{width:100%}
+    .right-column .partner-box{width:180px}
+    .right-column .partner-box:first-child{margin-right:0}
+    .main-wrap{margin:10px auto}
+    .pgttl span{font:700 22px/30px arial;}
+   .top-image-wrap .th-social-wrap{bottom:-25px;right:0;top:inherit;}
+    #home-section .top-image-wrap .share-wrap{bottom:-10px;top:inherit;}
+    #home-section .top-image-wrap .main-title-div{padding:10px;left:10px;right:10px;display:flex;justify-content:space-between;}
+    
+    #menunav-wrap{display:block;opacity:0;z-index:-9;position:fixed;top:0;left:0;width:100%;height:100%;
+    background: rgba(0, 0, 0, .3);-webkit-transition: all 500ms ease;-moz-transition: all 500ms ease;-ms-transition: all 500ms ease;
+    -o-transition: all 500ms ease;transition: all 500ms ease;}
+    #menunav-wrap.open{opacity:1;z-index:999;}
+    #menunav-wrap.open #mymenunav{left:0;-webkit-transition:all 500ms ease;-moz-transition:all 500ms ease;-ms-transition:all 500ms ease;-o-transition:all 500ms ease;transition:all 500ms ease}
+    #mymenunav{position:absolute;top:0px;left:-320px;bottom: 0;width: 320px;background: #fff;-webkit-transition: all 500ms ease;
+    -moz-transition: all 500ms ease;-ms-transition: all 500ms ease;-o-transition: all 500ms ease;transition: all 500ms ease;
+    overflow-y: scroll;display: flex;flex-direction: column;}
+    #mymenunav ul li{border-bottom:1px solid #B9B9B9;padding:10px 20px;font: 400 14px/20px Montserrat;}
+    .close-menunav{display:flex;justify-content:flex-end;padding:10px}
+    .close-menunav svg{width:24px;height:24px}
+    .photo-box{width:48%}
+    .photos-wrap .photo-box .photo-content .ph-ttl a{font:700 12px/16px 'Playfair Display';}
+    .phgallery-wrap .photo-box .image-wrap .icon-photo{width:22px;height:22px}
+    .list-wrap{justify-content:center;}
+    .list-wrap li{width:98px;display:flex;flex-direction:column;align-items:center;}
+    .list-wrap li img{width:80px;height:76px}
+    .list-wrap li .icname{font:700 13px/17px Playfair Display;margin-top:10px}
+    #home-section .top-image-wrap .main-title-wrap a{font:700 12px/20px 'Playfair Display';}
+    #home-section .top-image-wrap img{width:100%}
+    .tracker-wrap .slider__arrow--prev{display:none}
+    .tracker-wrap .glide__arrow--next{display:none}
+    .tracker-wrap .glide{margin:0 0 0 10px;width:calc(100% - 10px)}
+    #athletetracker{width:100%}
+    .left-section .tracker-cont{padding:0 10px 30px;width:calc(100% - 20px)}
+    .left-section .tracker-wrap .container{width:100%;padding:0}
+    .left-section .tracker-cont .profile img{width:166px;height:166px}
+    .left-section .tracker-cont .profile .athname{font:700 22px/36px Montserrat;padding:11px 14px 5px}
+    .left-section .tracker-cont .profile p{font: 500 16px/19px Montserrat;}
+    .left-section .tracker-cont .subttl{font:700 18px/26px Montserrat;padding-bottom:5px}
+    #athletetracker .right-section{padding:0 10px}
+    .other-sites-links{overflow:auto}
+    .history-box .flex-box .thumb-wrap{padding:15px 15px 20px 0}
+    .history-box.history-box-gray .flex-box .thumb-wrap img{width:106px;height:106px}
+    
+}
+@media screen and (max-width:480px){
+    .history-wrap{margin:0 -10px}
+    .anchor-wrap{padding:0 10px;overflow:auto;justify-content:inherit;flex-wrap:inherit;}
+    .history-box{padding:20px 10px}
+    .history-box .flex-box .thumb-wrap img{width:106px;height:106px}
+    .history-box .flex-box .mbttl{color:#fff;font:700 24px/30px Playfair Display;display:block;text-align:center;padding-bottom:20px}
+    .history-box .flex-box .cont h2{display:none}
+    .history-box .flex-box .thumb-wrap{padding:0px 10px 20px 0}
+    .history-box .flex-box .cont p{font:400 12px/19px Playfair Display;}
+    .history-box.history-box-gray .flex-box .mbttl{color:#000}
+    .history-box .flex-box .cont .showtext{display:none}
+    #mbtopleft .partner-box{position: absolute;right: 15px}
+    .part-ttl{font:400 11px/13px Roboto;color:#000;padding-bottom:5px}
+    #mbtopleft .box{width:84px;height:36px;}
+    #mbtopleft .box img{width: 100%;}
+}

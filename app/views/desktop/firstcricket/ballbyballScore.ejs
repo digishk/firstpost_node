@@ -1,0 +1,38 @@
+<%- include(viewpath+ '/layouts/header'); %>    
+        <div class="main-wrapper">
+
+            <!--728x90 Ad Space-->
+            <% if (typeof ads  !== 'undefined' && typeof ads['BTF_728']  !== 'undefined'){%>
+            <div class="ad-slot">
+                <%-common.displayAds(ads['ATF_728'][0]) %>
+            </div>
+            <% } %>
+            <!--728x90 Ad Space-->            
+            <!--Score-Widget-->
+            <%- include(viewpath+ '/widgets/scorecard_caraousal'); %>
+            <!--Score-Widget-->
+
+            <!--Bread crumb-->
+            <%- include(viewpath+ '/widgets/breadCrumbs'); %>
+            <!--Bread crumb-->
+
+            <!--Cricket Inner Menu-->
+            <% if(typeof seriesID !== 'undefined' && seriesID != '3978') { %>
+                <%- include(viewpath+ '/layouts/level-4-nav'); %>
+            <% } %>
+            <!--Cricket Inner Menu-->            
+            <!--Main Page Content-->
+            <div class="content-wrap" id="quickScore">
+                <div class="left-content ajax_widget team_widget_<%=matchFile%>">
+                    <%- include(viewpath+'/'+device+'/firstcricket/quick-score-ajax-widget'); %>
+                    <!--Schedule Section-->
+                </div>
+                <%- include(viewpath+ '/'+device+'/firstpost/rhs'); %>
+            </div>
+            <!--Main Page Content-->
+            <%- include(viewpath+ '/desktop/firstcricket/hidden-param'); %>
+        </div>                
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+<%- include(viewpath+ '/layouts/footer'); %>

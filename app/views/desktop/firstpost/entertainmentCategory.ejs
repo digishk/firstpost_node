@@ -1,0 +1,354 @@
+<%- include(viewpath+ '/layouts/header'); %>
+
+<div class="container">
+   <% if (typeof ads  !== 'undefined' && typeof ads['ATF_728']  !== 'undefined'){%>
+        <div class="ad-center fixed-ad-banner">
+            <%-common.displayAds(ads['ATF_728'][0]) %>
+        </div>
+    <% } %> 
+   <!--cricket-ticker-wrap-->
+   <%- include(viewpath+ '/widgets/cricketscore_strip'); %>
+   <!--cricket-ticker-wrap-->
+   
+   <%- include(viewpath+ '/widgets/breadCrumbs'); %>
+   <div class="main-container">
+      <div class="main-content">
+      	<% if((pgNo == '1' || typeof pgNo =='undefined') && categoryData !== null) { %> 
+         <div class="main-story-thumb-wrap">
+            <h3 class="main-story-title">
+               <a href="javascript:void(0);"><%=category_name %></a>
+               <span></span>
+            </h3>
+            <div class="slider-wrap main-story-slider" id="mainstoryslider">
+               <div class="glide__track" data-glide-el="track">
+                  <ul class="slider">
+                  	 <% for (const [categoryData_key, categoryData_val] of Object.entries(categoryData['CatMainRanking']['main_ranking'])) { %>
+                     <li class="main-story-thumb">
+                        <% if(categoryData_val['isliveBlog'] != 0) { %> 
+		                  <div class="live-txt"><span class="blinking"></span>live</div>
+		                <% } %>
+                        <a href="<%- categoryData_val['modified_posturl'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" class="thumb">
+                        <img src="<%- categoryData_val['desktop_img']%>" alt="<%- categoryData_val['modified_title']%>" title="<%- categoryData_val['modified_title']%>">
+                        </a>
+                        <div class="title-wrap">
+                        	<a href="<%-categoryData_val['category_url'] %>" class="category-name"><%-categoryData_val['category'] %></a>
+                           <h1 class="main-title">
+                              <a href="<%-categoryData_val['modified_posturl'].replace(constant.MAIN_SITE_URL, constant.SITE_URL) %>"><%-categoryData_val['modified_title'] %></a>
+                           </h1>
+                           <% var shareArr = []; 
+		                        shareArr['shareTitle'] = categoryData_val['modified_title'];
+		                        shareArr['shareUrl'] = categoryData_val['modified_posturl']; 
+		                   %>
+		                   <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+                        </div>
+                     </li>
+                    <% } %>
+                  </ul>
+                  <div class="glide__bullets" data-glide-el="controls[nav]">
+			<% i = 0; %>
+                  	<% for (const [categoryData_key, categoryData_val] of Object.entries(categoryData['CatMainRanking']['main_ranking'])) { %>
+		               <button class="glide__bullet" data-glide-dir="=<%=i %>"></button>
+			   <% i++; %>
+			<% } %>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!--main-story-thumb-->
+         <% for (const [categoryData_key, categoryData_val] of Object.entries(categoryData['CatMainRanking']['related_ranking'])) { %>
+         <div class="big-thumb">
+            <a href="<%- categoryData_val['modified_posturl'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" class="thumb-img">
+            	<img class="fp-lazy" src="<%-constant.PLACEHOLDER_IMG_640x362 %>" data-src="<%-common.firstpost_imageOptimization(categoryData_val['post_image'], 640, 362, '') %>" alt="<%- categoryData_val['modified_title']%>" title="<%- categoryData_val['modified_title']%>">
+            </a>
+            <div class="title-wrap">
+               <a href="<%- categoryData_val['category_url']%>" class="category-name"><%- categoryData_val['category']%>
+               </a>
+               <h3 class="main-title">
+                  <a href="<%- categoryData_val['modified_posturl'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>"><%= categoryData_val['modified_title']%></a>
+               </h3>
+               <p class="copy">
+                  <%= categoryData_val['post_excerpt']%>
+               </p>
+               <% var shareArr = []; 
+		            shareArr['shareTitle'] = categoryData_val['modified_title'];
+		            shareArr['shareUrl'] = categoryData_val['modified_posturl']; 
+		       %>
+		       <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+            </div>
+         </div>
+        <% } %>
+         <!--big-thumb-->
+
+         <% if (typeof ads  !== 'undefined' && (typeof ads['MID1_300']  !== 'undefined' || typeof ads['MID2_300']  !== 'undefined')){%>
+              <div class="ad-combo">
+              <% if (typeof ads  !== 'undefined' && typeof ads['MID1_300']  !== 'undefined'){%>
+                  <div>
+                      <%-common.displayAds(ads['MID1_300'][0]) %>
+                  </div>
+              <% } %> 
+              <% if (typeof ads  !== 'undefined' && typeof ads['MID2_300']  !== 'undefined'){%>
+                  <div>
+                      <%-common.displayAds(ads['MID2_300'][0]) %>
+                  </div>
+              <% } %>  
+              </div>
+         <% } %>
+         
+         <!-- Video section-->
+         <div class="small-thumb-wrap">
+            <h3 class="main-story-title">
+               <a href="javascript:void(0);">videos</a>
+               <span></span>
+            </h3>
+            <div class="small-thumb-row">
+            <% for (const [videoDataArr_key, videoDataArr_val] of Object.entries(videoDataArr['solarResults'].slice(0,3))) { %>
+               <div class="small-thumb">
+                  <a href="<%- videoDataArr_val['url']%>" class="thumbnail">
+                     <img class="fp-lazy" src="<%-constant.PLACEHOLDER_IMG_192x104 %>" data-src="<%-common.firstpost_imageOptimization(videoDataArr_val['image'], 192, 104, '') %>" alt="<%- videoDataArr_val['title']%>" title="<%- videoDataArr_val['title']%>">
+                     <svg width="70.182" height="70.182" viewBox="0 0 70.182 70.182" class="video-icon">
+                        <defs>
+                           <filter id="a" x="0" y="0" width="70.182" height="70.182" filterUnits="userSpaceOnUse">
+                              <feOffset dy="3" input="SourceAlpha"></feOffset>
+                              <feGaussianBlur stdDeviation="4.5" result="b"></feGaussianBlur>
+                              <feFlood flood-opacity="0.294"></feFlood>
+                              <feComposite operator="in" in2="b"></feComposite>
+                              <feComposite in="SourceGraphic"></feComposite>
+                           </filter>
+                        </defs>
+                        <g transform="matrix(1, 0, 0, 1, 0, 0)">
+                           <path fill="#fff" d="M23.591,2A21.591,21.591,0,1,0,45.182,23.591,21.6,21.6,0,0,0,23.591,2ZM19.273,33.307V13.875l12.955,9.716Z" transform="translate(11.5 8.5)"></path>
+                        </g>
+                     </svg>
+                  </a>
+                  <a href="<%- videoDataArr_val['url']%>" class="copy">
+                     <%-videoDataArr_val['title'] %>
+                  </a>
+                  <!--<a href="" class="duration">
+                  09:25
+                  </a>-->
+                  <% var shareArr = []; 
+                     shareArr['shareTitle'] = videoDataArr_val['title'];
+                     shareArr['shareUrl'] = videoDataArr_val['url']; 
+                  %>
+                  <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+               </div>
+            <% } %>
+            </div>
+         </div>
+         <!--trending-->
+
+       	<% for (const [categoryData_key, categoryData_val] of Object.entries(categoryData['CatLatestStories'])) { %>
+         <div class="big-thumb">
+            <a href="<%- categoryData_val['url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" class="thumb-img">
+            	<img class="fp-lazy" src="<%-constant.PLACEHOLDER_IMG_640x362 %>" data-src="<%-common.firstpost_imageOptimization(categoryData_val['post_image'], 640, 362, '') %>" alt="<%- categoryData_val['title']%>" title="<%- categoryData_val['title']%>">
+            </a>
+            <div class="title-wrap">
+               <a href="<%- categoryData_val['category_url']%>" class="category-name"><%- categoryData_val['category']%>
+               </a>
+               <h3 class="main-title">
+                  <a href="<%- categoryData_val['url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>"><%= categoryData_val['title']%></a>
+               </h3>
+               <p class="copy">
+                 	<%= categoryData_val['post_excerpt']%>
+               </p>
+               <% var shareArr = []; 
+		            shareArr['shareTitle'] = categoryData_val['title'];
+            		shareArr['shareUrl'] = categoryData_val['url'];  
+		       %>
+		       <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+            </div>
+         </div>
+        <% } %>
+        <!--big-thumb-->
+     <% } else { %>   
+     <% for (const [catData_key, catData_val] of Object.entries(catData['solarResults'])) { %>
+         <div class="big-thumb">
+            <a href="<%- catData_val['url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" class="thumb-img">
+            	<img class="fp-lazy" src="<%-constant.PLACEHOLDER_IMG_640x362 %>" data-src="<%-common.firstpost_imageOptimization(catData_val['image'], 640, 362, '') %>" alt="<%- catData_val['title']%>" title="<%- catData_val['title']%>">
+            </a>
+            <div class="title-wrap">
+              	<a href="<%=constant.SITE_URL%>category/<%- catData_val['category'].replace(/\s+/g, '-').toLowerCase()%>" class="category-name"><%- catData_val['category']%></a>
+               </a>
+               <h3 class="main-title">
+                  <a href="<%- catData_val['url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>"><%= catData_val['title']%></a>
+               </h3>
+               <p class="copy">
+                 	<%= catData_val['description']%>
+               </p>
+               <% var shareArr = []; 
+		            shareArr['shareTitle'] = catData_val['title'];
+                  	shareArr['shareUrl'] = catData_val['url']; 
+		       %>
+		       <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+            </div>
+         </div>
+        <% } %>
+      <% } %> 
+
+         <%- include(viewpath+ '/widgets/paginationDefault'); %>
+	 <% if(typeof outbrain_ads  !== 'undefined' && typeof outbrain_ads['AR_2']  !== 'undefined'){%>
+	    <%-outbrain_ads['AR_2'];%>	
+	 <% }%>
+   <!-- L2 Sections -->
+      <% if (entertainment['showsha'] != '') { %>
+         <% for (const [entertainment_key, entertainment_val] of Object.entries(entertainment['showsha'])) { %>
+            <% var sec = [];
+               sec = ["slider", "trending", "latest", "topstories", "reviews"];
+            %>
+         <% if (!(sec.includes(entertainment_key))) { %>
+            <%= /*JSON.stringify(entertainment_val)*/ %>
+         <div class="photos-wrap">
+            <h3 class="main-story-title">
+               <a href="javascript:void(0);"><%- entertainment_key %></a>
+               <span></span>
+            </h3>
+            <div class="big-thumb">
+               <a href="<%- entertainment_val[0].post_url %>" class="thumb-img">
+               <img class="fp-lazy" src="<%-constant.PLACEHOLDER_IMG_640x362 %>" data-src="<%-common.firstpost_imageOptimization(entertainment_val[0].post_image, 640, 362, '') %>" alt="<%- entertainment_val[0].post_title %>" title="<%- entertainment_val[0].post_title %>">
+               </a>
+               <div class="title-wrap">
+                 <h3 class="main-title">
+                   <a href="<%- entertainment_val[0].post_url %>"><%- entertainment_val[0].post_title %></a>
+                 </h3>
+                 <% var shareArr = []; 
+                   shareArr['shareTitle'] = entertainment_val[0].post_title;
+                   shareArr['shareUrl'] = entertainment_val[0].post_url; 
+                 %>
+                 <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+               </div>
+            </div>
+         </div>
+         <!--photos-wrap-->
+         <div class="photos small-thumb-wrap">
+            <div class="small-thumb-row">
+            <% for (const [entertainmentData_key, entertainmentData_val] of Object.entries(entertainment_val).slice(1,4)) { %>
+               <div class="small-thumb">
+                  <a href="<%- entertainmentData_val.post_url %>" class="thumbnail">
+                  <img class="fp-lazy" src="<%-constant.PLACEHOLDER_IMG_192x104 %>" data-src="<%-common.firstpost_imageOptimization(entertainmentData_val.post_image, 192, 104, '') %>" alt="<%- entertainmentData_val.post_title %>" title="<%- entertainmentData_val.post_title %>">
+                  </a>
+                  <a href="<%- entertainmentData_val.post_url %>" class="copy">
+                 <%- entertainmentData_val.post_title %>
+                  </a>
+                  <% var shareArr = []; 
+                     shareArr['shareTitle'] = entertainmentData_val.post_title;
+                     shareArr['shareUrl'] = entertainmentData_val.post_url; 
+                  %>
+                  <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+               </div>
+            <% } %>   
+            </div>
+            <!--<a href="" class="see-all">
+               see all 
+               <svg viewBox="0 0 24 24">
+                  <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"></path>
+                  <path d="M0 0h24v24H0V0z" fill="none"></path>
+               </svg>
+            </a>-->
+         </div>
+         <% } %> 
+         <% } %> 
+      <% } %> 
+      <!-- Fine print -->
+   <div class="photos-wrap">
+      <h3 class="main-story-title">
+         <a href="javascript:void(0);">Fine Print</a>
+         <span></span>
+      </h3>
+
+      <div class="big-thumb">
+         <a href="<%- fineprint['solarResults'][0]['url']%>" class="thumb-img">
+               <img class="fp-lazy" src="<%-constant.PLACEHOLDER_IMG_640x362 %>" data-src="<%-common.firstpost_imageOptimization(fineprint['solarResults'][0]['image'], 640, 362, '') %>" alt="<%- fineprint['solarResults'][0]['title']%>" title="<%- fineprint['solarResults'][0]['title']%>">
+         </a>
+         <div class="title-wrap">
+               <h3 class="main-title">
+                  <a href="<%- fineprint['solarResults'][0]['url']%>"><%- fineprint['solarResults'][0]['title']%></a>
+               </h3>
+               <% var shareArr = []; 
+                  shareArr['shareTitle'] = fineprint['solarResults'][0]['title'];
+                  shareArr['shareUrl'] = fineprint['solarResults'][0]['url']; 
+               %>
+               <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>    
+         </div>
+      </div>
+   </div><!--photos-wrap-->
+   <div class="photos small-thumb-wrap">
+      <div class="small-thumb-row">
+      <% for (const [fineprint_key, fineprint_val] of Object.entries(fineprint['solarResults'].slice(1,4))) { %>
+         <div class="small-thumb">
+            <a href="<%- fineprint_val['url']%>" class="thumbnail">
+               <img class="fp-lazy" src="<%-constant.PLACEHOLDER_IMG_192x104 %>" data-src="<%-common.firstpost_imageOptimization(fineprint_val['image'], 192, 104, '') %>" alt="<%- fineprint_val['title']%>" title="<%- fineprint_val['title']%>">
+            </a>
+            <a href="<%- fineprint_val['url']%>" class="copy">
+               <%= fineprint_val['title']%>
+            </a>
+            <!--<a href="" class="category-name">
+               #SPORTS
+            </a>-->
+            <% var shareArr = []; 
+               shareArr['shareTitle'] = fineprint_val['title'];
+               shareArr['shareUrl'] = fineprint_val['url']; 
+            %>
+             <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+         </div>
+      <% } %>
+      </div>
+   </div><!--videos-->
+
+        <!-- L2 sections end --> 
+   <div class="photos-wrap">
+      <h3 class="main-story-title">
+         <a href="javascript:void(0);">photos</a>
+         <span></span>
+      </h3>
+
+      <div class="big-thumb">
+         <a href="<%- photoDataArr['solarResults'][0]['url']%>" class="thumb-img">
+               <img class="fp-lazy" src="<%-constant.PLACEHOLDER_IMG_640x362 %>" data-src="<%-common.firstpost_imageOptimization(photoDataArr['solarResults'][0]['image'], 640, 362, '') %>" alt="<%- photoDataArr['solarResults'][0]['title']%>" title="<%- photoDataArr['solarResults'][0]['title']%>">
+               <div class="photo-icon">
+                  <img src="<%=constant.SITE_URL%>static/images/photo-icon-large.png">
+               </div>
+         </a>
+         <div class="title-wrap">
+               <h3 class="main-title">
+                  <a href="<%- photoDataArr['solarResults'][0]['url']%>"><%- photoDataArr['solarResults'][0]['title']%></a>
+               </h3>
+               <% var shareArr = []; 
+                  shareArr['shareTitle'] = photoDataArr['solarResults'][0]['title'];
+                  shareArr['shareUrl'] = photoDataArr['solarResults'][0]['url']; 
+               %>
+               <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>    
+         </div>
+      </div>
+   </div><!--photos-wrap-->
+   <div class="photos small-thumb-wrap">
+      <div class="small-thumb-row">
+      <% for (const [photoDataArr_key, photoDataArr_val] of Object.entries(photoDataArr['solarResults'].slice(1,4))) { %>
+         <div class="small-thumb">
+            <a href="<%- photoDataArr_val['url']%>" class="thumbnail">
+               <img class="fp-lazy" src="<%-constant.PLACEHOLDER_IMG_192x104 %>" data-src="<%-common.firstpost_imageOptimization(photoDataArr_val['image'], 192, 104, '') %>" alt="<%- photoDataArr_val['title']%>" title="<%- photoDataArr_val['title']%>">
+               <div class="s-photo-icon">
+                  <img src="<%=constant.SITE_URL%>static/images/photo-icon-small.png">
+               </div>
+            </a>
+            <a href="<%- photoDataArr_val['url']%>" class="copy">
+               <%= photoDataArr_val['title']%>
+            </a>
+            <!--<a href="" class="category-name">
+               #SPORTS
+            </a>-->
+            <% var shareArr = []; 
+               shareArr['shareTitle'] = photoDataArr_val['title'];
+               shareArr['shareUrl'] = photoDataArr_val['url']; 
+            %>
+             <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+         </div>
+      <% } %>
+      </div>
+   </div><!--videos-->
+
+      </div>
+      <!--main-content-->
+      <%- include(viewpath+ '/'+device+'/firstpost/rhs'); %>
+   </div>   
+</div>
+<%- include(viewpath+ '/layouts/footer'); %>

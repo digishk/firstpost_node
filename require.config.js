@@ -1,0 +1,14 @@
+module.exports={
+	'common_functions':'lib/common_functions',
+	'constant':'config/constants',
+	'ismobile_check':'config/ismobile_check',
+	'hidejsforeu_check':'config/hideJSforEU_check',
+	'ads_arr':'config/ads_arr',
+	'ads_arr_cricket':'config/ads_arr_cricket',
+	'ads_arr_amp':'config/ads_arr_amp',
+	'outbrain_arr':'config/outbrain_arr',
+	'error_controller':'app/controllers/firstpost/errorController',
+	'env_development':'config/env_development',
+	'env_staging':'config/env_staging',
+	'env_production':'config/env_production'
+}

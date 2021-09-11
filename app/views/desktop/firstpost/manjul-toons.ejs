@@ -1,0 +1,43 @@
+<%- include(viewpath+ '/layouts/header'); %>
+<% if (typeof ads  !== 'undefined' && typeof ads['ATF_728']  !== 'undefined'){%>
+		<div class="ad-center ATF_728"  data-ad-id="<%-ads['ATF_728'][0]%>" data-ad-size="<%-ads['ATF_728'][1]%>">
+		    <%-common.displayAds(ads['ATF_728'][0]) %>
+		</div>
+	<% } %>
+<div class="main-mid">
+        <section class="in-ban">
+            <div class="pgwrapper">
+                <img src="<%-constant.IMG_URL%>wp-content/uploads/manjulHub/manjul.png" alt="Manjul Toons">
+            </div>
+        </section>
+        <section class="manjul-blk">
+            <div class="pgwrapper">
+                <div class="manjul-logo"> <img src="<%-constant.IMG_URL%>wp-content/uploads/manjulHub/manjul-logo.png" alt="Manjul Toons">
+                    <h1 class="tag-line">Give us this day our daily satire</h1>
+                </div>
+
+                <ul class="manjul-container">
+                    <% for (const[tagData_key, tagData_val] of Object.entries(tagData)) { %>
+                    <li class="grid-wrap">
+                    	<a href="<%- tagData_val['url']%>" class="thumb-img"><img src="<%-tagData_val['Manjul-img']%>" alt="<%- tagData_val['title']%>" title="<%- tagData_val['title']%>"></a>
+                        <div class="date-wrap">
+                            <div class="date-m"><%- tagData_val['formatdate']%></div>
+                            <% var shareArr = []; 
+		            		shareArr['shareTitle'] = tagData_val['title'];
+	              			shareArr['shareUrl'] = tagData_val['url']; 
+		       				%>
+		       			<%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+                        </div>
+                    </li>
+                    <%}%>
+                    
+                </ul>
+
+            </div>
+        </section>
+
+        <%- include(viewpath+ '/widgets/paginationDefault'); %>
+        
+    </div>
+
+<%- include(viewpath+ '/layouts/footer'); %>

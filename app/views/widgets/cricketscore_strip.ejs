@@ -1,0 +1,6 @@
+<% for (const [match_key, match_val] of Object.entries(liveMatchList)) { %>
+<% if(typeof constant.config_flags.CRICKET_FLAG !== 'undefined' && constant.config_flags.CRICKET_FLAG == '1' && typeof liveMatchList !== 'undefined' && Object.entries(liveMatchList).length > 0 && typeof match_val['series_Id'] !== 'undefined' && match_val['series_Id'] == '4165') { %>
+<div class="ajax_strip_widget">
+<%- include(viewpath+ '/widgets/ajax_cricketscore_strip'); %>
+</div>
+<% } } %>

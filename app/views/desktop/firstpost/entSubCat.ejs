@@ -1,0 +1,98 @@
+<%- include(viewpath+ '/layouts/header'); %>
+
+<div class="container">
+   <% if (typeof ads  !== 'undefined' && typeof ads['ATF_728']  !== 'undefined'){%>
+        <div class="ad-center">
+            <%-common.displayAds(ads['ATF_728'][0]) %>
+        </div>
+    <% } %>
+   <!--cricket-ticker-wrap-->
+   <%- include(viewpath+ '/widgets/cricketscore_strip'); %>
+   <!--cricket-ticker-wrap-->
+   <%- include(viewpath+ '/widgets/breadCrumbs'); %>
+   <div class="main-container">
+      <div class="main-content">
+      	<% if((pgNo == '1' || typeof pgNo =='undefined') && subCat !== null) { %> 
+		<div class="main-story-thumb-wrap">
+			<h3 class="main-story-title">
+				<a href="javascript:void(0);"><%=sub_category_name.replace(/-/g, ' ') %></a>
+				<span></span>
+			</h3>
+			<div class="slider-wrap main-story-slider" id="mainstoryslider">
+	            <div>
+	                <ul class="slider">
+						<li class="main-story-thumb">
+							<!--<div class="live-txt"><span class="blinking"></span>live</div>-->
+						   <a href="<%=subCat['showsha'][sub_category_name]['post_url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL) %>" class="thumb">
+						   		<img class="fp-lazy" src="<%-constant.PLACEHOLDER_IMG_640x362 %>" data-src="<%-common.firstpost_imageOptimization(subCat['showsha'][sub_category_name]['post_image'].replace('http://images.firstpost.com', 'https://images.firstpost.com'), 640, 362, '') %>" alt="<%=subCat['showsha'][sub_category_name]['post_title'] %>" title="<%=subCat['showsha'][sub_category_name]['post_title'] %>">
+						   </a>
+						   <div class="title-wrap">
+						   		<h1 class="main-title">
+						   			<a href="<%=subCat['showsha'][sub_category_name]['post_url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL) %>"><%=subCat['showsha'][sub_category_name]['post_title'] %></a>
+						   		</h1>
+						   		<% var shareArr = []; 
+			                        shareArr['shareTitle'] = subCat['showsha'][sub_category_name]['post_title'];
+			                        shareArr['shareUrl'] = subCat['showsha'][sub_category_name]['post_url']; 
+			                   %>
+			                   <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>	
+						   </div>
+						</li>
+					</ul>    
+	          	</div>
+	    	</div>
+		</div><!--main-story-thumb--> 
+
+         <!-- <div class="ad-combo">
+            <div><img src="images/img.png"></div>
+            <div><img src="images/img.png"></div>
+         </div> -->
+        <% } %> 
+        <!--trending-->
+
+        <!--big-thumb--> 
+    		<% for (const [subCatData_key, subCatData_val] of Object.entries(subCatData['solarResults'])) { %>
+	         <div class="big-thumb">
+	            <a href="<%- subCatData_val['url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" class="thumb-img">
+	            	<img class="fp-lazy" src="<%-constant.PLACEHOLDER_IMG_640x362 %>" data-src="<%- common.firstpost_imageOptimization(subCatData_val['image'], 640, 362, '') %>" alt="<%- subCatData_val['title']%>" title="<%- subCatData_val['title']%>">
+	            </a>
+	            <div class="title-wrap">
+	              	<a href="<%=constant.SITE_URL%>category/<%- subCatData_val['category'].replace(/\s+/g, '-').toLowerCase()%>" class="category-name"><%- subCatData_val['category']%></a>
+	               </a>
+	               <h3 class="main-title">
+	                  <a href="<%- subCatData_val['url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>"><%= subCatData_val['title']%></a>
+	               </h3>
+	               <p class="copy">
+	                 	<%= subCatData_val['description']%>
+	               </p>
+	               <% var shareArr = []; 
+			            shareArr['shareTitle'] = subCatData_val['title'];
+	                  	shareArr['shareUrl'] = subCatData_val['url']; 
+			       %>
+			       <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+	            </div>
+	         </div>
+        	<% } %>
+			<% if (typeof ads  !== 'undefined' && (typeof ads['MID1_300']  !== 'undefined' || typeof ads['MID2_300']  !== 'undefined')){%>
+              <div class="ad-combo">
+              <% if (typeof ads  !== 'undefined' && typeof ads['MID1_300']  !== 'undefined'){%>
+                  <div>
+                      <%-common.displayAds(ads['MID1_300'][0]) %>
+                  </div>
+              <% } %> 
+              <% if (typeof ads  !== 'undefined' && typeof ads['MID2_300']  !== 'undefined'){%>
+                  <div>
+                      <%-common.displayAds(ads['MID2_300'][0]) %>
+                  </div>
+              <% } %>  
+              </div>
+         <% } %>
+         <%- include(viewpath+ '/widgets/paginationDefault'); %>
+	 <% if( typeof outbrain_ads  !== 'undefined' && typeof outbrain_ads['AR_2']  !== 'undefined'){%>
+	    <%-outbrain_ads['AR_2'];%>	
+	  <% } %>
+      </div>
+      <!--main-content-->
+      <%- include(viewpath+ '/'+device+'/firstpost/rhs'); %>
+   </div>   
+</div>
+<%- include(viewpath+ '/layouts/footer'); %>

@@ -1,0 +1,33 @@
+<% if(typeof alsoSee !== 'undefined' && alsoSee != ''){ %>
+    <div class="big-thumb">
+    <h3 class="main-story-title">
+        <a>also read</a>
+        <span></span>
+    </h3>
+    <% for (const [alsoSee_key, alsoSee_val] of Object.entries(alsoSee)) { %>
+	<div>
+	    <a href="<%=alsoSee_val['url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>/amp" class="thumb-img">
+		<amp-img src="<%-common.firstpost_imageOptimization(alsoSee_val['image'], 320, 180 , '') %>" width="320" height="180" layout="responsive" alt="<%-alsoSee_val['title'].replace(/"/g, '')%>" title="<%-alsoSee_val['title'].replace(/"/g, '')%>"></amp-img>
+		<% if(alsoSee_val['ContentType'] == 'Video'){%>
+		    <div class="video-icon">
+			<svg width="70.182" height="70.182" viewBox="0 0 70.182 70.182"><defs><filter id="a" x="0" y="0" width="70.182" height="70.182" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="4.5" result="b"></feGaussianBlur><feFlood flood-opacity="0.294"></feFlood><feComposite operator="in" in2="b"></feComposite><feComposite in="SourceGraphic"></feComposite></filter></defs><g transform="matrix(1, 0, 0, 1, 0, 0)"><path fill="#fff" d="M23.591,2A21.591,21.591,0,1,0,45.182,23.591,21.6,21.6,0,0,0,23.591,2ZM19.273,33.307V13.875l12.955,9.716Z" transform="translate(11.5 8.5)"></path></g></svg>
+		    </div>
+		<% } %>
+	    </a>
+	    <div class="title-wrap">
+		<!--href="<%=constant.SITE_URL%>category/<%=alsoSee_val['category'].toLowerCase().replace(/ /g , '')%>"-->
+		<a  class="category-name"><%=alsoSee_val['category'].replace(/-/g , ' ').replace(/\s*&amp;\s/ , ' & ')%></a>
+		<h3 class="main-title">
+		    <a href="<%=alsoSee_val['url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>/amp"><%=alsoSee_val['title']%></a>
+		</h3>
+		<p class="copy">
+		    <%=alsoSee_val['description']%>
+		</p>
+	    </div>
+	</div>
+    <% } %>
+    </div>
+<% } %>
+
+
+	   

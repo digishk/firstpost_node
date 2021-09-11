@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<%- include(viewpath+ '/util/header-meta'); %>
+	<link defer rel="preload" href="<%-mobilePageCss%>?v=<%-constant.config_flags.VERSION_NO%>" as="style" onload="this.onload=null;this.rel='stylesheet'">
+	<noscript><link defer rel="stylesheet" href="<%-mobilePageCss%>?v=<%-constant.config_flags.VERSION_NO%>"></noscript>
+	<% if (typeof catSlug  !== 'undefined' && catSlug == 'art-and-culture'){%>
+	<script async defer src="https://images.news18.com/static_news18/pix/ibnhome/news18/js/dm-ce.min.js"></script>
+	<% } %>
+	<script type="text/javascript" src="<%-constant.SITE_URL%>static/js/jquery-3.4.0.min.js"></script>
+
+	<link rel="preconnect" href="https://xmlns.cricketnext.com">
+	<link rel="dns-prefetch" href="https://xmlns.cricketnext.com">
+
+	<script>
+		const siteURL = '<%-constant.SITE_URL%>'
+		const versionNo = '<%-constant.config_flags.VERSION_NO%>'
+		const src = `${siteURL}static/js/search.js?v=${versionNo}`
+
+		const injectSearchScript = () => {
+			let headID = document.getElementsByTagName("head")[0];         
+			let newScript = document.createElement('script');
+			newScript.type = 'text/javascript';
+			newScript.src = src
+			headID.appendChild(newScript);
+		}
+
+		// Inject script when user clicks
+		const searchClickHandler = () => {
+			injectSearchScript()
+			searchBox()
+		}
+	</script>
+	
+	<% if (pageName == 'article') { %>
+		<script>
+		  dataLayer = [{
+		    'Author':'<%-postPageJson['post']['post_authorname']%>'
+		  }];
+		</script>	
+	<% } %>
+	<%- include(viewpath+ '/util/ga-scripts'); %>
+	<%- include(viewpath+ '/layouts/m-header-css'); %>
+
+	<!-- Mailchimp script start -->
+		<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/5eea658f179c37d2555573fac/0084276cc5ca765622f51f8eb.js");</script>	  
+	<!-- Mailchimp script end -->
+	<!-- Affinity HVR Invocation Code //-->
+	<script type="text/javascript">
+	(function(){var o='script',s=top.document,a=s.createElement(o),m=s.getElementsByTagName(o)[0],d=new Date();a.async=1;a.src='https://hbs.ph.affinity.com/v5/firstpost.com/index.php?t='+d.getDate()+d.getMonth()+d.getHours();m.parentNode.insertBefore(a,m)})()
+	</script>
+</head>
+<body>
+	<%- include(viewpath+ '/util/ga-scripts-body'); %>
+	<div id="<%-pageName%>-wrapper">		
+		<header id="mainHeader">
+			<div class="header-wrap">
+				<div class="hamburger-menu">
+					<div class="sidenav-menu-btn" onclick="openNav()">
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+
+				</div>
+				<div class="logo">
+					<a href="<%-constant.SITE_URL%>"><img width="105" height="30" src="<%-constant.SITE_URL%><%-constant.config_flags.FP_MOBILE_LOGO%>"></a>
+				</div>
+				<!-- <div class="covid-tracker" id="covidTracker">
+					<a href="javascript:void(0);" title="">
+						<img src="https://images.news18.com/static_news18/pix/ibnhome/news18/images/corona-toolbar/virus.png" alt="corona virus">
+						<span>Tracker</span>
+					</a>
+				</div> -->
+				<div id="mySEARCH" class="search-box">
+					<div class="input-wrap">
+						<input autocomplete="off" type="text" name="search" class="search" placeholder="search">
+					</div>
+					<div class="search-btn" onclick="searchClickHandler()">
+						<svg viewBox="0 0 512 512" class="close" fill="#fff"><path d="m256 512c-141.160156 0-256-114.839844-256-256s114.839844-256 256-256 256 114.839844 256 256-114.839844 256-256 256zm0-475.429688c-120.992188 0-219.429688 98.4375-219.429688 219.429688s98.4375 219.429688 219.429688 219.429688 219.429688-98.4375 219.429688-219.429688-98.4375-219.429688-219.429688-219.429688zm0 0"/><path d="m347.429688 365.714844c-4.679688 0-9.359376-1.785156-12.929688-5.359375l-182.855469-182.855469c-7.144531-7.144531-7.144531-18.714844 0-25.855469 7.140625-7.140625 18.714844-7.144531 25.855469 0l182.855469 182.855469c7.144531 7.144531 7.144531 18.714844 0 25.855469-3.570313 3.574219-8.246094 5.359375-12.925781 5.359375zm0 0"/><path d="m164.570312 365.714844c-4.679687 0-9.355468-1.785156-12.925781-5.359375-7.144531-7.140625-7.144531-18.714844 0-25.855469l182.855469-182.855469c7.144531-7.144531 18.714844-7.144531 25.855469 0 7.140625 7.140625 7.144531 18.714844 0 25.855469l-182.855469 182.855469c-3.570312 3.574219-8.25 5.359375-12.929688 5.359375zm0 0"/></svg>
+						<svg version="1.1" id="" x="0px" y="0px" viewBox="0 0 511.999 511.999" xml:space="preserve" fill="#fff" class="open">
+							<path d="M508.874,478.708L360.142,329.976c28.21-34.827,45.191-79.103,45.191-127.309c0-111.75-90.917-202.667-202.667-202.667
+										S0,90.917,0,202.667s90.917,202.667,202.667,202.667c48.206,0,92.482-16.982,127.309-45.191l148.732,148.732
+										c4.167,4.165,10.919,4.165,15.086,0l15.081-15.082C513.04,489.627,513.04,482.873,508.874,478.708z M202.667,362.667
+										c-88.229,0-160-71.771-160-160s71.771-160,160-160s160,71.771,160,160S290.896,362.667,202.667,362.667z"/>
+						</svg>
+					</div>
+					<div class="search-suggestions"></div>
+				</div>
+			</div>
+		</header>
+		<header class="consumption-header" id="articleHeader">
+			<div class="header-wrap">
+				<div class="h-left-div">
+					<div class="hamburger-menu">
+						<div class="sidenav-menu-btn" onclick="openNav()">
+							<span></span>
+							<span></span>
+							<span></span>
+						</div>
+	
+					</div>
+					<div class="logo">
+						<a href="<%-constant.SITE_URL%>"><img width="40.98" height="40" src="<%-constant.SITE_URL%>/public/static/images/Firstpost-Wht-logo_RGB-02.png"></a>
+					</div>
+				</div>
+				
+				<ul class="inner-share" id="sticky-share">
+					<li>
+						<a href="javascript:void(0);" class="fb sc-icon shareicon" title="" data-url="" data-title="" data-sitename="facebook">
+							<svg width="30" height="30" viewBox="0 0 30 30">
+								<g id="" data-name="Group 1199" transform="translate(-290 -78)">
+								  <rect id="" data-name="Rectangle 702" width="30" height="30" rx="15" transform="translate(290 78)" fill="#4968ab"></rect>
+								  <path id="" data-name="Icon feather-facebook" d="M18,3H15.954a3.409,3.409,0,0,0-3.409,3.409V8.454H10.5v2.727h2.045v5.454h2.727V11.181h2.045L18,8.454H15.272V6.409a.682.682,0,0,1,.682-.682H18Z" transform="translate(290.563 83.333)" fill="#fff"></path>
+								</g>
+							  </svg>
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);" class="tw sc-icon shareicon" title="" data-url="" data-title="" data-sitename="twitter">
+							<svg width="30" height="30" viewBox="0 0 30 30">
+								<g id="" data-name="Group 1200" transform="translate(-296 -132)">
+								  <rect id="" data-name="Rectangle 703" width="30" height="30" rx="15" transform="translate(296 132)" fill="#01b0ef"></rect>
+								  <path id="" data-name="Icon feather-twitter" d="M15.839,4.491a7.1,7.1,0,0,1-2.047,1A2.92,2.92,0,0,0,8.67,7.444V8.1A6.948,6.948,0,0,1,2.8,5.143S.2,11.009,6.062,13.616A7.587,7.587,0,0,1,1.5,14.92c5.866,3.259,13.036,0,13.036-7.5a2.933,2.933,0,0,0-.052-.541A5.032,5.032,0,0,0,15.839,4.491Z" transform="translate(302.5 136.515)" fill="#fff"></path>
+								</g>
+							  </svg>              
+						</a>
+					</li>
+					<li>
+						<a href="javascript:void(0);" class="wa sc-icon shareicon" title="" data-url="" data-title="" data-sitename="whatsapp">
+							<svg width="30" height="30" viewBox="0 0 30 30">
+								<g id="" data-name="Group 1201" transform="translate(-290 -45)">
+								  <rect id="" data-name="Rectangle 704" width="30" height="30" rx="15" transform="translate(290 45)" fill="#2cb742"></rect>
+								  <path id="" data-name="Icon ionic-logo-whatsapp" d="M9.384,2.25A6.854,6.854,0,0,0,2.5,9.077,6.756,6.756,0,0,0,3.492,12.6L2.25,16.264l3.809-1.21A6.892,6.892,0,0,0,16.264,9.077,6.853,6.853,0,0,0,9.384,2.25Zm3.421,9.419a1.777,1.777,0,0,1-1.217.784c-.323.017-.332.25-2.091-.514A7.178,7.178,0,0,1,6.6,9.2a3.374,3.374,0,0,1-.649-1.829,1.949,1.949,0,0,1,.67-1.43.674.674,0,0,1,.476-.2c.139,0,.228,0,.331,0s.256-.021.389.333.452,1.225.493,1.314a.319.319,0,0,1,0,.306,1.2,1.2,0,0,1-.186.284c-.092.1-.193.22-.275.3s-.187.174-.091.353a5.265,5.265,0,0,0,.932,1.243,4.8,4.8,0,0,0,1.379.917c.173.094.275.084.382-.029s.458-.493.582-.662.24-.137.4-.073,1.006.518,1.179.612.288.142.329.216A1.445,1.445,0,0,1,12.805,11.669Z" transform="translate(295.783 50.683)" fill="#fff"></path>
+								</g>
+							  </svg>
+							  
+						</a>
+					</li>
+					<li>
+						<a href="mailto:?subject=&amp;body=" class="mail sc-icon" title="" data-url="" data-title="" data-sitename="Email" name="emailLink">
+							<svg width="30" height="30" viewBox="0 0 30 30">
+								<g id="" data-name="Group 1202" transform="translate(-296 -166)">
+								  <rect id="" data-name="Rectangle 706" width="30" height="30" rx="15" transform="translate(296 166)" fill="#df5b43"></rect>
+								  <path id="" data-name="Icon material-email" d="M13.567,6H4.174A1.173,1.173,0,0,0,3.006,7.174L3,14.219a1.178,1.178,0,0,0,1.174,1.174h9.393a1.178,1.178,0,0,0,1.174-1.174V7.174A1.178,1.178,0,0,0,13.567,6Zm0,2.348-4.7,2.935-4.7-2.935V7.174l4.7,2.935,4.7-2.935Z" transform="translate(302 170)" fill="#fff"></path>
+								</g>
+							  </svg>
+							  
+						</a>
+					</li>
+				</ul>
+				
+			</div>
+		</header>
+
+		<%- include(viewpath+ '/layouts/m-hamburger'); %>
+
+		<!-- ads-->
+		<% if (typeof ads  !== 'undefined' && typeof ads['Shosh_OOP']  !== 'undefined'){%>
+			<div>
+		    	<%-common.displayAds(ads['Shosh_OOP'][0]) %>
+		    </div>
+	    <% } %>
+
+	    <% if (typeof ads  !== 'undefined' && typeof ads['Skin_OOP']  !== 'undefined'){%>
+		    <div>
+		    	<%-common.displayAds(ads['Skin_OOP'][0]) %>
+		    </div>
+		<% } %>
+
+		<!-- schema-->
+		<% if(typeof schema_meta !== 'undefined'){ %>
+		<%- include(viewpath+ '/util/schema',{schema_type_arr:schema_meta['schema_type'],schema_meta:schema_meta,flag:schema_meta['flag']}); %>
+		<% } %>
+		
+		<%- include(viewpath+ '/layouts/m-nav'); %>
+		<%- include(viewpath+ '/layouts/level-3-nav'); %>

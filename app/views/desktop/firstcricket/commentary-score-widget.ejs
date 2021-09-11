@@ -1,0 +1,33 @@
+<% if(commentryData != "noData") {%>
+<div class="ball-intro">
+    <p><%= commentryData['commentry'][0]['text'] %></p>
+</div>                        
+<!--Ball By Ball Description-->
+<div class="ball-desc-wrap">
+<% for (const [comm_key, comm_val] of Object.entries(commentryData['commentry'])) { 
+if(limit == 25 && limit == comm_key){ break;}
+    %>
+<% if(comm_key != 0) {     
+    if(comm_val['overs'] != '') {
+        var extraClass = ''; 
+          if(comm_val['Iswicket'] == true){
+            extraClass = "first-highlight";
+          }
+          if(comm_val['Isboundary'] == true){
+            extraClass = "first-highlight";
+          }                                  
+        %>
+    <div class="over-txt <%= extraClass %>">                                
+        <div class="ball-circle">
+            <span><%= comm_val['overs'] %></span>
+        </div>
+        <p>
+            <%= comm_val['text'] %>
+        </p>
+    </div>
+    <% } else { %>
+    <p><%= comm_val['text'] %></p>
+    <% } } } %>
+</div>
+<%}%>
+<!--Ball By Ball Description-->

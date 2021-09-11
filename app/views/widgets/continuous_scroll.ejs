@@ -1,0 +1,416 @@
+<% for (const [infiniteArticlesList_key, infiniteArticlesList_val] of Object.entries(infiniteArticlesList)) { %>
+    <% if (infiniteArticlesList_key == 0){ 
+       }else {%>
+            <div id="aid_<%=infiniteArticlesList_val['articleId']%>" data-category="<%=infiniteArticlesList_val['category']%>"></div>
+    <% } %>
+<% } %>
+<nav id="myScrollspy" class="articlesStripWrap" style="display:none;">
+    <ul class="nav articlesStrip">
+        <% for (const [infiniteArticles_key, infiniteArticles_val] of Object.entries(infiniteArticlesList)) { %>
+            <%
+            var activeclass = '';
+            if (infiniteArticles_key == 0){
+               activeclass = "active loaded";
+            }else{
+               activeclass = ""; 
+            }%>
+            <li class="<%=activeclass%>" data-id="aid_<%=infiniteArticles_val.articleId%>" data-index="<%=infiniteArticles_key%>" data-url="<%=infiniteArticles_val.url.replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" data-title="<%=infiniteArticles_val.title%>" data-adCount="<%=infiniteArticles_key%>" data-category="<%=infiniteArticles_val.category%>">
+            </li>
+        <% } %>
+    </ul>
+</nav>
+<script type="text/javascript">
+    var outbrain_ads_enable = '<%=constant.config_flags.OUTBRAINS_ADS_FLAG%>';
+    var getArticleSection_flag = true;
+    var hideJSforEU = '<%=constant.hideJSforEU%>';
+    var site_url = "<%=constant.SITE_URL%>";
+    var IO_SCRIPT_FLAG = "<%=constant.IO_SCRIPT_FLAG%>";
+    var post_id = "<%= postPageJson.post.ID %>";
+    console.log(post_id , "post_id");
+    var category_slug = "<%= catSlug %>";
+    var isMobile = "<%=isMobile%>";
+    var first_article_url = "<%= postPageJson.post.post_url %>";
+    first_article_url = first_article_url.replace("https://www.firstpost.com/", site_url);
+    var currentHash = first_article_url;
+    
+    if($('.photo-con-list img').length > 0){
+        var allGallList = document.getElementsByClassName("glrbox");
+        var firstGallURL = allGallList[0].getAttribute("data-url");
+        var currentHash = firstGallURL;
+    }
+    
+    
+    var first_article_title = "<%-postPageJson.post.post_title%>";
+    first_article_title = first_article_title.replace("'", "");
+    first_article_title = first_article_title.replace('"', '');
+    
+    var multipl = 0.1;
+    var nxtarticlecnt = '';
+    var article_arr = [];
+    var isbackScoll = false;
+    var previousScroll = 0;
+    var scrollTop = '';
+    //var adcount = 2;
+    
+    $(document).ready(function(){
+        if (isMobile == 1) {
+            addStickyShareAttribute(first_article_url , first_article_title);
+        }
+        (function() {
+                var s = document.createElement("script"),
+                        el = document.getElementsByTagName("script")[0];
+                s.async = true;
+                s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+                el.parentNode.insertBefore(s, el);
+            })();
+        if(category_slug == "health"){
+            myUpcharWidget();
+        }
+        
+        window.topScroll = $(window).scrollTop();
+        $(window).scroll(function () {
+            scrollTop = $(window).scrollTop();
+            if ($(window).scrollTop() >= ($(document).height() - $(window).height())*multipl){
+                //console.log($(window).scrollTop()+" -- "+$(document).height()+" - "+($(document).height() - $(window).height())*multipl);
+                nxtarticlecnt = $("#nxtarticle").val();
+                nxtarticlecnt++;
+                //console.log(nxtarticlecnt , "next article count");
+                var article_elem = $( ".articlesStrip li:nth-child("+nxtarticlecnt+")");
+                
+                if(article_elem.length != 0){
+                    
+                    var id = article_elem.data('id');
+                    id = id.replace("aid_", "");
+                    var url = article_elem.data('url');
+                    var title = article_elem.data('title');
+                    title = title.replace("'", "");
+                    title = title.replace('"', '');
+                    //console.log(id ,  url , "next article title");
+                    //console.log(article_arr.includes(id) , "array contain id")
+                    if(article_arr.includes(id) == false){
+                        loadArticle(id, url, title);
+                    }
+                    //getArticleSections();
+                }
+            }
+            if($('.photo-con-list').length > 0){
+                $('.photo-con-list').each(function () {
+                    var hash  = $(this).attr('data-url');
+                    if (elementInViewport(this) && currentHash != hash) {
+                       currentHash = hash;
+                       changeUrl($(this).data('title'),$(this).data('url'),$(this).data('photo-id'),$(this).data('desc'));  
+                    }
+                });
+            }
+            
+        });
+        
+        $(document).scroll(function() {
+            
+            var currentScroll = $(this).scrollTop();
+            $('.mainArticlediv').each(function() {
+                var top = window.pageYOffset;
+                var distance = top - $(this).offset().top + 400;
+                var hash = $(this).attr('data-url');
+                var title = $(this).attr('data-title');
+                
+                if (distance < 10 && distance > -10 && currentHash != hash) {
+                    currentHash = hash;
+                    updateUrl(title , hash);
+                }
+                if (distance > 500 && distance < 600 && currentHash != hash) {
+                    currentHash = hash;
+                    updateUrl(title , hash);
+                }
+            });
+            if (scrollTop < previousScroll) {
+                isbackScoll = true;
+            }else{
+                isbackScoll = false;
+            }
+            previousScroll = scrollTop;
+        });
+        
+        
+    });
+    window.addEventListener('load', function(){
+        loadAds(post_id);
+    });
+    
+    function addStickyShareAttribute(url , title){
+        $('#sticky-share .fb, .tw, .wa, .mail').attr('title', title);
+        $('#sticky-share .fb, .tw, .wa, .mail').attr('data-url', url);
+        $('#sticky-share .fb, .tw, .wa, .mail').attr('data-title', title);
+
+        $("#sticky-share .mail").attr('href','mailto:?subject='+title+'&body='+url); 
+    }
+    
+    function elementInViewport(el) {
+       
+        var rect = el.getBoundingClientRect();
+        var elemTop = rect.top;
+        var elemBottom = rect.bottom;
+    
+        // Only completely visible elements return true:
+        var isVisible = (elemTop >= 0) && (elemBottom <= window.innerHeight);
+        
+        return isVisible;
+    }
+    //pageview_candidate
+    function pageviewcandidate(){
+   // alert("here");
+        $.ajax({ 
+            url:'/ajaxCalls/pvCandidate', 
+            type:'GET', 
+            cache:false, 
+            success:function(pv_candidate){ 
+                console.log("candidate_comescore fired");                
+            }, 
+            error:function(){ 
+                console.log('Something went wrong..'); 
+            } 
+        }); 
+        // $('#pageview_candidate').remove();
+        // $('body').append('<div id="pageview_candidate">pageview_candidate</div>');
+    }
+    function callComScore() {
+       // alert("h");
+        var curntUrl = window.location.href;
+       // curntUrl = curntUrl.replace(window.location.hostname,"www.firstpost.com");
+            var _comscore = _comscore || [];
+            _comscore.push({
+                c1: "2",
+                c2: "6683813",
+                c7: curntUrl
+            });
+            
+
+    }
+    function changeUrl(title, url , pid , pdesc) {
+        
+        var cleanTitle = title;
+        cleanTitle += ' Firstpost Photos '+pid;
+        if(pid != 1){
+            updateUrl(cleanTitle , url);  
+        }else{
+            cleanTitle = cleanTitle.replace("'", "");
+            cleanTitle = cleanTitle.replace('"', '');
+            History.pushState(null, cleanTitle, url); 
+        }
+        
+        $('meta[name=description]').attr('content', pdesc+",Firstpost Photo "+pid);
+        $('link[rel="canonical"]').attr('href', url);
+    }
+    
+    function loadArticle(id, url , title) {
+        //var adcount = 2;
+        article_arr.push(id);
+        //section = document.querySelectorAll(".show-next");
+        //making sure article doesn't get loaded more than once
+        var ifExists = $("#aid_"+id+" .dynamicArticle").length;
+        var article_cat = $("#aid_"+id).data('category');
+        title = title.replace("'", "");
+        title = title.replace('"', '');
+        
+        //console.log(id , title ,  url , "load  article call");
+        if (ifExists > 0) {
+            //article has already been loaded
+            return false;
+        }else{
+            $("#aid_" + id).append("<div class='next-article' data-url='"+url+"' data-title='"+title+"'><span>next story</span></div><div class='dynamicArticle'></div>");
+            $("#aid_" + id + " .dynamicArticle").load(url + " .mainArticlediv", function() {
+                
+                $("#nxtarticle").val(nxtarticlecnt);
+                
+                $("#aid_" + id + " .auto-refresh").remove();
+                $("#aid_" + id + " .highlights-wrap").remove();
+                $("#aid_" + id + " #blogDivScroll").remove();
+                $("#aid_" + id + " .live-bnt").remove();
+                $("#aid_" + id + " .rhs-video-div").remove();
+                $("#aid_" + id + " .flying_carpet_ads").remove();
+                
+                
+                if(IO_SCRIPT_FLAG == 1 && $('.photo-con-list img').length == 0){
+                    window._io_config = window._io_config || {};
+                    window._io_config["0.2.0"] = window._io_config["0.2.0"] || [];
+                    window._io_config["0.2.0"].push({
+                    page_url:url,
+                    page_url_canonical: url,
+                    page_title: document.querySelector("#aid_"+id+" #headlineitem").innerHTML,
+                    page_type: "article",
+                    page_language: "en",
+                    article_authors: [ document.querySelector("#aid_"+id+" .article-by").innerHTML ],
+                    article_categories: [ document.querySelector("#aid_"+id+" .section-btn").innerHTML ],
+                    article_type: "longread",
+                    article_word_count: document.querySelector("#aid_"+id+" .article-full-content").innerHTML.split(' ').length,
+                    article_publication_date: document.querySelector("#aid_"+id+" .article-date").innerHTML
+                    });
+                }
+                                
+                if(article_cat == 'health'){
+                    myUpcharWidget();    
+                }else{
+                    $("#aid_" + id + " #myupchar_widget").remove();
+                    $("#aid_" + id + " .myupchar_widget").remove();
+                }
+                
+                loadAds(id);
+                
+                if(outbrain_ads_enable == '1'){
+                    outbrainAds();
+                }
+                //adcount++;
+            });
+        }
+    }
+    
+    function outbrainAds(){
+	OBR.extern.researchWidget();
+    }
+    
+    function loadAds(id,adcount = ''){
+        var ads_cnt = 0;
+        $('#aid_'+id+' .ad-center').each(function(){
+            
+            var ad_id = $(this).data('ad-id');
+            var ad_size = $(this).data('ad-size');
+            
+            if(typeof ad_id !== 'undefined' && typeof ad_size !== 'undefined'){
+                ad_size = ad_size.replace(/\[/g , '').replace(/\]/g , '').replace(/\s+/g, '').replace(/'/g, '');
+                var ad_size_arr = ad_size.split(',');
+                var ad_size_result = chunkArray(ad_size_arr , 2);
+                
+                $(this).html('<div id="'+ad_id+'_'+id+'_'+ads_cnt+'"></div>');
+                googletag.cmd.push(function() {
+                    var slot = googletag.defineSlot('/1039154/'+ad_id, ad_size_result , ad_id+'_'+id+'_'+ads_cnt).addService(googletag.pubads());
+                    googletag.display(ad_id+'_'+id+'_'+ads_cnt);                            
+                });
+                ads_cnt++;
+            }
+        });
+    }
+    function chunkArray(myArray, chunk_size){
+        var index = 0;
+        var arrayLength = myArray.length;
+        var tempArray = [];
+        var myChunk = [];
+        var j = 0;
+        var fluid_flag = false;
+        for (index = 0; index < arrayLength; index+=chunk_size) {
+            var k = 0;
+            for(i = index ; i < chunk_size+index ; i++){
+                if (!myChunk[j]) {
+                    myChunk[j] = [];
+                }
+                if(myArray[i] == "fluid"){
+                    myChunk[j][k] = myArray[i];
+                    fluid_flag = true;
+                    break;
+                }else{
+                   myChunk[j][k] = parseInt(myArray[i]);
+                    k++; 
+                }
+                
+            }
+            j++;
+            if(fluid_flag){
+                break;
+            }
+        }
+        //console.log(myChunk ,"myChunk");
+        return myChunk;
+    }
+    
+    /*function getArticleSections(){
+        var article_url = '';
+        var article_title = '';
+        var section = document.querySelectorAll(".next-article");
+        var sections = {};
+        var i = 0;
+        var currentIndex = 0;
+        var oldScrollPosition = 0;
+        var inti = 0;
+        window.onscroll = function() {
+            var scrollPosition = document.documentElement.scrollTop || document.body.scrollTop;
+            for (i in section) {
+                
+                if(oldScrollPosition < scrollPosition){
+                    if (section[i].offsetTop <= scrollPosition) {
+                        console.log(parseInt(i) , -currentIndex , "hiii 3333")
+                        if((parseInt(i)+1-currentIndex)==1){
+                            currentIndex = parseInt(i)+1;
+                            article_url = section[currentIndex - 1].getAttribute('data-url');
+                            article_title = section[currentIndex - 1].getAttribute('data-title');
+                            article_title = article_title.replace("'", "");
+                            article_title = article_title.replace('"', '');
+                            
+                            updateUrl(article_title , article_url);
+                        }
+                    }
+                }else{
+                    inti = parseInt(i);
+                    if (section[i].offsetTop <= scrollPosition && (inti+1)<section.length &&scrollPosition <= section[inti+1].offsetTop) {
+                        if(currentIndex != (inti+1)){
+                            currentIndex = parseInt(i)+1;
+                            article_url = section[currentIndex - 1].getAttribute('data-url');
+                            article_title = section[currentIndex - 1].getAttribute('data-title');
+                            article_title = article_title.replace("'", "");
+                            article_title = article_title.replace('"', '');
+                            
+                            updateUrl(article_title , article_url);
+                        };
+                    };
+                };
+                    if(scrollPosition < section[0].offsetTop && currentIndex!=0){
+                        currentIndex = 0;
+                        article_url = first_article_url;
+                        article_title = first_article_title;
+                        article_title = article_title.replace("'", "");
+                        article_title = article_title.replace('"', '');
+                        updateUrl(article_title , article_url);
+                    };
+            };
+            oldScrollPosition = scrollPosition;
+        };
+    }*/
+    
+    function updateUrl(title, url) {
+        
+        var cleanTitle = title;
+        cleanTitle = cleanTitle.replace("'", "");
+        cleanTitle = cleanTitle.replace('"', '');
+
+        /* Below code is implemented for GTM, GA, Comscore and other third party scripts */
+        // new_url = url.replace(/https:\/\/|http:\/\/|stg.firstpost.com|www.firstpost.com|devlocal.firstpost.com:8042/gi, "");
+        new_url = url.replace(/https:\/\/|http:\/\/|<%-constant.HOST_NAME_PORT%>/gi, "");
+        
+        /* Above code is implemented for GTM, GA, Comscore and other third party scripts */
+
+        History.pushState(null, cleanTitle, url);
+        
+        if (isMobile == 1) {
+            $('#sticky-share .fb, .tw, .wa, .mail').attr('title', cleanTitle);
+            $('#sticky-share .fb, .tw, .wa, .mail').attr('data-url', url);
+            $('#sticky-share .fb, .tw, .wa, .mail').attr('data-title', cleanTitle);
+            $("#sticky-share .mail").attr('href','mailto:?subject='+cleanTitle+'&body='+url); 
+        }
+
+        if(isbackScoll == false){
+            self.COMSCORE && COMSCORE.beacon({c1: "2", c2: "6683813"});
+            dataLayer.push({
+                      'event':'VirtualPageview',
+                      'virtualPageURL':new_url,
+                      'virtualPageTitle':title,
+                      'Author':'<%-postPageJson['post']['post_authorname']%>'
+                }); 
+            pageviewcandidate();
+            callComScore();
+        }
+    }
+    
+    function myUpcharWidget(){
+        var time = new Date().getTime() / 1000;var dataString='t='+parent.document.title+'&u='+parent.location.href+'&ord='+ time;
+        jQuery.ajax({url: 'https://www.myupchar.com/widget/index',type: "GET",dataType: 'text',data: dataString,cache: false,success: function (response_data) {jQuery('.myupchar_img').attr("src",response_data);jQuery('.myupchar_img').css("margin-top","0px");},error: function(response_data) {jQuery('.myupchar_img').attr("src",response_data);jQuery('.myupchar_img').css("margin-top","0px");}
+        });
+    }
+</script>

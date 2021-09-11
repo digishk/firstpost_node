@@ -1,0 +1,224 @@
+<%- include(viewpath+ '/layouts/m-header'); %>
+<!--cricket-ticker-wrap-->
+<%- include(viewpath+ '/widgets/m-cricketscore_strip'); %>
+<!--cricket-ticker-wrap-->
+
+<% if(typeof constant.config_flags.EXIT_POLL_FLAG !== 'undefined' && constant.config_flags.EXIT_POLL_FLAG == '1') { %>
+ <!--panchayat-election-widget-->
+ <%- include(viewpath+ '/widgets/five_states_result_widget_2021.ejs'); %> 
+ <!--panchayat-election-widget-->
+<% } %>
+
+<!-- <div class="ad-center">
+   <img src="http://placehold.it/320x50/">
+</div> -->
+<%- include(viewpath+ '/widgets/breadCrumbs'); %>
+<% if (typeof ads  !== 'undefined' && typeof ads['ATF_320']  !== 'undefined'){%>
+<div class="ad-center">
+    <%-common.displayAds(ads['ATF_320'][0]) %>
+</div>
+<% } %> 
+<div class="main-container">
+   <div class="main-content">
+   	<% if(pgNo == '1' || typeof pgNo =='undefined') { %> 
+      <div class="main-story-thumb-wrap">
+         <h3 class="main-story-title">
+            <a href="">Latest Photos</a>
+            <span></span>
+         </h3>
+         <div class="slider-wrap main-story-slider" id="mainstoryslider">
+            <div class="glide__track" data-glide-el="track">
+               <ul class="slider">
+               	<% for (const [categoryData_key, categoryData_val] of Object.entries(categoryData['CatMainRanking']['main_ranking'])) { %>
+                  <li class="main-story-thumb">
+                        <a href="<%-categoryData_val['modified_posturl'].replace(constant.MAIN_SITE_URL, constant.SITE_URL) %>" class="thumb">
+                  			<img src="<%-categoryData_val['mobile_img'] %>" alt="<%-categoryData_val['modified_title'] %>" title="<%-categoryData_val['modified_title'] %>">
+	                        <div class="photo-icon">
+	                           <svg width="50.45" height="45.239" viewBox="0 0 50.45 45.239"><defs><filter id="a" x="0" y="0" width="50.45" height="45.239" filterUnits="userSpaceOnUse"><feOffset dy="3" input="SourceAlpha"></feOffset><feGaussianBlur stdDeviation="4.5" result="b"></feGaussianBlur><feFlood flood-opacity="0.161"></feFlood><feComposite operator="in" in2="b"></feComposite><feComposite in="SourceGraphic"></feComposite></filter></defs><g transform="translate(13.5 10.5)"><g style="filter:url(#a);" transform="matrix(1, 0, 0, 1, -13.5, -10.5)"><path style="fill:#000;" d="M23.147,3H2.3A1.3,1.3,0,0,0,1,4.3V19.936a1.3,1.3,0,0,0,1.3,1.3H23.147a1.3,1.3,0,0,0,1.3-1.3V4.3A1.3,1.3,0,0,0,23.147,3ZM16.959,7.56A1.628,1.628,0,1,1,15.33,9.188,1.628,1.628,0,0,1,16.959,7.56ZM4.908,17.33,9.226,7.4l4.91,7.949,4.209-2.091,2.2,4.067Z" transform="translate(12.5 7.5)"></path></g></g></svg>
+	                        </div>
+                     </a>
+                     <div class="title-wrap">
+                        <a href="<%-categoryData_val['category_url'] %>" class="category-name"><%-categoryData_val['category'] %></a>
+	                    <h1 class="main-title">
+	                        <a href="<%-categoryData_val['modified_posturl'].replace(constant.MAIN_SITE_URL, constant.SITE_URL) %>"><%-categoryData_val['modified_title'] %></a>
+	                    </h1>
+                        <% var shareArr = []; 
+		                        shareArr['shareTitle'] = categoryData_val['modified_title'];
+		                        shareArr['shareUrl'] = categoryData_val['modified_posturl']; 
+		                %>
+                        <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+                     </div>
+                  </li>
+                  <% } %>
+               </ul>
+               <div class="glide__bullets" data-glide-el="controls[nav]">
+			<% i = 0; %>
+	                <% for (const [categoryData_key, categoryData_val] of Object.entries(categoryData['CatMainRanking']['main_ranking'])) { %>
+		               <button class="glide__bullet" data-glide-dir="=<%=i %>"></button>
+			    <% i++; %>
+			<% } %>
+              	</div>
+            </div>
+         </div>
+      </div>
+      <!--main-story-thumb-->
+      <% for (const [categoryData_key, categoryData_val] of Object.entries(categoryData['CatMainRanking']['related_ranking'])) { %>
+      <div class="big-thumb">
+            <a href="<%- categoryData_val['modified_posturl'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" class="thumb-img">
+            	<img class="fp-lazy" src="<%-constant.PLACEHOLDER_IMG_320x180 %>" data-src="<%-common.firstpost_imageOptimization(categoryData_val['post_image'], 320, 180, '') %>" alt="<%- categoryData_val['modified_title']%>" title="<%- categoryData_val['modified_title']%>">
+            <div class="photo-icon">
+               <svg width="50.45" height="45.239" viewBox="0 0 50.45 45.239"><defs><filter id="a" x="0" y="0" width="50.45" height="45.239" filterUnits="userSpaceOnUse"><feOffset dy="3" input="SourceAlpha"></feOffset><feGaussianBlur stdDeviation="4.5" result="b"></feGaussianBlur><feFlood flood-opacity="0.161"></feFlood><feComposite operator="in" in2="b"></feComposite><feComposite in="SourceGraphic"></feComposite></filter></defs><g transform="translate(13.5 10.5)"><g style="filter:url(#a);" transform="matrix(1, 0, 0, 1, -13.5, -10.5)"><path style="fill:#000;" d="M23.147,3H2.3A1.3,1.3,0,0,0,1,4.3V19.936a1.3,1.3,0,0,0,1.3,1.3H23.147a1.3,1.3,0,0,0,1.3-1.3V4.3A1.3,1.3,0,0,0,23.147,3ZM16.959,7.56A1.628,1.628,0,1,1,15.33,9.188,1.628,1.628,0,0,1,16.959,7.56ZM4.908,17.33,9.226,7.4l4.91,7.949,4.209-2.091,2.2,4.067Z" transform="translate(12.5 7.5)"></path></g></g></svg>
+            </div>
+         </a>
+         <div class="title-wrap">
+            <a href="<%- categoryData_val['category_url']%>" class="category-name"><%- categoryData_val['category']%>
+           </a>
+           <h3 class="main-title">
+              <a href="<%- categoryData_val['modified_posturl'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>"><%= categoryData_val['modified_title']%></a>
+           </h3>
+            <p class="copy">
+               <%= categoryData_val['post_excerpt']%>
+            </p>
+            <% var shareArr = []; 
+		            shareArr['shareTitle'] = categoryData_val['modified_title'];
+		            shareArr['shareUrl'] = categoryData_val['modified_posturl']; 
+		       %>
+		       <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+         </div>
+      </div>
+      <% } %>
+      <!--big-thumb-->
+      <% if (typeof ads  !== 'undefined' && typeof ads['ATF_300']  !== 'undefined'){%>
+      <div class="ad-center">
+            <%-common.displayAds(ads['ATF_300'][0]) %>
+      </div>
+      <% } %>
+      <!--Article from Latest stories-->
+       <% for (const [categoryData_key, categoryData_val] of Object.entries(categoryData['CatLatestStories'])) { %>
+         <div class="big-thumb">
+            <a href="<%- categoryData_val['url']%>" class="thumb-img">
+            	<img class="fp-lazy" src="<%-constant.PLACEHOLDER_IMG_320x180 %>" data-src="<%-common.firstpost_imageOptimization(categoryData_val['post_image'], 320, 180, '') %>" alt="<%- categoryData_val['title']%>" title="<%- categoryData_val['title']%>">
+            	<div class="photo-icon">
+                  <svg width="50.45" height="45.239" viewBox="0 0 50.45 45.239"><defs><filter id="a" x="0" y="0" width="50.45" height="45.239" filterUnits="userSpaceOnUse"><feOffset dy="3" input="SourceAlpha"></feOffset><feGaussianBlur stdDeviation="4.5" result="b"></feGaussianBlur><feFlood flood-opacity="0.161"></feFlood><feComposite operator="in" in2="b"></feComposite><feComposite in="SourceGraphic"></feComposite></filter></defs><g transform="translate(13.5 10.5)"><g style="filter:url(#a);" transform="matrix(1, 0, 0, 1, -13.5, -10.5)"><path style="fill:#000;" d="M23.147,3H2.3A1.3,1.3,0,0,0,1,4.3V19.936a1.3,1.3,0,0,0,1.3,1.3H23.147a1.3,1.3,0,0,0,1.3-1.3V4.3A1.3,1.3,0,0,0,23.147,3ZM16.959,7.56A1.628,1.628,0,1,1,15.33,9.188,1.628,1.628,0,0,1,16.959,7.56ZM4.908,17.33,9.226,7.4l4.91,7.949,4.209-2.091,2.2,4.067Z" transform="translate(12.5 7.5)"></path></g></g></svg>
+               </div>
+            </a>
+            <div class="title-wrap">
+               	<a href="<%- categoryData_val['category_url']%>" class="category-name"><%- categoryData_val['category']%></a>
+               </a>
+               <h3 class="main-title">
+                  <a href="<%- categoryData_val['url']%>"><%= categoryData_val['title']%></a>
+               </h3>
+               <p class="copy">
+                 	<%= categoryData_val['post_excerpt']%>
+               </p>
+               <% var shareArr = []; 
+		            shareArr['shareTitle'] = categoryData_val['title'];
+            		shareArr['shareUrl'] = categoryData_val['url'];  
+		       %>
+		       <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+            </div>
+         </div>
+        <% } %>
+        <!--big-thumb-->
+      <% } else { %>   
+     	<% for (const [catData_key, catData_val] of Object.entries(catData['solarResults'])) { %>
+         <div class="big-thumb">
+            <a href="<%- catData_val['url']%>" class="thumb-img">
+            	<img class="fp-lazy" src="<%-constant.PLACEHOLDER_IMG_320x180 %>" data-src="<%-common.firstpost_imageOptimization(catData_val['image'], 320, 180, '') %>" alt="<%- catData_val['title']%>" title="<%- catData_val['title']%>">
+            	<div class="photo-icon">
+                  <svg width="50.45" height="45.239" viewBox="0 0 50.45 45.239"><defs><filter id="a" x="0" y="0" width="50.45" height="45.239" filterUnits="userSpaceOnUse"><feOffset dy="3" input="SourceAlpha"></feOffset><feGaussianBlur stdDeviation="4.5" result="b"></feGaussianBlur><feFlood flood-opacity="0.161"></feFlood><feComposite operator="in" in2="b"></feComposite><feComposite in="SourceGraphic"></feComposite></filter></defs><g transform="translate(13.5 10.5)"><g style="filter:url(#a);" transform="matrix(1, 0, 0, 1, -13.5, -10.5)"><path style="fill:#000;" d="M23.147,3H2.3A1.3,1.3,0,0,0,1,4.3V19.936a1.3,1.3,0,0,0,1.3,1.3H23.147a1.3,1.3,0,0,0,1.3-1.3V4.3A1.3,1.3,0,0,0,23.147,3ZM16.959,7.56A1.628,1.628,0,1,1,15.33,9.188,1.628,1.628,0,0,1,16.959,7.56ZM4.908,17.33,9.226,7.4l4.91,7.949,4.209-2.091,2.2,4.067Z" transform="translate(12.5 7.5)"></path></g></g></svg>
+               </div>
+            </a>
+            <div class="title-wrap">
+               	<a href="<%=constant.SITE_URL%>category/<%- catData_val['category'].replace(/\s+/g, '-').toLowerCase()%>" class="category-name"><%- catData_val['category']%></a>
+               </a>
+               <h3 class="main-title">
+                  <a href="<%- catData_val['url']%>"><%= catData_val['title']%></a>
+               </h3>
+               <p class="copy">
+                 	<%= catData_val['description']%>
+               </p>
+               <% var shareArr = []; 
+		            shareArr['shareTitle'] = catData_val['title'];
+                  	shareArr['shareUrl'] = catData_val['url']; 
+		       %>
+		       <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+            </div>
+         </div>
+        <% } %>
+      <% } %> 
+      <%- include(viewpath+ '/widgets/paginationDefault'); %>
+      <% if (typeof ads  !== 'undefined' && typeof ads['BTF_300']  !== 'undefined'){%>
+      <div class="ad-center">
+         <%-common.displayAds(ads['BTF_300'][0]) %>
+      </div>
+      <% } %>
+      <!-- More Albums --> 
+      <div class="photos-wrap">
+         <h3 class="main-story-title">
+            <a href="">More Albums</a>
+            <span></span>
+         </h3>
+         <div class="big-thumb">
+            <a href="<%- moreAlbums['solarResults'][0]['url']%>" class="thumb-img">
+            	<img class="fp-lazy" src="<%-constant.PLACEHOLDER_IMG_320x180 %>" data-src="<%-common.firstpost_imageOptimization(moreAlbums['solarResults'][0]['image'], 320, 180, '') %>" alt="<%- moreAlbums['solarResults'][0]['title']%>" title="<%- moreAlbums['solarResults'][0]['title']%>">
+                  <div class="photo-icon">
+                     <svg width="50.45" height="45.239" viewBox="0 0 50.45 45.239"><defs><filter id="a" x="0" y="0" width="50.45" height="45.239" filterUnits="userSpaceOnUse"><feOffset dy="3" input="SourceAlpha"></feOffset><feGaussianBlur stdDeviation="4.5" result="b"></feGaussianBlur><feFlood flood-opacity="0.161"></feFlood><feComposite operator="in" in2="b"></feComposite><feComposite in="SourceGraphic"></feComposite></filter></defs><g transform="translate(13.5 10.5)"><g style="filter:url(#a);" transform="matrix(1, 0, 0, 1, -13.5, -10.5)"><path style="fill:#000;" d="M23.147,3H2.3A1.3,1.3,0,0,0,1,4.3V19.936a1.3,1.3,0,0,0,1.3,1.3H23.147a1.3,1.3,0,0,0,1.3-1.3V4.3A1.3,1.3,0,0,0,23.147,3ZM16.959,7.56A1.628,1.628,0,1,1,15.33,9.188,1.628,1.628,0,0,1,16.959,7.56ZM4.908,17.33,9.226,7.4l4.91,7.949,4.209-2.091,2.2,4.067Z" transform="translate(12.5 7.5)"></path></g></g></svg>
+                  </div>
+            </a>
+            <div class="title-wrap">
+               <h3 class="main-title">
+                  <a href="<%- moreAlbums['solarResults'][0]['url']%>"><%- moreAlbums['solarResults'][0]['title']%></a>
+               </h3>
+               <% var shareArr = []; 
+			            shareArr['shareTitle'] = moreAlbums['solarResults'][0]['title'];
+	                  	shareArr['shareUrl'] = moreAlbums['solarResults'][0]['url']; 
+			       %>
+			       <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+            </div>
+         </div>
+      </div>
+      <div class="photos small-thumb-wrap">
+         <div class="small-thumb-row inner-fp-lazy">
+         	<% for (const [moreAlbums_key, moreAlbums_val] of Object.entries(moreAlbums['solarResults'].slice(1,4))) { %>
+            <div class="small-thumb">
+               <a href="<%- moreAlbums_val['url']%>" class="thumbnail">
+                  <img class="fp-lazy" src="<%-constant.PLACEHOLDER_IMG_192x104 %>" data-src="<%-common.firstpost_imageOptimization(moreAlbums_val['image'], 192, 104, '') %>" alt="<%- moreAlbums_val['title']%>" title="<%- moreAlbums_val['title']%>" > 
+                 <div class="s-photo-icon">
+                    <img src="<%=constant.SITE_URL%>static/images/photo-icon-small.png">
+                 </div>
+               </a>
+               	<a href="<%- moreAlbums_val['url']%>" class="copy">
+              		<%= moreAlbums_val['title']%>
+              	</a>
+               <% var shareArr = []; 
+		            shareArr['shareTitle'] = moreAlbums_val['title'];
+                  	shareArr['shareUrl'] = moreAlbums_val['url']; 
+		       %>
+		       <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+            </div>
+             <% } %>
+         </div>
+         <a href="<%=constant.SITE_URL%>tag/<%- category_name%>" class="see-all">
+            see all 
+            <svg viewBox="0 0 24 24">
+               <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"></path>
+               <path d="M0 0h24v24H0V0z" fill="none"></path>
+            </svg>
+         </a>
+      </div>
+      <!--videos-->
+   </div>
+   <!--main-content-->
+    <% if (typeof outbrain_ads  !== 'undefined' && typeof outbrain_ads['MB_2']  !== 'undefined'){%>
+	<%-outbrain_ads['MB_2'];%>	
+    <% } %>
+
+  <%- include(viewpath+ '/widgets/mailChimp'); %>
+   <%- include(viewpath+ '/widgets/most_read_widget'); %>
+
+  <!-- Apester code -->
+      <!--<div class="apester-media" data-token="57026ab0d51383a359ae688c" data-context="true" data-tags="" data-fallback="true" height="350"></div><script async src="https://static.apester.com/js/sdk/latest/apester-sdk.js"></script>-->
+  <!-- Apester code end-->
+</div>
+<%- include(viewpath + '/layouts/m-footer'); %>

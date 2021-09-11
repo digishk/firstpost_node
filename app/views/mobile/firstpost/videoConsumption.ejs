@@ -1,0 +1,99 @@
+<%- include(viewpath+ '/layouts/m-header'); %>
+<script type="text/javascript">
+  $('#sticky-share .fb, .tw, .wa, .mail').attr('title', <%- JSON.stringify(postPageJson['post']['post_title']) %>);
+    $('#sticky-share .fb, .tw, .wa, .mail').attr('data-url', <%- JSON.stringify(postPageJson['post']['post_url']) %>);
+    $('#sticky-share .fb, .tw, .wa, .mail').attr('data-title', <%- JSON.stringify(postPageJson['post']['post_title']) %>);
+    $("#sticky-share .mail").attr('href','mailto:?subject='+<%- JSON.stringify(postPageJson['post']['post_title']) %>+'&body='+<%- JSON.stringify(postPageJson['post']['post_url']) %>); 
+</script>
+<div class="container mainArticlediv">
+    <!--cricket-ticker-wrap-->
+    <%- include(viewpath+ '/widgets/m-cricketscore_strip'); %>
+    <!--cricket-ticker-wrap-->
+    <% if (typeof ads  !== 'undefined' && typeof ads['ATF_320']  !== 'undefined'){%>
+	    <div class="ad-center"  data-ad-id="<%-ads['ATF_320'][0]%>" data-ad-size="<%-ads['ATF_320'][1]%>">
+		<%-common.displayAds(ads['ATF_320'][0]) %>
+	    </div>
+    <% } %> 
+    <%- include(viewpath+ '/widgets/breadCrumbs'); %>
+    <div class="article-content clearfix">
+        <%# include(viewpath+ '/widgets/floating_social_share_widget'); %>
+        <div class="article-sect"  id="articleCont">
+            <div class="innerpage-share">
+                <h2 class="category-name"><a href="<%=constant.SITE_URL%>category/<%=catSlug_new%>" class="section-btn"><%=common.capitalizeFLetter(catSlug_new)%></a></h2>
+                <%# include(viewpath+ '/widgets/social_share_widget'); %>
+                </div>
+                <h1 class="inner-main-title" id="headlineitem">
+                <%=postPageJson['post']['post_title']%>
+                </h1>
+                <p class="inner-copy">
+                <%=postPageJson['post']['post_excerpt']%>
+                </p>
+                
+                <div class="author-info">
+                <a href="<%=constant['SITE_URL']%>author/<%=postPageJson['post']['post_authorslug']%>"><span class="article-by <% if(catSlug == 'health'){%> health-category <% } %>"><%=postPageJson['post']['post_authorname']%></span></a>
+                <span><%=dateFormat(postPageJson['post']['post_date'] , "mmmm dd',' yyyy HH:MM:ss")%> IST</span>
+                </div>
+                
+                <%  if(typeof videoURLArr !== 'undefined' && videoURLArr != ''){ %>
+                <%- include(viewpath+ '/widgets/video_player_widget',{videoURLArr:videoURLArr}); %>
+                <%  }else if(typeof movieActorSchemaString !== 'undefined' && movieActorSchemaString != ""){%>
+                <%- include(viewpath+ '/widgets/movie_review_widget',{postPageJson:postPageJson}); %>    
+                <%	}else { %>
+                <div class="article-img">
+                    <img class="fp-lazy" title="<%=postPageJson['post']['post_title']%>" alt="<%=postPageJson['post']['post_title']%>" src="<%-constant.PLACEHOLDER_IMG_320x180 %>" data-src="<%-common.firstpost_imageOptimization(postPageJson['post']['post_image'], 320, 180, '') %>">
+                </div>
+                <%  } %>
+                <ul class="bullets-list">
+                <% for ( let bullCount=1 ; bullCount <=5 ; bullCount++ ){ %>
+                    <% if (typeof postPageJson['meta']["heading-"+bullCount] !== 'undefined' && postPageJson['meta']["heading-"+bullCount] != "") { %>
+                    <li><h2 class="bullets"><%=postPageJson['meta']["heading-"+bullCount]%></h2></li>
+                    <% } %>
+                <% } %>
+                </ul>
+                
+                <div class="inner-copy article-full-content article-full-content_<%-postPageJson.post.ID%> hideCont">
+                <%- postContent %>
+                </div>
+		<div class="checkUser fadeout" id="fade_<%-postPageJson.post.ID%>"></div>
+		<div id="show-full-artcl" class="readMore" data-postid="<%-postPageJson.post.ID%>">                    
+		<a href="javascript:void(0);" data-toggle="modal">show Full story</a>
+		</div>
+                <p class="author-info article-date">Updated Date: <span class="article-date"><%=dateFormat(postPageJson['post']['post_modified'] , "mmmm dd',' yyyy HH:MM:ss")%> IST</span></p>
+                <% if(typeof postPageJson['tag'] !== 'undefined' && postPageJson['tag'] !== null && postPageJson['tag'] != ''){ %>
+                <div class="tags-wrap">
+                    <p class="tags-heading">TAGS:</p>
+                    <ul class="tags-list">
+                    <% for (var [tag_key, tag_val] of Object.entries(postPageJson['tag'])) { %>
+                        <li>
+                        <a href="<%=tag_val.url.replace('http://www.firstpost.com/' , constant.SITE_URL)%>"><%= common.capitalizeEWLetter(tag_val.name) %></a>
+                        </li>
+                    <%
+                        if(tag_key >= 4){
+                        break;
+                        }
+                    } %>
+                    </ul>
+                </div>
+                <% } %>
+		<!-- <div class="share-page innerpage-share">
+			<p>Share this article</p>
+			<%# include(viewpath+ '/widgets/social_share_widget'); %>
+		</div> -->
+		<% if (typeof outbrain_ads  !== 'undefined' && typeof outbrain_ads['MB_1']  !== 'undefined'){%>
+			<%-outbrain_ads['MB_1'];%>	
+		<% } %>
+        <%- include(viewpath+ '/widgets/whatsapp_text_widget'); %>
+        
+        </div>
+    </div>
+    <%- include(viewpath+ '/widgets/mailChimp'); %>
+    <%- include(viewpath+ '/widgets/most_read_widget'); %>
+
+    <!-- Apester code -->
+        <!--<div class="apester-media" data-token="57026ab0d51383a359ae688c" data-context="true" data-tags="" data-fallback="true" height="350"></div><script async src="https://static.apester.com/js/sdk/latest/apester-sdk.js"></script>-->
+    <!-- Apester code end-->
+    
+    <%- include(viewpath+ '/widgets/alsosee_article_widget'); %>
+    <%- include(viewpath+ '/widgets/related_article_widget'); %>
+</div>
+<%- include(viewpath+ '/layouts/m-footer'); %>

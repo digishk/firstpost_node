@@ -1,0 +1,24 @@
+<% if(rating != "" && rating != undefined){ %>
+	<% var whole1 = ""; %>
+	<% var fraction = ""; %>
+	<% var check = ""; %>
+	<% whole1 = Math.floor(rating); %>
+	<% fraction = "" %>
+	<% check = "" %>
+	<% fraction = rating - whole1 %>
+	<div class="rating-wrap">
+		<% if (rating != 0) { %><p class="rating"><%-rating%>/5</p><% } %>
+		<ul class="popcorns-list">
+			<% for (var i = 0; i <= 4; i++ ) { %>
+				<% if (i < whole1) { %>
+					<li class="full-star"></li>
+				<% }else if(fraction > 0 && check != 'true'){%>
+					<li class="half-star"></li>
+					<% check = 'true'; %>
+				<% }else{ %>	
+					<li class=""></li>
+				<% } %>
+			<% } %>
+		</ul>
+	</div>
+<% } %>

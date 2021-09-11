@@ -1,0 +1,269 @@
+
+<style>
+	body {margin: 0; }
+	* {padding: 0; margin: 0; }
+	.exit_poll_wrapper {font-family: 'Fira Sans'; background: #f6f6f6; max-width: 1244px; margin: auto; box-shadow: 0px 0px 2px #00000033; margin-bottom: 10px; }
+	.exit_poll_slider {width: 100%; overflow: hidden; }
+	.exit_poll_slider .glide__slides {display: flex; }
+	.exit_poll_slider_row {height:134px; background: #FFFFFF 0% 0% no-repeat padding-box; box-shadow: 0px 0px 2px #00000033; padding: 7px 12px; box-sizing: border-box; margin-bottom: 10px; }
+	.exit_poll_top {display: flex; align-items: center; justify-content: space-between; width: 100%; padding-bottom: 7px; }
+	.states_name {color: #464646; font-weight: 500; font-size: 16px; text-transform: uppercase; }
+	.channel_name {background: #001D42 0% 0% no-repeat padding-box; border-radius: 11px; color: #FFFFFF; font-size: 12px; text-transform: uppercase; padding: 0 10px; line-height: 22px; font-weight: 500; }
+	p.total_seats {font-size: 16px; color: #474747; font-weight: 500; padding-top: 5px; }
+	p.total_seats span {color: #767676; font-size: 12px; font-weight: normal; }
+	.exit_poll_slider_row table {border-collapse: collapse; border-spacing: 0; }
+	.exit_poll_slider_row table tbody tr th {height: 22px; letter-spacing: -0.28px; font-size: 14px; color: #fff; font-weight: 500; vertical-align: middle; border-right: 1px #fff solid; text-transform: uppercase; }
+	.exit_poll_slider_row table tbody tr td {height: 42px; letter-spacing: -0.28px; font-size: 20px; color: #fff; font-weight: 500; vertical-align: middle; text-align: center; border-right: 1px #fff solid; border-top: 1px #fff solid; }
+	.exit_poll_slider_row table tbody tr th:last-child {border-right: 0; }
+	.exit_poll_slider_row table tbody tr td:last-child {border-right: 0; }
+	.exit_poll_row {box-sizing: border-box; }
+	.exit_poll_ad {background: #282828; width: 100%; height: 60px; }
+	.exit_poll_title_link {display: flex; align-items: center; justify-content: space-between; padding: 10px 13px; margin-bottom: 5px; }
+	.exit_poll_detailed {color: #E1261C; font-size: 12px; font-weight: 500; position: relative; padding-right: 24px; text-decoration: underline; }
+	a.exit_poll_detailed:after {content: ""; width: 13px; height: 2px; position: absolute; background: #E1261C; top: 6px; right: 2px; }
+	a.exit_poll_detailed:before {content: ''; border-top: 2px solid #E1261C; border-left: 2px solid #E1261C; width: 6px; height: 6px; transform: rotate(132deg ); position: absolute; right: 4px; top: 3px; }
+	.ls_pageheading {position: relative; font-size: 20px; text-transform: uppercase; color: #e1261c; line-height: 20px; }
+	.ls_pageheading a {color: #e1261c; line-height: 20px; text-decoration: none; }
+	.ls_pageheading span {color: #001D42; position: relative; }
+	.ls_pageheading span:after {content: "";position: absolute;background: #e1261c;width: 100%;height: 3px;left: 0;bottom: 0px;}
+	.exit_poll_slider_wrapper {padding: 0 10px;width: 100%;box-sizing: border-box;}
+	.exit_poll_slider .glide__bullets {display: flex; align-items: center; justify-content: center; padding: 0 10px; }
+	.exit_poll_slider button.glide__bullet {border: none; padding: 0px; background: #b0b0b0; width: 20px; height: 4px; border-radius: 20px; margin: 0 3px; cursor: pointer; outline: none; }
+	.exit_poll_slider button.glide__bullet.glide__bullet--active {background: #e1261c; }
+	.exit_poll_slider button.glide__bullet:hover {background: #e1261c; }
+	.exit_poll_slider .glide__arrows {display: flex; align-items: center; justify-content: center; margin: 15px 0 24px; }
+	a.exit-right-arrow:before {content: ''; border-top: 2px solid #646464; border-left: 2px solid #646464; width: 9px; height: 9px; -webkit-transform: rotate(132deg ); -ms-transform: rotate(132deg); transform: rotate(132deg ); position: absolute; top: 15px; left: 15px; background: transparent; }
+	a.exit-right-arrow {position: relative; font-size: 0; margin-top: -41px; width: 40px; }
+	a.exit-right-arrow:after {content: ''; width: 18px; height: 2px; background-color: #646464; display: block; left: 9px; position: absolute; top: 19.3px; }
+	a.exit-left-arrow {position: relative; font-size: 0; margin-top: -43px; width: 40px; }
+	a.exit-left-arrow:after {content: ''; width: 18px; height: 2px; background-color: #646464; display: block; left: 17px; position: absolute; top: 19.3px; }
+	a.exit-left-arrow:before {content: ''; border-top: 2px solid #646464; border-left: 2px solid #646464; width: 9px; height: 9px; -webkit-transform: rotate(-45deg ); -ms-transform: rotate(-45deg); transform: rotate(-45deg ); position: absolute; left: 16px; top: 15px; }
+	.bottom-part{
+		display:flex; align-items: flex-end;justify-content:space-between;
+	}
+	@media screen and (max-width:767px) {
+	.bottom-part{align-items:center;}
+	.exit_poll_slider .glide__arrows {display: none; }
+	.ls_pageheading {font-size: 14px; }
+	/* .exit_poll_detailed {font-size: 0; top: -9px; } */
+	.exit_poll_title_link {padding: 8px 10px;margin: 0;}
+	.states_name {font-size: 14px; }
+	.channel_name {font-size: 11px; }
+	.exit_poll_slider_row {padding: 5px 10px; height: auto; }
+	p.total_seats {font-size: 14px; }
+	.exit_poll_ad {height: 50px;}
+	.ls_pageheading span:after {bottom: -2px; }
+	.exit_poll_slider_row table tbody tr td {font-size: 16px; width: 63px; }
+	}
+	
+	.loader {
+	
+		  border-radius: 50%;
+		  border: 3px solid #f3f3f3;
+		border-top: 3px solid #000000b0;
+		width: 40px;
+		height: 40px;
+	
+	  -webkit-animation: spin 2s linear infinite; /* Safari */
+	  animation: spin 2s linear infinite;
+	  
+	}
+	
+	/* Safari */
+	@-webkit-keyframes spin {
+	  0% { -webkit-transform: rotate(0deg); }
+	  100% { -webkit-transform: rotate(360deg); }
+	}
+	
+	@keyframes spin {
+	  0% { transform: rotate(0deg); }
+	  100% { transform: rotate(360deg); }
+	}
+	
+	#result-fallback {
+	  height: 226px;
+	  display: flex;
+	  justify-content:center;
+	  align-items: center;
+	}
+	</style>
+	
+	</head>
+	<body>
+	
+		<div id="result-fallback">
+			<div class="loader"></div>
+		  </div>
+	<div class="exit_poll_wrapper" id="result-main-container" style="display:none;">
+		<div class="exit_poll_row">
+			<div class="exit_poll_title_link">
+				<h3 class="ls_pageheading"><a href="https://www.firstpost.com/politics/exit-poll-results-2021-live-updates-pollsters-to-predict-election-winners-for-four-states-puducherry-after-7-pm-today-9577471.html">ASSEMBLY ELECTIONS 2021 <span>EXIT POLL RESULTS</span></a></h3>
+				<!-- <a href="#" class="exit_poll_detailed">DETAILED EXIT POLL RESULTS</a> -->
+			</div>
+			<div class="exit_poll_slider_wrapper">
+			<div class="exit_poll_slider">
+				<div data-glide-el="track">	
+					<div class="glide__slides" id="poll-container">
+						<!-- Election Data will go here programmatically -->
+					</div>
+				</div>
+	
+				<div data-glide-el="controls" class="glide__arrows">
+	
+			   <a href="" class="exit-left-arrow" data-glide-dir="<">&lt;</a>
+					   <div class="glide__bullets" data-glide-el="controls[nav]" id="nav-controller">
+						   <!-- Nav Buttons will come here programmatically -->
+					   </div>
+			   <a href="" class="exit-right-arrow" data-glide-dir=">">&gt;</a>
+				</div>
+	
+				</div>
+	
+			</div>
+	
+		</div>
+	</div>	
+	<script type="text/javascript" src="<%-constant.SITE_URL%>static/js/jquery-3.4.0.min.js"></script>
+	<script async type="text/javascript" src="<%-constant.SITE_URL%>static/js/glide.min.js"></script>
+	<script>
+	
+		// AJAX
+		$(document).ready(function (){
+		
+			const switchDataURL = 'https://election.nw18.com/electiondata/electionjson/five_states_assembly_election_2021/live/switchdata.json';
+		
+			// Fetch Data on Load
+			getResultData(switchDataURL);
+
+			// setInterval(function(){
+			// 	getResultData(switchDataURL);
+			// },25000);
+	
+			function getResultData(switchDataURL){
+				$.ajax({
+					url: switchDataURL,
+					type: 'GET',
+					cache: true,
+					dataType: 'jsonp',
+					jsonp: 'jsonp',
+					jsonpCallback: 'switchdata_five_states_assembly_election_2021',
+					crossDomain: true,
+					success: function (response) {
+	
+						if(!response) {
+							$('#result-fallback').remove()
+							$('#result-main-container').remove()
+							return false
+						}
+	
+						const {exit_poll_strip} = response
+						
+						if(!exit_poll_strip) {
+							$('#result-fallback').remove()
+							$('#result-main-container').remove()
+							return false
+						}
+	
+						$.getJSON(exit_poll_strip, function(result){
+	
+							if(!result) {
+								$('#result-fallback').remove()
+								$('#result-main-container').remove()
+								return false
+							}
+	
+							let dataBlock = ''
+							let navController = ''
+							let btnCount = 0
+							for(let key in result){
+								if(key !== 'exit_poll_onoff') {
+									const state = result[key]
+									if(state) {
+										let stateHtml = ''
+										state.forEach(data => {
+											const {agency_name, parties, state, total_seats, majority} = data
+											let th = ''
+											let td = ''
+											
+											if(parties) {
+												parties.forEach(({colour, name, seats}) => {
+													th += `<th style="background:${colour}">${name}</th>`
+													td += `<td style="background:${colour}">${seats}</td>`
+												})
+											}
+	
+											stateHtml += `
+												<div class="exit_poll_slider_row">
+													<div class="exit_poll_top">
+														<p class="states_name">${state}</p>
+														<p class="channel_name">${agency_name}</p>
+													</div>
+													<table width="100%">
+														<tbody>
+															<tr>
+																${th}
+															</tr>
+															<tr>
+																${td}
+															</tr>
+														</tbody>
+														
+													</table>
+													<div class="bottom-part">
+	
+													<p class="total_seats">${total_seats} Seats <span>(${majority} Seats to win)</span></p>
+													<a href="https://www.firstpost.com/${state.split(' ').join('-').toLowerCase()}-assembly-elections/exit-poll-results-2021-live" class="exit_poll_detailed">RESULTS</a>
+													</div>
+													
+												</div>
+											`		
+											navController += `<button class="glide__bullet" data-glide-dir="=${btnCount}"></button>`
+											btnCount++;
+										})
+										dataBlock += stateHtml
+										
+									}		
+								}
+							}
+	
+							$('#poll-container').html(dataBlock)
+							$('#nav-controller').html(navController)
+							$('#result-fallback').remove()
+							$('#result-main-container').show();
+								// Glide
+							  new Glide(document.querySelector('.exit_poll_slider'), {
+								autoplay: 5000,
+								type: 'carousel',
+								perView: 3,
+								gap:10,
+								slidesToShow: 2,
+								dots: '#dots',
+								draggable: true,  
+								breakpoints: {
+									767: {
+									perView: 1,
+									gap:10,
+									slidesToShow: 1,
+									peek: {
+										before:0,
+										after:60
+									}
+								}
+							}
+							}).mount()
+						})
+					},
+					error: function (x, y, error) {
+						$('#result-fallback').remove()
+						$('#result-main-container').remove()
+						console.log("error", error.message);
+					}
+				});
+			}  
+	  
+	})
+	</script>
+	
+	
+	
+	

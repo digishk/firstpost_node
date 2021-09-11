@@ -1,0 +1,131 @@
+<%
+	const {post} = (typeof postPageJson !== 'undefined' && postPageJson) ? postPageJson : {}
+	const {post_title,post_url, post_date, post_modified, post_excerpt} = post || {}
+
+	const formatedDate = dateFormat(post_date,"yyyy-mm-dd")
+	const formatedModifiedDate = dateFormat(post_modified,"yyyy-mm-dd")
+
+	const formatedTime = dateFormat(post_date,"HH:MM:ss")
+	const formatedModifiedTime = dateFormat(post_modified,"HH:MM:ss")
+
+	const replacedPostExcerpt = post_excerpt && post_excerpt.replace(/"/g,"`")
+%>
+
+<% if ((typeof liveBlog  !== 'undefined' && typeof liveBlog.kf !== 'undefined')){%>
+<div class="highlights-wrap">
+    <h3 class="heading">
+        Highlights
+    </h3>
+    <div id="highlights" class="refresh-highlight-blog">
+    	<% for (const [key, item] of Object.entries(liveBlog.kf)) { %>
+    	<% if (item.title != null) { %>
+        <div class="indicatorDivs">
+        	<a href="#live-blog-<%-item['date'] %>">
+            <div class="time">
+                <strong>
+                    <% filteredTime = item['date'].substring(8) %> 
+                    <%-filteredTime.substring(0, 2) %>:<%-filteredTime.substring(2, 4) %>
+                </strong>
+                (ist)
+            </div>
+            <%-item.title %>
+        	</a>
+        </div>
+        <% } %>
+        <% } %>
+    </div>
+    <!--highlights-->
+</div>
+<% } %>
+<input type="hidden" id="post_title" value="<%-post_title %>" />
+<input type="hidden" id="post_url" value="<%-post_url %>" />
+<!--highlights-wrap-->
+<% if ((typeof liveBlog  !== 'undefined' && typeof liveBlog.data !== 'undefined')){%>
+<h2 class="h2class">LIVE NEWS and UPDATES</h2>
+<div class="timeline" id="blogDivScroll">
+	<div class="timeline-bullet-points bullet-points refresh-live-blog live-blog" data-live-blog-id="<%-liveBlogKey %>" data-live-blog-page = "1" itemtype="http://schema.org/LiveBlogPosting" itemprop="liveBlogUpdate" itemscope="itemscope" data-shareTitle="<%-shareArr.shareTitle %>" data-shareUrl="<%-shareArr.shareUrl %>">
+		<meta itemprop="headline" content="<%- seoData['metaTitle'] %>"/>
+        <meta itemprop="coverageStartTime" content="<%-formatedDate %>T<%-formatedTime %>+05:30">
+        <meta itemprop="author" content="Firstpost">
+		<meta itemprop="url" content="<%-post_url %>">
+	    <meta itemprop="description" content="<%-replacedPostExcerpt %>">
+	    <meta itemprop="datePublished" content="<%-formatedModifiedDate %>T<%-formatedModifiedTime %>+05:30">
+	    <meta itemprop="dateModified" content="<%-formatedModifiedDate %>T<%-formatedModifiedTime %>+05:30">
+	    <span itemtype="http://schema.org/Event" itemscope="itemscope" itemprop="about">
+	        <meta itemprop="name" content="<%- seoData['metaTitle'] %>">
+	        <meta itemprop="startDate" content="<%-formatedDate %>T<%-formatedTime %>+05:30">
+	        <meta itemprop="description" content="<%-replacedPostExcerpt %>">
+	        <meta itemprop="endDate" content="<%-formatedDate %>T<%-formatedTime %>+05:30">
+	        <span itemprop="location" itemscope="itemscope" itemtype="http://schema.org/Place">
+	        <meta itemprop="address" itemscope="itemscope" itemtype="http://schema.org/PostalAddress"></span>
+        </span>
+		<% for (const [key, item] of Object.entries(liveBlog.data)) { %>
+			<% striptagtitle = striptags(item.post.title) %> 
+			<% filteredDate = item['time'].substring(0,8) %> 
+			<% blogDate = filteredDate.substring(6, 8)+"-"+filteredDate.substring(4, 6) +"-"+filteredDate.substring(0, 4) %>
+			<% blogDateTimeSchema = item['time'].substring(6, 8)+"-"+item['time'].substring(4, 6) +"-"+item['time'].substring(0, 4) +"T"+ item['time'].substring(8, 10) +":"+ item['time'].substring(10, 12) +":"+ item['time'].substring(12, 14) %>
+
+			<div class="timeline-content big-thumb" data-id="live-blog-<%-item.time %>" itemtype="https://schema.org/BlogPosting" itemprop="liveBlogUpdate" itemscope="itemscope">
+			    
+			    <div itemprop="articleBody">
+			        <time itemprop="datePublished" datetime="<%-blogDateTimeSchema %>+05:30"></time>
+			        <time itemprop="url" content="<%-postPageJson.post.post_url %>#<%-item.time %>"></time>
+			        <span itemscope="itemscope" itemprop="author" itemtype="http://schema.org/Person">
+				        <meta content="https://www.firstpost.com/" itemprop="sameAs">
+				        <meta content="firstpost.com" itemprop="name">
+				     </span>
+
+				     <% if(item.post.image_path != '') { %>
+				        <span itemtype="https://schema.org/ImageObject" itemscope="itemscope" itemprop="image">
+				            <meta itemprop="url" content="<%-item.post.image_path %>">
+				            <meta content="480" itemprop="width"><meta content="267" itemprop="height">
+				        </span>
+			        <% } else { %>	
+				        <span itemtype="https://schema.org/ImageObject" itemscope="itemscope" itemprop="image">
+					        <meta itemprop="url" content="<%-constant.IMG_URL %>wp-content/uploads/FP-LiveCoverage-Box.jpg">
+					        <meta content="480" itemprop="width"><meta content="267" itemprop="height">
+					    </span>
+			        <% } %>	
+			        <span itemtype="https://schema.org/Organization" itemscope="itemscope" itemprop="publisher">
+			            <span itemtype="https://schema.org/ImageObject" itemscope="itemscope" itemprop="logo">
+			                <meta content="<%-constant.IMG_URL %>wp-content/uploads/fp/fp-logowhite.png" itemprop="url">
+			            </span>
+			            <meta content="Firstpost" itemprop="name">
+			        </span>
+			        <meta itemprop="mainEntityOfPage" content="<%-post_url %>">
+			        <meta itemprop="dateModified" content="<%-blogDateTimeSchema %>+05:30">
+			        <% /*if(typeof item.post.title !== 'undefined' || striptagtitle == '') { %>
+			        	<meta itemprop="headline" content="<%=striptagtitle.substring(0,52) %>..<%=striptagtitle.substring((striptagtitle.length-54),(striptagtitle.length)) %>">
+			        <% } else {*/ %>
+			        	<meta itemprop="headline" content="<%=striptagtitle.substring(0,52) %>..<%=striptagtitle.substring((striptagtitle.length-54),(striptagtitle.length)) %>">
+			        <% //} %>
+				
+			        <div class="time-date">
+			            <%-constant.monthsWNos[filteredDate.substring(4, 6)] %> <%-filteredDate.substring(6, 8) %>, <%-filteredDate.substring(0, 4) %>
+			            <span>
+			                - <% filteredTime = item['time'].substring(8) %> 
+			                  <%-filteredTime.substring(0, 2) %>:<%-filteredTime.substring(2, 4) %> (IST)
+			            </span>
+			        </div>
+			        <%-item.post.title %>
+
+			        <% if (item.post.image_path != "") { %>
+						<img class="timeline-image" src="<%-item.post.image_path %>" />
+					<% } %>	
+
+					<% if (item.post.data_type != 'new_embedded' && (typeof item['post']['source'] !== 'undefined' && striptags(item['post']['source']).indexOf('embed') > -1)) { %>
+						<iframe class="embed-responsive-item" src="<%-item.post.source %>"></iframe>
+					<% } else if(item.post.source != null) { %>	
+						<p class="blog-source"><%-item.post.source %></p>
+					<% } %>	
+
+			        <%- include(viewpath+ '/widgets/social_share_widget'); %>
+			    </div>
+		    </div>
+    	<% } %>
+	</div>
+    <% if (liveBlog.count.count > 10) { %>
+    <div class="btn-panel clearfix"><a id="live-blog-update" href="javascript:void(0);" class="link">Load More</a></div>
+    <% } %>
+</div>
+<% } %>

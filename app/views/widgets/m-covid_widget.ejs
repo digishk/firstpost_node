@@ -1,0 +1,473 @@
+<style type="text/css">
+@import url(https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,900&display=swap);@font-face{font-family:'Segoe Pro Regular';font-style:normal;font-weight:400;src:local('Segoe Pro Regular'),url(https://images.news18.com/static_news18/pix/ibnhome/news18/delhi-assembly-election-2020/fonts/SegoePro-Regular.woff) format('woff')}@font-face{font-family:'Segoe Pro Bold';font-style:normal;font-weight:400;src:local('Segoe Pro Bold'),url(https://images.news18.com/static_news18/pix/ibnhome/news18/delhi-assembly-election-2020/fonts/SegoePro-Bold.woff) format('woff')}@font-face{font-family:'Segoe Condensed';font-style:normal;font-weight:400;src:local('Segoe Condensed'),url(https://images.news18.com/static_news18/pix/ibnhome/news18/delhi-assembly-election-2020/fonts/SegoePro-Cond.woff) format('woff')}@font-face{font-family:'Segoe Pro Cond Bold';font-style:normal;font-weight:400;src:local('Segoe Pro Cond Bold'),url(https://images.news18.com/static_news18/pix/ibnhome/news18/delhi-assembly-election-2020/fonts/SegoePro-CondBold.woff) format('woff')}.corona-toolbar{background:#000;position:fixed;z-index:9999999999;width:100%;height:100%;top:0;left:0;padding-top:10px;display:flex;overflow-x:auto}.corona-toolbar ul{list-style:none}.corona-toolbar.hide{display:none}.corona-container{width:100%;box-sizing:border-box;background:#1e2630}.corona-container .corona-boxl{width:100%;display:flex;padding:7px;align-items:center;background:#ffc44e;position:relative}.corona-container .corona-boxl .cross-icon{width:26px;height:26px;background:#000;border-radius:50%;position:absolute;right:0;top:5px;cursor:pointer}.corona-container .corona-boxl .cross-icon:after,.corona-container .corona-boxl .cross-icon:before{content:'';width:15px;height:2px;background:#ffc44e;display:block;position:absolute;top:50%;left:24%}.corona-container .corona-boxl .cross-icon:before{transform:rotate(-45deg)}.corona-container .corona-boxl .cross-icon:after{transform:rotate(45deg)}.corona-container .corona-boxr{width:100%;padding:8px}.corona-container .corona-boxl .virus{margin-right:5px}.corona-container .corona-boxl .virus-text .virushead-1{font-family:Montserrat,sans-serif;font-weight:900;font-size:28px;margin-bottom:0}.corona-container .corona-boxl .virus-text .virushead-2{font-family:Montserrat,sans-serif;font-weight:500;font-size:17px;text-transform:uppercase;margin-bottom:5px}.corona-container .corona-boxl .virus-text .virushead-2 span{border-bottom:2px solid #000}.corona-container .corona-boxl .virus-text ul{display:flex;flex-wrap:wrap;justify-content:space-between}.corona-container .corona-boxl .virus-text ul li{width:50%}.corona-container .corona-boxl .virus-text ul li span{font-weight:700}.corona-boxr .corona-main{display:none}.corona-boxr .corona-header{display:flex;justify-content:space-between;margin-bottom:7px;position:relative}.corona-boxr .corona-header .coorna-tab{display:flex}.corona-boxr .corona-header .coorna-tab li{font-size:24px;color:#8f8a7f;font-family:'Segoe Pro Regular';text-transform:uppercase;padding:0 50px 5px 15px;margin-right:3px;border-bottom:1px solid #8f8a7f;cursor:pointer}.corona-boxr .corona-header .coorna-tab li:last-child{margin-right:0}.corona-main-wrap{background:#1f2326}.corona-main-inner{margin-bottom:5px}.corona-main-inner .c-main-r{width:100%}.corona-main-inner .c-main-r ul{display:flex;flex-wrap:wrap}.corona-main-inner .c-main-r ul li{font-family:'Segoe Pro Regular';flex:0 0 50%;text-align:center;position:relative;padding:5px 0}.corona-main-inner .c-main-r ul li:after{content:'';width:80%;height:1px;background:#707070;position:absolute;left:50%;bottom:0;transform:translate(-50%,0)}.corona-main-inner .c-main-r ul li:before{content:'';width:1px;height:70%;background:#707070;position:absolute;right:0;top:50%;transform:translate(0,-50%)}.corona-main-inner .c-main-r ul li .head1{color:#bbb;font-size:11px;text-transform:uppercase;margin-bottom:5px}.corona-main-inner .c-main-r ul li .head2{font-size:28px;font-family:'Segoe Pro Bold';margin-bottom:5px;line-height:22px}.corona-main-inner .c-main-r ul li span{font-size:12px}.corona-main-inner .c-main-r ul li.active-cases .head2{color:#ffb727}.corona-main-inner .c-main-r ul li.active-cases span{color:#ffb727}.corona-main-inner .c-main-r ul li.total-confirmed .head2{color:#ffd488}.corona-main-inner .c-main-r ul li.total-confirmed span{color:#ffd488}.corona-main-inner .c-main-r ul li.cured .head2{color:#41b408}.corona-main-inner .c-main-r ul li.cured span{color:#41b408}.corona-main-inner .c-main-r ul li.total-deaths .head2{color:#e34042}.corona-main-inner .c-main-r ul li.total-deaths span{color:#e34042}.c-main-select{width:85%;padding:4px;border:0}.c-main-l-head{color:#444;font-size:24px;font-family:'Segoe Pro Regular';text-transform:uppercase;width:50%}.corona-m-ftr{padding:5px}.corona-m-ftr .corona-m-box{font-family:'Segoe Pro Regular';color:#ffeccb;font-size:11px;font-style:italic;display:flex;flex-wrap:wrap;margin-bottom:10px}.corona-m-ftr .corona-m-box li{width:50%;margin-bottom:5px}.corona-m-ftr .corona-m-box li:last-child{width:100%;color:#ffc44e}.corona-m-ftr .corona-m-box span{color:#ffeccb;font-weight:900;border-bottom:1px solid}.corona-hospital{font-family:'Segoe Pro bold';background:#f5f5f5;color:#e1261c;font-size:14px;text-transform:uppercase;padding:5px 18px 7px;border-radius:25px;display:flex;align-items:center}.corona-hospital div{line-height:13px}.corona-hospital div span{display:block;color:#404040;font-size:11px}.corona-hospital img{width:22px;margin-right:10px;border-right:1px solid #bbb;padding-right:10px}.corona-boxr .corona-header .coorna-tab li.active{position:relative;font-family:'Segoe Pro bold';color:#ffc44e}.corona-boxr .corona-header .coorna-tab li.active:before{content:'';width:100%;height:3px;position:absolute;background:#ffc44e;bottom:0;left:0}.corona-boxr .corona-header .coorna-tab li.active:after{content:'';width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-top:10px solid #ffc44e;position:absolute;top:100%;left:10px}.corona-main-inner .c-main-r ul li:first-child:before{content:none}.corona-main-inner .c-main-r ul li:nth-child(2n):before{content:none}.corona-main-inner .c-main-r ul li:nth-child(1):after{content:none}.corona-main-inner .c-main-r ul li:nth-child(2):after{content:none}.corona-main .helpline{display:flex;flex-wrap:wrap;justify-content:space-between;padding:5px}.corona-main .helpline li{font-family:'Segoe Pro Regular';width:45%;color:#bbb;padding:5px 0}.corona-main .helpline li:nth-child(2n){width:55%}.corona-main .helpline li span{font-family:'Segoe Pro bold';color:#fff}.corona-main .helpline li span img{width:15px}.corona-main .helpline li:nth-child(2n) span{font-size:17px;color:#ffb727}.corona-btnwrap{display:flex;justify-content:space-between}.corona-btnwrap li{width:49%}.corona-btnwrap li a{display:flex;align-items:center;background:#fff;border-radius:20px;padding:8px;font-size:13px;text-transform:uppercase;font-family:'Segoe Pro Regular';color:#e1261c}.corona-btnwrap li a img{width:20px;margin-right:5px}.corona-main-inner .c-main-r ul li a.newletter-btn{font-size:14px;text-transform:uppercase;font-family:'Segoe Pro Bold';color:#fff;display:flex;align-items:center}.corona-main-inner .c-main-r ul li a.newletter-btn .icon{width:35px;margin-right:7px}.corona-main-inner .c-main-r ul li a.newletter-btn .newletter-text{text-align:left;line-height:15px}.corona-main-inner .c-main-r ul li a.newletter-btn .newletter-text span{display:block;color:#a5a5a5;font-size:10px}.corona-popupftr{display:flex;padding:7px;border-left:2px solid #e1261c;background:#fff}.corona-popupftr .note-icon{margin-right:7px}.corona-popupftr p{color:#1e2630;font-family:'Segoe Pro Bold';font-size:13px}.corona-toolbarbtn{position:fixed;z-index:99999;top:50%;right:0;width:46px;background:#ffc44e;transform:translate(0,-50%);text-align:center;padding:5px;line-height:14px;border-radius:10px 0 0 10px;border:1px solid #1e2630;border-right:0; display:none;}.corona-toolbarbtn img{width:35px}.corona-toolbarbtn p{font-size:10px;text-transform:uppercase;line-height:11px;text-align:center}.covid-radio{padding-left:20px;position:relative;line-height:15px;margin-right:10px}.covid-radio .covid-radio-label{color:#ffc44e;font-size:11px;text-transform:uppercase}.covid-radio input[type=radio]{position:absolute;opacity:0;z-index:1;left:0;top:3px;cursor:pointer;margin:0}.covid-radio input[type=radio]+.covid-radio-label:before{position:absolute;content:'';border-radius:100%;border:1px solid #ffc44e;display:inline-block;width:10px;height:10px;top:3px;vertical-align:top;cursor:pointer;text-align:center;-webkit-transition:all 250ms ease;transition:all 250ms ease;left:0}.covid-radio input[type=radio]:checked+.covid-radio-label:before{background-color:#ffc44e;box-shadow:inset 0 0 0 2px #1f2326}.corona-main-inner .c-main-r ul li.covid-radio-wrap{display:flex;border-bottom:1px solid #707070;flex:0 0 100%}.corona-main-inner .c-main-r ul li.covid-radio-wrap:after{height:0}.corona-main-inner .c-main-r ul li span{font-size:14px;font-family:'Segoe Pro Regular'}
+</style>
+
+<div class="corona-toolbarbtn">
+    <img width="50" height="50" src="https://images.news18.com/static_news18/pix/ibnhome/news18/images/corona-toolbar/virus.png" alt="corona virus">
+    <p>COV19<br>info</p>
+</div>
+<div class="corona-toolbar hide">
+    <div class="corona-container">
+		<div class="corona-boxl">
+                <div class="cross-icon"></div>
+                <div class="virus"><img width="50" height="50" src="https://images.news18.com/static_news18/pix/ibnhome/news18/images/corona-toolbar/virus.png" alt="corona virus"></div>
+				<div class="virus-text">
+					<h2 class="virushead-1">CORONAVIRUS</h2>
+					<h3 class="virushead-2">COVID-19 <span>Information Centre</span></h3>
+				</div>
+		</div>
+		<div class="corona-boxr">
+			<div class="corona-header">
+				<ul class="coorna-tab">
+					<li class="tablinks1 active" onclick="coronaTab(event, 'corona-tab1')">India</li>
+					<li class="tablinks1" onclick="coronaTab(event, 'corona-tab2')">World</li>
+				</ul>
+			</div>
+			<div id="corona-tab1" class="corona-main" style="display: block">
+                <div class="corona-main-wrap">
+				<div class="corona-main-inner">
+					<div class="c-main-r">
+						<ul>
+                            <li>
+                                <select class="c-main-select" id="coronoVirusStateChange">
+                                <option value="Select State/UT">Select State/UT</option>
+			                     <% for (const [covidDataKey, covidDataVal] of Object.entries(covidData['India']['data'])) { %>
+				                    <% if (covidDataVal['english'] != "India") { %>
+				                     	<option value="<%-covidDataVal['english'] %>"><%-covidDataVal['english'] %></option>
+				                    <% } %>  	
+			                     <% } %>  
+                                </select>
+                            </li>
+                            <li><a class="newletter-btn" href="https://www.firstpost.com/indiagives/">
+                                <div class="icon"><img width="63" height="55" src="https://images.firstpost.com/wp-content/uploads/2020/04/donation.png" alt="donation"></div>
+                                <div class="newletter-text"><span>#INDIAGIVES</span></div>
+                            </a>
+                            </li>
+                            <li class="covid-radio-wrap">
+								<div class="covid-radio">
+				                    <input id="radio1" class="stateRadio" name="radio" type="radio" checked="checked" value="default">
+				                    <label for="radio1" class="covid-radio-label">MOHFW, India</label>
+				                </div>
+
+				                <div class="covid-radio" id="stateDepDiv">
+				                    <input id="radio2" class="stateRadio" name="radio" type="radio" value="state_active">
+				                    <label for="radio2" class="covid-radio-label" id="state_sourceLabel">Health Dep. Delhi</label>
+				                </div>
+							</li>
+							<li class="active-cases" id="txtactive" name="active">
+		                        <h3 class="head1">Active Cases</h3>
+		                        <h4 class="head2"></h4>
+		                        <span></span>
+		                     </li>
+		                     <li class="total-confirmed" id="txtconfirmed" name="confirmed">
+		                        <h3 class="head1">Total Confirmed</h3>
+		                        <h4 class="head2"></h4>
+		                        <span></span>
+		                     </li>
+		                     <li class="cured" id="txtcured" name="cured">
+		                        <h3 class="head1">Cured/Discharged</h3>
+		                        <h4 class="head2"></h4>
+		                        <span></span>
+		                     </li>
+		                     <li class="total-deaths" id="txtdeaths" name="deaths">
+		                        <h3 class="head1">Total DEATHS</h3>
+		                        <h4 class="head2"></h4>
+		                        <span></span>
+		                     </li>
+						</ul>
+					</div>
+				</div>
+				<div class="corona-m-ftr">
+                    <ul class="corona-m-box">
+                        <li>*change over the previous day</li>
+                        <li><span id="UpdatedStateTimeStamp">Updated: <%- dateFormat(covidData['India']['time']['upated_time'], "mmmm dd',' yyyy HH:MM:ss") %></span></li>
+                        <li><span>Data Source:</span> <span id="IndiaTextDiv">Ministry of Health and Family Welfare, India</span></li>
+                    </ul>
+                    <ul class="corona-btnwrap">
+                        <li><a href="https://www.firstpost.com/tag/coronavirus"><img width="20" height="20" src="https://images.firstpost.com/wp-content/uploads/2020/04/news-red-20x20.png" alt=""> COVID-19 NEWS</a></li>
+                         <li><a href="https://covid.bhaarat.ai/workflow" target="_blank" rel="nofollow noindex"><img width="39" height="39" src="https://images.news18.com/static_news18/pix/ibnhome/news18/images/corona-toolbar/m-symptom-icon.png" alt=""> Symptom Checker</a></li>
+                    </ul>
+                </div>
+                </div>
+                <ul class="helpline">
+                    <li><span>24 hrs.</span> helpline no. -</li>
+                   <li><span><img width="27" height="27" src="https://images.news18.com/static_news18/pix/ibnhome/news18/images/corona-toolbar/m-phone-icon.png" alt="phone"> +91-11-23978046</span></li>
+                    <li><span>24 hrs.</span> toll free no. -</li>
+                     <li><span><img width="27" height="27" src="https://images.news18.com/static_news18/pix/ibnhome/news18/images/corona-toolbar/m-phone-icon.png" alt="phone"> 1075</span></li>
+				</ul>
+                <a class="corona-hospital" href="https://covid.bhaarat.ai/testingcentres/" target="_blank" rel="nofollow noindex">
+                  <img width="34" height="32" src="https://images.news18.com/static_news18/pix/ibnhome/news18/images/corona-toolbar/hospital-icon.png" alt="hospital icon"> 
+                    <div><span>List of</span> Hospitals &amp; Testing centres</div>
+                </a>
+            </div>
+            <div id="corona-tab2" class="corona-main">
+                <div class="corona-main-wrap">
+				<div class="corona-main-inner">
+					<div class="c-main-r">
+						<ul>
+                            <li>
+                                <select class="c-main-select" id="coronoVirusCountryChange">
+				                     <option value="Select Country">Select Country</option>
+				                     <% for (const [covidDataKey, covidDataVal] of Object.entries(covidData['World']['data'])) { %>
+				                       <% if (covidDataVal['english'] != "World") { %>
+					                     	<option value="<%-covidDataVal['english'] %>"><%-covidDataVal['english'] %></option>
+					                    <% } %>     
+				                     <% } %>  
+				                  </select>
+                            </li>
+                            <li><a class="newletter-btn" href="https://www.firstpost.com/indiagives/">
+                                <div class="icon"><img width="63" height="55" src="https://images.firstpost.com/wp-content/uploads/2020/04/donation.png" alt="donation"></div>
+                                <div class="newletter-text"><span>#INDIAGIVES</span></div>
+                            </a>
+                            </li>
+							<li class="active-cases" id="txtactiveworld" name="active">
+		                        <h3 class="head1">Active Cases</h3>
+		                        <h4 class="head2"></h4>
+		                     </li>
+		                     <li class="total-confirmed" id="txtconfirmedworld" name="confirmed">
+		                        <h3 class="head1">Total Confirmed</h3>
+		                        <h4 class="head2"></h4>
+		                        <span></span>
+		                     </li>
+		                     <li class="cured" id="txtcuredworld" name="cured">
+		                        <h3 class="head1">Cured/Discharged</h3>
+		                        <h4 class="head2"></h4>
+		                     </li>
+		                     <li class="total-deaths" id="txtdeathsworld" name="deaths">
+		                        <h3 class="head1">Total DEATHS</h3>
+		                        <h4 class="head2"></h4>
+		                        <span></span>
+		                     </li>
+						</ul>
+					</div>
+				</div>
+				<div class="corona-m-ftr">
+                    <ul class="corona-m-box">
+                        <li>*change over the previous day</li>
+                        <li><span>Updated: <%- dateFormat(covidData['India']['time']['upated_time'], "mmmm dd',' yyyy HH:MM:ss") %></span></li>
+                        <li><span>Data Source:</span> Johns Hopkins University, U.S. (www.jhu.edu)</li>
+                    </ul>
+                    <ul class="corona-btnwrap">
+                        <li><a href="https://www.firstpost.com/tag/coronavirus"><img width="20" height="20" src="https://images.firstpost.com/wp-content/uploads/2020/04/news-red-20x20.png" alt=""> COVID-19 NEWS</a></li>
+                         <li><a href="https://covid.bhaarat.ai/workflow" target="_blank" rel="nofollow noindex"><img width="39" height="39" src="https://images.news18.com/static_news18/pix/ibnhome/news18/images/corona-toolbar/m-symptom-icon.png" alt=""> Symptom Checker</a></li>
+                    </ul>
+                </div>
+                </div>
+                <ul class="helpline">
+                    <li><span>24 hrs.</span> helpline no. -</li>
+                    <li><span><img width="27" height="27" src="https://images.news18.com/static_news18/pix/ibnhome/news18/images/corona-toolbar/m-phone-icon.png" alt="phone-icon"> +91-11-23978046</span></li>
+                    <li><span>24 hrs.</span> toll free no. -</li>
+                    <li><span><img width="27" height="27" src="https://images.news18.com/static_news18/pix/ibnhome/news18/images/corona-toolbar/m-phone-icon.png" alt="phone-icon"> 1075</span></li>
+				</ul>
+                <a class="corona-hospital" href="https://covid.bhaarat.ai/testingcentres/" target="_blank" rel="nofollow noindex">
+                  <img width="34" height="32" src="https://images.news18.com/static_news18/pix/ibnhome/news18/images/corona-toolbar/hospital-icon.png" alt="hospital-icon"> 
+                    <div><span>List of</span> Hospitals &amp; Testing centres</div>
+                </a>
+			</div>
+        </div>
+        <div class="corona-popupftr">
+         <div class="note-icon"><img width="30" height="34" src="https://images.news18.com/static_news18/pix/ibnhome/news18/images/corona-toolbar/notebook-icon.png" alt="notebook-icon"></div>
+				<p>
+					<% var i = 0;
+	                  for (const [categoryData_key, categoryData_val] of Object.entries(covidCatData['CatMainRanking']['main_ranking'])) { 
+	                     i++;
+	                  if(i == 1){   
+	               	%>
+	                  <a href="<%-categoryData_val.post_url %>"><%-categoryData_val.post_title %></a>
+	                  <% } %>
+	               	<% } %>
+				</p>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+function numberFormat(x) {
+	x=x.toString();
+	var lastThree = x.substring(x.length-3);
+	var otherNumbers = x.substring(0,x.length-3);
+	if(otherNumbers != '')
+	    lastThree = ',' + lastThree;
+	var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+	return res;
+}
+
+$(document).ready(function(){
+
+	//setting default country
+    var defaultState = 'India';
+
+	$("#stateDepDiv").hide();
+    document.getElementById('radio1').checked = true; 
+
+    var coronaVirusIndiaData = <%- JSON.stringify(covidData['India']['data']) %>;
+    if(coronaVirusIndiaData !== undefined && coronaVirusIndiaData !== '' && coronaVirusIndiaData[defaultState] !== ''){
+        populateStateData(defaultState);    
+    }
+
+    //state change action
+    $("#coronoVirusStateChange").change(function(){
+    	var selState = $('option:selected', this).val();
+    	var selectedState = selState;
+    	var radioSelected = $('.covid-radio-label').text();
+    	if(selState == 'Select State/UT'){
+    		selectedState = "India"; 
+    	}
+
+    	if(selectedState != "India")
+	    {
+	       	$("#stateDepDiv").show();
+	        document.getElementById('radio1').checked = true;  
+	    }
+	    else
+	    {
+	        $("#stateDepDiv").hide();
+	        document.getElementById('radio1').checked = true;      
+	    }
+	    if (radioSelected.indexOf('MOHFW') > -1) {
+         	populateStateData(selectedState,false);
+	     }else{
+	        populateStateData(selectedState,true);   
+	    }
+
+    	//populateStateData(selectedState);
+    });
+    //common populate state data
+    // function populateStateData(selState){
+    // 	var coronaVirusIndiaData = {/literal}{$covidData['India']['data']|json_encode}{literal};
+    //     $("#txtactive h4").text(''); 
+    //     $("#txtconfirmed h4").text('');
+    //     $("#txtcured h4").text('');
+    //     $("#txtdeaths h4").text('');
+    //     if(selState != 'sel'){
+    //     	for(var i=0;i<=coronaVirusIndiaData.length-1;i++){
+    //     		if(coronaVirusIndiaData[i].english == selState){
+    //     			$("#txtactive h4").text(numberFormat(coronaVirusIndiaData[i].active_case));
+	   //              $("#txtconfirmed h4").text(numberFormat(coronaVirusIndiaData[i].total_cases));
+	   //              $("#txtcured h4").text(numberFormat(coronaVirusIndiaData[i].total_discharge));
+	   //              $("#txtdeaths h4").text(numberFormat(coronaVirusIndiaData[i].total_deaths))	;
+    //     		}
+    //     	}
+    //     }
+    // }
+
+    $(".stateRadio").click(function(){
+      var selState =$(this).next('label:first').html();
+      var selectedState1 = $("#coronoVirusStateChange").val();
+      if (selState.indexOf('MOHFW') > -1) {
+         populateStateData(selectedState1,false);
+      }else{
+         populateStateData(selectedState1,true);   
+      }
+   });
+
+    //setting default country
+    var defaultCountry = 'World';
+    var coronaVirusWorldData = <%- JSON.stringify(covidData['World']['data']) %>;
+    if(coronaVirusWorldData !== undefined && coronaVirusWorldData !== '' && coronaVirusWorldData[defaultCountry] !== ''){
+    	$('#coronoVirusCountryChange').val(defaultCountry);
+        populateCountryData(defaultCountry);    
+    }
+	
+	//country change action
+    $("#coronoVirusCountryChange").change(function(){
+    	var selCountry = $('option:selected', this).val();
+    	var selectedCountry = selCountry;
+    	if(selCountry == 'Select Country'){
+    		selectedCountry = "World"; 
+    	}
+        populateCountryData(selectedCountry);
+    });
+
+});
+
+function populateStateData(selState,stateFlag=false){
+	var coronaVirusIndiaData = <%- JSON.stringify(covidData['India']['data']) %>;
+    $("#txtactive h4").text(''); 
+    $("#txtactive span").text(''); 
+
+    $("#txtconfirmed h4").text('');
+    $("#txtconfirmed span").text('');
+
+    $("#txtcured h4").text('');
+    $("#txtcured span").text('');
+
+    $("#txtdeaths h4").text('');
+    $("#txtdeaths span").text('');
+
+    if(selState != 'sel'){
+    	for(var i=0;i<=coronaVirusIndiaData.length-1;i++){
+    		if(coronaVirusIndiaData[i].english == selState){
+
+				$('#state_sourceLabel').html(coronaVirusIndiaData[i].state_source);
+
+               if(($("input[name=radio]:checked").val() == "state_active") && coronaVirusIndiaData[i].state_source!="")
+               {
+                   $('#IndiaTextDiv').html(coronaVirusIndiaData[i].state_source);           
+               }
+               else
+               {
+               $('#IndiaTextDiv').html('Ministry of Health and Family Welfare, India');   
+               }
+
+               if(($("input[name=radio]:checked").val() == "state_active") && coronaVirusIndiaData[i].state_timeupdated!="")
+               {
+               $('#UpdatedStateTimeStamp').html('Updated: '+coronaVirusIndiaData[i].state_timeupdated);
+               }
+
+               if(stateFlag)
+               {
+                  $("#txtactive h4").text(numberFormat(coronaVirusIndiaData[i].state_active));
+                  if(Math.sign(coronaVirusIndiaData[i].active_change) == 1){
+                     $("#txtactive span").text('+'+(numberFormat(coronaVirusIndiaData[i].active_change))+'*');
+                  }else{
+                     $("#txtactive span").text(numberFormat(coronaVirusIndiaData[i].active_change)+'*');
+                  }
+                  
+                  $("#txtconfirmed h4").text(numberFormat(coronaVirusIndiaData[i].state_total));
+                  if(Math.sign(coronaVirusIndiaData[i].total_change) == 1){
+                     $("#txtconfirmed span").text('+'+(numberFormat(coronaVirusIndiaData[i].total_change))+'*');
+                  }else{
+                     $("#txtconfirmed span").text(numberFormat(coronaVirusIndiaData[i].total_change)+'*');
+                  }
+
+                  $("#txtcured h4").text(numberFormat(coronaVirusIndiaData[i].state_discharged));
+                  if(Math.sign(coronaVirusIndiaData[i].discharged_change) == 1){
+                     $("#txtcured span").text('+'+(numberFormat(coronaVirusIndiaData[i].discharged_change))+'*');
+                  }else{
+                     $("#txtcured span").text(numberFormat(coronaVirusIndiaData[i].discharged_change)+'*');
+                  }
+
+                  $("#txtdeaths h4").text(numberFormat(coronaVirusIndiaData[i].state_deads));
+                  if(Math.sign(coronaVirusIndiaData[i].dead_change) == 1){
+                     $("#txtdeaths span").text('+'+(numberFormat(coronaVirusIndiaData[i].dead_change))+'*');
+                  }else{
+                     $("#txtdeaths span").text(numberFormat(coronaVirusIndiaData[i].dead_change)+'*');
+                  }
+               }else{
+                  $("#txtactive h4").text(numberFormat(coronaVirusIndiaData[i].active_case));
+                  if(Math.sign(coronaVirusIndiaData[i].active_change) == 1){
+                     $("#txtactive span").text('+'+(numberFormat(coronaVirusIndiaData[i].active_change))+'*');
+                  }else{
+                     $("#txtactive span").text(numberFormat(coronaVirusIndiaData[i].active_change)+'*');
+                  }
+
+                  $("#txtconfirmed h4").text(numberFormat(coronaVirusIndiaData[i].total_cases));
+                  if(Math.sign(coronaVirusIndiaData[i].total_change) == 1){
+                     $("#txtconfirmed span").text('+'+(numberFormat(coronaVirusIndiaData[i].total_change))+'*');
+                  }else{
+                     $("#txtconfirmed span").text(numberFormat(coronaVirusIndiaData[i].total_change)+'*');
+                  }
+
+                  $("#txtcured h4").text(numberFormat(coronaVirusIndiaData[i].total_discharge));
+                  if(Math.sign(coronaVirusIndiaData[i].discharged_change) == 1){
+                     $("#txtcured span").text('+'+(numberFormat(coronaVirusIndiaData[i].discharged_change))+'*');
+                  }else{
+                     $("#txtcured span").text(numberFormat(coronaVirusIndiaData[i].discharged_change)+'*');
+                  }
+
+                  $("#txtdeaths h4").text(numberFormat(coronaVirusIndiaData[i].total_deaths));
+                  if(Math.sign(coronaVirusIndiaData[i].dead_change) == 1){
+                     $("#txtdeaths span").text('+'+(numberFormat(coronaVirusIndiaData[i].dead_change))+'*');
+                  }else{
+                     $("#txtdeaths span").text(numberFormat(coronaVirusIndiaData[i].dead_change)+'*');
+                  }
+               } 
+    		}
+    	}
+    }
+}
+
+function populateCountryData(selCountry){
+	var coronaVirusWorldData = <%- JSON.stringify(covidData['World']['data']) %>;
+    $("#txtactiveworld h4").text(''); 
+
+    $("#txtconfirmedworld h4").text('');
+    $("#txtconfirmedworld span").text('');
+
+    $("#txtcuredworld h4").text('');
+
+    $("#txtdeathsworld h4").text('');
+    $("#txtdeathsworld span").text('');
+
+    if(selCountry != 'sel'){
+    	for(var i=0;i<=coronaVirusWorldData.length-1;i++){
+    		if(coronaVirusWorldData[i].english == selCountry){
+
+    			$("#txtactiveworld h4").text(numberFormat(coronaVirusWorldData[i].active_case));
+
+               $("#txtconfirmedworld h4").text(numberFormat(coronaVirusWorldData[i].total_cases));
+               if(selCountry == ''){
+                  if(Math.sign(coronaVirusWorldData[i].total_today_cases) == 1){
+                     $("#txtconfirmedworld span").text('+'+(numberFormat(coronaVirusWorldData[i].total_today_cases))+'*');
+                  }else{
+                     $("#txtconfirmedworld span").text(numberFormat(coronaVirusWorldData[i].total_today_cases)+'*');
+                  }
+               }else{
+                  if(Math.sign(coronaVirusWorldData[i].today_cases) == 1){
+                     $("#txtconfirmedworld span").text('+'+(numberFormat(coronaVirusWorldData[i].today_cases))+'*');
+                  }else{
+                     $("#txtconfirmedworld span").text(numberFormat(coronaVirusWorldData[i].today_cases)+'*');
+                  }
+               }
+               
+               $("#txtcuredworld h4").text(numberFormat(coronaVirusWorldData[i].total_discharge));
+
+               $("#txtdeathsworld h4").text(numberFormat(coronaVirusWorldData[i].total_deaths));
+               if(selCountry == ''){
+                  if(Math.sign(coronaVirusWorldData[i].total_today_deaths) == 1){
+                     $("#txtdeathsworld span").text('+'+(numberFormat(coronaVirusWorldData[i].total_today_deaths))+'*');
+                  }else{
+                     $("#txtdeathsworld span").text(numberFormat(coronaVirusWorldData[i].total_today_deaths)+'*');
+                  }
+               }else{
+                  if(Math.sign(coronaVirusWorldData[i].today_deaths) == 1){
+                     $("#txtdeathsworld span").text('+'+(numberFormat(coronaVirusWorldData[i].today_deaths))+'*');
+                  }else{
+                     $("#txtdeathsworld span").text(numberFormat(coronaVirusWorldData[i].today_deaths)+'*');
+                  }  
+               } 
+    		}
+    	}
+    }
+}
+
+function coronaTab(evt, conbox) {
+	var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("corona-main");
+    for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks1");
+    for (i = 0; i < tablinks.length; i++) {
+    	//console.log("tab active class called");
+    	tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(conbox).style.display = "block";
+    evt.currentTarget.className += " active";
+	if(conbox == 'corona-tab1'){
+		$('#coronoVirusStateChange').val('Select State/UT')
+		$("#stateDepDiv").hide();
+        document.getElementById('radio1').checked = true; 
+		this.populateStateData('India'); 
+	}else if(conbox == 'corona-tab2'){
+		$('#coronoVirusCountryChange').val('Select Country')
+		this.populateCountryData('World'); 
+	}
+
+
+}
+
+var coronaBtn = document.querySelector('.corona-toolbarbtn');
+var coronaImg = document.querySelector('.covid-tracker');
+var coronapopup = document.querySelector('.corona-toolbar');
+var cross = document.querySelector('.cross-icon');
+coronaImg.onclick = function() {
+    coronapopup.classList.remove('hide');
+}
+coronaBtn.onclick = function() {
+    coronapopup.classList.remove('hide');
+}
+cross.onclick = function() {
+    coronapopup.classList.add('hide');
+}
+</script>

@@ -1,0 +1,62 @@
+<style>
+    .thumb-social-wrap {
+    position: absolute !important;
+    }
+</style>
+<section class="other-story">
+<%
+    var img_w = '';
+    var img_h = '';
+    var img_place_holder = '';
+        if(isMobile == 1){
+        img_w = '320';
+        img_h = '180';
+        img_place_holder = constant.PLACEHOLDER_IMG_320x180
+    }else{
+        img_w = '640';
+        img_h = '362';
+        img_place_holder = constant.PLACEHOLDER_IMG_640x362;
+    }
+%>
+<% if (iplTeamData && iplTeamData['solarResults'] && iplTeamData['solarResults'].length > 0) {%>
+<% var countForAd = 0; for (const [tagData_key, tagData_val] of Object.entries(iplTeamData['solarResults'])) { countForAd = countForAd+1%>
+<div class="image-wrap">
+    <a href="<%= tagData_val['url']%>" title="">
+        <img src="<%=img_place_holder%>" class="fp-lazy" data-src="<%-common.firstpost_imageOptimization(tagData_val['image'], img_w, img_h, '') %>" alt="<%= tagData_val['title']%>" title="<%= tagData_val['title']%>" />
+    </a>
+    <div class="title-div-wrap">
+        <div class="text-wrap">
+            <a href="<%= tagData_val['url']%>" title="">
+                <h2 class="title-text">
+                    <%= tagData_val['title']%>
+                </h2>
+                <h4 class="sub-title-txt">
+                    <%= tagData_val['description']%>
+                </h4>
+            </a>
+        </div>
+            <% var shareArr = []; 
+            shareArr['shareTitle'] = tagData_val['title'];
+            shareArr['shareUrl'] = tagData_val['url']; 
+            %>
+            <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+    </div>
+</div>
+<% if(countForAd == '5' && template2 == "ipl/home"){%>
+     <% if (typeof ads  !== 'undefined' && (typeof ads['MID1_300']  !== 'undefined' || typeof ads['MID2_300']  !== 'undefined')){%>
+    <div class="two-ad-slot">
+    <% if (typeof ads  !== 'undefined' && typeof ads['MID1_300'] !== 'undefined'){%>
+    <div class="ad-slot">
+    <%-common.displayAds(ads['MID1_300'][0]) %>
+    </div>
+    <% } %> 
+    <% if (typeof ads  !== 'undefined' && typeof ads['MID2_300'] !== 'undefined'){%>
+    <div class="ad-slot">
+    <%-common.displayAds(ads['MID2_300'][0]) %>
+    </div>
+    <% } %>  
+    </div>                        
+    <% }%>
+ <% } } %>
+<%}%>                         
+</section>

@@ -1,0 +1,13 @@
+<% if (typeof level3_nav_slug !== 'undefined' && typeof constant.fp_menu[3][level3_nav_slug] !== 'undefined') { %>
+<div class="sports-menu-wrap">
+    <div class="category-wrap">
+        <div class="main-category-div">
+            <% i = 0 %>
+            <% for (const [menuLevel3Key, menuLevel3items] of Object.entries(constant.fp_menu[3][level3_nav_slug])) { %>
+                <a href="<%=menuLevel3items.menu_url.replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" title="<%=menuLevel3items.menu_name%>" <% if(menuLevel3items.menu_target != 'undefined'){ %><%=menuLevel3items.menu_target%><% } %> class=" <% if(typeof active_level3_nav_slug !== 'undefined' && menuLevel3items.menu_slug == active_level3_nav_slug){ %>active<% } %>" > <%=menuLevel3items.menu_name%> </a>
+            <% i++ %>
+            <% } %>
+        </div>
+    </div>
+</div>
+<% } %>

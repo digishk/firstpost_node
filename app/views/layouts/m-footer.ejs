@@ -1,0 +1,90 @@
+<style>
+  @font-face {
+	font-family: "Playfair Display";
+	font-style: normal;
+	font-weight: 400;
+	src: url("/static/fonts/playfair-display-v20-latin-regular.eot");
+	src: local(""),
+		url("/static/fonts/playfair-display-v20-latin-regular.eot?#iefix")
+			format("embedded-opentype"),
+		url("/static/fonts/playfair-display-v20-latin-regular.woff2") format("woff2"),
+		url("/static/fonts/playfair-display-v20-latin-regular.woff") format("woff"),
+		url("/static/fonts/playfair-display-v20-latin-regular.ttf") format("truetype"),
+		url("/static/fonts/playfair-display-v20-latin-regular.svg#PlayfairDisplay") format("svg");
+	font-display: swap;
+}
+@font-face {
+	font-family: "Playfair Display";
+	font-style: normal;
+	font-weight: 700;
+	src: url("/static/fonts/playfair-display-v20-latin-700.eot");
+	src: local(""),
+		url("/static/fonts/playfair-display-v20-latin-700.eot?#iefix") format("embedded-opentype"),
+		url("/static/fonts/playfair-display-v20-latin-700.woff2") format("woff2"),
+		url("/static/fonts/playfair-display-v20-latin-700.woff") format("woff"),
+		url("/static/fonts/playfair-display-v20-latin-700.ttf") format("truetype"),
+		url("/static/fonts/playfair-display-v20-latin-700.svg#PlayfairDisplay") format("svg");
+	font-display: swap;
+}
+</style>
+
+<% if (typeof ads  !== 'undefined' && typeof ads['FBN_320']  !== 'undefined'){%>
+<div class="ad-center ft-sticky-ad">
+<%-common.displayAds(ads['FBN_320'][0]) %>
+</div>
+<% } %>
+<!-- <link rel="stylesheet" type="text/css" href="<%-constant.SITE_URL%>static/css/m-footer-fp.css"> -->
+<link rel="preload" href="<%-constant.SITE_URL%>static/css/m-footer-fp.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="<%-constant.SITE_URL%>static/css/m-footer-fp.css"></noscript>
+
+<script>
+    // window.onload=function(l){setTimeout(function(){var l="@font-face {font-family: 'Playfair Display';font-style: normal;font-weight: 400;src: url('/static/fonts/playfair-display-v20-latin-regular.eot');src: local(''),url('/static/fonts/playfair-display-v20-latin-regular.eot?#iefix') format('embedded-opentype'),url('/static/fonts/playfair-display-v20-latin-regular.woff2') format('woff2'),url('/static/fonts/playfair-display-v20-latin-regular.woff') format('woff'),url('/static/fonts/playfair-display-v20-latin-regular.ttf') format('truetype'),url('/static/fonts/playfair-display-v20-latin-regular.svg#PlayfairDisplay') format('svg');}@font-face {font-family: 'Playfair Display';font-style: normal;font-weight: 700;src: url('/static/fonts/playfair-display-v20-latin-700.eot');src: local(''),url('/static/fonts/playfair-display-v20-latin-700.eot?#iefix') format('embedded-opentype'),url('/static/fonts/playfair-display-v20-latin-700.woff2') format('woff2'),url('/static/fonts/playfair-display-v20-latin-700.woff') format('woff'),url('/static/fonts/playfair-display-v20-latin-700.ttf') format('truetype'),url('/static/fonts/playfair-display-v20-latin-700.svg#PlayfairDisplay') format('svg');}",a=document.head||document.getElementsByTagName("head")[0],e=document.createElement("style");e.type="text/css",e.styleSheet?e.styleSheet.cssText=l:e.appendChild(document.createTextNode(l)),a.appendChild(e)},1000)};
+</script>
+
+<% if (typeof ads  !== 'undefined' && typeof ads['PG_1x1']  !== 'undefined'){%>
+    <div>
+        <%-common.displayAds(ads['PG_1x1'][0]) %>
+    </div>
+<% } %>    
+<% if (typeof ads  !== 'undefined' && typeof ads['PG_Slider_1x1']  !== 'undefined'){%>
+    <div>
+        <%-common.displayAds(ads['PG_Slider_1x1'][0]) %>
+    </div>
+<% } %> 
+<%- include(viewpath+ '/layouts/footer-html'); %>
+<%  if(pageName == "article" || pageName == "liveBlog") {%>
+<link rel="stylesheet" href="https://www.news18.com/board-results-pubstack/assets/css/inarticle-fp.css?v=<%-constant.config_flags.VERSION_NO%>">
+<%  } %>
+<script type="text/javascript" src="<%-constant.SITE_URL%>static/js/glide.min.js"></script>
+<script type="text/javascript" src="<%-constant.SITE_URL%>static/js/m-main-fp.js?v=<%-constant.config_flags.VERSION_NO%>"></script>
+<%  if((pageName == "article" || pageName == "videoArticle" || pageName == "videos" || pageName == "showsCategory" || pageName == "showsArticle") && youtube_js_flag == "1") {%>
+        <script type="text/javascript" src="/static/js/yt-player.min.js"></script>
+<%  } %>
+<%  if(pageName == "article" || pageName == "photoArticle" || pageName == "videoArticle" || pageName == "firstcricket-article" || pageName == "firstcricket-photoarticle") {%>
+    <script type="text/javascript" src="<%-constant.SITE_URL%>static/js/jquery.visible.js"></script>
+    <script type="text/javascript" src="<%-constant.SITE_URL%>static/js/jquery.history.js"></script>
+<%  } %>
+<% if(typeof mobileCricJs !== 'undefined' && mobileCricJs != '') {%>
+	<script type="text/javascript" src="<%-mobileCricJs%>?v=<%-constant.config_flags.VERSION_NO%>"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+             
+        $('.live-highlights ul.tabs .tab-link').click(function(){
+            var tab_id = $(this).attr('data-tab');
+             
+        $('.live-highlights ul.tabs .tab-link').removeClass('current');
+        $('.tab-content').removeClass('current');
+             
+        $(this).addClass('current');
+        $("#"+tab_id).addClass('current');
+        })
+             
+        })
+    </script>	
+<% } %>
+<script type="text/javascript" src="<%-constant.SITE_URL%>static/js/m-ipl2021.js"></script>
+<%# if (typeof constant.config_flags.OUTBRAINS_ADS_FLAG !== 'undefined' && constant.config_flags.OUTBRAINS_ADS_FLAG == 1) {%>
+<!--<script type='text/javascript' async='async' src='//widgets.outbrain.com/outbrain.js'></script>-->
+<%# } %>
+</body>
+</html>

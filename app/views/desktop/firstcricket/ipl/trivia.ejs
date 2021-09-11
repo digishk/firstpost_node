@@ -1,0 +1,120 @@
+<%- include(viewpath+ '/layouts/header'); %>
+        <div class="main-wrapper">
+
+            <!--ipllogo-->
+            <style type="text/css">
+            .logoflex{display: flex;justify-content: space-between;align-items: center;margin-bottom: 20px}
+            .logoright{display: flex;}
+            .copo,.aoso{display: flex;}
+            .copotext{text-align: left;text-decoration: underline;font: 400 11px/13px Arial;letter-spacing: 0px;color: #B1B1B1;text-transform: uppercase;opacity: 1;margin-right: 10px}
+            .logoright img{margin-right: 10px}
+            .thumb-social-wrap{position: relative !important;top: 9px;right: 10px;}
+            </style>
+            <div class="logoflex">
+                <div class="lodoleft"><img loading="lazy" width="275" height="108" src="<%-constant.SITE_URL %>static/images/cricket/ipl/logoipl.png" alt="IPL 2021"></div>
+                <div class="logoright">
+                    <div class="aoso"><div class="copotext">Associate Partners</div>
+                    <a href="http://pubads.g.doubleclick.net/gampad/clk?id=5661389695&iu=/1039154/FSTPST_ENG/FSTPST_ENG_CRICKET/FSTPST_ENG_CRICKET_AL/FSTPST_ENG_CRI_AL_ROS_LOGO_ClickTracker_Shell" target="_blank">
+                        <img src="<%-constant.SITE_URL %>static/images/cricket/ipl/shell_logo.png">
+                    </a>
+                    <a href="http://pubads.g.doubleclick.net/gampad/clk?id=5664296053&iu=/1039154/FSTPST_ENG/FSTPST_ENG_CRICKET/FSTPST_ENG_CRICKET_AL/FSTPST_ENG_CRI_AL_ROS_LOGO_ClickTracker_PanMasala" target="_blank">
+                        <img src="<%-constant.SITE_URL %>static/images/cricket/ipl/panmasala.jpg">
+                    </a>
+                    <a href="http://pubads.g.doubleclick.net/gampad/clk?id=5665050131&iu=/1039154/FSTPST_ENG/FSTPST_ENG_CRICKET/FSTPST_ENG_CRICKET_AL/FSTPST_ENG_CRI_AL_ROS_LOGO_ClickTracker_AMFI" target="_blank">
+                        <img src="<%-constant.SITE_URL %>static/images/cricket/ipl/amfi.png">
+                    </a>
+                    </div>
+                    <!-- <div class="aoso"><div class="copotext">Associate Partners</div><img src="http://placehold.it/105x45/"><img src="http://placehold.it/105x45/"></div> -->
+                </div>
+            </div>
+            <!--ipllogo-->
+
+            <!--Score-Widget-->
+            <%- include(viewpath+ '/widgets/scorecard_caraousal'); %>
+            <input type="hidden" name="" id="checkDevice" value="<%=device%>">
+            <!--Score-Widget-->
+        </div>
+
+        <!--1244x60 Ad Space-->
+        <% if (typeof ads  !== 'undefined' && typeof ads['ATF_728']  !== 'undefined'){%>
+            <div class="ad-slot fixed-ad-banner-fc">
+                <%-common.displayAds(ads['ATF_728'][0]) %>
+            </div>
+        <% } %>
+        <!--1244x60 Ad Space-->
+
+        <div class="main-wrapper">
+            <!--Bread crumb-->
+             <%- include(viewpath+ '/widgets/breadCrumbs'); %>
+            <!--Bread crumb-->
+
+            <!--Main Page Content-->
+            <div class="content-wrap" id="ipl">
+                <style type="text/css">
+                    #ipl .page-title span{font-weight: 900;}
+                </style>
+                <div class="left-content">
+                    <h1 class="page-title"><span>TRIVIA</span></h1>
+                    <%- include(viewpath+ '/widgets/cric-series-menu'); %>
+                    <!--did u know-->
+                    <style type="text/css">
+                       .did-know{ background: #FFFFFF;box-shadow: 0px 3px 6px #00000029;opacity: 1; padding: 10px 15px; display: flex;justify-content: space-between;position: relative;margin-bottom: 30px}
+                        .didright .did-title{ font: 700 24px/20px 'Playfair Display'; color: #7E7E7E;line-height: 1.22;text-transform: uppercase; margin-bottom: 10px}
+                        .didright .sub-txt{ font: 700 18px/20px 'Playfair Display'; color: #000; line-height: 1.22}
+                        .didleft{width: 45%}
+                        .didleft img{width: 100%}
+                        .didright{width: 52%}
+                        .share-detail-div{position: absolute;right: 5px;bottom: 20px}
+                    </style>
+                    <% if(typeof trivia['ipl_cricket_trivia'] !== 'undefined' && trivia['ipl_cricket_trivia'] !== null) { %>
+                        <% for (const [trivia_key, trivia_val] of Object.entries(trivia['ipl_cricket_trivia'])) { %>
+                            <div class="did-know">
+                            <%if(trivia_val['trivia_image_url']) {%>
+                                <div class="didleft">
+                                    <img src="<%= trivia_val['trivia_image_url'] %>" alt="<%= trivia_val['trivia_title'] %>" title="<%= trivia_val['trivia_title'] %>" />
+                                </div>
+                            <%}%>
+                        <div class="didright">
+                            <div class="video-title-div">
+                                <h3 class="did-title"><%= trivia_val['trivia_title'] %></h3>
+                                <h4 class="sub-txt"><%= trivia_val['trivia_description'] %></h4>
+                            </div>
+                            <div class="share-detail-div">
+                                <div class="share-icon-wrap">
+                                    <% var shareArr = []; 
+                                    shareArr['shareTitle'] = trivia_val['trivia_title'];
+                                    shareArr['shareUrl'] = "https://stg.firstpost.com/firstcricket/trivia/series/ipl-2021.html";
+                                    %>
+                                    <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+                                </div>
+                            </div>
+                        </div>
+                         </div>
+                        <% } %>
+                    <% } %>
+                    <!--did u know-->
+                </div>
+
+                <div class="right-content">
+                    <!--Ad Slot-->
+                    <% if ((typeof ads  !== 'undefined' && typeof ads['ATF_300'] !== 'undefined')){%>
+                        <div class="ad-center ATF_300 fixed-ad-banner-rhs" data-ad-id="<%-ads['ATF_300'][0]%>" data-ad-size="<%-ads['ATF_300'][1]%>">
+                        <%-common.displayAds(ads['ATF_300'][0]) %>
+                        </div>
+                    <% } %>
+                    <!--Ad Slot-->
+
+                    <!--Ad Slot-->
+                    <% if (typeof ads  !== 'undefined' && typeof ads['BTF_300']  !== 'undefined'){%>
+                    <div class="sticky-ad ad-slot">
+                        <div class="ad-center sticky-ad ad-slot BTF_300"  data-ad-id="<%-ads['BTF_300'][0]%>" data-ad-size="<%-ads['BTF_300'][1]%>">
+                            <%-common.displayAds(ads['BTF_300'][0]) %>
+                        </div>
+                    </div>
+                    <% } %>
+                    <!--Ad Slot-->
+                </div>
+            </div>
+            <!--Main Page Content-->
+        </div>
+<%- include(viewpath+ '/layouts/footer'); %>

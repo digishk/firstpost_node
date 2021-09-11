@@ -1,0 +1,104 @@
+<!--IPL entrypoint SLIDER-->
+    <% if(typeof iplData !== 'undefined' && iplData !== null) { %>
+    <style type="text/css">
+        #iplSlider .glide__bullets{margin:10px 0 40px;display:flex;justify-content:center}
+        #iplSlider .title-div-wrap .share-wrap{bottom:0;right:10px;top:unset}
+        #iplSlider .image-wrap img{border:8px solid #585858;width:100%}
+        #iplSlider .share-wrap{position:absolute}
+        #iplSlider .title-div-wrap{bottom:0;position: relative;padding: 20px 40px 0 20px;}
+        
+        .iplflex{display: flex; justify-content: space-between;background: url(/static/images/cricket/ipl/ipl-bg.png);padding: 20px 20px 10px;margin-left:2px;}
+        .iplflex .partners, .asSlider{min-width: 0;min-height: 0;}
+        .ipllogo{width: 270px}
+        .partners {width: 50%; display: flex;}
+        .partners img{width: 90px}
+        .coSlider{width: 95px;margin-right: 10px}
+        .partners .slick-dots button {width: 5px;height: 5px;}
+        .slick-dots {padding: 6px 0 0;}
+        .prttext{text-align: left;text-decoration: underline;font:400 9px/11px Arial;letter-spacing: 0px;color: #B1B1B1;text-transform: uppercase;opacity: 1;margin-bottom: 5px; display: block;}
+        .asSlider img{margin-right: 10px}
+        #iplSlider .title-text {font: 700 24px/27px 'Playfair Display';letter-spacing: 0;color: #000; margin: 0 0 10px;}
+        #iplSlider .sub-title-txt {font: 400 15px/20px Arial;letter-spacing: 0;color: #333;}
+        #iplSlider .glide__bullets .glide__bullet.glide__bullet--active{background:#f04f38}
+        #iplSlider .glide__bullets .glide__bullet{background:#d6d6d6;border:none;width:30px;height:6px;margin:0 2px;cursor:pointer;outline:0}
+    </style>
+    <div class="iplflex">
+        <a href="<%-constant.SITE_URL %>firstcricket/series/ipl-2021.html" class="ipllogo"><img class="fp-lazy" data-src="<%-constant.SITE_URL %>static/images/cricket/ipl/t20-league.png" src="<%constant.PLACEHOLDER_IMG_640x362%>" alt=""></a>
+        <div class="partners">
+            <div class="asSlider">
+                <span class="prttext">Associate Partners</span>
+                <div class="glide multi" id="logos">
+                    <div class="glide__track" data-glide-el="track">
+                        <ul class="glide__slides"  id="asoSlider">
+                            <li>
+                                <a href="http://pubads.g.doubleclick.net/gampad/clk?id=5661389695&iu=/1039154/FSTPST_ENG/FSTPST_ENG_CRICKET/FSTPST_ENG_CRICKET_AL/FSTPST_ENG_CRI_AL_ROS_LOGO_ClickTracker_Shell" target="_blank"> <img src="<%-constant.SITE_URL %>static/images/cricket/ipl/shell_logo.png" alt=""></a>
+                            </li>
+                            <li>
+                                <a href="http://pubads.g.doubleclick.net/gampad/clk?id=5664296053&iu=/1039154/FSTPST_ENG/FSTPST_ENG_CRICKET/FSTPST_ENG_CRICKET_AL/FSTPST_ENG_CRI_AL_ROS_LOGO_ClickTracker_PanMasala" target="_blank"> <img src="<%-constant.SITE_URL %>static/images/cricket/ipl/panmasala.jpg" alt=""></a>
+                            </li>
+                            <li>
+                                <a href="http://pubads.g.doubleclick.net/gampad/clk?id=5665050131&iu=/1039154/FSTPST_ENG/FSTPST_ENG_CRICKET/FSTPST_ENG_CRICKET_AL/FSTPST_ENG_CRI_AL_ROS_LOGO_ClickTracker_AMFI" target="_blank"> <img src="<%-constant.SITE_URL %>static/images/cricket/ipl/amfi.png" alt=""></a>
+                            </li>
+                        </ul>
+                     </div>
+
+            </div>
+
+            </div>
+        </div>
+    </div>
+    <section class="ipl-slider">
+            <div class="glide" id="iplSlider">
+                <div data-glide-el="track" class="glide__track">
+                    <ul class="glide__slides">
+                        <% for (const [rankDataKey, rankDataValue] of Object.entries(iplData['main_ranking'])) { %>
+                        <li class="glide__slide">
+                            <div class="image-wrap">
+                                <a href="<%=rankDataValue['post_url']%>" title="<%=rankDataValue['post_title']%>">
+                                    <img src="<%=rankDataValue['desktop_img']%>" alt="<%=rankDataValue['post_title']%>" title="<%=rankDataValue['post_title']%>" />
+                                </a>
+                                <div class="title-div-wrap">
+                                    <div class="text-wrap">
+                                        <a href="<%=rankDataValue['post_url']%>" title="<%=rankDataValue['post_title']%>">
+                                            <h2 class="title-text">
+                                                <%=rankDataValue['post_title']%>
+                                            </h2>
+                                            <h4 class="sub-title-txt">
+                                                <%=rankDataValue['post_excerpt']%>
+                                            </h4>
+                                        </a>
+                                    </div>
+                                    <div class="share-wrap">
+                                        <% var shareArr = []; 
+                                        shareArr['shareTitle'] = rankDataValue['post_title'];
+                                        shareArr['shareUrl'] = rankDataValue['post_url']; %>
+                                        <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <% } %>
+                    </ul>
+                </div>
+                <div class="glide__bullets" data-glide-el="controls[nav]">
+                    <button class="glide__bullet" data-glide-dir="=0"></button>
+                    <button class="glide__bullet" data-glide-dir="=1"></button>
+                    <button class="glide__bullet" data-glide-dir="=2"></button>
+                </div>
+            </div>
+    </section>
+    <script type="text/javascript" src="<%-constant.SITE_URL %>static/js/jquery-3.4.0.min.js"></script>
+    <script type="text/javascript">
+    
+		$(document).ready(function(){
+           const slider = document.getElementById('asoSlider')
+           if(slider.children.length > 3) {
+            var logoglide = new Glide('.multi', {type: 'slider', autoplay: 2000, perView: 3});
+		        logoglide.mount();
+           } else {
+            var logoglide = new Glide('.multi', { swipeThreshold: false, dragThreshold: false });
+           }  
+		});
+	</script>
+    <% } %>
+<!--IPL entrypoint SLIDER-->

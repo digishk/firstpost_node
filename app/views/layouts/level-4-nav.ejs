@@ -1,0 +1,22 @@
+<!--Ad Slot-->
+<% if (isMobile == 1 && pageName != "firstcricket-article" && pageName != "firstcricket-home-amp" && (typeof ads  !== 'undefined' && typeof ads['ATF_300'] !== 'undefined')){%>
+    <div class="ad-center ATF_300" data-ad-id="<%-ads['ATF_300'][0]%>" data-ad-size="<%-ads['ATF_300'][1]%>">
+        <%-common.displayAds(ads['ATF_300'][0]) %>
+    </div>
+<% } %>
+<!--Ad Slot-->
+<% if (typeof level4_nav_slug !== 'undefined' && typeof constant.fp_menu[4][level4_nav_slug] !== 'undefined') { %>
+<div class="sport-menu-div">
+    <ul class="inner-menu-list">   
+    <% i = 0 %>
+    <% for (const [menuLevel4Key, menuLevel4items] of Object.entries(constant.fp_menu[4][level4_nav_slug])) { %>                 
+        <li>
+            <a href="<%=menuLevel4items.menu_url.replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" title="<%=menuLevel4items.menu_name%>" class="<% if(typeof active_level4_nav_slug !== 'undefined' && menuLevel4items.menu_slug == active_level4_nav_slug){ %>active<% } %>">
+                <%=menuLevel4items.menu_name%>
+            </a>
+        </li> 
+    <%}%>                    
+    </ul>
+</div>
+<% } %>
+<input type="hidden" name="" id="checkDevice" value="<%=device%>">

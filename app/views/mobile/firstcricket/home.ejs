@@ -1,0 +1,312 @@
+<%- include(viewpath+ '/layouts/m-header'); %>
+
+<%
+const {ATF_320, BTF_300} = (typeof ads !== 'undefined' && ads) ? ads : {}
+const {MB_2} = (typeof outbrain_ads !== 'undefined' && outbrain_ads) ? outbrain_ads : {};
+
+const {MAIN_SITE_URL,SITE_URL,PLACEHOLDER_IMG_320x180, PLACEHOLDER_IMG_192x104} =  (typeof constant !== 'undefined' && constant) ? constant : {};
+
+const {CatMainRanking} =  (typeof homePageJson !== 'undefined' && homePageJson) ? homePageJson : {} 
+const {main_ranking, related_ranking} = CatMainRanking || {} 
+
+const photoGallerySolarResultsEntries =   (typeof photoGallery !== 'undefined' && photoGallery && photoGallery.solarResults) ? Object.entries(photoGallery.solarResults) : null
+const videoListSolarResultsEntries =   (typeof videosList !== 'undefined' && videosList && videosList.solarResults) ? Object.entries(videosList.solarResults) : null
+const cricketNewsSolarResultsEntries =  (typeof cricketNews !== 'undefined' && cricketNews && cricketNews.solarResults )? Object.entries(cricketNews.solarResults) : null
+
+const mainRankingEntries = main_ranking ? Object.entries(main_ranking) : null
+const relatedRankingEntries = related_ranking ? Object.entries(related_ranking) : null
+%>
+
+        <div class="main-wrapper">
+            <!--Ad Slot-->
+            <% if (ATF_320){%>
+                <div class="ad-center m-fixed-ad-banner" width="360px" height="50px">
+                    <%-common.displayAds(ATF_320[0]) %>
+                </div>
+            <% } %>
+            <!--Ad Slot-->
+
+            <!--Score-Widget-->
+            <%- include(viewpath+ '/widgets/scorecard_caraousal'); %>
+            <!--Score-Widget-->
+
+            <!--Bread crumb-->
+            <%- include(viewpath+ '/widgets/breadCrumbs'); %>
+            <!--Bread crumb-->
+
+            <!--Cricket Inner Menu-->
+            <%- include(viewpath+ '/layouts/level-4-nav'); %>            
+            <!--Cricket Inner Menu-->
+
+            <div class="main-content" id="home">
+                <!--Top Slider Section-->
+                <%if(mainRankingEntries) {%>
+                <section class="top-slider-section">
+                    <h2 class="page-title"><span>Cricket News</span></h2>
+                    <div class="glide" id="topSlider">
+                        <div data-glide-el="track" class="glide__track">
+                            <ul class="glide__slides">
+
+                                <%mainRankingEntries.forEach(([mainRankingKey, mainRankingValue]) => {%>
+                                    <%const {modified_posturl, modified_title, mobile_img} = mainRankingValue%>
+                                    <%const replacedUrl = modified_posturl.replace(MAIN_SITE_URL, SITE_URL)%>
+                                    <li class="glide__slide">
+                                        <div class="top-story-slide">
+                                            <div class="top-image-wrap">
+                                                <a href="<%=replacedUrl%>" title="<%=modified_title %>">
+                                                    <img loading="lazy" width="340" height="425" src="<%- mobile_img%>" data-src="<%- %>" alt="<%=modified_title %>" title="<%=modified_title %>"/>
+                                                </a>
+                                                <div class="main-title-div">
+                                                    <h2 class="main-title-wrap">
+                                                        <a href="<%=replacedUrl%>" title="<%=modified_title %>">
+                                                            <%=modified_title %>
+                                                        </a>
+                                                    </h2>
+                                                    <div class="share-wrap">
+                                                    <% var shareArr = []; 
+                                                        shareArr['shareTitle'] = modified_title;
+                                                        shareArr['shareUrl'] = modified_posturl; %>
+                                                    <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr}); %>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li> 
+                                <%})%>
+                            </ul>
+                        </div>
+                        <div class="glide__bullets" data-glide-el="controls[nav]">
+                            <%mainRankingEntries.forEach((_,index)=>{%>
+                                <button class="glide__bullet" data-glide-dir="=<%=index %>"></button>
+                            <%})%>
+                          </div>
+                    </div>
+                </section>
+                <%}%>
+                <!--Top Slider Section-->
+
+                <!--Other Story Section-->
+                <%if(relatedRankingEntries){%>
+                <section class="other-story">
+                   <%relatedRankingEntries.forEach(([relatedRankingKey, relatedRankingValue]) => {%>
+                    <%const {modified_posturl, modified_title, modified_postImg, post_title, post_url} = relatedRankingValue%>
+                    <%const replacedUrl = modified_posturl.replace(MAIN_SITE_URL, SITE_URL)%>
+                    <div class="image-wrap">
+                        <a href="<%=replacedUrl %>" title="<%=modified_title %>">
+                            <img loading="lazy" width="360" height="203" class="fp-lazy" src="<%-PLACEHOLDER_IMG_320x180 %>" data-src="<%-common.firstpost_imageOptimization(modified_postImg, 320, 180, '') %>"  alt="<%=modified_title %>" title="<%=modified_title %>" />
+                        </a>
+                        <div class="title-div-wrap">
+                            <div class="text-wrap">                                
+                                <a href="<%=replacedUrl%>" title="<%=modified_title%>">
+                                    <h2 class="title-text">
+                                        <%=modified_title %>
+                                    </h2>                                        
+                                </a>
+                            </div>
+                            <div class="share-wrap">
+                                <% var shareArr = []; 
+                                 shareArr['shareTitle'] = post_title;
+                                 shareArr['shareUrl'] = post_url; %>
+                                <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr}); %>
+                            </div>
+                        </div>
+                    </div>
+                    <%})%>
+                    
+                </section>
+                <%}%>
+                <!--Other Story Section-->
+
+                <!--Video Section-->
+                <%if(videoListSolarResultsEntries) {%>
+                <section class="video-section">
+                    <h2 class="page-title"><span>Videos</span></h2>
+                    <div class="video-slider">
+                        <div id="videoSlider">
+                            <ul class="video-slides">
+                                <%videoListSolarResultsEntries.forEach(([videoListKey, videoListValue]) => {%>
+                                    <% const {url, title, image} = videoListValue %> 
+                                    <% const replacedUrl = url.replace(MAIN_SITE_URL, SITE_URL) %> 
+                                <li>
+                                    <div class="video-wrap">                                    
+                                        <div class="video-img-wrap">                
+                                            <a href="<%=replacedUrl %>" title="<%=title %>">
+                                                <img loading="lazy" width="210" height="114" class="fp-lazy" src="<%-PLACEHOLDER_IMG_192x104 %>" data-src="<%-common.firstpost_imageOptimization(image, 192, 104, '') %>" alt="<%=title %>" title="<%=title %>">
+                                            </a>
+                                            <div class="video-icon">
+                                                <svg width="57.887" height="57.887" viewBox="0 0 57.887 57.887"><defs><style>.a{fill:#fff;}.b{filter:url(#a);}</style><filter id="a" x="0" y="0" width="57.887" height="57.887" filterUnits="userSpaceOnUse"><feOffset dy="3" input="SourceAlpha"/><feGaussianBlur stdDeviation="4.5" result="b"/><feFlood flood-opacity="0.294"/><feComposite operator="in" in2="b"/><feComposite in="SourceGraphic"/></filter></defs><g class="b" transform="matrix(1, 0, 0, 1, 0, 0)"><path class="a" d="M17.443,2A15.443,15.443,0,1,0,32.887,17.443,15.449,15.449,0,0,0,17.443,2ZM14.355,24.393v-13.9l9.266,6.95Z" transform="translate(11.5 8.5)"/></g></svg>
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="video-title-div">
+                                            <h3 class="video-title">
+                                                <a href="<%=replacedUrl %>" title="<%=title %>">
+                                                    <%=title %>
+                                                </a>
+                                            </h3>
+                                            
+                                        </div>
+                                        <div class="share-detail-div">
+                                            <div class="<%//video-time%>">
+                                                <!-- 09:25 -->
+                                            </div>
+                                            <div class="share-icon-wrap">
+                                            <% var shareArr = []; 
+                                                    shareArr['shareTitle'] = title;
+                                                    shareArr['shareUrl'] = url; %>
+                                            <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr}); %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <% }) %>                                
+                            </ul>
+                        </div>
+
+                        <div class="see-all-btn">
+                            <a href="<%=SITE_URL%>/firstcricket/cricket-videos/" title="">
+                                See All 
+                                <svg fill="#333333" height="20" viewBox="0 0 24 24" width="20"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/><path d="M0 0h24v24H0V0z" fill="none"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+                <%}%>
+                <!--Video Section-->
+
+                <!--Misc Story Section-->
+                <% if(cricketNewsSolarResultsEntries) { %> 
+                <section class="other-story">
+                    <% cricketNewsSolarResultsEntries.forEach(([cricketNewsKey, cricketNewsValue]) => { %> 
+                        <% const {url, title, image} = cricketNewsValue %>
+                        <% const replacedUrl = url.replace(MAIN_SITE_URL, SITE_URL) %>  
+                        <div class="image-wrap">
+                        <a href="<%=replacedUrl %>" title="<%=title %>">
+                            <img loading="lazy" class="fp-lazy" src="<%-PLACEHOLDER_IMG_320x180 %>" data-src="<%-common.firstpost_imageOptimization(image, 320, 180, '') %>" alt="<%=title%>" title="<%=title %>">
+                        </a>
+                        <div class="title-div-wrap">
+                            <div class="text-wrap">
+                                <a href="<%=replacedUrl%>" title="<%=title%>">
+                                    <h2 class="title-text">
+                                        <%=title %>
+                                    </h2>
+                                </a>
+                            </div>
+                            <div class="share-wrap">
+                            <% var shareArr = []; 
+                                shareArr['shareTitle'] = title;
+                                shareArr['shareUrl'] = url; %>
+                            <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr}); %>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>                    
+                </section>
+                <% } %> 
+                <!--Misc Story Section-->
+                <!--Pagination-->
+                <%- include(viewpath+ '/widgets/paginationDefault'); %>                
+                <!--Pagination-->
+
+                <!--Ad Slot-->
+                <% if (BTF_300){%>
+                    <div class="ad-center BTF_300" data-ad-id="<%-BTF_300[0]%>" data-ad-size="<%-BTF_300[1]%>">
+                        <%-common.displayAds(BTF_300[0]) %>
+                    </div>
+                <% } %>
+                <!--Ad Slot-->
+                <%- include(viewpath+ '/widgets/mailChimp'); %> 
+                <!--Most Read Widget-->
+                <%- include(viewpath+ '/widgets/most_read_widget'); %>
+                <!--Most Read Widget-->
+
+                <!-- Outbrain ads -->
+                <% if (MB_2){%>
+                    <%-MB_2%>  
+                <% } %>
+                <!-- Outbrain ads -->
+
+                <!--Cricket Scores-->
+                <section class="cricket-score common-widget">
+                    <%- include(viewpath+ '/widgets/cric-score-rhs-widget'); %>
+                </section>
+                <!--Cricket Scores-->
+
+                <!--Upcoming Matches-->
+                <section class="upcoming-matches common-widget">
+                    <%- include(viewpath+ '/widgets/cric-upcoming-rhs-widget'); %>
+                </section>
+                <!--Upcoming Matches-->
+
+                <!--Photo Gallery-->
+                <% if(photoGallerySolarResultsEntries) { %> 
+                    <% const {url, title,image} = photoGallerySolarResultsEntries[0][1] %>
+                    <%const replacedLinkUrl = url.replace(MAIN_SITE_URL, SITE_URL).replace("photos/sports-gallery","firstcricket/photo-gallery")%>
+                <section class="photo-section">
+                    <h2 class="page-title"><span>Photos</span></h2>
+
+                    <div class="gallery-wrap">
+                        <div class="photo-wrap">
+                            
+                            <div class="photo-img-wrap">                                
+                                <a href="<%=replacedLinkUrl%>" title="<%=title%>">
+                                    <img loading="lazy" width="340" height="191" class="fp-lazy" src="<%-PLACEHOLDER_IMG_320x180 %>" data-src="<%-common.firstpost_imageOptimization(image, 320, 180, '') %>" alt="<%=title%>" title="<%=title%>"/>
+                                </a>
+                                <div class="photo-icon">
+                                    <img loading="lazy" width="30" height="30" src="<%-SITE_URL%>static/images/cricket/photo-icon.png" alt="<%=title%>" title="<%=title%>" />
+                                </div>
+                            </div>
+                            
+                            <div class="photo-title-div">                                    
+                                <h3 class="photo-title">
+                                    <a href="<%=replacedLinkUrl%>" title="<%=title%>">
+                                        <%=title%>
+                                    </a>
+                                </h3>  
+                                <% var shareArr = []; 
+                                    shareArr['shareTitle'] = title;
+                                    shareArr['shareUrl'] = url; %>
+                                <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr}); %>                                   
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="photo-wrap-slider">
+
+                        <% photoGallerySolarResultsEntries.forEach(([photoGalleryKey, photoGalleryValue])=> {%>
+                            <% if(photoGalleryKey != '0') { %> 
+                                <% const {url, title, image} = photoGalleryValue %> 
+                                <% const replaceUrl = url.replace(MAIN_SITE_URL, SITE_URL).replace("photos/sports-gallery","firstcricket/photo-gallery") %> 
+                                <div class="photo-wrap">
+                                    <div class="photo-img-wrap">
+                                        <a href="<%=replaceUrl%>" title="<%=title %>">
+                                            <img loading="lazy" width="198" height="107" class="fp-lazy" src="<%-PLACEHOLDER_IMG_192x104 %>" data-src="<%-common.firstpost_imageOptimization(image, 192, 104, '') %>" alt="<%=title %>" title="<%=title %>">
+                                        </a>                                
+                                    </div>
+                                    <div class="photo-title-div">                                    
+                                        <h3 class="photo-title">
+                                            <a href="<%=replaceUrl %>" title="<%=title %>">
+                                            <%=title %>
+                                            </a>
+                                        </h3>  
+                                        <div class="share-icon-wrap">
+                                        <% var shareArr = []; 
+                                            shareArr['shareTitle'] = title;
+                                            shareArr['shareUrl'] = url; %>
+                                        <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr}); %>                           
+                                        </div>       
+                                    </div>
+                                </div>
+                            <% } %> 
+
+                        <%}) %> 
+                    </div>
+                </section>
+                <% } %> 
+                <!--Photo Gallery-->
+            </div>
+        </div>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+<%- include(viewpath+ '/layouts/m-footer'); %>               

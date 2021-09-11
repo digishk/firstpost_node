@@ -1,0 +1,53 @@
+<% if (typeof ads  !== 'undefined' && typeof ads['FBN_320']  !== 'undefined'){%>
+    <div class="btm-ad">
+        <amp-sticky-ad layout="nodisplay">
+          <%-common.displayAmpAds(ads['FBN_320'][0] , ads['FBN_320'][1] , ads['FBN_320'][2] , ads['FBN_320'][3]) %>
+        </amp-sticky-ad>
+    </div>
+<% } %>
+<% if (typeof ads  !== 'undefined' && typeof ads['PG_1x1']  !== 'undefined'){%>
+    <div class="ad-center" >
+        <%-common.displayAmpAds(ads['PG_1x1'][0] , ads['PG_1x1'][1] , ads['PG_1x1'][2] , ads['PG_1x1'][3]) %>
+    </div>
+<% } %>
+<% if (typeof ads  !== 'undefined' && typeof ads['PG_Slider_1x1']  !== 'undefined'){%>
+    <div class="ad-center" >
+        <%-common.displayAmpAds(ads['PG_Slider_1x1'][0] , ads['PG_Slider_1x1'][1] , ads['PG_Slider_1x1'][2] , ads['PG_Slider_1x1'][3]) %>
+    </div>
+<% } %>
+  <amp-analytics type="comscore">
+      <script type="application/json">
+          {
+              "vars": {
+                  "c2": "6683813"
+              },
+              "extraUrlParams": {
+                  "comscorekw": "amp"
+              }
+          }
+      </script>
+  </amp-analytics>
+    <% if(typeof postPageJson  !== 'undefined' && postPageJson.post && postPageJson.post.post_authorslug == "myupchar"){%>
+        <amp-analytics type="googleanalytics" id="analytics2">
+            <script type="application/json">
+                {
+                    "vars": {
+                        "account": "UA-88592708-1"
+                    },
+                    "triggers": {
+                        "trackPageview": {
+                            "on": "visible",
+                            "request": "pageview"
+                        }    
+                    }
+                }
+            </script>
+        </amp-analytics>
+    <% } %>
+  </div>
+  <footer>
+    <div class="brand-logo"></div>
+    <div class="copyrights">Copyright &copy; <%= new Date().getFullYear();%> Firstpost - All rights reserved.</div>
+  </footer>
+</body>
+</html>

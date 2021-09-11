@@ -1,0 +1,146 @@
+<%- include(viewpath+ '/layouts/header'); %>    
+        <div class="main-wrapper">
+
+            <!--Score-Widget-->
+            <%- include(viewpath+ '/widgets/scorecard_caraousal'); %>
+            <input type="hidden" name="" id="checkDevice" value="<%=device%>">
+            <!--Score-Widget-->
+
+            <!--728x90 Ad Space-->
+            <% if (typeof ads  !== 'undefined' && typeof ads['ATF_728']  !== 'undefined'){%>
+            <div class="ad-slot fixed-ad-banner-fc">
+                <%-common.displayAds(ads['ATF_728'][0]) %>
+            </div>
+            <% } %>
+            <!--728x90 Ad Space-->
+
+            <!--Bread crumb-->
+            <%- include(viewpath+ '/widgets/breadCrumbs'); %>
+            <!--Bread crumb-->
+
+            <% if(typeof seriesSlug !== 'undefined' && seriesSlug != 'ipl-2021') {%>
+            <!--Cricket Inner Menu-->
+            <%- include(viewpath+ '/layouts/level-4-nav'); %>
+            <!--Cricket Inner Menu-->
+            <% } %>
+
+            <!--Main Page Content-->
+            <div class="content-wrap" id="home">
+                <div class="left-content">
+                    <h1 class="page-title"><span><%= seriesName %></span></h1>
+
+                    <!--Tab container-->
+                    <%- include(viewpath+ '/widgets/cric-series-menu'); %>
+                    <!--Tab container-->                    
+                    <div class="result-block">
+                        <% for (const [schedule_key, schedule_val] of Object.entries(scheduleMonthList)) { %>
+                        <div class="schedule-block-wrap" id="<%= schedule_key %>">
+                            <div class="big-title-heading">
+                                <h2 class="big-heading-text">
+                                    <% var strplit = schedule_key.split("_") %>
+                                    <%= monthL[strplit[0]] %> <span><%= strplit[1] %></span>
+                                </h2>
+                                
+                            </div>
+    
+                            <div class="schedule-block-grid">
+                                <% for (const [sche_key, sche_val] of Object.entries(schedule_val['data'])) { %>
+<div class="desc vevent" style="margin-bottom: 2px;">
+<span class="dtstart" style="display:none;"><%=sche_val['matchdate_ist']%></span>
+<span style="display:none;" class="dtend"><%=sche_val['end_matchdate_ist']%></span>
+<span style="display:none;" class="description">Live score <%=sche_val['teama']%> vs <%=sche_val['teamb']%> <%=sche_val['matchnumber']%> at <%=sche_val['venue']%> </span>
+<span style="display:none;" class="summary"><%=sche_val['teama']%> vs <%=sche_val['teamb']%></span>
+<div class="match-venue" style="display:none;" data-venue="<%=sche_val['venue']%>"> <p style="display:none;"><%=sche_val['matchnumber']%></p>,<div style="display:none;" class="location category venue-detail1"> <%=sche_val['venue']%></div> </div>
+<span style="display:none;" class="url">https://www.firstpost.com/firstcricket<%=sche_val['url']%></span></div>
+
+                                <div class="schedule-block-cell">
+                                    <div class="schedule-head">
+                                        <h3 class="schedule-txt">
+                                            <% var dt = sche_val['matchdate_ist'].split('/') %>
+                                            <%= dt[1] %> <%= monthS[dt[0]] %>
+                                        </h3>
+                                        <div class="schedule-label-div">
+                                            <h4 class="sc-match-txt">
+                                                <%= sche_val['matchnumber'] %>
+                                            </h4>
+                                            <%if(sche_val['live'] == '1'){ %>
+                                            <div class="live-txt-div">
+                                                <div class="status-div live">
+                                                    <span class="circle white"></span>
+                                                    Live
+                                                </div>
+                                            </div>
+                                            <%}%>
+                                        </div>
+                                    </div>
+
+                                    <div class="schedule-content">
+                                        <h4 class="sc-match-name">
+                                            <a href="javascript:void(0);" title=""><%= sche_val['teama'] %> vs <%= sche_val['teamb'] %></a>
+                                        </h4>
+                                        <h6 class="sc-match-no">
+                                            <a href="javascript:void(0);" title=""><%= sche_val['series_short_display_name'] %></a>
+                                        </h6>
+
+                                        <div class="sc-match-details">
+                                            <div class="sc-ventue-txt">
+                                                <label for="" class="sc-label">
+                                                    Venue: 
+                                                </label>
+                                                <span class="sc-label-val">
+                                                    <%= sche_val['venue'] %>
+                                                </span>
+                                            </div>
+                                            <div class="sc-venue-time">
+                                                <label for="" class="sc-label">
+                                                    Time: 
+                                                </label>
+                                                <span class="sc-label-val">
+                                                    <%= sche_val['matchtime_ist'] %> To <%= sche_val['end_matchtime_ist'] %> (IST)
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% } %>                                
+                            </div>
+                        </div>                                                 
+                        <%  } if(Object.entries(scheduleMonthList).length == 0) {%>
+
+                <div class="page-title"> Currently we dont have schedule for this series</div>
+
+<% } if (typeof ads  !== 'undefined' && (typeof ads['MID1_300']  !== 'undefined' || typeof ads['MID2_300']  !== 'undefined')){%>
+    <div class="two-ad-slot">
+    <% if (typeof ads  !== 'undefined' && typeof ads['MID1_300']  !== 'undefined'){%>
+    <div class="ad-slot">
+    <%-common.displayAds(ads['MID1_300'][0]) %>
+    </div>
+    <% } %> 
+    <% if (typeof ads  !== 'undefined' && typeof ads['MID2_300']  !== 'undefined'){%>
+    <div class="ad-slot">
+    <%-common.displayAds(ads['MID2_300'][0]) %>
+    </div>
+    <% } %>  
+    </div>                        
+<% }%>
+                        </div>
+                    <!--Misc Story Section-->
+                    <!--%- include(viewpath+ '/desktop/firstcricket/news-widget'); % -->
+                    <!--Misc Story Section-->
+
+                    <!--Pagination-->
+                    <!-- %- include(viewpath+ '/widgets/paginationDefault'); % -->
+                    <!--Pagination-->
+                    
+                </div>
+                <%- include(viewpath+ '/desktop/firstcricket/ipl/ipl-rhs'); %>
+            </div>
+            <!--Main Page Content-->
+        </div>
+
+        
+
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+<%- include(viewpath+ '/layouts/footer'); %>

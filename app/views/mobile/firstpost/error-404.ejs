@@ -1,0 +1,117 @@
+<%- include(viewpath+ '/layouts/m-header'); %>
+<div class="container">
+  
+<%- include(viewpath+ '/widgets/breadCrumbs'); %>
+
+<div class="main-mid">
+        <section class="in-ban">
+            <div class="pgwrapper">
+                <img src="<%-constant.IMG_URL%>wp-content/uploads/nodefp/404-mo.jpg" alt="Page Not Found">
+            </div>
+        </section>
+
+        <section class="notfound-wrap">
+            <div class="pgwrapper">
+                <h1 class="big-ti"><span>WHY DON’T YOU READ THESE?</span></h1>
+                <div class="notfound-row">
+                	<% for (const[key, val] of Object.entries(errorPageJson['LatestNews'])) { %>
+                	<% if(key<=3){%>
+                    <div class="notfound-thumb">
+                        <a href="<%-val['PostURL'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" class="thumbnail">
+                            <img src="<%-val['PostImage']%>" title="<%-val['PostTitle']%>" alt="<%-val['PostTitle']%>">
+                        </a>
+                        <a href="<%-val['PostURL'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" class="notfoundcopy">
+                            <%-val['PostTitle']%>
+                        </a>
+
+                        <div class="thumb-social-wrap">
+                            <% var shareArr = []; 
+		            		shareArr['shareTitle'] = val['PostTitle'];
+	              			shareArr['shareUrl'] =  val['PostURL']; 
+		       				%>
+                        <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+                        </div>
+                     </div>   
+                    <%}}%>
+
+                </div>
+
+                <h1 class="big-ti"><span>ALSO IN VOICES</span></h1>
+                <div class="notfound-row">
+                    <% for (const[key, val] of Object.entries(errorPageJson['AlsoInVideos'])) { %>
+                    <% if(key<=3){%>
+                    <div class="notfound-thumb">
+                        <a href="<%-val['PostURL'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" class="thumbnail">
+                            <img src="<%-val['PostImage']%>" title="<%-val['PostTitle']%>" alt="<%-val['PostTitle']%>">
+                        </a>
+                        <a href="<%-val['PostURL'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" class="notfoundcopy">
+                            <%-val['PostTitle']%>
+                        </a>
+
+                        <div class="thumb-social-wrap">
+                            <% var shareArr = []; 
+		            		shareArr['shareTitle'] = val['PostTitle'];
+	              			shareArr['shareUrl'] =  val['PostURL']; 
+		       				%>
+                        <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+                        </div>
+                     </div>   
+                    <%}}%>
+                </div>
+
+
+
+                <h1 class="big-ti"><span>MORE NEWS</span></h1>
+                <div class="notfound-row">
+                    <% for (const[key, val] of Object.entries(errorPageJson['MoreNews'])) { %>
+                    <% if(key<=3){%>
+                    <div class="notfound-thumb">
+                        <a href="<%-val['PostURL'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" class="thumbnail">
+                            <img src="<%-val['PostImage']%>" title="<%-val['PostTitle']%>" alt="<%-val['PostTitle']%>">
+                        </a>
+                        <a href="<%-val['PostURL'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" class="notfoundcopy">
+                            <%-val['PostTitle']%>
+                        </a>
+
+                        <div class="thumb-social-wrap">
+                            <% var shareArr = []; 
+		            		shareArr['shareTitle'] = val['PostTitle'];
+	              			shareArr['shareUrl'] =  val['PostURL']; 
+		       				%>
+                        <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+                        </div>
+                     </div>   
+                    <%}}%>
+                </div>
+
+                <h1 class="big-ti"><span>OTHER STORIES</span></h1>
+                <div class="notfound-row">
+                    <% for (const[key, val] of Object.entries(errorPageJson['OtherStories'])) { %>
+                    <% if(key<=3){%>
+                    <div class="notfound-thumb">
+                        <a href="<%-val['PostURL'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" class="thumbnail">
+                            <img src="<%-val['PostImage']%>" title="<%-val['PostTitle']%>" alt="<%-val['PostTitle']%>">
+                        </a>
+                        <a href="<%-val['PostURL'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" class="notfoundcopy">
+                            <%-val['PostTitle']%>
+                        </a>
+
+                        <div class="thumb-social-wrap">
+                            <% var shareArr = []; 
+		            		shareArr['shareTitle'] = val['PostTitle'];
+	              			shareArr['shareUrl'] =  val['PostURL']; 
+		       				%>
+                        <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+                        </div>
+                     </div>   
+                    <%}}%>
+                </div>
+
+                
+            </div>
+        </section>
+
+    </div>
+</div>
+
+<%- include(viewpath+ '/layouts/m-footer'); %>

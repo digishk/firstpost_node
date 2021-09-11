@@ -1,0 +1,178 @@
+<%- include(viewpath+ '/layouts/m-header'); %>
+        <div class="main-wrapper">
+            <!--Ad Slot-->
+            <% if (typeof ads  !== 'undefined' && typeof ads['ATF_320']  !== 'undefined'){%>
+                <div class="ad-center">
+                    <%-common.displayAds(ads['ATF_320'][0]) %>
+                </div>
+            <% } %>
+            <!--Ad Slot-->
+
+            <!--Score-Widget-->
+            <%- include(viewpath+ '/widgets/scorecard_caraousal'); %>
+            <!--Score-Widget-->
+
+            <!--Bread crumb-->
+            <%- include(viewpath+ '/widgets/breadCrumbs'); %>
+            <!--Bread crumb-->
+
+            <!--Cricket Inner Menu-->
+            <%- include(viewpath+ '/layouts/level-4-nav'); %>            
+            <!--Cricket Inner Menu-->
+
+            <div class="main-content" id="videos">
+
+                <!--Top Slider Section-->
+                <section class="top-slider-section">
+                    <h1 class="page-title"><span>Latest videos</span></h1>
+                    <div class="glide" id="topSlider">
+                        <div data-glide-el="track" class="glide__track">
+                            <ul class="glide__slides">
+                                <li class="glide__slide">
+                                    <div class="top-story-slide">
+                                        <div class="top-image-wrap">                
+                                            <a href="<%=templateVars['videosList']['solarResults'][0]['url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" title="<%=templateVars['videosList']['solarResults'][0]['title']%>">
+                                                <img src="<%-constant.PLACEHOLDER_IMG_320x180 %>" class="fp-lazy" data-src="<%-common.firstpost_imageOptimization(templateVars['videosList']['solarResults'][0]['image'], 320, 180, '') %>" alt="<%=templateVars['videosList']['solarResults'][0]['title']%>" title="<%=templateVars['videosList']['solarResults'][0]['title']%>"/>
+                                            </a>
+                                            <div class="video-icon">
+                                                <svg width="80" height="80" viewBox="0 0 80 80"><defs><style>.a{}.b{}</style><filter id="a" x="0" y="0" width="80" height="80" filterUnits="userSpaceOnUse"><feOffset dy="3" input="SourceAlpha"/><feGaussianBlur stdDeviation="4.5" result="b"/><feFlood flood-opacity="0.294"/><feComposite operator="in" in2="b"/><feComposite in="SourceGraphic"/></filter></defs><g style="filter:url(#a);" transform="matrix(1, 0, 0, 1, 0, 0)"><path style="fill:#fff;" d="M28.5,2A26.5,26.5,0,1,0,55,28.5,26.51,26.51,0,0,0,28.5,2ZM23.2,40.425V16.575L39.1,28.5l-7.227,5.42Z" transform="translate(11.5 8.5)"/></g></svg>
+                                            </div>
+                                            <div class="main-title-div">
+                                                <h3 class="category-name">
+                                                    <a href="/author/<%=templateVars['videosList']['solarResults'][0]['author'].toLowerCase().replace(" ","-") %>" title="<%=templateVars['videosList']['solarResults'][0]['author']%>">
+                                        <%=templateVars['videosList']['solarResults'][0]['author']%>
+                                    </a>
+                                                </h3>
+                                                <div class="main-title-text">
+                                                    <h4 class="main-title-wrap">
+                                                        <a href="<%=templateVars['videosList']['solarResults'][0]['url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" title="<%=templateVars['videosList']['solarResults'][0]['title']%>">
+                                                            <%=templateVars['videosList']['solarResults'][0]['title']%>
+                                                        </a>
+                                                    </h4>
+                                                    <div class="share-wrap">
+                                                        <div class="thumb-social-wrap">
+                                                            <% var shareArr = []; 
+                                                                shareArr['shareTitle'] = templateVars['videosList']['solarResults'][0]['title'];
+                                                                shareArr['shareUrl'] = templateVars['videosList']['solarResults'][0]['url']; %>
+                                                            <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <% if(templateVars['videosList']['solarResults'][1] !== 'undefined'){ %>
+                                <li class="glide__slide">
+                                    <div class="top-story-slide">
+                                        <div class="top-image-wrap">
+                                            <a href="<%=templateVars['videosList']['solarResults'][1]['url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" title="<%=templateVars['videosList']['solarResults'][1]['title']%>">
+                                                <img src="<%-constant.PLACEHOLDER_IMG_320x180 %>" class="fp-lazy" data-src="<%-common.firstpost_imageOptimization(templateVars['videosList']['solarResults'][1]['image'], 320, 180, '') %>" alt="<%=templateVars['videosList']['solarResults'][1]['title']%>" title="<%=templateVars['videosList']['solarResults'][1]['title']%>"/>
+                                            </a>
+                                            <div class="video-icon">
+                                                <svg width="80" height="80" viewBox="0 0 80 80"><defs><style>.a{}.b{}</style><filter id="a" x="0" y="0" width="80" height="80" filterUnits="userSpaceOnUse"><feOffset dy="3" input="SourceAlpha"/><feGaussianBlur stdDeviation="4.5" result="b"/><feFlood flood-opacity="0.294"/><feComposite operator="in" in2="b"/><feComposite in="SourceGraphic"/></filter></defs><g style="filter:url(#a);" transform="matrix(1, 0, 0, 1, 0, 0)"><path style="fill:#fff;" d="M28.5,2A26.5,26.5,0,1,0,55,28.5,26.51,26.51,0,0,0,28.5,2ZM23.2,40.425V16.575L39.1,28.5l-7.227,5.42Z" transform="translate(11.5 8.5)"/></g></svg>
+                                            </div>
+                                            <div class="main-title-div">
+                                                <h3 class="category-name">
+                                                    <a href="/author/<%=templateVars['videosList']['solarResults'][1]['author'].toLowerCase().replace(" ","-") %>" title="<%=templateVars['videosList']['solarResults'][1]['author']%>">
+                                        <%=templateVars['videosList']['solarResults'][1]['author']%>
+                                    </a>
+                                                </h3>
+                                                <div class="main-title-text">
+                                                    <h4 class="main-title-wrap">
+                                                        <a href="<%=templateVars['videosList']['solarResults'][1]['url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" title="<%=templateVars['videosList']['solarResults'][1]['title']%>">
+                                                            <%=templateVars['videosList']['solarResults'][1]['title']%>
+                                                        </a>
+                                                    </h4>
+                                                    <div class="share-wrap">
+                                                        <div class="thumb-social-wrap">
+                                                            <% var shareArr = []; 
+                                                                shareArr['shareTitle'] = templateVars['videosList']['solarResults'][1]['title'];
+                                                                shareArr['shareUrl'] = templateVars['videosList']['solarResults'][1]['url']; %>
+                                                            <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <% } %>
+                            </ul>
+                        </div>
+                        <div class="glide__bullets" data-glide-el="controls[nav]">
+                            <button class="glide__bullet" data-glide-dir="=0"></button>
+                            <% if(templateVars['videosList']['solarResults'][1] !== 'undefined'){ %>
+                            <button class="glide__bullet" data-glide-dir="=1"></button>
+                            <% } %>
+                          </div>
+                    </div>
+                </section>
+                <!--Top Slider Section-->
+
+                <!--Other Story Section-->
+                <section class="other-story">
+                    <% for (const [homePageJson_key, homePageJson_videos] of Object.entries(templateVars['videosList']['solarResults'])) { %>
+                    <%if(homePageJson_key != '0' && homePageJson_key != '1'){%>
+                    <div class="image-wrap">                    
+                        <a href="<%=homePageJson_videos['url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL) %>" title="<%=homePageJson_videos['title'] %>">
+                            <img src="<%-constant.PLACEHOLDER_IMG_320x180 %>" class="fp-lazy" data-src="<%-common.firstpost_imageOptimization(homePageJson_videos['image'], 320, 180, '') %>" alt="<%=homePageJson_videos['title'] %>" title="<%=homePageJson_videos['title'] %>" />
+                        </a>
+                        <div class="video-icon">
+                            <svg width="80" height="80" viewBox="0 0 80 80"><defs><style>.a{}.b{}</style><filter id="a" x="0" y="0" width="80" height="80" filterUnits="userSpaceOnUse"><feOffset dy="3" input="SourceAlpha"/><feGaussianBlur stdDeviation="4.5" result="b"/><feFlood flood-opacity="0.294"/><feComposite operator="in" in2="b"/><feComposite in="SourceGraphic"/></filter></defs><g style="filter:url(#a);" transform="matrix(1, 0, 0, 1, 0, 0)"><path style="fill:#fff;" d="M28.5,2A26.5,26.5,0,1,0,55,28.5,26.51,26.51,0,0,0,28.5,2ZM23.2,40.425V16.575L39.1,28.5l-7.227,5.42Z" transform="translate(11.5 8.5)"/></g></svg>
+                        </div>
+                        <div class="title-div-wrap">
+                            <h3 class="category-name">
+                                <a href="/author/<%=homePageJson_videos['author'].toLowerCase().replace(" ","-") %>" title="<%=homePageJson_videos['author']%>">
+                                    <%=homePageJson_videos['author']%>
+                                </a>
+                            </h3>
+                            <div class="category-text">
+                                <div class="text-wrap">
+                                    <a href="<%=homePageJson_videos['url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL) %>" title="<%=homePageJson_videos['title'] %>">
+                                        <h2 class="title-text">
+                                            <%=homePageJson_videos['title'] %>
+                                        </h2>
+                                        <h4 class="sub-title-txt">
+                                            <%=homePageJson_videos['description'] %>
+                                        </h4>
+                                    </a>
+                                </div>
+                                <div class="share-wrap">
+                                    <div class="thumb-social-wrap">
+                                        <% var shareArr = []; 
+                                                shareArr['shareTitle'] = homePageJson_videos['title'];
+                                                shareArr['shareUrl'] = homePageJson_videos['url']; %>
+                                        <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+                                    </div>
+                                </div>
+                            </div>       
+                        </div>
+                    </div>
+                    <% } } %>
+                </section>
+                <!--Misc Story Section-->
+                <!--Pagination-->
+                <%- include(viewpath+ '/widgets/paginationDefault'); %>
+                <!--Pagination-->
+
+                <!--Ad Slot-->
+                <% if ((typeof ads  !== 'undefined' && typeof ads['BTF_300'] !== 'undefined')){%>
+                    <div class="ad-center BTF_300" data-ad-id="<%-ads['BTF_300'][0]%>" data-ad-size="<%-ads['BTF_300'][1]%>">
+                        <%-common.displayAds(ads['BTF_300'][0]) %>
+                    </div>
+                <% } %>
+                <!--Ad Slot-->
+                <% if (typeof outbrain_ads !== 'undefined' && typeof outbrain_ads['MB_2'] !== 'undefined'){%>
+                    <%-outbrain_ads['MB_2'];%>  
+                <% } %>
+                <%- include(viewpath+ '/widgets/mailChimp'); %> 
+                <!--Most Read Widget-->
+                <%- include(viewpath+ '/widgets/most_read_widget'); %>
+                <!--Most Read Widget-->
+            </div>
+        </div>
+
+<%- include(viewpath+ '/layouts/m-footer'); %>

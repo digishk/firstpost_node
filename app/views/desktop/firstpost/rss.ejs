@@ -1,0 +1,64 @@
+<%- include(viewpath+ '/layouts/header'); %>
+<% if (typeof ads  !== 'undefined' && typeof ads['ATF_728']  !== 'undefined'){%>
+        <div class="ad-center">
+            <%-common.displayAds(ads['ATF_728'][0]) %>
+        </div>
+    <% } %>
+<% var rssArr = []; 
+      /* rssArr['Art & Culture'] = constant.SITE_URL+'/rss';
+       rssArr['Lifestyle'] = constant.SITE_URL+'/rss'; 
+       rssArr['Entertainment'] = constant.SITE_URL+'/rss';
+       rssArr['Sports'] = constant.SITE_URL+'/rss';
+       rssArr['Opinion'] = constant.SITE_URL+'/rss';
+       rssArr['Learning'] = constant.SITE_URL+'/rss';
+       rssArr['Science & Tech'] = constant.SITE_URL+'/rss';
+       rssArr['Fashion'] = constant.SITE_URL+'/rss';
+       rssArr['Cricket'] = constant.SITE_URL+'/rss';
+       rssArr['Photos'] = constant.SITE_URL+'/rss';
+       rssArr['Videos'] = constant.SITE_URL+'/rss';*/
+       
+%>
+
+<% for (const [key, menuitems] of Object.entries(constant.fp_menu[2]['section'])) { %>
+<% /*if(key == "section") {*/ %>
+<% /*for (const [menuKey, menuitems] of Object.entries(items)) {*/ %>
+<% rssArr[menuitems.menu_name] = constant.SITE_URL+'rss/'+menuitems.menu_slug+'.xml'; %>
+<% /*}*/ %>
+<% /*}*/ %>
+<% } %>
+<%rssArr['First Cricket'] = constant.SITE_URL+'rss/firstcricketnews.xml'; %>
+<div class="main-mid">
+        <div class="pgwrapper two-grid">
+            <div class="grid-left">
+              <%- include(viewpath+ '/widgets/breadCrumbs'); %>
+                <h1 class="big-ti"><span>rss</span></h1>
+                <ul class="rss-container">
+                	 <% for (const [rss_key, rss_val] of Object.entries(rssArr)) { %>
+                    <li class="grid-wrap">
+                        <a href="<%-rss_val %>" class="rss-wrap">
+
+                            <svg height="28px" viewBox="0 0 512 512" width="28px" fill="#C1C1C1">
+                                <path d="m256 512c-68.378906 0-132.667969-26.628906-181.019531-74.980469-48.351563-48.351562-74.980469-112.640625-74.980469-181.019531s26.628906-132.667969 74.980469-181.019531c48.351562-48.351563 112.640625-74.980469 181.019531-74.980469s132.667969 26.628906 181.019531 74.980469c48.351563 48.351562 74.980469 112.640625 74.980469 181.019531s-26.628906 132.667969-74.980469 181.019531c-48.351562 48.351563-112.640625 74.980469-181.019531 74.980469zm0-482c-60.367188 0-117.121094 23.507812-159.804688 66.195312-42.6875 42.683594-66.195312 99.4375-66.195312 159.804688s23.507812 117.121094 66.195312 159.804688c42.683594 42.6875 99.4375 66.195312 159.804688 66.195312s117.121094-23.507812 159.804688-66.195312c42.6875-42.683594 66.195312-99.4375 66.195312-159.804688s-23.507812-117.121094-66.195312-159.804688c-42.683594-42.6875-99.4375-66.195312-159.804688-66.195312zm0 0" />
+                                <path d="m154.429688 398.136719c-22.207032 0-40.273438-18.066407-40.273438-40.273438s18.066406-40.269531 40.273438-40.269531c22.207031 0 40.273437 18.0625 40.273437 40.269531s-18.066406 40.273438-40.273437 40.273438zm0-50.546875c-5.664063 0-10.273438 4.609375-10.273438 10.273437 0 5.664063 4.609375 10.273438 10.273438 10.273438 5.664062 0 10.273437-4.609375 10.273437-10.273438 0-5.664062-4.609375-10.273437-10.273437-10.273437zm0 0" />
+                                <path d="m249.539062 372.863281c-8.28125 0-15-6.714843-15-15 0-44.171875-35.9375-80.109375-80.109374-80.109375-8.285157 0-15-6.71875-15-15 0-8.285156 6.714843-15 15-15 60.714843 0 110.109374 49.394532 110.109374 110.109375 0 8.285157-6.714843 15-15 15zm0 0" />
+                                <path d="m316.632812 372.863281c-8.285156 0-15-6.714843-15-15 0-81.167969-66.035156-147.203125-147.203124-147.203125-8.285157 0-15-6.714844-15-15s6.714843-15 15-15c97.710937 0 177.203124 79.492188 177.203124 177.203125 0 8.285157-6.714843 15-15 15zm0 0" />
+                                <path d="m382.925781 372.863281c-8.28125 0-15-6.714843-15-15 0-117.722656-95.773437-213.496093-213.496093-213.496093-8.285157 0-15-6.714844-15-15 0-8.285157 6.714843-15 15-15 65.039062 0 126.1875 25.328124 172.179687 71.316406 45.988281 45.992187 71.316406 107.140625 71.316406 172.179687 0 8.285157-6.714843 15-15 15zm0 0" />
+                            </svg>
+                            <%-rss_key %>
+
+                        </a>
+                    </li>
+                    <% } %>
+                    
+                </ul>
+
+            </div>
+            <%- include(viewpath+ '/'+device+'/firstpost/rhs'); %>
+
+        </div>
+    </div>
+
+<!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+<%- include(viewpath+ '/layouts/footer'); %>

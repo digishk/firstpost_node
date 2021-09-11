@@ -1,0 +1,278 @@
+<link href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" rel="stylesheet" type="text/css"></link>
+<style>
+  .site-result-slider .slick-slide {
+    margin: 0 5px;
+  }
+  .site-results {
+    display: inline-block;
+    width: 100%;
+    background: #F4F4F4;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px 0 0 0;
+    border: #ccc solid 1px;
+  }
+  .site-results p{
+      margin: 0;
+  }
+  .site-results .title {
+    box-shadow: 0px 1px 7px #ccc;
+    font: 700 14px/16px 'Roboto', sans-serif;
+    letter-spacing: 0;
+    color: #272727;
+    padding: 8px;
+    margin-bottom: 8px;
+    width: 100%;
+  }
+  .site-results .party-col {
+    flex: 1;
+  }
+  .site-results .party-col {
+    margin: 0 1px;
+  }
+  .site-results .party-name {
+    font: 900 24px/28px 'Roboto', sans-serif;
+    letter-spacing: 0;
+    color: #FFFFFF;
+    border-bottom: white solid 1px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .site-results .result-count {
+    font: 900 18px/22px 'Roboto', sans-serif;
+    letter-spacing: 0;
+    color: #FFFFFF;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .win-leads{margin-left:20px;font-weight:400;}
+  .dle20-live-couting {
+      background: #fff;
+      padding: 10px;
+      -webkit-box-shadow: 0 0 5px 1px rgba(0,0,0,.2);
+      box-shadow: 0 0 5px 1px rgba(0,0,0,.2);
+      margin-bottom: 20px;
+      position: relative;
+  }
+  .dle20-counting-header {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+  }
+  .counting-title.border span {
+      color: #ea5454;
+  }
+  .dle20-counting-header .full-results {
+      display: flex;
+      align-items: center;
+      text-align: left;
+      font: 700 12px/14px Roboto,sans-serif;
+      letter-spacing: 0;
+      color: #11a0a4;
+      margin-left: auto;
+      text-decoration: none;
+  }
+  .dle20-counting-header .full-results svg {
+      margin-left: 5px;
+      width: 15px;
+      height: 15px;
+      fill: #11a0a4;
+  }
+  .dle20-counting-header .counting-title {
+      text-align: left;
+      font: 700 16px/19px Roboto,sans-serif;
+      letter-spacing: 0;
+      color: #272727;
+      opacity: 1;
+  }
+  .seats-count {
+      font: 900 16px/19px Roboto,sans-serif;
+      letter-spacing: 0;
+      color: #272727;
+  }
+  .seats-count .to-win{
+      font: 400 16px/19px Roboto,sans-serif;
+
+  }
+  .site-result-slider .slick-dots {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 1rem 0;
+    list-style-type: none;
+    bottom: -48px;
+  }
+  .site-result-slider .slick-dots li {
+    margin: 0 0.25rem;
+  }
+  .site-result-slider .slick-dots button {
+    display: block;
+    width: 13px;
+    height: 13px;
+    padding: 0;
+    border: #ccc solid 1px;
+    border-radius: 100%;
+    background-color: white;
+    text-indent: -9999px;
+    outline: none;
+  }
+  .site-result-slider .slick-dots li.slick-active button {
+    background-color: #11A0A4;
+    border-color: #11A0A4;
+  }
+
+  @media (max-width: 1280px){
+      .exit-assembly-2019{
+          width: 330px;
+      }
+  }
+
+  @media (max-width: 768px){
+     .dle20-counting-header{
+          flex-wrap: wrap;
+          justify-content: space-between;
+      }
+     .dle20-counting-header .counting-title{
+          border: none;
+          width: 100%;
+          margin-bottom: 10px;
+      }
+      .counting-title.border span{display:block;}
+      .win-leads{margin-left:6px;font-size:10px;}
+  }
+  @media (max-width: 375px){
+    .site-results .party-name,
+    .site-results .result-count {
+      font-size: 20px;
+    }
+  }
+</style>
+<div class="dle20-live-couting">
+  <div class="dle20-counting-header">
+      <p class="counting-title border">Punjab Panchayat Election 2021</p>
+      <!-- <a href="" class="full-results">
+        More Details
+        <svg version="1.1" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+          <g id="Bounding_Box">
+             <rect fill="none" width="24" height="24"></rect>
+          </g>
+          <g id="Master">
+              <g>
+                <polygon points="15.5,5 11,5 16,12 11,19 15.5,19 20.5,12    "></polygon>
+                <polygon points="8.5,5 4,5 9,12 4,19 8.5,19 13.5,12     "></polygon>
+              </g>
+          </g>
+        </svg>
+      </a> -->
+  </div>
+  <div class="party-table-wrap"  id="biharResultData">
+     
+  </div>  
+</div>
+<script>
+  var exittableslickinit = function(){
+    $('.site-result-slider').slick({
+        autoplay:true,
+        slidesToShow:2,
+        arrows:false,
+        dots:false,
+        responsive:[
+            {
+                breakpoint:1025,
+                settings:{
+                    slidesToShow:2,
+                }
+            },
+            {
+                breakpoint:769,
+                settings:{
+                    slidesToShow:2,
+                }
+            },
+            {
+              breakpoint: 580,
+              settings: {
+                slidesToShow: 1,
+                dots:true
+              }
+            }
+        ]
+    });
+  };  
+  var exittableslickdeinit = function(){
+    if($('.exit-poll-slider').length>0){
+      $('.exit-poll-slider').slick('unslick');  
+    };
+  };
+
+  
+  
+  $(document).ready(function(){
+
+    var consWidgetJsonUrl = 'https://election.nw18.com/electiondata/electionjson/punjab_panchayat_election/punjab_panchayat_election_cross.json';
+
+    getResultData(consWidgetJsonUrl);
+
+    setInterval(function(){
+      //console.log("calling set interval");
+      getResultData(consWidgetJsonUrl);
+    },20000);
+
+
+    function getResultData(consWidgetJsonUrl){
+        $.ajax({
+          url: consWidgetJsonUrl,
+          type: 'GET',
+          cache: true,
+          dataType: 'jsonp',
+          jsonp: 'jsonp',
+          jsonpCallback: 'punjabpanchayat_election',
+          crossDomain: true,
+          success: function (response) {
+            if(!response) { 
+                return false; 
+            }
+            var resultData = response.punjab_panchayat_election;
+            var stateData = resultData.state;
+            var corporationData = stateData.corporation;
+            var muncipalityData = stateData.muncipality;
+            var corporationFinalData = corporationData.party;
+            var muncipalityFinalData = muncipalityData.party;
+            //console.log(corporationData);
+            var dataHtml = "";
+            dataHtml += '<div class="site-result-slider" role="listbox">';
+            dataHtml += '<div>';
+            dataHtml += '<div class="site-results">';
+            dataHtml += '<div class="title">'+corporationData['name']+'<span class="win-leads">Win + Leads ('+corporationData['count']+'/'+corporationData['total']+')</span></div>';
+              
+              $.each( corporationFinalData, function( key, filtArrvalue ) {
+                  dataHtml += '<div class="party-col" style="background-color:'+filtArrvalue['colour']+'"><p class="party-name">'+filtArrvalue['party']+'</p><p class="result-count">'+filtArrvalue['seats']+'</p></div>';
+              }); 
+            dataHtml += '</div>';
+            dataHtml += '</div>';
+            dataHtml += '<div>';
+            dataHtml += '<div class="site-results">';
+            dataHtml += '<div class="title">'+muncipalityData['name']+'<span class="win-leads">Win + Leads ('+muncipalityData['count']+'/'+muncipalityData['total']+')</span></div>';
+              
+              $.each( muncipalityFinalData, function( key, filtArrvalue ) {
+                  dataHtml += '<div class="party-col" style="background-color:'+filtArrvalue['colour']+'"><p class="party-name">'+filtArrvalue['party']+'</p><p class="result-count">'+filtArrvalue['seats']+'</p></div>';
+              }); 
+            dataHtml += '</div>';
+            dataHtml += '</div>';
+            dataHtml += '</div>';
+            $('#biharResultData').html(dataHtml);
+            exittableslickinit();
+          },
+          error: function (error) {
+            console.log("error "+error);
+          }
+        });
+    }  
+  });
+</script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> 

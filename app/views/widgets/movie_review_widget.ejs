@@ -1,0 +1,42 @@
+<% if(postPageJson['meta']['Movie-Rating'] != "" && postPageJson['meta']['Movie-Rating'] != undefined){ %>
+<div class="rating-wrap" <% if(isMobile == 1) {%> style="margin: 10px 10px" <%}%>>
+    <p class="rating"><%-postPageJson['meta']['Movie-Rating']%>/5</p>
+    <ul class="popcorns-list">
+        <%
+            var whole = Math.floor(postPageJson['meta']['Movie-Rating']);
+            var fraction = postPageJson['meta']['Movie-Rating'] - whole;
+            var check='';
+        %>
+        <% for (var rat_i = 0; rat_i <= 4;  rat_i++ ) {
+            if(rat_i < whole){%>
+               <li class="full-star"></li>
+            <% }else if(fraction > 0 && check != 'true'){%>
+                <li class="half-star"></li>
+                <% check = 'true'; %>
+            <% }else{ %>
+                <li class=""></li>
+            <% } %>
+        <% } %>
+    </ul>
+</div>
+<% } %>
+<ul class="cast-n-crew">
+    <% if(actorHTMLString != ""){ %>
+        <li>
+        <p class="heading">cast</p>
+        <%- actorHTMLString%>
+        </li>
+    <% } %>
+    <% if(postPageJson['meta']['Movie-Director'] != "" && postPageJson['meta']['Movie-Director'] != undefined){ %>
+    <li>
+        <p class="heading">director</p>
+        <a href="<%=constant.SITE_URL%>search/<%=postPageJson['meta']['Movie-Director']%>"><%=postPageJson['meta']['Movie-Director']%></a>
+    </li>
+    <% } %>
+    <% if(movie_language != ""){ %>
+    <li>
+        <p class="heading">language</p>
+        <a><%- movie_language%></a>
+    </li>
+    <% } %>
+</ul><!--cast-n-crew-->

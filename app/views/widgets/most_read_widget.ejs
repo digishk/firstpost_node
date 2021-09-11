@@ -1,0 +1,27 @@
+<div class="top-stories common-widget">
+    <div class="double-title">
+        <h3 class="title-txt">Most Read</h3>
+        <span class="title-shadow">Most Read</span>
+    </div>
+    <div class="top-stories-wrap widget-wrapper">
+        <ul class="story-list-ul">
+            <% for (const [mostReadArtcles_key, mostReadArtcles_val] of Object.entries(mostReadArtcles['top_stories'])) { %>
+            <li>
+                <a href="<%-mostReadArtcles_val['post_url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL) %>" title="<%-mostReadArtcles_val['post_title'] %>">
+                    <% if (mostReadArtcles_val['content_type'].toLowerCase() == "video") { %>
+                    <div class="top-play">
+                        <svg width="17.904" height="17.904" viewBox="0 0 17.904 17.904"><path d="M56.952,48A8.952,8.952,0,1,0,65.9,56.952,8.956,8.956,0,0,0,56.952,48Zm-1.79,12.981V52.924l5.371,4.029Z" transform="translate(-48 -48)"/></svg>
+                    </div>
+                    <% } %>
+                    <h3 class="top-head-title">
+                        <%-mostReadArtcles_val['post_title'] %>
+                    </h3>
+                    <h6 class="top-head-sum">
+                       <%-mostReadArtcles_val['post_excerpt'] %>
+                    </h6> 
+                </a>                                                       
+            </li>
+            <% } %>
+        </ul>
+    </div>
+</div>

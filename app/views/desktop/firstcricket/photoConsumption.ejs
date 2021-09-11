@@ -1,0 +1,98 @@
+<%- include(viewpath+ '/layouts/header'); %>
+<%
+var new_url = '';
+if(typeof photoArr !== 'undefined' && photoArr != ''){
+    new_url = photoArr[0]['url_new'];
+} %>
+<div class="container mainArticlediv" data-url="<%-new_url%>" data-title="<%-postPageJson['post']['post_title']%>">
+    <% if (typeof ads  !== 'undefined' && typeof ads['ATF_728']  !== 'undefined'){%>
+        <div class="ad-center ATF_728"  data-ad-id="<%-ads['ATF_728'][0]%>" data-ad-size="<%-ads['ATF_728'][1]%>">
+            <%-common.displayAds(ads['ATF_728'][0]) %>
+        </div>
+    <% } %>
+    <!--cricket-ticker-wrap-->
+    <%- include(viewpath+ '/widgets/scorecard_caraousal'); %>
+    <!--cricket-ticker-wrap-->
+    <%- include(viewpath+ '/widgets/breadCrumbs'); %>
+    <!-- main container wrapper -->
+    <!--Cricket Inner Menu-->
+    	<%- include(viewpath+ '/layouts/level-4-nav'); %>
+    <!--Cricket Inner Menu-->
+    <div class="main-container" >
+	<div class="main-content">
+		<div class="article-wrap-div article-div-wrap">
+			<%- include(viewpath+ '/widgets/floating_social_share_widget'); %>
+
+			<div class="article-sect">
+				<div class="innerpage-share">
+					<h2 class="category-name"><a href="<%=constant.SITE_URL%>category/<%=catSlug_new%>" class="section-btn"><%=common.capitalizeFLetter(catSlug_new)%></a></h2>
+					
+					</div>
+					<h1 class="inner-main-title" id="headlineitem">
+					<%=postPageJson['post']['post_title']%>
+					</h1>
+					<p class="inner-copy">
+					<%=postPageJson['post']['post_excerpt']%>
+					</p>
+					<% if(catSlug == 'health'){%>
+					<div class="author-health-wrap">
+					<% } %>
+					<div class="author-info">
+					<a href="<%=constant['SITE_URL']%>author/<%=postPageJson['post']['post_authorslug']%>"><span class="article-by <% if(catSlug == 'health'){%> health-category <% } %>"><%=postPageJson['post']['post_authorname']%></span></a>
+					<span><%=dateFormat(postPageJson['post']['post_modified'] , "mmmm dd',' yyyy HH:MM:ss")%> IST</span>
+					</div>
+					<% if(photoArr != '' && photoArr != 'undefined'){ %>
+					<% var countForAd = 0; for (const [photos_key, photos_val] of Object.entries(photoArr)) { countForAd = countForAd+1 %>
+						<div class="photo-con-list" data-url="<%-photos_val['url_new'].replace(constant.MAIN_SITE_URL, constant.SITE_URL) %>" data-desc="<%=seoData['metaDesc']%>" data-index="<%-photos_val['photo_cnt']%>" data-photo-id="<%-photos_val['photo_cnt']%>" data-title="<%=photos_val['title']%>">
+						<img src="<%-constant.PLACEHOLDER_IMG_640x362 %>" class="fp-lazy glrbox" data-src="<%-common.firstpost_imageOptimization(photos_val['img_src'], 640, 362, '') %>" itemprop="http://schema.org/image" alt="<%=photos_val['title']%>" title="<%=photos_val['title']%>" data-url="<%=photos_val['url_new'].replace(constant.MAIN_SITE_URL, constant.SITE_URL) %>" data-desc="<%=seoData['metaDesc']%>" data-index="<%-photos_val['photo_cnt']%>" data-photo-id="<%-photos_val['photo_cnt']%>">
+						<div class="photo-count">
+							<strong><%-photos_val['photo_cnt']%></strong>/<%-photoArr.length%>
+						</div>
+						<div class="photo-copy">
+							<%=photos_val['title']%>
+							<% var shareArr = [];
+							if(typeof photos_val['title'] === 'undefined'){
+							shareArr['shareTitle'] = seoData['metaTitle'].replace(/'/g , "").replace(/"/g , '');
+							}else{
+							shareArr['shareTitle'] = photos_val['title'].replace(/'/g , "").replace(/"/g , '');
+							}
+							
+							shareArr['shareUrl'] = photos_val['url_new']; %>
+							<%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+						</div>        	
+						</div>
+						<%if(countForAd == '5'){%>
+                         <% if (typeof ads  !== 'undefined' && (typeof ads['MID1_300']  !== 'undefined' || typeof ads['MID2_300']  !== 'undefined')){%>
+                        <div class="two-ad-slot">
+                        <% if (typeof ads  !== 'undefined' && typeof ads['MID1_300']  !== 'undefined'){%>
+                        <div class="ad-slot">
+                        <%-common.displayAds(ads['MID1_300'][0]) %>
+                        </div>
+                        <% } %> 
+                        <% if (typeof ads  !== 'undefined' && typeof ads['MID2_300']  !== 'undefined'){%>
+                        <div class="ad-slot">
+                        <%-common.displayAds(ads['MID2_300'][0]) %>
+                        </div>
+                        <% } %>  
+                        </div>                        
+                    <% }%>
+                        <% } } %>
+					<% } %>
+			</div>
+			<% if (typeof outbrain_ads !== 'undefined' && typeof outbrain_ads['AR_1'] !== 'undefined'){%>
+                    <%-outbrain_ads['AR_1'];%>  
+                <% } %>
+		</div>
+	    <% if (typeof outbrain_ads  !== 'undefined' && typeof outbrain_ads['AR_1']  !== 'undefined'){%>
+            <%-outbrain_ads['AR_1'];%>
+        <% } %>
+	</div><!--main-content-->
+	<!--- sidebar  start --->
+	<%- include(viewpath+ '/'+device+'/firstpost/rhs'); %>
+	<input type="hidden" name="" id="nxtarticle" value="1">
+    </div>
+</div><!--container-->
+<%  if(infiniteArticlesList != '' && typeof infiniteArticlesList != 'undefined'){%>
+	<%- include(viewpath+ '/widgets/continuous_scroll'); %>
+<%  } %>
+<%- include(viewpath+ '/layouts/footer'); %>

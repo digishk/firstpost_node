@@ -1,0 +1,128 @@
+<%- include(viewpath+ '/layouts/m-header'); %>
+	<!--cricket-ticker-wrap-->
+    <%- include(viewpath+ '/widgets/m-cricketscore_strip'); %>
+	<!--cricket-ticker-wrap-->
+
+	<!-- <div class="ad-center">
+		<img src="http://placehold.it/320x50/">
+	</div> -->
+
+	<%- include(viewpath+ '/widgets/breadCrumbs'); %>
+	<% if (typeof ads  !== 'undefined' && typeof ads['ATF_320']  !== 'undefined'){%>
+	<div class="ad-center">
+         <%-common.displayAds(ads['ATF_320'][0]) %>
+   </div>
+   <% } %> 
+    <div class="main-story-thumb-wrap">
+		<h3 class="main-story-title">
+			<a href="javascript:void(0);">latest movie stories</a>
+			<span></span>
+		</h3>
+		<div class="slider-wrap main-story-slider" id="mainstoryslider">
+            <div class="glide__track" data-glide-el="track">
+                <ul class="slider">
+                	<% for (const [movieReview_key, movieReview_val] of Object.entries(movieReview['reviews']['latest'])) { %>
+					<li class="main-story-thumb">
+						<!--<div class="live-txt"><span class="blinking"></span>live</div>-->
+					   <a href="<%- movieReview_val.post_url %>" class="thumb" alt="<%- movieReview_val.post_title %>" title="<%- movieReview_val.post_title %>">
+							<img src="<%-movieReview_val.post_image %>" alt="<%=movieReview_val.post_title %>" title="<%=movieReview_val.post_title %>">
+						</a>		
+					   <div class="title-wrap">
+					   		<a href="<%=constant.SITE_URL%>category/entertainment" class="category-name">Entertainment</a>
+					   		<h2 class="main-title">
+					   			<a href="<%- movieReview_val.post_url %>">
+					   				<%- movieReview_val.post_title %>
+					   			</a>
+					   		</h2>
+					   		<%- include(viewpath+ '/widgets/ratings',{rating:movieReview_val.rating}); %>
+					   		<% var shareArr = []; 
+		                        shareArr['shareTitle'] = movieReview_val.post_title;
+		                        shareArr['shareUrl'] = movieReview_val.post_url; 
+				            %>
+				            <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>		
+					   </div>
+					</li>
+					<% } %>
+				</ul> 
+		        <div class="glide__bullets" data-glide-el="controls[nav]">
+			 <% i = 0;%>
+                    <% for (const [movieReview_key, movieReview_val] of Object.entries(movieReview['reviews']['latest'])) { %>
+	                    <button class="glide__bullet" data-glide-dir="=<%=i %>"></button>
+	                <% i++;%>
+		    <% } %>
+                </div>   
+          	</div>
+    	</div>
+	</div><!--main-story-thumb-->
+	<% if (typeof ads  !== 'undefined' && typeof ads['ATF_300']  !== 'undefined'){%>
+	<div class="ad-center">
+        <%-common.displayAds(ads['ATF_300'][0]) %>
+    </div>
+    <% } %>
+	<% var i = 0;
+	for (const [movieReview_key, movieReview_val] of Object.entries(movieReview['reviews'])) { 
+		i++;
+	%>
+	<% if (movieReview_key != "latest") {%>	
+	<div class="big-thumb movie-review-thumb">
+		<h3 class="main-story-title">
+			<a href="javascript:void(0);"><%- movieReview_key.replace(/\s+/g, '-').toLowerCase() %></a>
+			<span></span>
+		</h3>
+		   <a href="<%- movieReview_val[0].post_url %>" class="thumb-img" alt="<%- movieReview_val[0].post_title %>" title="<%- movieReview_val[0].post_title %>">
+		   		<img class="fp-lazy" src="<%-constant.PLACEHOLDER_IMG_320x180 %>" data-src="<%- common.firstpost_imageOptimization(movieReview_val[0].post_image, 320, 180, '') %>" alt="<%- movieReview_val[0].post_title%>" title="<%- movieReview_val[0].post_title%>">
+		   </a>
+		   <div class="title-wrap">
+		   		<h3 class="main-title">
+		   			<a href="<%- movieReview_val[0].post_url %>">
+		   				<%- movieReview_val[0].post_title %>
+		   			</a>
+		   		</h3>
+		   		<%- include(viewpath+ '/widgets/ratings',{rating:movieReview_val[0].rating}); %>
+		   		<% var shareArr = []; 
+	                shareArr['shareTitle'] = movieReview_val[0].post_title;
+	                shareArr['shareUrl'] = movieReview_val[0].post_url; 
+                %>
+                <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>	
+		   </div>
+	</div>
+	<div class=" small-thumb-wrap">
+		<div class="small-thumb-row inner-fp-lazy">
+			<% for (const [movieReviewData_key, movieReviewData_val] of Object.entries(movieReview_val.slice(1,4))) { %>
+				<div class="small-thumb">
+					<a href="<%- movieReviewData_val.post_url %>" class="thumbnail" alt="<%- movieReviewData_val.post_title %>" title="<%- movieReviewData_val.post_title %>">
+						<img class="fp-lazy" src="<%-constant.PLACEHOLDER_IMG_192x104 %>" data-src="<%- common.firstpost_imageOptimization(movieReviewData_val.post_image, 192, 104, '') %>" alt="<%- movieReviewData_val.post_title%>" title="<%- movieReviewData_val.post_title%>">
+					</a>
+					<a href="<%- movieReviewData_val.post_url %>" class="copy">
+						<%- movieReviewData_val.post_title %>
+					</a>
+					<% var shareArr = []; 
+                        shareArr['shareTitle'] = movieReviewData_val.post_title;
+                        shareArr['shareUrl'] = movieReviewData_val.post_url; 
+	                    %>
+	                    <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>	
+				</div>
+			<% } %>
+		</div>
+		<a href="<%=constant.SITE_URL%>entertainment/<%- movieReview_key %>" class="see-all">see all <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"></path><path d="M0 0h24v24H0V0z" fill="none"></path></svg></a>
+    </div>
+    <% if(i == 3) {%>
+    	<% if (typeof ads  !== 'undefined' && typeof ads['BTF_300']  !== 'undefined'){%>	
+	    	<div class="ad-center">
+	         <%-common.displayAds(ads['BTF_300'][0]) %>
+	      </div>
+	      <% } %>
+    <% } %>
+    <% } %>
+    <% } %>
+   <% if (typeof outbrain_ads  !== 'undefined' && typeof outbrain_ads['MB_2']  !== 'undefined'){%>
+      <%-outbrain_ads['MB_2'];%>	
+   <% } %>
+   <%- include(viewpath+ '/widgets/mailChimp'); %>
+	<%- include(viewpath+ '/widgets/most_read_widget'); %>
+
+	    <!-- Apester code -->
+	    <!--<div class="apester-media" data-token="57026ab0d51383a359ae688c" data-context="true" data-tags="" data-fallback="true" height="350"></div><script async src="https://static.apester.com/js/sdk/latest/apester-sdk.js"></script>-->
+	<!-- Apester code end-->
+
+<%- include(viewpath + '/layouts/m-footer'); %>

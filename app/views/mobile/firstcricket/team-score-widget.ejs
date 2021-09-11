@@ -1,0 +1,121 @@
+<section class="live-score-wrap">
+    <h2 class="page-title"><span>LIVE CRICKET SCORE</span></h2>  
+    <!--Tab container-->
+    <div class="livescore-tabs">
+        <div class="tab">                                
+            <a href="<%= quickUrl %>" title="<%= scoreData['teamfa'] %> Vs <%= scoreData['teamfb'] %> Quick Scorecard" class="tablinks <% if(template == 'quickscore'){%>active<%}%>">Quick Scorecard</a>
+            <a href="<%= fullUrl %>" title="<%= scoreData['teamfa'] %> Vs <%= scoreData['teamfb'] %> Full scorecard"  class="tablinks <% if(template == 'fullscore'){%>active<%}%>">Full scorecard</a>
+            <a href="<%= commUrl %>" title="<%= scoreData['teamfa'] %> Vs <%= scoreData['teamfb'] %> Ball by ball commentary"  class="tablinks <% if(template == 'ballbyballScore'){%>active<%}%>">Ball by ball commentary</a>
+            <% if(postId != "" && postId != null){ %>
+            <a href="<%= blogUrl %>" title="<%= scoreData['teamfa'] %> Vs <%= scoreData['teamfb'] %> Live Update"  class="blog-url tablinks <% if(template == 'articleConsumption'){%>active<%}%>">FP commentary</a>
+            <% } %>
+        </div>                                             
+    </div>
+    <!--Tab container-->
+
+    <!--Live Score Widget-->
+    <div class="live-score-widget">
+        <div class="big-title-heading">
+            <h2 class="big-heading-text">
+                <%= scoreData['teamfa'] %> Vs <%= scoreData['teamfb'] %> At <%= scoreData['Venue'] %>, <span><%= scoreData['matchdate'] %></span>
+            </h2>                                
+        </div>
+        <section class="live-sc-div">
+            <div class="live-match-details">
+                <h6 class="l-match-date"><%= scoreData['matchdate'] %></h6>
+                <h6 class="l-match-time">Starts <%= scoreData['matchtime_ist'] %> (IST)</h6>
+                
+            </div>
+
+            <div class="live-match-details">
+                <h5 class="red-txt">
+                    <%= scoreData['status'] %>
+                </h5>
+                <div class="l-match-no">
+                    <%= scoreData['matchnumber']%>
+                </div>
+            </div>
+<% if(typeof scoreData['firstInnings'] !== 'undefined') { %>
+            <div class="l-team-flex">
+                <div class="l-team-div team-one">
+                    <div class="l-team-name">
+                        <a href="javascript:void(0);" title="">
+                            <img src="https://xmlns.cricketnext.com/cktnxt/scorecard/crk_player_images/flags/90x50/<%= scoreData['firstInnings']['Battingteam_id'] %>.png" alt="<%= scoreData['firstInnings']['Battingteam'] %>" title="<%= scoreData['firstInnings']['Battingteam'] %>" />
+                            <h4 class="l-team"><%= scoreData['firstInnings']['Battingteam'].replace("-"," ") %></h4>
+                        </a>
+                    </div>
+                    <div class="l-score-div">
+                        <h4 class="l-score-txt">
+                            <span class="l-total"><%= scoreData['firstInnings']['Equation']['Total']%>/<%= scoreData['firstInnings']['Equation']['Wickets']%></span>
+                            <span class="l-over">(<%= scoreData['firstInnings']['Equation']['Overs']%> ov)</span>
+                        </h4>
+                        <% var currentInn = "firstInnings";%>
+                        <% if(scoreData['thirdInnings']['status'] == "1" && scoreData['thirdInnings']['Battingteam'] == scoreData['firstInnings']['Battingteam']) {%>
+                        <% var currentInn = "thirdInnings";%>
+                        <h4 class="l-score-txt">
+                            <span class="l-total"><%= scoreData['thirdInnings']['Equation']['Total']%>/<%= scoreData['thirdInnings']['Equation']['Wickets']%></span>
+                            <span class="l-over">(<%= scoreData['thirdInnings']['Equation']['Overs']%> ov)</span>
+                        </h4>
+                        <% } %>
+                        <% if(scoreData['fourthInnings']['status'] == "1" && scoreData['fourthInnings']['Battingteam'] == scoreData['firstInnings']['Battingteam']) {%>
+                        <% var currentInn = "fourthInnings";%>
+                        <h4 class="l-score-txt">
+                            <span class="l-total"><%= scoreData['fourthInnings']['Equation']['Total']%>/<%= scoreData['fourthInnings']['Equation']['Wickets']%></span>
+                            <span class="l-over">(<%= scoreData['fourthInnings']['Equation']['Overs']%> ov)</span>
+                        </h4>
+                        <% } %>
+                    </div>
+                </div>
+                
+                <div class="l-team-div team-two">
+                    <div class="l-team-name">
+                        <% if(typeof scoreData['firstInnings']['Bowlingteam'] !== 'undefined') {%>
+                        <a href="javascript:void(0)" title="">
+                            <img src="https://xmlns.cricketnext.com/cktnxt/scorecard/crk_player_images/flags/90x50/<%= scoreData['firstInnings']['Bowlingteam_id'] %>.png" alt="<%= scoreData['firstInnings']['Bowlingteam'] %>" title="<%= scoreData['firstInnings']['Bowlingteam'] %>" />
+
+                            <h4 class="l-team"><%= scoreData['firstInnings']['Bowlingteam'].replace("-"," ") %></h4>
+                        </a>
+                        <%}%>
+                    </div>
+                    <div class="l-score-div">
+                        <h4 class="l-score-txt">
+                            <% if(scoreData['secondInnings']['status'] == "1") { %>
+                            <% var currentInn = "secondInnings";%>
+                            <span class="l-total"><%= scoreData['secondInnings']['Equation']['Total']%>/<%= scoreData['secondInnings']['Equation']['Wickets']%></span>
+                            <span class="l-over">(<%= scoreData['secondInnings']['Equation']['Overs']%> ov)</span>
+                            <%}else{%>
+                            Yet To Bat
+                            <% } %>
+                        </h4>
+                        <% if(scoreData['thirdInnings']['status'] == "1" && scoreData['thirdInnings']['Battingteam'] == scoreData['secondInnings']['Battingteam']) {%>
+                        <h4 class="l-score-txt">
+                            <span class="l-total"><%= scoreData['thirdInnings']['Equation']['Total']%>/<%= scoreData['thirdInnings']['Equation']['Wickets']%></span>
+                            <span class="l-over">(<%= scoreData['thirdInnings']['Equation']['Overs']%> ov)</span>
+                        </h4>
+                        <% } %>
+                        <% if(scoreData['fourthInnings']['status'] == "1" && scoreData['fourthInnings']['Battingteam'] == scoreData['secondInnings']['Battingteam']) {%>
+                        <h4 class="l-score-txt">
+                            <span class="l-total"><%= scoreData['fourthInnings']['Equation']['Total']%>/<%= scoreData['fourthInnings']['Equation']['Wickets']%></span>
+                            <span class="l-over">(<%= scoreData['fourthInnings']['Equation']['Overs']%> ov)</span>
+                        </h4>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+
+            <div class="l-match-res">
+                <p><%= scoreData['matchresult']%></p>
+            </div>
+
+            <% if(pseudo_value == 0) { %>
+            <div class="btn-div">
+                <a href="<%= blogUrl %>" title="" class="blog-url live-scr-btn">
+                    Live Blog 
+                </a>
+            </div>                
+            <%} } %>
+        </section>
+        
+    </div>
+    <!--Live Score Widget-->
+</section>                

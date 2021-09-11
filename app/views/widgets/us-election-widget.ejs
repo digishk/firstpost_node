@@ -1,0 +1,131 @@
+
+<!doctype html> 
+<html lang="hi"> <head> <meta charset="utf-8"> 
+<title>US Presidential Election Result Tally</title> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://images.hindi.news18.com/ibnkhabar/uploads/assets/event/common/css/us_web_1603179575.css">
+	<style type="text/css">
+	.us_election{display: table;margin-bottom: 10px;}
+	.a.nw_logo{display:none}
+	</style>
+</head>
+<body>
+<div class="us_election" id="usResultData">
+	
+</div>
+<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
+<script>
+	var lang = "en";
+	var langconf={en:{text0:"To win",text1:"seats",text2:"Detailed Exit poll result"},
+				hi:{text0:"सीटें जीत के लिए",text1:"सीटें",text2:"विस्तृत नतीजे"},
+				as:{text0:"To win",text1:"seats",text2:"Detailed Exit poll result"},
+				bn:{text0:"To win",text1:"seats",text2:"Detailed Exit poll result"},
+				gu:{text0:"To win",text1:"seats",text2:"Detailed Exit poll result"},
+				kn:{text0:"To win",text1:"seats",text2:"Detailed Exit poll result"},
+				mr:{text0:"To win",text1:"seats",text2:"Detailed Exit poll result"},
+				ml:{text0:"To win",text1:"seats",text2:"Detailed Exit poll result"},
+				pa:{text0:"To win",text1:"seats",text2:"Detailed Exit poll result"},
+				ta:{text0:"To win",text1:"seats",text2:"Detailed Exit poll result"},
+				te:{text0:"To win",text1:"seats",text2:"Detailed Exit poll result"},
+				ur:{text0:"To win",text1:"seats",text2:"Detailed Exit poll result"},
+				or:{text0:"To win",text1:"seats",text2:"Detailed Exit poll result"},
+
+				
+	};
+	
+$(document).ready(function(){
+
+	var consWidgetJsonUrl = 'https://election.nw18.com/electiondata/electionjson/us_election_2020/us_result.json';
+
+	setInterval(function(){
+		console.log("calling set interval");
+        getResultData(consWidgetJsonUrl);
+    },3000);
+
+    function getResultData(consWidgetJsonUrl){
+        //var jsonUrl = "https://election.nw18.com/electiondata/electionjson/us_election_2020/us_result_cross.json";
+        $.ajax({
+            url: consWidgetJsonUrl,
+        	type: 'GET',
+			cache: true,
+			//dataType: 'jsonp',
+			//jsonp: 'jsonp',
+			//jsonpCallback: 'us_election_2020',
+			crossDomain: true,
+            success: function (response) {
+            	if(!response) {	
+	                return false;	
+	            }
+				var totalData = response.total;
+				var totalEv = totalData.total_ev;
+				var totalVotes = totalData.total_votes;
+				var numberofsheet = totalEv.electoralvotes;
+				var biddper = ((totalEv.biden/numberofsheet)*100).toFixed(2);
+				var trumper = ((totalEv.trump/numberofsheet)*100).toFixed(2);
+				var dataHtml = "";
+				dataHtml += '<div class="us_election_row">';
+				dataHtml += '<div class="top_bar">';
+				dataHtml += '<p class="us_title">RESULT<span>TALLY</span></p>';
+				//dataHtml += '<a href="javascript:;" class="nw_logo"><img src="https://images.hindi.news18.com/ibnkhabar/uploads/assets/event/common/images/news18_logo_1603088761.png"/></a></div>';
+				dataHtml += '</div>';
+				dataHtml += '<div class="election_info">';
+								dataHtml += '<div class="candidate"><img src="https://images.hindi.news18.com/ibnkhabar/uploads/assets/event/common/images/biden_ipad_1603117761.png"/></div>';
+								dataHtml += '<div class="election_info_midd">';
+				dataHtml += '<div class="election_count">';
+				dataHtml += '<div class="election_count_row blue">';
+				dataHtml += '<p>Biden</p>';
+				dataHtml += '<span>'+totalEv.biden+'</span>';
+				dataHtml += '</div>';
+				dataHtml += '<div class="election_count_midd">';
+				dataHtml += '<div class="party_icon align_right">';
+				dataHtml += '<i><img src="https://images.hindi.news18.com/ibnkhabar/uploads/assets/event/common/others/republican_icon_1603088910.svg"/></i>';
+				dataHtml += '<span>Democrat</span>';
+				dataHtml += '</div>';
+				dataHtml += '<div class="vs_row"><img src="https://images.hindi.news18.com/ibnkhabar/uploads/assets/event/common/others/vs_icon_1603088940.svg"/></div>';
+				dataHtml += '<div class="party_icon align_left">';
+				dataHtml += '<i><img src="https://images.hindi.news18.com/ibnkhabar/uploads/assets/event/common/others/democrat_icon_1603088810.svg"/></i>';
+				dataHtml += '<span>Republican</span>';
+				dataHtml += '</div>';
+				dataHtml += '</div>';
+						
+				dataHtml += '<div class="election_count_row red">';
+				dataHtml += '<p>Trump</p>';
+				dataHtml += '<span>'+totalEv.trump+'</span>';
+				dataHtml += '</div>';
+						
+				dataHtml += '</div>';
+					
+				dataHtml += '<div class="progress mb-3">';
+				dataHtml += '<div class="progress-bar bg-success" role="progressbar" style="width: '+biddper+'%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">50%</div>';
+
+				dataHtml += '<div class="progress-bar bg-danger" role="progressbar" style="width: '+trumper+'%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">20%</div>';
+				dataHtml += '</div>';
+
+				dataHtml += '<div class="to_win">';
+				dataHtml += '<p class="win_title">'+totalVotes.biden+'<br/>votes</p>';
+				dataHtml += '<p class="winto">270 to Win</p>'
+				dataHtml += '<p class="win_title">'+totalVotes.trump+'<br/>votes</p>';
+				dataHtml += '</div>';
+
+					
+				dataHtml += '</div>';
+			
+								dataHtml += '<div class="candidate"><img src="https://images.hindi.news18.com/ibnkhabar/uploads/assets/event/common/images/trump_ipad_1603117621.png"/></div>';
+								dataHtml += '</div>'
+		
+				dataHtml += '</div>';
+				$('#usResultData').html(dataHtml);
+			},error: function (error) {
+				console.log("error "+error);
+            }
+		});
+    }
+	
+
+	});
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+<% if(typeof constant.config_flags.ELECTION_FLAG !== 'undefined' && constant.config_flags.ELECTION_FLAG == '1') { %>
+	<!--US result widget-->
+    <%- include(viewpath+ '/widgets/us-election-widget-web'); %>
+    <!--US result widget-->
+    <!--US result map-->
+    <%- include(viewpath+ '/widgets/us-election-map-wap'); %>
+    <!--US result map-->
+<% } %>

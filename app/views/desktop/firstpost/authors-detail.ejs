@@ -1,0 +1,89 @@
+<%- include(viewpath+ '/layouts/header'); %>
+<style>
+	.modalbio{display:none;position:fixed;padding-top:100px;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:#000;background-color:rgba(0,0,0,0.4);z-index:999}.authoinfo p{height:auto}.modal-content{background-color:#fefefe;margin:auto;padding:20px;border:1px solid #888;width:80%}.close123{color:#aaa;float:right;font-size:28px;font-weight:bold}.close123:hover,.close123:focus{color:#000;text-decoration:none;cursor:pointer}.modal-content{width:547px}
+	@media only screen and (max-width:767px){
+	.modal-content{width: auto;}	
+	}
+
+</style>
+<div class="container">
+     <% if (typeof ads  !== 'undefined' && typeof ads['ATF_728']  !== 'undefined'){%>
+        <div class="ad-center">
+            <%-common.displayAds(ads['ATF_728'][0]) %>
+        </div>
+    <% } %> 
+    <!--cricket-ticker-wrap-->
+    <%- include(viewpath+ '/widgets/cricketscore_strip'); %>
+    <!--cricket-ticker-wrap-->
+    <%- include(viewpath+ '/widgets/breadCrumbs'); %>
+<div class="main-container">
+				<div class="main-content">
+
+					<% if (authorPageJson['description'] != "") { %>
+					<div class="author-bio">
+						<div class="author-img"><img alt="<%-authorPageJson['displayname']%>" src="<%-authorPageJson['avatar']%>"></div>
+						<div class="author-info"><div class="author-name"><%-authorPageJson['displayname']%></div>
+						<div class="read-bio" id="myBtn2" style="cursor: pointer;">read bio</div></div>
+					</div>
+
+					
+						
+					<div id="myModal" class="modalbio">
+					<!-- Modal content -->
+						<div class="modal-content" id="myModal" >
+						<span class="close123">&times;</span>
+							<div class=" animate" id="authorinfo">
+								<div class="authoinfo">
+									<h3 class="main-story-title"><a href="">author bio</a><span></span></h3>
+									<p><%-authorPageJson['description']%></p>
+							     </div>
+							</div>
+						</div>
+					</div>
+					<% } %>
+
+					<div class="main-story-thumb-wrap">
+						<h3 class="main-story-title">
+							<a href="">articles by <%-authorPageJson['displayname']%></a>
+							<span></span>
+						</h3>
+					</div><!--main-story-thumb-->
+					<% for (const [authors_key, authors_val] of Object.entries(author_details['solarResults'])) {%>	
+					<div class="big-thumb">
+					   <a href="<%-authors_val['url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" class="thumb-img">
+					   		<img src="<%-authors_val['image']%>">
+					   		
+					   </a>
+					   <div class="title-wrap">
+					   		<a href="<%-constant.SITE_URL+'category/'+authors_val['cat_slug'].toLowerCase()%>" class="category-name"><%-authors_val['category']%></a>
+					   		<h3 class="main-title">
+					   			<a href="<%-authors_val['url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>"><%-authors_val['title']%></a>
+					   		</h3>
+					   		<p class="copy">
+					   			<%-authors_val['description']%>
+					   		</p>
+					   		<% var shareArr = []; 
+		                        shareArr['shareTitle'] = authors_val['title'];
+		                        shareArr['shareUrl'] = authors_val['url']; 
+		                   %>
+		                   <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+					   	</div>
+					</div><!--big-thumb-->
+					<% }%>	
+					
+					<!-- pagination widget-->
+					<%- include(viewpath+ '/widgets/paginationDefault'); %>
+					<!-- pagination widget-->
+  <!--videos-->
+
+  			
+
+			</div><!--main-content-->
+			<%- include(viewpath+ '/'+device+'/firstpost/rhs'); %>
+		</div>
+	</div>
+<!-- JS modal box -->
+<script>
+var modal=document.getElementById("myModal");var btn=document.getElementById("myBtn2");var span=document.getElementsByClassName("close123")[0];btn.onclick=function(){modal.style.display="block"};span.onclick=function(){modal.style.display="none"};window.onclick=function(a){if(a.target==modal){modal.style.display="none"}};
+</script>						
+<%- include(viewpath+ '/layouts/footer'); %>

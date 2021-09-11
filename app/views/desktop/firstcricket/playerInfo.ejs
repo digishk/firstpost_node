@@ -1,0 +1,716 @@
+<%- include(viewpath+ '/layouts/header'); %>
+
+        <div class="main-wrapper">
+
+            <!--728x90 Ad Space-->
+            <% if (typeof ads  !== 'undefined' && typeof ads['BTF_728']  !== 'undefined'){%>
+            <div class="ad-slot">
+                <%-common.displayAds(ads['ATF_728'][0]) %>
+            </div>
+            <% } %>
+            <!--728x90 Ad Space-->
+
+            <!--Cricket Ticker-->
+            <%- include(viewpath+ '/widgets/scorecard_caraousal'); %>
+            <!--Cricket Ticker-->
+
+            <!--Bread crumb-->
+            <%- include(viewpath+ '/widgets/breadCrumbs'); %>
+            <!--Bread crumb-->
+
+            <!--Cricket Inner Menu-->
+            <%- include(viewpath+ '/layouts/level-4-nav'); %>
+            <!--Cricket Inner Menu-->
+
+            <!--Main Page Content-->
+            <div class="content-wrap" id="playerprofile">
+                <div class="left-content">
+                    <!--Player Profile Section-->
+                    <section class="profile-section">
+                        <h2 class="page-title"><span>Player Profile</span></h2>
+                        <div class="player-profile-wrap">
+
+                            <!--Share Div-->
+                            <div class="share-btn">
+                                <div class="share-wrap">
+                                    <div class="thumb-social-wrap">
+                                        <% var shareArr = []; 
+                                            shareArr['shareTitle'] = "";
+                                            shareArr['shareUrl'] = ""; 
+                                        %>
+                                        <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Share Div-->
+
+                            <!--Player Columns-->
+                            <% for (const [player_key, player_val] of Object.entries(playerData)) { %>
+                            <div class="player-column-wrap">
+                                <div class="player-image-div">
+                                    <div class="player-img">
+                                        <img src="https://xmlns.cricketnext.com/cktnxt/scorecard/crk_player_images/players/128X128/<%=player_val['player_id']%>.png" alt="<%=player_val['name']%>" title="<%=player_val['name']%>" />
+                                    </div>
+                                    <h1 class="player-name">
+                                        <%=player_val['name']%>
+                                    </h1>
+                                    <div class="country-name-div">
+                                        <div class="country-img">
+                                        </div>
+                                        <h4 class="country-name-txt">
+                                            <a href="javascript:void(0);" title="">
+                                                <%=player_val['team']%>
+                                            </a>   
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="player-info-table">
+                                    <table class="player-info">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Full name: 
+                                                </td>
+                                                <td>
+                                                    <%=player_val['fullname']%>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Born: 
+                                                </td>
+                                                <td>
+                                                    <%=player_val['dob']%>, <%=player_val['place_birth']%>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Current age:
+                                                </td>
+                                                <td>
+                                                    <%=currentYear%> Years, <%=currentMonth%> Months, <%=currentDay%> Days
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Major Teams:
+                                                </td>
+                                                <td>
+                                                    <% for (var i = 0; i < Object.entries(player_val['majorteams']['team']).length; i++) { -%>
+                                                    <% if(typeof player_val['majorteams']['team'][i] !== 'undefined' && typeof player_val['majorteams']['team'][i]['_'] !== 'undefined'){%>
+                                                   <%= player_val['majorteams']['team'][i]['_'] %>,      
+                                                    <% } } %>                                           
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <!--Player Columns-->
+        <% if (typeof ads  !== 'undefined' && (typeof ads['MID1_300']  !== 'undefined' || typeof ads['MID2_300']  !== 'undefined')){%>
+            <div class="two-ad-slot">
+                <% if (typeof ads  !== 'undefined' && typeof ads['MID1_300']  !== 'undefined'){%>
+                <div class="ad-slot">
+                    <%-common.displayAds(ads['MID1_300'][0]) %>
+                    </div>
+                    <% } %> 
+                    <% if (typeof ads  !== 'undefined' && typeof ads['MID2_300']  !== 'undefined'){%>
+                    <div class="ad-slot">
+                    <%-common.displayAds(ads['MID2_300'][0]) %>
+                </div>
+                <% } %>  
+            </div>                        
+        <% }%>
+                            <!--batting statistics-->
+
+                            <div class="stats-wrap">
+                                <div class="big-title-heading">
+                                    <h2 class="big-heading-text">
+                                        BATTING STATISTICS 
+                                    </h2>                                
+                                </div>
+                                <div class="table-wrapper">
+                                    <table class="general-tbl">
+                                        <thead>
+                                            <tr>
+                                                <th width="40px"></th>
+                                                <th>M</th>
+                                                <th>I</th>
+                                                <th>N/O</th>
+                                                <th>R</th>
+                                                <th>Avg</th>
+                                                <th>S/R</th>
+                                                <th>HS</th>
+                                                <th>100s</th>
+                                                <th>50s</th>
+                                                <th>BF</th>
+                                                <th>4x</th>
+                                                <th>6s</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Test</th>
+                                                <% if(player_val['in_tests'] != undefined && player_val['in_tests'] != ''){ %>
+                                                <td>
+                                                    <%=player_val['in_tests']['batting_record']['matches']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_tests']['batting_record']['innings']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_tests']['batting_record']['not_outs']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_tests']['batting_record']['runs']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_tests']['batting_record']['average']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_tests']['batting_record']['strike_rate']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_tests']['batting_record']['highest_score']['_']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_tests']['batting_record']['hundreds']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_tests']['batting_record']['fifties']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_tests']['batting_record']['balls_faced']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_tests']['batting_record']['fours']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_tests']['batting_record']['sixes']%>
+                                                </td>
+                                                <% } %>
+                                            </tr>
+                                            <tr>
+                                                <th>ODI</th>
+                                                <% if(player_val['in_one_day_internationals'] != undefined && player_val['in_one_day_internationals'] != ''){ %>
+                                                <td>
+                                                    <%=player_val['in_one_day_internationals']['batting_record']['matches']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_one_day_internationals']['batting_record']['innings']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_one_day_internationals']['batting_record']['not_outs']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_one_day_internationals']['batting_record']['runs']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_one_day_internationals']['batting_record']['average']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_one_day_internationals']['batting_record']['strike_rate']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_one_day_internationals']['batting_record']['highest_score']['_']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_one_day_internationals']['batting_record']['hundreds']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_one_day_internationals']['batting_record']['fifties']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_one_day_internationals']['batting_record']['balls_faced']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_one_day_internationals']['batting_record']['fours']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_one_day_internationals']['batting_record']['sixes']%>
+                                                </td>
+                                                <% } %>
+                                            </tr>
+                                            <tr>
+                                                <th>T20I</th>
+                                                <% if(player_val['in_ttwenty'] != undefined && player_val['in_ttwenty'] != ''){ %>
+                                                <td>
+                                                    <%=player_val['in_ttwenty']['batting_record']['matches']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ttwenty']['batting_record']['innings']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ttwenty']['batting_record']['not_outs']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ttwenty']['batting_record']['runs']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ttwenty']['batting_record']['average']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ttwenty']['batting_record']['strike_rate']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ttwenty']['batting_record']['highest_score']['_']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ttwenty']['batting_record']['hundreds']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ttwenty']['batting_record']['fifties']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ttwenty']['batting_record']['balls_faced']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ttwenty']['batting_record']['fours']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ttwenty']['batting_record']['sixes']%>
+                                                </td>
+                                                <% } %>
+                                            </tr>
+                                            <tr>
+                                                <th>IPL</th>
+                                                <% if(player_val['in_ipl'] != undefined && player_val['in_ipl'] != ''){ %>
+                                                <td>
+                                                    <%=player_val['in_ipl']['batting_record']['matches']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ipl']['batting_record']['innings']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ipl']['batting_record']['not_outs']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ipl']['batting_record']['runs']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ipl']['batting_record']['average']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ipl']['batting_record']['strike_rate']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ipl']['batting_record']['highest_score']['_']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ipl']['batting_record']['hundreds']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ipl']['batting_record']['fifties']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ipl']['batting_record']['balls_faced']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ipl']['batting_record']['fours']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ipl']['batting_record']['sixes']%>
+                                                </td>
+                                                <% } %>
+                                            </tr>
+                                            <tr>
+                                                <th>FC</th>
+                                                <% if(player_val['in_first_class'] != undefined && player_val['in_first_class'] != ''){ %>
+                                                <td>
+                                                    <%=player_val['in_first_class']['batting_record']['matches']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_first_class']['batting_record']['innings']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_first_class']['batting_record']['not_outs']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_first_class']['batting_record']['runs']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_first_class']['batting_record']['average']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_first_class']['batting_record']['strike_rate']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_first_class']['batting_record']['highest_score']['_']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_first_class']['batting_record']['hundreds']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_first_class']['batting_record']['fifties']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_first_class']['batting_record']['balls_faced']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_first_class']['batting_record']['fours']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_first_class']['batting_record']['sixes']%>
+                                                </td>
+                                                <% } %>
+                                            </tr>     
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!--batting statistics-->
+
+                            <!--bowling statistics-->
+
+                            <div class="stats-wrap">
+                                <div class="big-title-heading">
+                                    <h2 class="big-heading-text">
+                                        bowling STATISTICS 
+                                    </h2>                                
+                                </div>
+                                <div class="table-wrapper">
+                                    <table class="general-tbl">
+                                        <thead>
+                                            <tr>
+                                                <th width="40px"></th>
+                                                <th>M</th>
+                                                <th>I</th>
+                                                <th>O</th>
+                                                <th>Maiden</th>
+                                                <th>R</th>
+                                                <th>W</th>
+                                                <th>AVG</th>
+                                                <th>S/R</th>
+                                                <th>E/R</th>
+                                                <th>BEST BOWL</th>
+                                                <th>BEST BOWL MATCH</th>
+                                                <th>5 WKT</th>
+                                                <th>10 WKT</th>
+                                                <th>BALL BOWLED</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th>Test</th>
+                                                <% if(player_val['in_tests'] != undefined && player_val['in_tests'] != ''){ %>
+                                                <td>
+                                                    <%=player_val['in_tests']['bowling_record']['matches']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_tests']['bowling_record']['innings']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_tests']['bowling_record']['overs']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_tests']['bowling_record']['maidens']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_tests']['bowling_record']['runs']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_tests']['bowling_record']['wickets']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_tests']['bowling_record']['average']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_tests']['bowling_record']['strike_rate']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_tests']['bowling_record']['economy_rate']%>
+                                                </td>
+                                                <% if(player_val['in_tests']['bowling_record']['best_bowling'] != undefined && player_val['in_tests']['bowling_record']['best_bowling'] != ''){ %>
+                                                <td>
+                                                    <%=player_val['in_tests']['bowling_record']['best_bowling']['_']%>
+                                                </td>
+                                                <% } %>
+                                                <% if(player_val['in_tests']['bowling_record']['best_bowling_in_match'] != undefined && player_val['in_tests']['bowling_record']['best_bowling_in_match'] != ''){ %>
+                                                <td>
+                                                    <%=player_val['in_tests']['bowling_record']['best_bowling_in_match']['_']%>
+                                                </td>
+                                                <% } %>
+                                                <td>
+                                                    <%=player_val['in_tests']['bowling_record']['five_wk_hauls']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_tests']['bowling_record']['ten_wk_hauls']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_tests']['bowling_record']['balls_bowled']%>
+                                                </td>
+                                                <% } %>
+                                            </tr>
+                                            <tr>
+                                                <th>ODI</th>
+                                                <% if(player_val['in_one_day_internationals'] != undefined && player_val['in_one_day_internationals'] != ''){ %>
+                                                <td>
+                                                    <%=player_val['in_one_day_internationals']['bowling_record']['matches']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_one_day_internationals']['bowling_record']['innings']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_one_day_internationals']['bowling_record']['overs']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_one_day_internationals']['bowling_record']['maidens']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_one_day_internationals']['bowling_record']['runs']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_one_day_internationals']['bowling_record']['wickets']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_one_day_internationals']['bowling_record']['average']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_one_day_internationals']['bowling_record']['strike_rate']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_one_day_internationals']['bowling_record']['economy_rate']%>
+                                                </td>
+                                                <% if(player_val['in_one_day_internationals']['bowling_record']['best_bowling'] != undefined && player_val['in_one_day_internationals']['bowling_record']['best_bowling'] != ''){ %>
+                                                <td>
+                                                    <%=player_val['in_one_day_internationals']['bowling_record']['best_bowling']['_']%>
+                                                </td>
+                                                <% } %>
+                                                <% if(player_val['in_one_day_internationals']['bowling_record']['best_bowling_in_match'] != undefined && player_val['in_one_day_internationals']['bowling_record']['best_bowling_in_match'] != ''){ %>
+                                                <td>
+                                                    <%=player_val['in_one_day_internationals']['bowling_record']['best_bowling_in_match']['_']%>
+                                                </td>
+                                                <% } %>
+                                                <td>
+                                                    <%=player_val['in_one_day_internationals']['bowling_record']['five_wk_hauls']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_one_day_internationals']['bowling_record']['ten_wk_hauls']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_one_day_internationals']['bowling_record']['balls_bowled']%>
+                                                </td>
+                                                <% } %>
+                                            </tr>
+                                            <tr>
+                                                <th>T20I</th>
+                                                <% if(player_val['in_ttwenty'] != undefined && player_val['in_ttwenty'] != ''){ %>
+                                                <td>
+                                                    <%=player_val['in_ttwenty']['bowling_record']['matches']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ttwenty']['bowling_record']['innings']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ttwenty']['bowling_record']['overs']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ttwenty']['bowling_record']['maidens']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ttwenty']['bowling_record']['runs']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ttwenty']['bowling_record']['wickets']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ttwenty']['bowling_record']['average']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ttwenty']['bowling_record']['strike_rate']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ttwenty']['bowling_record']['economy_rate']%>
+                                                </td>
+                                                <% if(player_val['in_ttwenty']['bowling_record']['best_bowling'] != undefined && player_val['in_ttwenty']['bowling_record']['best_bowling'] != ''){ %>
+                                                <td>
+                                                    <%=player_val['in_ttwenty']['bowling_record']['best_bowling']['_']%>
+                                                </td>
+                                                <% } %>
+                                                <% if(player_val['in_ttwenty']['bowling_record']['best_bowling_in_match'] != undefined && player_val['in_ttwenty']['bowling_record']['best_bowling_in_match'] != ''){ %>
+                                                <td>
+                                                    <%=player_val['in_ttwenty']['bowling_record']['best_bowling_in_match']['_']%>
+                                                </td>
+                                                <% } %>
+                                                <td>
+                                                    <%=player_val['in_ttwenty']['bowling_record']['five_wk_hauls']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ttwenty']['bowling_record']['ten_wk_hauls']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ttwenty']['bowling_record']['balls_bowled']%>
+                                                </td>
+                                                <% } %>
+                                            </tr>
+                                            <tr>
+                                                <th>IPL</th>
+                                                <% if(player_val['in_ipl'] != undefined && player_val['in_ipl'] != ''){ %>
+                                                <td>
+                                                    <%=player_val['in_ipl']['bowling_record']['matches']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ipl']['bowling_record']['innings']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ipl']['bowling_record']['overs']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ipl']['bowling_record']['maidens']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ipl']['bowling_record']['runs']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ipl']['bowling_record']['wickets']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ipl']['bowling_record']['average']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ipl']['bowling_record']['strike_rate']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ipl']['bowling_record']['economy_rate']%>
+                                                </td>
+                                                <% if(player_val['in_ipl']['bowling_record']['best_bowling'] != undefined && player_val['in_ipl']['bowling_record']['best_bowling'] != ''){ %>
+                                                <td>
+                                                    <%=player_val['in_ipl']['bowling_record']['best_bowling']['_']%>
+                                                </td>
+                                                <% } %>
+                                                <% if(player_val['in_ipl']['bowling_record']['best_bowling_in_match'] != undefined && player_val['in_ipl']['bowling_record']['best_bowling_in_match'] != ''){ %>
+                                                <td>
+                                                    <%=player_val['in_ipl']['bowling_record']['best_bowling_in_match']['_']%>
+                                                </td>
+                                                <% } %>
+                                                <td>
+                                                    <%=player_val['in_ipl']['bowling_record']['five_wk_hauls']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ipl']['bowling_record']['ten_wk_hauls']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_ipl']['bowling_record']['balls_bowled']%>
+                                                </td>
+                                                <% } %>
+                                            </tr>
+                                            <tr>
+                                                <th>FC</th>
+                                                <% if(player_val['in_first_class'] != undefined && player_val['in_first_class'] != ''){ %>
+                                                <td>
+                                                    <%=player_val['in_first_class']['bowling_record']['matches']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_first_class']['bowling_record']['innings']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_first_class']['bowling_record']['overs']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_first_class']['bowling_record']['maidens']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_first_class']['bowling_record']['runs']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_first_class']['bowling_record']['wickets']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_first_class']['bowling_record']['average']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_first_class']['bowling_record']['strike_rate']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_first_class']['bowling_record']['economy_rate']%>
+                                                </td>
+                                                <% if(player_val['in_first_class']['bowling_record']['best_bowling'] != undefined && player_val['in_first_class']['bowling_record']['best_bowling'] != ''){ %>
+                                                <td>
+                                                    <%=player_val['in_first_class']['bowling_record']['best_bowling']['_']%>
+                                                </td>
+                                                <% } %>
+                                                <% if(player_val['in_first_class']['bowling_record']['best_bowling_in_match'] != undefined && player_val['in_first_class']['bowling_record']['best_bowling_in_match'] != ''){ %>
+                                                <td>
+                                                    <%=player_val['in_first_class']['bowling_record']['best_bowling_in_match']['_']%>
+                                                </td>
+                                                <% } %>
+                                                <td>
+                                                    <%=player_val['in_first_class']['bowling_record']['five_wk_hauls']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_first_class']['bowling_record']['ten_wk_hauls']%>
+                                                </td>
+                                                <td>
+                                                    <%=player_val['in_first_class']['bowling_record']['balls_bowled']%>
+                                                </td>
+                                                <% } %>
+                                            </tr>    
+                                        </tbody>
+                                    </table>
+                                </div>    
+                            </div>
+                            <% } %>
+                            <!--bowling statistics-->
+                        </div>
+
+                        <div class="player-news-section">
+                            <!--Misc Story Section-->
+                    <section class="other-story">
+                        <% if(typeof tagData !== 'undefined'){ for (const [tagData_key, tagData_val] of Object.entries(tagData['solarResults'])) { %>
+                        <div class="image-wrap">
+                            
+                            <a href="<%- tagData_val['url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" title="<%- tagData_val['title']%>">
+                                <img src="<%-constant.PLACEHOLDER_IMG_640x362 %>" class="fp-lazy" data-src="<%-common.firstpost_imageOptimization(tagData_val['image'], 640, 362, '') %>" alt="<%- tagData_val['title']%>" title="<%- tagData_val['title']%>" />
+                            </a>
+                            <div class="title-div-wrap">
+                                <h3 class="category-name">
+                                    <a href="/author/<%=tagData_val['author'].toLowerCase().replace(" ","-") %>" title="<%=tagData_val['author']%>">
+                                        <%=tagData_val['author']%>
+                                    </a>
+                                </h3>
+                                <div class="category-text">
+                                    <div class="text-wrap">
+                                        <a href="<%- tagData_val['url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" title="<%- tagData_val['title']%>">
+                                            <h2 class="title-text">
+                                                <%- tagData_val['title']%>
+                                            </h2>
+                                            <h4 class="sub-title-txt">
+                                                <%- tagData_val['description']%>
+                                            </h4>
+                                        </a>
+                                    </div>
+                                    <div class="share-wrap">
+                                        <div class="thumb-social-wrap">
+                                            <% var shareArr = []; 
+                                                shareArr['shareTitle'] = tagData_val['title'];
+                                                shareArr['shareUrl'] = tagData_val['url']; 
+                                            %>
+                                            <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+                                        </div>
+                                    </div>
+                                </div>   
+                            </div>
+                        </div>
+                        <% }} %>
+
+                        <div class="see-all-btn">
+                            <a href="<%-constant.SITE_URL%>tag/<%=tag_name%>" title="">
+                                more news
+                                <svg fill="#333333" height="20" viewBox="0 0 24 24" width="20"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/><path d="M0 0h24v24H0V0z" fill="none"/></svg>
+                            </a>
+                        </div>
+                    </section>
+                    <!--Misc Story Section-->
+                        </div>
+                    </section>
+                    <!--Player Profile Section-->
+                    <% if (typeof outbrain_ads  !== 'undefined' && typeof outbrain_ads['AR_2']  !== 'undefined'){%>
+                        <%-outbrain_ads['AR_2'];%>
+                    <% } %>
+                </div>
+                <%- include(viewpath+ '/'+device+'/firstpost/rhs'); %>
+            </div>
+            <!--Main Page Content-->
+        </div>
+<%- include(viewpath+ '/layouts/footer'); %>

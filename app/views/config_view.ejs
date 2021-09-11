@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Config Flags & Configurations</title>
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/static/css/style_developer.css?v=<%-constant.config_flags.VERSION_NO%>">
+
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <!-- Top content -->
+        <form action="" method="post">
+        <div class="top-content">
+            <div class="container">
+                <div class="">
+                    <h1>Config Flags & Configurations</h1>
+                    <label for="revampkey" id="mainrevampkey"><h4>Generate Key on Revamp </h4>
+                        <input value="1" <% if(revamp) {  %>checked<% } %> type="checkbox" name="revampkey" id="revampkey" onclick="getRevampKeyInfo(this);">
+                    </label> 
+                </div>
+                <div class="" style="padding-bottom:10px;margin-bottom: 100px;overflow: hidden;" id="accordion">
+                    <div class="col-sm-12" style="background: <% if(revamp) {  %>rgb(202, 10, 10)<% }else{ %>rgb(3, 84, 9)<% } %>; color: #fff; margin-top: 10px;padding: 1px;">
+                        <h4><a href="http://www.firstpost.com/rcheck.php?key=<%-redisKey%>&rtype=c" target="_blank" class="text-white"><i class="fa fa-external-link" aria-hidden="true"></i> <%-redisKey%></a></h4>
+                    </div>
+
+                    <div class="">
+                    <div class="col-sm-12 accordion" data-toggle="collapse" data-target="#flags" data-parent="#accordion">
+                        <h4><i class="fa fa-plus-circle"></i> FLAGS </h4>
+                    </div>
+                    <div id="flags" class="collapse">
+                        <div class="col-sm-6 bg-grey">
+                            <label for="MGID_ADS_FLAG" <% if(configFlags.hasOwnProperty("MGID_ADS_FLAG")) {  %>style="background: #bae6ba;"<% } %>>
+                                MGID_ADS_FLAG <input value="1" <% if(configFlags.hasOwnProperty("MGID_ADS_FLAG")) {  %>checked<% } %> type="checkbox" name="MGID_ADS_FLAG" id="MGID_ADS_FLAG"></label> 
+                       </div>
+                        <div class="col-sm-6 bg-grey">
+                            <label for="OUTBRAINS_ADS_FLAG">OUTBRAINS_ADS_FLAG <input value="1" <% if(configFlags.hasOwnProperty("OUTBRAINS_ADS_FLAG")) {  %>checked<% } %> type="checkbox" name="OUTBRAINS_ADS_FLAG" id="OUTBRAINS_ADS_FLAG"></label> 
+                        </div>
+                        <div class="col-sm-6 bg-grey">
+                            <label for="WHATSAPP_SUBTXT_FLAG">WHATSAPP_SUBTXT_FLAG <input value="1" <% if(configFlags.hasOwnProperty("WHATSAPP_SUBTXT_FLAG")) {  %>checked<% } %> type="checkbox" name="WHATSAPP_SUBTXT_FLAG" id="WHATSAPP_SUBTXT_FLAG"></label>
+                        </div>
+                        <div class="col-sm-6 bg-grey">
+                            <label for="WHATSAPP_IMAGE_IN_ARTICLE_WIDGET_FLAG">WHATSAPP_IMAGE_IN_ARTICLE_WIDGET_FLAG <input value="1" <% if(configFlags.hasOwnProperty("WHATSAPP_IMAGE_IN_ARTICLE_WIDGET_FLAG")) {  %>checked<% } %> type="checkbox" name="WHATSAPP_IMAGE_IN_ARTICLE_WIDGET_FLAG" id="WHATSAPP_IMAGE_IN_ARTICLE_WIDGET_FLAG"></label>
+                        </div>
+                        <div class="col-sm-6 bg-grey">
+                            <label for="CLAIM_REVIEW_SCHEMA_FLAG">CLAIM_REVIEW_SCHEMA_FLAG <input value="1" <% if(configFlags.hasOwnProperty("CLAIM_REVIEW_SCHEMA_FLAG")) {  %>checked<% } %> type="checkbox" name="CLAIM_REVIEW_SCHEMA_FLAG" id="CLAIM_REVIEW_SCHEMA_FLAG"></label>
+                        </div>
+                        <div class="col-sm-6 bg-grey">
+                            <label for="IZOOTO_SCRIPT_FLAG">IZOOTO_SCRIPT_FLAG <input value="1" <% if(configFlags.hasOwnProperty("IZOOTO_SCRIPT_FLAG")) {  %>checked<% } %> type="checkbox" name="IZOOTO_SCRIPT_FLAG" id="IZOOTO_SCRIPT_FLAG"></label>
+                        </div>
+                        <div class="col-sm-6 bg-grey">
+                            <label for="VERSION_NO">VERSION_NO <input type="text" <% if(configFlags.hasOwnProperty("VERSION_NO")) {  %>value="<%-configFlags.VERSION_NO %>"<% } %> name="VERSION_NO" id="VERSION_NO" placeholder="Eg. 1.0"></label>
+                        </div>
+                        <div class="col-sm-6 bg-grey">
+                            <label for="CRICKET_FLAG">CRICKET_FLAG <input value="1" <% if(configFlags.hasOwnProperty("CRICKET_FLAG")) {  %>checked<% } %> type="checkbox" name="CRICKET_FLAG" id="CRICKET_FLAG"></label>
+                        </div>
+                        <div class="col-sm-6 bg-grey">
+                            <label for="TEMP_SEO_FLAG">TEMP_SEO_FLAG <input value="1" <% if(configFlags.hasOwnProperty("TEMP_SEO_FLAG")) {  %>checked<% } %> type="checkbox" name="TEMP_SEO_FLAG" id="TEMP_SEO_FLAG"></label>
+                        </div>
+                        <div class="col-sm-6 bg-grey">
+                            <label for="IO_SCRIPT_FLAG">IO_SCRIPT_FLAG <input value="1" <% if(configFlags.hasOwnProperty("IO_SCRIPT_FLAG")) {  %>checked<% } %> type="checkbox" name="IO_SCRIPT_FLAG" id="IO_SCRIPT_FLAG"></label>
+                        </div>
+                    </div>
+
+
+
+                    <div class="">
+                        <div class="col-sm-12 accordion" data-toggle="collapse" data-target="#meta_refresh" data-parent="#accordion">
+                            <h4><i class="fa fa-plus-circle"></i> META REFRESH</h4>
+                        </div>
+                        <div id="meta_refresh" class="collapse">
+                            <div class="col-sm-6 bg-grey">
+                                <label for="STOP_META_REFRESH_FLAG">STOP_META_REFRESH_FLAG <input value="1" <% if(configFlags.hasOwnProperty("STOP_META_REFRESH_FLAG")) {  %>checked<% } %> type="checkbox" name="STOP_META_REFRESH_FLAG" id="STOP_META_REFRESH_FLAG"></label>
+                            </div>
+                            <div class="col-sm-6 bg-grey">
+                                <label for="PAGE_WISE_META_REFRESH_SECONDS">PAGE_WISE_META_REFRESH_SECONDS <textarea name="PAGE_WISE_META_REFRESH_SECONDS" id="PAGE_WISE_META_REFRESH_SECONDS" placeholder="E.g. Homepage=120,Article=600 etc."><% if(configFlags.hasOwnProperty("PAGE_WISE_META_REFRESH_SECONDS")) {  %><%-configFlags.PAGE_WISE_META_REFRESH_SECONDS %><% } %></textarea>
+                                    <span class="note">
+                                        Note: <br>
+                                        <ol>
+                                            <li>Default Meta Refresh time is 120 seconds.</li>
+                                            <li>Add multiple values in comma seperated format.</li>
+                                            <li>Format is mentioned below:<br>
+                                                PageName1=seconds1,PageName2=seconds2,... etc.<br>
+                                                e.g. Homepage=120,Article=600 etc.</li>
+                                        </ol>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+
+                    <div class="">
+                        <div class="col-sm-12 accordion" data-toggle="collapse" data-target="#fplogo" data-parent="#accordion">
+                            <h4><i class="fa fa-plus-circle"></i> FIRSTPOST LOGO </h4>
+                        </div>
+                        <div id="fplogo" class="collapse">
+                            <div class="col-sm-6 bg-grey">
+                                <label for="FP_DESKTOP_LOGO">FP_DESKTOP_LOGO <input type="text" <% if(configFlags.hasOwnProperty("FP_DESKTOP_LOGO")) {  %>value="<%-configFlags.FP_DESKTOP_LOGO %>"<% } %> name="FP_DESKTOP_LOGO" id="FP_DESKTOP_LOGO"></label>
+                            </div>
+                            <div class="col-sm-6 bg-grey">
+                                <label for="FP_MOBILE_LOGO">FP_MOBILE_LOGO <input type="text" <% if(configFlags.hasOwnProperty("FP_MOBILE_LOGO")) {  %>value="<%-configFlags.FP_MOBILE_LOGO %>"<% } %> name="FP_MOBILE_LOGO" id="FP_MOBILE_LOGO"></label>
+                            </div>
+                            <div class="col-sm-6 bg-grey">
+                                <label for="FP_AMP_LOGO">FP_AMP_LOGO <input type="text" <% if(configFlags.hasOwnProperty("FP_AMP_LOGO")) {  %>value="<%-configFlags.FP_AMP_LOGO %>"<% } %> name="FP_AMP_LOGO" id="FP_AMP_LOGO"></label>
+                            </div>
+                            <div class="col-sm-6 bg-grey">
+                                <label for="FP_AMP_LOGO">FP_SOCIAL_SHARE_LOGO <input type="text" <% if(configFlags.hasOwnProperty("FP_SOCIAL_SHARE_LOGO")) {  %>value="<%-configFlags.FP_SOCIAL_SHARE_LOGO %>"<% } %> name="FP_SOCIAL_SHARE_LOGO" id="FP_SOCIAL_SHARE_LOGO"></label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+
+                    <div class="">
+                        <div class="col-sm-12 accordion" data-toggle="collapse" data-target="#elections">
+                            <h4><i class="fa fa-plus-circle"></i> ELECTIONS </h4>
+                        </div>
+                        <div id="elections" class="collapse">
+                            <div class="col-sm-6 bg-grey">
+                                <label for="ELECTION_FLAG">ELECTION_FLAG <input value="1" <% if(configFlags.hasOwnProperty("ELECTION_FLAG")) {  %>checked<% } %> type="checkbox" name="ELECTION_FLAG" id="ELECTION_FLAG"></label>
+                            </div>
+                            <div class="col-sm-6 bg-grey">
+                                <label for="ELEC_DATE">ELEC_DATE <input type="text" name="ELEC_DATE" id="ELEC_DATE" <% if(configFlags.hasOwnProperty("ELEC_DATE")) {  %>value="<%-configFlags.ELEC_DATE %>"<% } %>></label>
+                            </div>
+                            <div class="col-sm-6 bg-grey">
+                                <label for="EXIT_POLL_WIDGET_ELECTION_FLAG">EXIT_POLL_WIDGET_ELECTION_FLAG <input value="1" <% if(configFlags.hasOwnProperty("EXIT_POLL_WIDGET_ELECTION_FLAG")) {  %>checked<% } %> type="checkbox" name="EXIT_POLL_WIDGET_ELECTION_FLAG" id="EXIT_POLL_WIDGET_ELECTION_FLAG"></label>
+                            </div>
+                            <div class="col-sm-6 bg-grey">
+                                <label for="EXIT_POLL_FLAG">EXIT_POLL_FLAG <input value="1" <% if(configFlags.hasOwnProperty("EXIT_POLL_FLAG")) {  %>checked<% } %> type="checkbox" name="EXIT_POLL_FLAG" id="EXIT_POLL_FLAG"></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="">
+                        <div class="col-sm-12 accordion" data-toggle="collapse" data-target="#rhs_video">
+                            <h4><i class="fa fa-plus-circle"></i> RHS VIDEO </h4>
+                        </div>
+                        <div id="rhs_video" class="collapse">
+                            <!-- ===========================RHS LIVE VIDEO============================= -->
+                            <div class="">
+                            <div class="accordion" data-toggle="collapse" data-target="#rhs_live_video">
+                                <h4><i class="fa fa-plus-circle"></i> RHS LIVE VIDEO </h4>
+                            </div>
+                                
+                            <div id="rhs_live_video" class="collapse">
+                                <div class="col-sm-6 bg-grey">
+                                    <label for="RHS_LIVE_VIDEO_WIDGET">RHS_LIVE_VIDEO_WIDGET <input value="1" <% if(configFlags.hasOwnProperty("RHS_LIVE_VIDEO_WIDGET")) {  %>checked<% } %> type="checkbox" name="RHS_LIVE_VIDEO_WIDGET" id="RHS_LIVE_VIDEO_WIDGET"></label>
+                                </div>
+                                <div class="col-sm-6 bg-grey">
+                                    <label for="RHS_LIVE_VIDEO_HIDE_TITLE_URL">RHS_LIVE_VIDEO_HIDE_TITLE_URL <input value="1" <% if(configFlags.hasOwnProperty("RHS_LIVE_VIDEO_HIDE_TITLE_URL")) {  %>checked<% } %> type="checkbox" name="RHS_LIVE_VIDEO_HIDE_TITLE_URL" id="RHS_LIVE_VIDEO_HIDE_TITLE_URL"></label>
+                                </div>
+                                <div class="col-sm-6 bg-grey">
+                                    <label for="RHS_LIVE_VIDEO_HLS">RHS_LIVE_VIDEO_HLS <input type="text" name="RHS_LIVE_VIDEO_HLS" id="RHS_LIVE_VIDEO_HLS" <% if(configFlags.hasOwnProperty("RHS_LIVE_VIDEO_HLS")) {  %>value="<%-configFlags.RHS_LIVE_VIDEO_HLS %>"<% } %>></label>
+                                </div>
+                                <div class="col-sm-6 bg-grey">
+                                    <label for="RHS_LIVE_VIDEO_PD">RHS_LIVE_VIDEO_PD <input type="text" name="RHS_LIVE_VIDEO_PD" id="RHS_LIVE_VIDEO_PD" <% if(configFlags.hasOwnProperty("RHS_LIVE_VIDEO_PD")) {  %>value="<%-configFlags.RHS_LIVE_VIDEO_PD %>"<% } %>></label>
+                                </div>
+                                <div class="col-sm-6 bg-grey">
+                                    <label for="RHS_LIVE_VIDEO_POST_ID">RHS_LIVE_VIDEO_POST_ID <input type="text" name="RHS_LIVE_VIDEO_POST_ID" id="RHS_LIVE_VIDEO_POST_ID" <% if(configFlags.hasOwnProperty("RHS_LIVE_VIDEO_POST_ID")) {  %>value="<%-configFlags.RHS_LIVE_VIDEO_POST_ID %>"<% } %>></label>
+                                </div>
+                                <div class="col-sm-6 bg-grey">
+                                    <label for="RHS_LIVE_VIDEO_POST_TITLE">RHS_LIVE_VIDEO_POST_TITLE <input type="text" name="RHS_LIVE_VIDEO_POST_TITLE" id="RHS_LIVE_VIDEO_POST_TITLE" <% if(configFlags.hasOwnProperty("RHS_LIVE_VIDEO_POST_TITLE")) {  %>value="<%-configFlags.RHS_LIVE_VIDEO_POST_TITLE %>"<% } %>></label>
+                                </div>
+                                <div class="col-sm-6 bg-grey">
+                                    <label for="RHS_LIVE_VIDEO_MEDIA_URL">RHS_LIVE_VIDEO_MEDIA_URL <input type="text" name="RHS_LIVE_VIDEO_MEDIA_URL" id="RHS_LIVE_VIDEO_MEDIA_URL" <% if(configFlags.hasOwnProperty("RHS_LIVE_VIDEO_MEDIA_URL")) {  %>value="<%-configFlags.RHS_LIVE_VIDEO_MEDIA_URL %>"<% } %>></label>
+                                </div>
+                                <div class="col-sm-6 bg-grey">
+                                    <label for="RHS_LIVE_VIDEO_DAILY_MOTION_ID">RHS_LIVE_VIDEO_DAILY_MOTION_ID <input type="text" name="RHS_LIVE_VIDEO_DAILY_MOTION_ID" id="RHS_LIVE_VIDEO_DAILY_MOTION_ID" <% if(configFlags.hasOwnProperty("RHS_LIVE_VIDEO_DAILY_MOTION_ID")) {  %>value="<%-configFlags.RHS_LIVE_VIDEO_DAILY_MOTION_ID %>"<% } %>></label>
+                                </div>
+                            </div>
+                            </div>
+
+                            <!-- ===========================RHS YOUTUBE VIDEO============================= -->
+                            <div class="">
+                            <div class="accordion" data-toggle="collapse" data-target="#rhs_youtube_video">
+                                <h4><i class="fa fa-plus-circle"></i> RHS YOUTUBE VIDEO </h4>
+                            </div>
+                            <div id="rhs_youtube_video" class="collapse">
+                                <div>Note: Except youtube iframe, you can use any other video iframe url also.</div>
+                                <div class="col-sm-6 bg-grey">
+                                    <label for="RHS_YOUTUBE_VIDEO_WIDGET">RHS_YOUTUBE_VIDEO_WIDGET <input value="1" <% if(configFlags.hasOwnProperty("RHS_YOUTUBE_VIDEO_WIDGET")) {  %>checked<% } %> type="checkbox" name="RHS_YOUTUBE_VIDEO_WIDGET" id="RHS_YOUTUBE_VIDEO_WIDGET"></label>
+                                </div>
+                                <div class="col-sm-6 bg-grey">
+                                    <label for="RHS_YOUTUBE_VIDEO_URL">RHS_YOUTUBE_VIDEO_URL <input type="text" name="RHS_YOUTUBE_VIDEO_URL" id="RHS_YOUTUBE_VIDEO_URL" <% if(configFlags.hasOwnProperty("RHS_YOUTUBE_VIDEO_URL")) {  %>value="<%-configFlags.RHS_YOUTUBE_VIDEO_URL %>"<% } %>></label>
+                                </div>
+                                <div class="col-sm-6 bg-grey">
+                                    <label for="RHS_YOUTUBE_VIDEO_TITLE">RHS_YOUTUBE_VIDEO_TITLE <input type="text" name="RHS_YOUTUBE_VIDEO_TITLE" id="RHS_YOUTUBE_VIDEO_TITLE" <% if(configFlags.hasOwnProperty("RHS_YOUTUBE_VIDEO_TITLE")) {  %>value="<%-configFlags.RHS_YOUTUBE_VIDEO_TITLE %>"<% } %>></label>
+                                </div>
+                                <div class="col-sm-6 bg-grey">
+                                    <label for="RHS_YOUTUBE_VIDEO_PAGE_LINK">RHS_YOUTUBE_VIDEO_PAGE_LINK <input type="text" name="RHS_YOUTUBE_VIDEO_PAGE_LINK" id="RHS_YOUTUBE_VIDEO_PAGE_LINK" <% if(configFlags.hasOwnProperty("RHS_YOUTUBE_VIDEO_PAGE_LINK")) {  %>value="<%-configFlags.RHS_YOUTUBE_VIDEO_PAGE_LINK %>"<% } %>></label>
+                                </div>
+                                <div class="col-sm-6 bg-grey">
+                                    <label for="RHS_YOUTUBE_VIDEO_INCLUDE_PAGENAMES">RHS_YOUTUBE_VIDEO_INCLUDE_PAGENAMES <input type="text" name="RHS_YOUTUBE_VIDEO_INCLUDE_PAGENAMES" id="RHS_YOUTUBE_VIDEO_INCLUDE_PAGENAMES" <% if(configFlags.hasOwnProperty("RHS_YOUTUBE_VIDEO_INCLUDE_PAGENAMES")) {  %>value="<%-configFlags.RHS_YOUTUBE_VIDEO_INCLUDE_PAGENAMES %>"<% } %> placeholder="e.g. homepage,article etc."></label>
+                                </div>
+                                <div class="col-sm-6 bg-grey">
+                                    <label for="RHS_YOUTUBE_VIDEO_EXCLUDE_PAGENAMES">RHS_YOUTUBE_VIDEO_EXCLUDE_PAGENAMES <input type="text" name="RHS_YOUTUBE_VIDEO_EXCLUDE_PAGENAMES" id="RHS_YOUTUBE_VIDEO_EXCLUDE_PAGENAMES" <% if(configFlags.hasOwnProperty("RHS_YOUTUBE_VIDEO_EXCLUDE_PAGENAMES")) {  %>value="<%-configFlags.RHS_YOUTUBE_VIDEO_EXCLUDE_PAGENAMES %>"<% } %> placeholder="e.g. homepage,article etc."></label>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    
+                </div>
+            </div>
+        </div>
+        <div id="footerbutton" style="padding: 10px;position: fixed;bottom: 0;background: #dddecb;width: 100%;">
+            <input type="submit" name="" value="Save Config Information" style="background: #05776d;font-weight: bold;text-transform: uppercase;border: none;color: #fff;padding: 7px 30px;font-size: 16px;letter-spacing: 1px;" onclick="$(this).hide();">
+        </div>
+        </form>
+
+        <script type="text/javascript">
+            function getRevampKeyInfo(obj) {
+                if($(obj).prop('checked') == true)
+                {
+                    window.location="/config-flags?revamp=1";
+                }
+                else
+                {
+                    window.location="/config-flags";
+                }
+            }
+            $('input[type="checkbox"]:checked,input[type="text"][value!=""]').parent('label').css('background','rgb(251, 203, 162)');
+            $('#mainrevampkey input[type="checkbox"]:checked').parent('label').css('background','rgb(202, 10, 10)');
+            $('#mainrevampkey input[type="checkbox"]:not(:checked)').parent('label').css('background','rgb(3, 84, 9)');
+        </script>
+    </body>
+</html>

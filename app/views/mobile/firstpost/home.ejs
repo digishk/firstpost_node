@@ -1,0 +1,284 @@
+<%- include(viewpath+ '/layouts/m-header'); %>
+
+<%
+    const { config_flags, MAIN_SITE_URL, SITE_URL, PLACEHOLDER_IMG_320x180, PLACEHOLDER_IMG_192x104 } = constant || {};
+    const { ATF_320, ATF_300, BTF_300,PG_1x1, PG_Slider_1x1, ATF_SLUG_300, HP_NAT1} = ads || {};
+    const { MB_7} = outbrain_ads || {};
+    const { HPRanking, HPTrendingArticles, HPLatestStories } = homePageJson || {};
+    const { main_ranking, related_ranking } = HPRanking || {};
+
+    const mainRankingEntries = main_ranking ? Object.entries(main_ranking) : null;
+    const relatedRankingEntries = related_ranking ? Object.entries(related_ranking) : null;
+    const HPTrendingArticlesEntries = HPTrendingArticles ? Object.entries(HPTrendingArticles) : null;
+    const HPLatestStoriesEntries = HPLatestStories ? Object.entries(HPLatestStories) : null;
+%>
+
+		<!--cricket-ticker-wrap-->
+		<%- include(viewpath+ '/widgets/m-cricketscore_strip'); %>
+		<!--cricket-ticker-wrap-->
+
+	    <% if(config_flags && config_flags.EXIT_POLL_FLAG && config_flags.EXIT_POLL_FLAG == '1') { %>
+            <!--exitpoll-election-widget-->
+			<%- include(viewpath+ '/widgets/five_states_result_widget_2021.ejs'); %> 
+	        <!--exitpoll-election-widget-->
+	    <% } %>
+
+		<% if (ATF_320){%>
+			<div class="ad-center m-fixed-ad-banner">
+			    <%-common.displayAds(ATF_320[0]) %>
+			</div>
+		<% } %>  
+
+
+		<% if(mainRankingEntries) { %>
+			<div class="main-story-thumb-wrap">
+				<h3 class="main-story-title">
+					THE BIG story
+					<span></span>
+				</h3>
+				<div class="slider-wrap main-story-slider" id="mainstoryslider">
+					<div class="glide__track" data-glide-el="track">
+						<ul class="slider" style="width:2685px; height: 440px;">
+							<% mainRankingEntries.forEach(([key, data], index)=>{ %>
+
+								<% const { modified_posturl, modified_title, mobile_img, category_url, category, isliveBlog } = data %>
+								<% const replacedModifiedPostUrl = modified_posturl.replace(MAIN_SITE_URL, SITE_URL) %> 
+								<% const replacedCategoryUrl = category_url.toLowerCase().replace(MAIN_SITE_URL, SITE_URL)%> 
+
+								<li class="main-story-thumb" style="width: 100vw;">
+									<% if(isliveBlog != 0) { %>
+										<div class="live-txt"><span class="blinking"></span>live</div>
+									<% } %>
+									<a href="<%-replacedModifiedPostUrl %>" class="thumb"  title="<%-modified_title %>">
+										<%if(index !== 0){%>
+											<img loading="lazy" class="fp-lazy" width="340" height="425" data-src="<%-mobile_img %>" src="<%-PLACEHOLDER_IMG_320x180%>" alt="<%-modified_title %>" >
+										<%} else {%>
+											<img loading="lazy" width="340" height="425" src="<%-mobile_img %>" alt="<%-modified_title %>" >
+										<%}%>
+									</a>
+									<div class="title-wrap">
+										<a href="<%- replacedCategoryUrl%>" class="category-name" title="<%-category %>">
+											<%-category %>
+										</a>
+										<h1 class="main-title">
+											<a href="<%-replacedModifiedPostUrl %>" title="<%-modified_title %>"><%-modified_title %></a>
+										</h1>
+										<% var shareArr = []; 
+										shareArr['shareTitle'] = modified_title;
+										shareArr['shareUrl'] = modified_posturl; %>
+										<%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr}); %>
+									</div>
+								</li>
+							<% }) %>
+						</ul> 
+						<div class="glide__bullets" data-glide-el="controls[nav]">
+							<% mainRankingEntries.forEach((_, index) => { %>
+								<button class="glide__bullet" data-glide-dir="=<%=index %>"></button>
+							<% }) %> 
+						</div>   
+					</div>
+				</div>
+			</div><!--main-story-thumb-->
+		<% } %> 
+
+		<% if(relatedRankingEntries) {%> 
+			<% relatedRankingEntries.forEach(([key, data])=> { %>
+
+				<% const { modified_posturl, modified_title, category_url, category, content_type, post_authorslug, post_image, post_excerpt } = data %>
+				<% const replacedModifiedPostUrl = modified_posturl.replace(MAIN_SITE_URL, SITE_URL) %> 
+				<% const replacedCategoryUrl = category_url.toLowerCase().replace(MAIN_SITE_URL, SITE_URL)%> 
+		
+				<div class="big-thumb">
+					<a href="<%-replacedModifiedPostUrl %>" class="thumb-img"  title="<%-modified_title %>">
+						 <!-- <%-/*common.firstpost_imageOptimization(homePageJson_val['post_image'], 768, 432, '')*/ %>  -->
+						<img class="fp-lazy" src="<%-PLACEHOLDER_IMG_320x180 %>" data-src="<%-common.firstpost_imageOptimization(post_image, 320, 180, '') %>" alt="<%-modified_title %>" >
+						<% if (content_type.toLowerCase() == "video") { %>
+							<div class="video-icon">
+			   					<svg width="70.182" height="70.182" viewBox="0 0 70.182 70.182"><defs><filter id="a" x="0" y="0" width="70.182" height="70.182" filterUnits="userSpaceOnUse"><feOffset dy="3" input="SourceAlpha"/><feGaussianBlur stdDeviation="4.5" result="b"/><feFlood flood-opacity="0.294"/><feComposite operator="in" in2="b"/><feComposite in="SourceGraphic"/></filter></defs><g transform="matrix(1, 0, 0, 1, 0, 0)"><path fill="#fff" d="M23.591,2A21.591,21.591,0,1,0,45.182,23.591,21.6,21.6,0,0,0,23.591,2ZM19.273,33.307V13.875l12.955,9.716Z" transform="translate(11.5 8.5)"/></g></svg>
+			   				</div>
+		   				<% } else if (content_type.toLowerCase() == "podcast") { %>
+		   					<svg class="podcast-icon" viewBox="0 0 48 58"><g id="Page-1" fill="none" fill-rule="evenodd"><g id="077---Podcast" fill="rgb(0,0,0)" fill-rule="nonzero" transform="translate(-1 -1)"><circle id="Oval" cx="25" cy="25" r="7"/><path id="Shape" d="m41 25c.0043835 3.8369583-1.381053 7.5456651-3.9 10.44-.8816497-1.0158408-1.9600185-1.8424768-3.17-2.43 4.3150268-4.8070778 4.0504913-12.1673491-.5984984-16.6522513-4.6489898-4.4849021-12.0140134-4.4849021-16.6630032 0-4.6489897 4.4849022-4.9135252 11.8451735-.5984984 16.6522513-1.2099815.5875232-2.2883503 1.4141592-3.17 2.43-4.63398704-5.3707457-5.17622072-13.1522935-1.3318892-19.1138252 3.8443314-5.9615317 11.1563967-8.67818511 17.9606345-6.67291902 6.8042379 2.00526612 11.4743714 8.25317422 11.4712547 15.34674422z"/><path id="Shape" d="m49 25c-.0020711 7.5935583-3.6000328 14.7375524-9.7 19.26l.03-.14c.3603606-1.6531373.2915082-3.3710057-.2-4.99 5.7270739-5.7172575 7.4444796-14.3223043 4.3508714-21.8000042-3.0936081-7.47769995-10.3885041-12.35425664-18.4808714-12.35425664s-15.38726325 4.87655669-18.48087142 12.35425664c-3.09360816 7.4776999-1.37620243 16.0827467 4.35087142 21.8000042-.4915082 1.6189943-.5603606 3.3368627-.2 4.99l.03.14c-9.07806131-6.7351009-12.22594977-18.8917939-7.5576155-29.1864253 4.66833428-10.29463137 15.887313-15.93634235 26.9351117-13.54491516 11.0477988 2.39142719 18.9293761 12.16768026 18.9225038 23.47134046z"/><path id="Shape" d="m29.556 36h-9.112c-1.8151552-.0000102-3.5327417.8217028-4.6717465 2.2350168s-1.576974 3.2662842-1.1912535 5.0399832l3.077 14.15c.1998936.9191918 1.0133242 1.5748485 1.954 1.575h10.776c.9406758-.0001515 1.7541064-.6558082 1.954-1.575l3.077-14.15c.3857205-1.773699-.0522487-3.6266692-1.1912535-5.0399832s-2.8565913-2.235027-4.6717465-2.2350168zm-11.026 9.242-.5-2c-.0959435-.3498693.0051249-.72426.2641012-.9783171.2589762-.2540571.635236-.3479281.9832013-.2452935.3479652.1026346.6130526.385675.6926975.7396106l.5 2c.1334945.5356925-.1923791 1.0782184-.728 1.212-.0791715.0196698-.1604221.0297422-.242.03-.4589705-.0001268-.8589292-.3126718-.97-.758zm2.712 6.728c-.0791715.0196698-.1604221.0297422-.242.03-.4585975-.0005854-.8580197-.3130332-.969-.758l-.531-2.117c-.1024987-.3519028-.0042666-.731682.2560049-.9897522.2602716-.2580703.6408715-.353073.991891-.2475891s.616204.3945496.6911041.7533413l.53 2.117c.1335558.5353845-.1917847 1.0777678-.727 1.212zm9.258-2.845-.529 2.117c-.111161.44569-.5116567.7583324-.971.758-.0819126-.0001775-.1635037-.0102505-.243-.03-.5356209-.1337816-.8614945-.6763075-.728-1.212l.53-2.117c.0749001-.3587917.3400846-.6478574.6911041-.7533413s.7316194-.0104812.991891.2475891c.2602715.2580702.3585036.6378494.2560049.9897522zm1.471-5.883-.5 2c-.111161.44569-.5116567.7583324-.971.758-.0819126-.0001775-.1635037-.0102505-.243-.03-.5356209-.1337816-.8614945-.6763075-.728-1.212l.5-2c.1436734-.5239217.6793531-.8373021 1.2064607-.7057969.5271075.1315052.8528058.6597861.7335393 1.1897969z"/></g></g></svg>
+		   				<% } %>
+					</a>
+					<div class="title-wrap">
+						<% if(category.toLowerCase() == 'health' && post_authorslug == "myupchar") { %>
+	        		        <a class="sponsor-logo" href="https://www.myupchar.com/en" rel="nofollow noindex" target="_blank">
+	          			        <img src="<%-SITE_URL%>static/images/myupchar-logo.png" alt="My Upchar"/>
+	           		    	</a>
+               		 	<% } %>
+						<a href="<%-replacedCategoryUrl%>" class="category-name" title="<%-category%>">
+							<%-category %>
+						</a>
+						<h3 class="main-title">
+							<a href="<%-replacedModifiedPostUrl %>" title="<%-modified_title %>"><%-modified_title %></a>
+						</h3>
+						<p class="copy">
+							<%-post_excerpt %>
+						</p>
+						<% var shareArr = []; 
+						shareArr['shareTitle'] = modified_title;
+						shareArr['shareUrl'] = modified_posturl; %>
+						<%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr}); %>
+					</div>
+				</div><!--big-thumb-->
+			<% }) %>
+		<% } %> 
+
+
+		<% if (ATF_300){%>
+			<div class="ad-center">
+			    <%-common.displayAds(ATF_300[0]) %>
+			</div>
+		<% } %> 
+
+		<% if (PG_1x1){%>
+		    <div>
+		        <%-common.displayAds(PG_1x1[0]) %>
+		    </div>
+		<% } %>    
+		<% if (PG_Slider_1x1){%>
+		    <div>
+		        <%-common.displayAds(PG_Slider_1x1[0]) %>
+		    </div>
+		<% } %> 
+
+		<%- include(viewpath+ '/widgets/mailChimp'); %>
+
+		<div class="ad-center">
+            <a href="https://www.moneycontrol.com/promos/pro.php?utm_source=firstpost-app&utm_medium=referral&utm_campaign=Pro365" target="_new">
+                <img src="https://images.firstpost.com/wp-content/uploads/MC_mobile.gif" width="320" height="50">
+            </a>
+        </div>
+		<%- include(viewpath+ '/widgets/most_read_widget'); %>
+		
+		<!-- Apester code -->
+	    <div class="apester-media" data-token="57026ab0d51383a359ae688c" data-context="true" data-tags="" data-fallback="true" height="350"></div><script async src="https://static.apester.com/js/sdk/latest/apester-sdk.js"></script>
+	    <!-- Apester code end-->
+		
+		<% if (ATF_SLUG_300){%>
+			<div class="ad-center ATF_SLUG_300" data-ad-id="<%-ATF_SLUG_300[0]%>" data-ad-size="<%-ATF_SLUG_300[1]%>">
+				<%-common.displayAds(ATF_SLUG_300[0]) %>
+			</div>
+		<% } %> 
+
+		<% if(HPTrendingArticlesEntries) { %> 
+			<div class="trending small-thumb-wrap">
+				<h3 class="main-story-title">
+					trending
+					<span></span>
+				</h3>
+				<div class="trending-block-grid">
+				<% if (HP_NAT1){%>
+				
+					<% HPTrendingArticlesEntries.slice(0,5).forEach(([key, data]) => { %>
+						<% const {PostURL, PostTitle, PostImage, cat_slug} = data %>
+						<% const replacedUrl = PostURL.replace(MAIN_SITE_URL, SITE_URL) %> 
+						<div class="trending-block">                      
+							<a href="<%-replacedUrl %>" title="<%-PostTitle %>" class="thumnail">
+								<img class="fp-lazy" src="<%-PLACEHOLDER_IMG_192x104 %>" data-src="<%-common.firstpost_imageOptimization(PostImage, 192, 104, '') %>" alt="<%-PostTitle%>" >
+							</a>
+							<div class="trend-text-wrap">
+								<a class="category-name" href="<%-SITE_URL%>category/<%-cat_slug %>" title="<%-cat_slug %>">
+									#<%-cat_slug%>
+								</a>
+								<a class="trend-text-title" href="<%-replacedUrl %>" title="<%-PostTitle %>">
+									<%-PostTitle%>
+								</a>
+							</div>                
+						</div>
+					<% }) %>	
+					<div class="trending-block"><%-common.displayAds(HP_NAT1[0]) %></div>
+
+					<% HPTrendingArticlesEntries.slice(6).forEach(([key, data]) => { %>
+						<% const {PostURL, PostTitle, PostImage, cat_slug} = data %>
+						<% const replacedUrl = PostURL.replace(MAIN_SITE_URL, SITE_URL) %> 
+						<div class="trending-block">                      
+							<a href="<%-replacedUrl %>" title="<%-PostTitle %>" class="thumnail">
+								<img class="fp-lazy" src="<%-PLACEHOLDER_IMG_192x104 %>" data-src="<%-common.firstpost_imageOptimization(PostImage, 192, 104, '') %>" alt="<%-PostTitle%>" >
+							</a>
+							<div class="trend-text-wrap">
+								<a class="category-name" href="<%-SITE_URL%>category/<%-cat_slug %>" title="<%-cat_slug %>">
+									#<%-cat_slug%>
+								</a>
+								<a class="trend-text-title" href="<%-replacedUrl %>" title="<%-PostTitle %>">
+									<%-PostTitle%>
+								</a>
+							</div>                
+						</div>
+					<% }) %>	
+			
+				<% } else { %> 
+				
+					<% HPTrendingArticlesEntries.slice(0,6).forEach(([key, data]) => { %>
+						<% const {PostURL, PostTitle, PostImage, cat_slug} = data %>
+						<% const replacedUrl = PostURL.replace(MAIN_SITE_URL, SITE_URL) %> 
+						<div class="trending-block">                      
+							<a href="<%-replacedUrl %>" title="<%-PostTitle %>" class="thumnail">
+								<img class="fp-lazy" src="<%-PLACEHOLDER_IMG_192x104 %>" data-src="<%-common.firstpost_imageOptimization(PostImage, 192, 104, '') %>" alt="<%-PostTitle%>" >
+							</a>
+							<div class="trend-text-wrap">
+								<a class="category-name" href="<%-SITE_URL%>category/<%-cat_slug %>" title="<%-cat_slug %>">
+									#<%-cat_slug%>
+								</a>
+								<a class="trend-text-title" href="<%-replacedUrl %>" title="<%-PostTitle %>">
+									<%-PostTitle%>
+								</a>
+							</div>                
+						</div>
+					<% }) %>	
+			
+				<% } %>	
+			</div>	
+		<% } %>
+		</div>	
+		
+		<% if(HPLatestStoriesEntries) { %>
+			<% HPLatestStoriesEntries.forEach(([key, data]) => { %>
+				<% const {post_url, post_title, post_image,cat_slug,post_authorslug, category_url,post_excerpt} = data %> 
+				<% const replacedUrl = post_url.replace(MAIN_SITE_URL, SITE_URL) %> 
+				<% const replacedCategoryUrl = category_url.toLowerCase().replace(MAIN_SITE_URL, SITE_URL) %> 
+
+				<div class="big-thumb">
+					<a href="<%-replacedUrl %>" title="<%-post_title%>" class="thumb-img">
+						<img class="fp-lazy" src="<%-PLACEHOLDER_IMG_320x180 %>" data-src="<%-common.firstpost_imageOptimization(post_image, 320, 180, '') %>" alt="<%-post_title%>" >
+					</a>
+					<div class="title-wrap">
+						<% if(cat_slug.toLowerCase() == 'health' && post_authorslug == "myupchar") { %>
+							<a class="sponsor-logo" href="https://www.myupchar.com/en" rel="nofollow noindex" target="_blank">
+								<img src="<%-SITE_URL%>static/images/myupchar-logo.png" alt="My Upchar"/>
+							</a>
+						<% } %>
+						<a href="<%-replacedCategoryUrl %>" class="category-name" title="<%-cat_slug %>"><%-cat_slug %></a>
+						<h3 class="main-title">
+							<a href="<%-replacedUrl %>" title="<%-post_title %>"><%-post_title %></a>
+						</h3>
+						<p class="copy">
+							<%-post_excerpt %>
+						</p>
+						<% var shareArr = []; 
+						shareArr['shareTitle'] = post_title;
+						shareArr['shareUrl'] = post_url; %>
+						<%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr}); %>
+				</div>
+				</div><!--big-thumb-->
+
+				<% if(key == 0) { %>
+					<%- include(viewpath+ '/'+device+'/firstpost/home-videos-widget'); %>
+				<% } else if(key == 2){ %>
+					<%- include(viewpath+ '/'+device+'/firstpost/home-podcast-widget'); %>
+					<% if (BTF_300){%>
+						<div class="ad-center">
+							<%-common.displayAds(BTF_300[0]) %>
+						</div>
+					<% } %> 
+				<% } %>
+
+			<% }) %>
+		<% } %>
+
+		<%- include(viewpath+ '/'+device+'/firstpost/home-photos-widget'); %>
+		<% if (MB_7){%>
+			<%-MB_7;%>	
+		<% } %>
+	</div><!--wrapper-->
+<%- include(viewpath+ '/layouts/m-footer'); %>

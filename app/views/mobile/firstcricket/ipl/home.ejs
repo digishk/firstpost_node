@@ -1,0 +1,783 @@
+<%- include(viewpath+ '/layouts/m-header'); %>
+        <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+        <script>
+          window.googletag = window.googletag || {cmd: []};
+          googletag.cmd.push(function() {
+            googletag.defineSlot('/1039154/FSTPST_ENG/FSTPST_ENG_CRICKET/FSTPST_ENG_CRICKET_AL/FSTPST_ENG_CRI_AL_ROS_LOGO_ImpressionTracker', [1, 1], 'div-gpt-ad-1617695489538-0').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+          });
+        </script>
+
+        <!-- /1039154/FSTPST_ENG/FSTPST_ENG_CRICKET/FSTPST_ENG_CRICKET_AL/FSTPST_ENG_CRI_AL_ROS_LOGO_ImpressionTracker -->
+        <div id='div-gpt-ad-1617695489538-0' style='width: 1px; height: 1px;'>
+          <script>
+            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1617695489538-0'); });
+          </script>
+        </div>
+
+        <div class="main-wrapper">
+
+            <!--ipllogo-->
+            <style type="text/css">
+            .logoflex{margin-bottom: 20px}
+            .lodoleft{width: 100%;display: flex;justify-content: center;margin-bottom: 10px}
+            .logoright{display: flex;width: 100%; justify-content: center;}
+            .copotext{text-align: left;text-decoration: underline;font: 400 11px/13px Arial;letter-spacing: 0px;color: #B1B1B1;text-transform: uppercase;opacity: 1;margin-right: 10px;margin-bottom: 5px}
+            .logoright img{margin-right: 10px; width: 95px}
+            .lodoleft img{width: 168px;}
+            </style>
+            <div class="logoflex">
+                <div class="lodoleft"><img src="<%-constant.SITE_URL %>static/images/cricket/ipl/t20-league-final-fp.PNG" alt=""></div>
+                <div class="logoright">
+                    <div class="aoso"><div class="copotext">Associate Partners</div>
+                    <a href="http://pubads.g.doubleclick.net/gampad/clk?id=5661389695&iu=/1039154/FSTPST_ENG/FSTPST_ENG_CRICKET/FSTPST_ENG_CRICKET_AL/FSTPST_ENG_CRI_AL_ROS_LOGO_ClickTracker_Shell" target="_blank">
+                        <img src="<%-constant.SITE_URL %>static/images/cricket/ipl/shell_logo.png">
+                    </a>
+                    <a href="http://pubads.g.doubleclick.net/gampad/clk?id=5664296053&iu=/1039154/FSTPST_ENG/FSTPST_ENG_CRICKET/FSTPST_ENG_CRICKET_AL/FSTPST_ENG_CRI_AL_ROS_LOGO_ClickTracker_PanMasala" target="_blank">
+                        <img src="<%-constant.SITE_URL %>static/images/cricket/ipl/panmasala.jpg">
+                    </a>
+                    <a href="http://pubads.g.doubleclick.net/gampad/clk?id=5665050131&iu=/1039154/FSTPST_ENG/FSTPST_ENG_CRICKET/FSTPST_ENG_CRICKET_AL/FSTPST_ENG_CRI_AL_ROS_LOGO_ClickTracker_AMFI" target="_blank">
+                        <img src="<%-constant.SITE_URL %>static/images/cricket/ipl/amfi.png">
+                    </a>
+                    </div>
+                </div>
+            </div>
+            <!--ipllogo-->
+
+            <!--Score-Widget-->
+            <%- include(viewpath+ '/widgets/scorecard_caraousal'); %>
+            <!--Score-Widget-->
+
+            <!--320x50 Ad Space-->
+            <% if (typeof ads  !== 'undefined' && typeof ads['ATF_320']  !== 'undefined'){%>
+                <div class="ad-center m-fixed-ad-banner">
+                    <%-common.displayAds(ads['ATF_320'][0]) %>
+                </div>
+            <% } %>
+            <!--320x50 Ad Space-->
+
+            <!--Bread crumb-->
+            <%- include(viewpath+ '/widgets/breadCrumbs'); %>
+            <!--Bread crumb-->
+
+            
+            <div class="main-content" id="ipl">
+
+                <!--Top Slider Section-->
+                <style type="text/css">
+                    #ipl .page-title span{font-weight: 900;margin: 0 5px}
+                </style>
+                <section class="top-slider-section">
+                    <h2 class="page-title"><span>Cricket News</span></h2>
+
+                    <%- include(viewpath+ '/widgets/cric-series-menu'); %>
+
+                    <% if(typeof rankingData !== 'undefined' && rankingData !== null) { %>
+                    <div class="glide" id="topSlider">
+                        <div data-glide-el="track" class="glide__track">
+                            <ul class="glide__slides">
+                                <% for (const [rankDataKey, rankDataValue] of Object.entries(rankingData['main_ranking'])) { %>
+                                <li class="glide__slide">
+                                    <div class="top-story-slide">
+                                        <div class="top-image-wrap">
+                                            <a href="<%=rankDataValue['post_url']%>" title="<%=rankDataValue['post_title']%>">
+                                                <img src="<%=rankDataValue['mobile_img']%>" alt="<%=rankDataValue['post_title']%>" title="<%=rankDataValue['post_title']%>"/>
+                                            </a>
+                                            <div class="main-title-div">
+                                                <h1 class="main-title-wrap">
+                                                    <a href="<%=rankDataValue['post_url']%>" title="<%=rankDataValue['post_title']%>">
+                                                        <%=rankDataValue['post_title']%>
+                                                    </a>
+                                                </h1>
+                                                <div class="share-wrap">
+                                                    <% var shareArr = []; 
+                                                    shareArr['shareTitle'] = rankDataValue['post_title'];
+                                                    shareArr['shareUrl'] = rankDataValue['post_url']; %>
+                                                    <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <% } %>
+                            </ul>
+                        </div>
+                        <div class="glide__bullets" data-glide-el="controls[nav]">
+                            <button class="glide__bullet" data-glide-dir="=0"></button>
+                            <button class="glide__bullet" data-glide-dir="=1"></button>
+                            <button class="glide__bullet" data-glide-dir="=2"></button>
+                          </div>
+                    </div>
+                    <% } %>
+                </section>
+                <!--Top Slider Section-->
+
+                    <!--point table-->
+                    <style type="text/css">
+                    .tabflex{ margin: 0 10px 30px}
+                    .tableft{width: 100%}
+                    .tabright{width: 100%}
+                    .tabflex .page-title {text-align: center;margin: 0;border-bottom: 0 solid #707070}
+                    .tabflex .page-title:after {content: none}
+                    .gridwrap {display: grid;grid-template-columns: 15% 35% 15% 15% 20%; text-align: left;font: 400 16px/25px Roboto;letter-spacing: 0;color: #000000;opacity: 1;padding: 10px 0}
+                    .gridbox{text-align: center;font: 600 10px/20px Arial;letter-spacing: 0px;color: #202020;opacity: 1; text-transform: uppercase;}
+                    .whi .gridbox{color: #fff}
+                    .gridwrap:nth-child(even){background:#F8F8F8}
+                    .mapflex{display: flex;align-items: center;}
+                    .mapflex img{width: 45px;margin-right: 10px}
+                    .mapflex span{text-align: left;text-decoration: underline;font: 700 12px/20px Arial;letter-spacing: 0px; text-transform: uppercase;}
+                    .tabflex .page-title span {font:900 21px/37px arial}
+                    .gridwrap:nth-child(even).bluebg{background:#012F68 }
+                    .gridbox:nth-child(2){text-align: left;}
+                    .mi{color: #005795}
+                    .csk{color:#EE9B00;}
+                    .dc{color:#0355A2;}
+                    .srh{color:#FF4233;}
+                    .kkr{color:#482863;}
+                    .pbks{color:#D33F25;}
+                    .rr{color:#1F3A76;}
+                    .rcb{color:#1E1E1E;}
+                    .orgbg .whi{background: #F55B00}
+                    .purbg .whi{background:#5D068E;}
+                    .purbg .page-title span{color: #5D068E}
+                    .tabwrap .page-title span span{text-align: center;font: italic 500 18px/20px Arial;letter-spacing: 0px;color: #C2C2C2;}
+                    .purbg .page-title, .orgbg .page-title{text-align: left;}
+                    .orgbg{margin-bottom: 21px}
+                    .gridwrap{box-shadow: 1px 1px 0 0px #F8F8F8}
+                    .purbg .gridbox:nth-child(3), .orgbg .gridbox:nth-child(3){color: #909090;font-weight: 400}
+                    .orgbg .whi .gridbox:nth-child(3),.purbg .whi .gridbox:nth-child(3){color: #fff; font-weight: 600}
+                    .purbg .mapflex img, .orgbg .mapflex img {width: 26px; background: #fff; box-shadow: 0px 3px 6px #00000029; border-radius: 50%}
+                    .mapflex span { font: italic 600 10px/12px Arial;}
+                    .fulltab{text-align: right;text-decoration: underline;font: 400 9px/13px Arial;letter-spacing: 0px;color: #001D42;text-transform: uppercase;display: block;margin: 10px 0;}
+                    .purbg .fulltab{color: #5D068E}
+                    .orgbg .fulltab{color: #F55B00}
+                    .no-data{text-align:center;padding: 10px;font-weight: 600;color: grey;}
+                    </style>
+                    <div class="tabflex">
+                        <div class="tableft">
+                            <div class="tabwrap">
+                            <h2 class="page-title"><span>POINTS TABLE</span></h2>
+                            <div class="gridwrap whi bluebg">
+                                    <div class="gridbox">Pos</div>
+                                    <div class="gridbox">Teams</div>
+                                    <div class="gridbox">Matches</div>
+                                    <div class="gridbox">Points</div>
+                                    <div class="gridbox">NRR</div>
+                            </div>
+
+                            <% if(templateVars && templateVars['pointsData'] && templateVars['pointsData']['standings'] && templateVars['pointsData']['standings']['stage1'] && templateVars['pointsData']['standings']['stage1']['team']) { %>                             
+                            <% const pointsData = templateVars['pointsData']['standings']['stage1']['team'] %>          
+                            <% pointsData.forEach((data, index) => { 
+                                const {name, short_name,pts,nrr,p,pos,id} = data
+                                const serialNo = index+1
+                                if(serialNo > 8) return %>
+ 
+                                <div class="gridwrap">
+                                    <div class="gridbox"> <%- pos %> </div>
+                                    <div class="gridbox">
+                                        <div class="mapflex">
+                                            <img src="https://xmlns.cricketnext.com/cktnxt/scorecard/crk_player_images/flags/90x50/<%- id %>.png" alt="">
+                                            <a href="<%=constant.SITE_URL %>firstcricket/teams/<%= name.replace(/\s/g,'-').toLowerCase() %>-team-players/series/ipl-<%=iplYear%>.html">
+                                                <span class="<%- short_name.toLowerCase()%>"> <%- short_name%> </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="gridbox"> <%- p %> </div>
+                                    <div class="gridbox"> <%- pts%> </div>
+                                    <div class="gridbox"><%= nrr%> </div>
+                                </div>
+                            <% }) %>
+                            <% } else { %>
+                                <p class="no-data">No Data</p>
+                            <% } %>
+                            <a href="<%-constant.SITE_URL %>firstcricket/points-table/series/ipl-2021.html" class="fulltab">FULL TABLE [+]</a>
+                            </div>
+                        </div>
+                        <div class="tabright">
+                            <div class="tabwrap orgbg">
+                            <h2 class="page-title"><span>ORANGE CAP <span>-Most Runs</span></span></h2>
+                            <div class="gridwrap whi">
+                                    <div class="gridbox">Pos</div>
+                                    <div class="gridbox">Player</div>
+                                    <div class="gridbox">Team</div>
+                                    <div class="gridbox">matches</div>
+                                    <div class="gridbox">runs</div>
+                            </div>
+                            <% if(templateVars && templateVars['orangeCap'] && templateVars['orangeCap']['leaderboard'] ) { %>
+                            <% const orangeCapLeaderboard = templateVars['orangeCap']['leaderboard'] %>      
+                            <% orangeCapLeaderboard.forEach((data, index) => { 
+                                const {player_name,player_id,team_short_name, matches_played,runs_scored} = data
+                                const serialNo = index+1
+                                if(serialNo > 3) return %>
+ 
+                                <div class="gridwrap">    
+                                    <div class="gridbox"> <%- serialNo %></div>
+                                    <div class="gridbox">
+                                        <div class="mapflex">
+                                            <img src="https://xmlns.cricketnext.com/cktnxt/scorecard/crk_player_images/players/128X128/<%- player_id %>.png" class="icon_player" alt="">
+                                            <a href="<%=constant.SITE_URL%>firstcricket/player-profile/<%= player_name.replace(/\s/g,'-').toLowerCase() %>-<%=player_id %>">
+                                                <span class="playname"> <%- player_name %></span>
+                                            </a>    
+                                        </div>
+                                    </div>
+                                    <div class="gridbox"> <%- team_short_name %> </div>
+                                    <div class="gridbox"> <%- matches_played %> </div>
+                                    <div class="gridbox"> <%- runs_scored%> </div>
+                                </div>
+
+                            <% }) %>
+                    
+                        <% } else { %>
+                            <p class="no-data">No Data</p>
+                        <% } %>
+                        <a href="<%-constant.SITE_URL %>firstcricket/orange-cap-holder/series/ipl-2021.html" class="fulltab">FULL TABLE [+]</a>
+                        </div>
+
+                            <div class="tabwrap purbg">
+                            <h2 class="page-title"><span>PURPLE CAP <span>-Most Wickets</span></span></h2>
+                            <div class="gridwrap whi">
+                                    <div class="gridbox">Pos</div>
+                                    <div class="gridbox">Player</div>
+                                    <div class="gridbox">Team</div>
+                                    <div class="gridbox">matches</div>
+                                    <div class="gridbox">Wickets</div>
+                            </div>
+                            <% if(templateVars && templateVars['purpleCap'] && templateVars['purpleCap']['leaderboard']) { %>
+                            <% const purpleCapLeaderboard = templateVars['purpleCap']['leaderboard'] %>  
+                            <% purpleCapLeaderboard.forEach((data, index) => { 
+                                const {player_name,player_id,team_short_name, matches_played,wickets} = data
+                                const serialNo = index+1
+                                if(serialNo > 3) return %>
+ 
+                                <div class="gridwrap">    
+                                    <div class="gridbox"> <%- serialNo %></div>
+                                    <div class="gridbox">
+                                        <div class="mapflex">
+                                            <img src="https://xmlns.cricketnext.com/cktnxt/scorecard/crk_player_images/players/128X128/<%- player_id %>.png" class="icon_player" alt="">
+                                            <a href="<%=constant.SITE_URL%>firstcricket/player-profile/<%= player_name.replace(/\s/g,'-').toLowerCase() %>-<%=player_id %>">
+                                                <span class="playname"> <%- player_name %></span>
+                                            </a>    
+                                        </div>
+                                    </div>
+                                    <div class="gridbox"> <%- team_short_name %> </div>
+                                    <div class="gridbox"> <%- matches_played %> </div>
+                                    <div class="gridbox"> <%- wickets%> </div>
+                                </div>
+
+                            <% }) %>
+                    
+                            <% } else { %>
+                                <p class="no-data">No Data</p>
+                            <% } %>
+                            <a href="<%-constant.SITE_URL %>firstcricket/purple-cap-holder/series/ipl-2021.html" class="fulltab">FULL TABLE [+]</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--point table-->
+
+                    <!--My First IPL Match-->
+                    <style type="text/css">
+                        .myfirst-section .sub-title-txt{padding:10px 20px 0 0}
+                        .myfirst-section .glide__slide{width:100% }
+                        .myfirst-section .video-wrap {margin: 10px;}
+                        .myfirst-section .video-wrap .share-detail-div{display:flex;justify-content:space-between;padding:0;align-items:center;position:absolute;bottom:10px;right:10px}
+                        .myfirst-section{position:relative; }
+                        .readmore{font:12px/15px Arial;letter-spacing:0;color:#747474;text-transform:uppercase;opacity:1;border:1px solid #BEBEBE;padding:5px;display:block;margin: 5px auto 0;text-align: center;width: 100px;}
+                        .myfirst{margin-bottom: 30px}
+                    </style>
+                    <section class="myfirst-section" style="display: none;">
+                    <h2 class="page-title"><span>IPL's Lighter Side</span></h2>
+                    <div class="myfirst">
+                        <div class="glide">
+                                <ul class="glide__slides">
+                                    <% for (const [light_key, light_val] of Object.entries(lighterside['solarResults'])) { %>
+                                    <% if(light_key == '0' ){ %>
+                                    <li class="glide__slide">
+                                        <div class="video-wrap">
+                                            <div class="video-img-wrap">
+                                                <a href="<%= light_val['url'] %>" title="<%= light_val['title'] %>">
+                                                    <img src="<%= light_val['image'] %>" alt="<%= light_val['title'] %>" title="<%= light_val['title'] %>" />
+                                                </a>
+                                            </div>
+
+                                            <div class="video-title-div">
+                                                <h3 class="video-title">
+                                                    <a href="<%= light_val['url'] %>" title="<%= light_val['title'] %>">
+                                                        <%= light_val['title'] %>
+                                                    </a>
+                                                </h3>
+                                                <h4 class="sub-title-txt">
+                                                    <%= light_val['description'] %>
+                                                </h4>
+                                            </div>
+
+                                            <div class="share-detail-div">
+                                                <div class="share-icon-wrap">
+                                                    <% var shareArr = []; 
+                                                    shareArr['shareTitle'] = light_val['title'];
+                                                    shareArr['shareUrl'] = light_val['url']; %>
+                                                    <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <% } } %>
+                                </ul>
+                        </div>
+                        <a href="javascript:void(0);" class="readmore">read more</a>
+                    </div>
+                    </section>
+                    <!--My First IPL Match-->
+
+                    <!--PODCASTS Section-->
+                    <style type="text/css">
+                    .podcast-section .sub-title-txt{padding:10px 20px 0 0}
+                    .podcast-section .glide__slide{width:100%}                
+                    .podcast-section .video-wrap {margin: 10px;}
+                    .podcast-section{position:relative}
+                    .readmore{font:12px/15px Arial;letter-spacing:0;color:#747474;text-transform:uppercase;opacity:1;border:1px solid #BEBEBE;padding:5px;display:block;margin: 5px auto 0;text-align: center;width: 100px;}
+                    .podcast{margin-bottom: 30px}
+                    #ipl .podcast-section .video-wrap .share-detail-div {position: absolute;bottom: 10px;right: 0;}
+                    </style>
+                    <section class="podcast-section">
+                        <h2 class="page-title"><span>PODCASTS</span></h2>
+                        <div class="podcast">
+                            <div class="glide">
+                                    <ul class="glide__slides">
+                                        <% for (const [pod_key, pod_val] of Object.entries(podcast['solarResults'])) { %>
+                                        <% if(pod_key == '0' ){ %>
+                                        <li class="glide__slide">
+                                            <div class="video-wrap">
+                                            
+                                                <div class="video-img-wrap">
+                                                    <div class="video-icon">
+                                                        <img src="<%-constant.SITE_URL %>static/images/cricket/ipl/podcast.png" alt="">
+                                                    </div>
+                                                    <a href="<%= pod_val['url'] %>" title="<%= pod_val['title'] %>">
+                                                        <img src="<%= pod_val['image'] %>" alt="<%= pod_val['title'] %>" title="<%= pod_val['title'] %>">
+                                                    </a>
+                                                </div>
+                                            
+                                                <div class="video-title-div">
+                                                    <h3 class="video-title">
+                                                        <a href="<%= pod_val['url'] %>" title="<%= pod_val['title'] %>">
+                                                            <%= pod_val['title'] %>
+                                                        </a>
+                                                    </h3>
+                                                    
+                                                </div>
+                                                <div class="share-detail-div">
+                                                    <div class="share-icon-wrap">
+                                                        <% var shareArr = []; 
+                                                        shareArr['shareTitle'] = pod_val['title'];
+                                                        shareArr['shareUrl'] = pod_val['url']; %>
+                                                        <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <% } } %>
+                                    </ul>
+                            </div>
+                             <a href="<%-constant.SITE_URL %>tag/ipl-2021-podcast" class="readmore">read more</a>
+                        </div>
+                    </section>
+                    <!--PODCASTS Section-->
+
+                    <!--trivia-->
+                    <style type="text/css">
+                    .trivia-section{margin-bottom: 30px;background: #F8F8F8;padding: 30px 20px;}
+                    .trivia{position: relative;}
+                    .trivia-section .page-title:after {content: none}
+                    .readmore{font:12px/15px Arial;letter-spacing:0;color:#747474;text-transform:uppercase;opacity:1;border:1px solid #BEBEBE;padding:5px;display:block;margin:20px auto 0;text-align: center;width: 100px;}
+                    .triviatext{font: 700 15px/20px 'Playfair Display';letter-spacing: 0;color: #000;margin-top: 5px;}
+                    .trivialogo{display: flex; align-items: center;}
+                    .trivia-section .page-title {text-align: left;margin: 0;border-bottom: 0 solid #707070;margin-top: -10px;margin-left: 10px;}
+                    .trivialogo img{width: 80px}
+                    </style>
+                    <% if(typeof trivia['ipl_cricket_trivia'] !== 'undefined' && trivia['ipl_cricket_trivia'] !== null) { %>
+                    <section class="trivia-section">
+                        <% for (const [trivia_key, trivia_val] of Object.entries(trivia['ipl_cricket_trivia'])) { %>
+                        <% if(trivia_key == '0' ){ %>
+                        <div class="trivia">  
+                            <div class="trivialogo">
+                                <img src="<%-constant.SITE_URL %>static/images/cricket/ipl/trivia.png" alt="">
+                                <h2 class="page-title">
+                                    <span><%= trivia_val['trivia_title'] %></span>
+                                </h2>
+                            </div>
+                            <div class="triviatext"><%= trivia_val['trivia_description'] %></div><a href="<%-constant.SITE_URL %>firstcricket/trivia/series/ipl-2021.html" class="readmore">read more</a>
+                        </div>
+                        <% } } %>
+                    </section>
+                    <% } %>
+                    <!--trivia-->
+
+                    <!--IPL 2021 stats
+                    <style type="text/css">
+                        .iplstats{margin-bottom: 30px}
+                        .iplstats-section .page-title:after {content: none}
+                        .iplstats-section .page-title {text-align: left;margin: 0;border-bottom: 0 solid #707070;}
+                        .iplstats img{width: 100%}
+                    </style>
+                    <section class="iplstats-section">
+                    <h2 class="page-title"><span>IPL 2021 stats</span></h2>
+                    <div class="iplstats">
+                        <img src="<%-constant.SITE_URL %>static/images/cricket/ipl/stats.png" alt="">
+                    </div>
+                    </section>
+                    IPL 2021 stats-->
+
+                    <!--IPL FACTBOX-->
+                    <style type="text/css">
+                        .factbox-section .sub-title-txt{padding:10px 20px 0 0}
+                        .factbox-section .glide__slide{width:100%}                
+                        .factbox-section .video-wrap {margin: 10px;}
+                        .factbox-section .video-wrap .share-detail-div{display:flex;justify-content:space-between;padding:0;align-items:center;position:absolute;bottom:10px;right:10px}
+                        .factbox-section{position:relative}
+                        .readmore{font:12px/15px Arial;letter-spacing:0;color:#747474;text-transform:uppercase;opacity:1;border:1px solid #BEBEBE;padding:5px;display:block;margin: 10px auto 0;text-align: center;width: 100px;}
+                        .factbox{margin-bottom: 30px}
+                    </style>
+                    <section class="factbox-section">
+                    <h2 class="page-title"><span>IPL FACTBOX</span></h2>
+                    <div class="factbox">
+                        <div class="glide">
+                            <ul class="glide__slides">
+                                <% for (const [fact_key, fact_val] of Object.entries(factbox['solarResults'])) { %>
+                                <% if(fact_key == '0' ){ %>
+                                <li class="glide__slide">
+                                    <div class="video-wrap">
+                                        <div class="video-img-wrap">
+                                            <a href="<%= fact_val['url'] %>" title="<%= fact_val['title'] %>">
+                                                <img src="<%= fact_val['image'] %>" alt="<%= fact_val['title'] %>" title="<%= fact_val['title'] %>" />
+                                            </a>
+                                        </div>
+
+                                        <div class="video-title-div">
+                                            <h3 class="video-title">
+                                                <a href="<%= fact_val['url'] %>" title="<%= fact_val['title'] %>">
+                                                    <%= fact_val['title'] %>
+                                                </a>
+                                            </h3>
+                                            <h4 class="sub-title-txt">
+                                                <%= fact_val['description'] %>
+                                            </h4>
+                                        </div>
+                                        <div class="share-detail-div">
+                                            <div class="share-icon-wrap">
+                                                <% var shareArr = []; 
+                                                shareArr['shareTitle'] = fact_val['title'];
+                                                shareArr['shareUrl'] = fact_val['url']; %>
+                                                <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>            
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <% } } %>    
+                            </ul>
+                        </div>
+
+                        <a href="<%-constant.SITE_URL %>tag/ipl-factbox" class="readmore">read more</a>
+                    </div>
+                    </section>
+                    <!--IPL FACTBOX-->
+
+                    <!--Photo Gallery-->
+                    <style type="text/css">
+                        #ipl .photo-wrap-slider{background: #fff}
+                        .photo-section .page-title span {font: 900 22px/26px arial;}
+                    </style>
+                    <section class="photo-section">
+                        <h2 class="page-title"><span>Photos</span></h2>
+
+                        <div class="gallery-wrap">
+                            <% for (const [photos_key, photos_val] of Object.entries(photos_ipl['solarResults'])) { %>
+                            <% if(photos_key == '0' ){ %>
+                            <div class="photo-wrap">
+                                
+                                <div class="photo-img-wrap">
+                                    
+                                    <a href="<%= photos_val['url'] %>" title="<%= photos_val['title'] %>">
+                                        <img src="<%= photos_val['image'] %>" alt="<%= photos_val['title'] %>" title="<%= photos_val['title'] %>"/>
+                                    </a>
+                                </div>
+                                
+                                <div class="photo-title-div">                                    
+                                    <h3 class="photo-title">
+                                        <a href="<%= photos_val['url'] %>" title="<%= photos_val['title'] %>">
+                                            <%= photos_val['title'] %>
+                                        </a>
+                                    </h3>  
+                                    <div class="share-icon-wrap">
+                                        <% var shareArr = []; 
+                                        shareArr['shareTitle'] = photos_val['title'];
+                                        shareArr['shareUrl'] = photos_val['url']; %>
+                                        <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+                                    </div>                                  
+                                </div>    
+                            </div>
+                            <% } } %>    
+                        </div>
+                        <div class="photo-wrap-slider">
+                            <% for (const [photos_key, photos_val] of Object.entries(photos_ipl['solarResults'])) { %>
+                            <% if(photos_key >= '1' && photos_key <= '3'){ %>
+                            <div class="photo-wrap">
+                                
+                                <div class="photo-img-wrap">
+                                    <a href="<%= photos_val['url'] %>" title="<%= photos_val['title'] %>">
+                                        <img src="<%= photos_val['image'] %>" alt="<%= photos_val['title'] %>" title="<%= photos_val['title'] %>"/>
+                                    </a>
+                                </div>
+                                
+                                <div class="photo-title-div">                                    
+                                    <h3 class="photo-title">
+                                        <a href="<%= photos_val['url'] %>" title="<%= photos_val['title'] %>">
+                                            <%= photos_val['title'] %>
+                                        </a>
+                                    </h3>  
+                                    <div class="share-icon-wrap">
+                                        <% var shareArr = []; 
+                                        shareArr['shareTitle'] = photos_val['title'];
+                                        shareArr['shareUrl'] = photos_val['url']; %>
+                                        <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+                                    </div>                                  
+                                </div>   
+                            </div>
+                            <% } } %>
+                        </div>
+                    </section>
+                    <!--Photo Gallery-->
+
+                    <!--IPL 2021 QUIZ
+                    <style type="text/css">
+                        .iplquiz-section{background: url(images/quiz-bg.png);padding: 20px;margin-bottom: 40px}
+                        .iplquiz-section{position:relative}
+                        .iplquiz img{width: 100%}
+                        .iplquiz-section .page-title:after {border-left: 10px solid #000;border-right: 10px solid #000;}
+                    </style>
+                    <section class="iplquiz-section">
+                        <div class="apester-media" data-media-id="604b13afc7823f0009707965" height="452"></div><script async src="https://static.apester.com/js/sdk/latest/apester-sdk.js"></script>
+                    </section>
+                    IPL 2021 QUIZ-->
+
+                    <!--latest cricket Section-->
+                    <style type="text/css">
+                    #iplstoriesSlider .glide__bullets .glide__bullet.glide__bullet--active{background:#f04f38}
+                    #iplstoriesSlider .glide__bullets .glide__bullet{background:#d6d6d6;border:none;width:30px;height:6px;margin:0 2px;cursor:pointer;outline:0}
+                    #iplstoriesSlider .glide__bullets{margin:10px 0 40px;display:flex;justify-content:center}
+                    #iplstoriesSlider .title-div-wrap .share-wrap{bottom:0;right:10px;top:unset}
+                    #iplstoriesSlider .image-wrap img{width:100%}
+                    #iplstoriesSlider .share-wrap{position:absolute}
+                    </style>
+                    <section class="ipl-slider">
+                        <h2 class="page-title"><span>LATEST CRICKET STORIES</span></h2>
+                        <div class="glide" id="iplstoriesSlider">
+                            <div data-glide-el="track" class="glide__track">
+                                <ul class="glide__slides">
+                                    <% for (const [latestKey, latestValue] of Object.entries(latestStories['CatMainRanking']['main_ranking'])) { %>
+                                    <li class="glide__slide">
+                                        <div class="image-wrap">
+                                            <a href="<%=latestValue['post_url']%>" title="<%=latestValue['post_title']%>">
+                                                <img src="<%=latestValue['mobile_img']%>" alt="<%=latestValue['post_title']%>" title="<%=latestValue['post_title']%>" />
+                                            </a>
+                                            <div class="title-div-wrap">
+                                                <div class="text-wrap">
+                                                    <a href="<%=latestValue['post_url']%>" title="<%=latestValue['post_title']%>">
+                                                        <h2 class="title-text">
+                                                            <%=latestValue['post_title']%>
+                                                        </h2>
+                                                    </a>
+                                                </div>
+                                                <div class="share-wrap">
+                                                    <% var shareArr = []; 
+                                                    shareArr['shareTitle'] = latestValue['post_title'];
+                                                    shareArr['shareUrl'] = latestValue['post_url']; %>
+                                                    <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <% } %>
+                                </ul>
+                            </div>
+                            <div class="glide__bullets" data-glide-el="controls[nav]">
+                                <button class="glide__bullet" data-glide-dir="=0"></button>
+                                <button class="glide__bullet" data-glide-dir="=1"></button>
+                                <button class="glide__bullet" data-glide-dir="=2"></button>
+                            </div>
+                        </div>
+                    </section>
+                    <!--latest cricket Section-->
+
+                <!--Misc Story Section-->
+                <%- include(viewpath+ '/desktop/firstcricket/ipl/ipl-news-widget'); %>
+                <!--Misc Story Section-->
+                
+                <!--Pagination-->
+                <%- include(viewpath+ '/widgets/paginationDefault'); %>
+                <!--Pagination-->
+                
+                <!--Ad Slot-->
+                <% if ((typeof ads  !== 'undefined' && typeof ads['ATF_300'] !== 'undefined')){%>
+                    <div class="ad-center ATF_300" data-ad-id="<%-ads['ATF_300'][0]%>" data-ad-size="<%-ads['BTF_300'][1]%>">
+                        <%-common.displayAds(ads['ATF_300'][0]) %>
+                    </div>
+                <% } %>
+                <!--Ad Slot-->
+
+                    <!--Cricket Scores-->
+                    <style type="text/css">
+                    .matchname{text-align: left;font: 700 20px/26px Playfair Display;letter-spacing: 0px;color: #000000;} 
+                    .matchname span{font-weight: 400;font-style: italic;}   
+                    .matchdate{text-align: left;font: 400 14px/17px Arial;letter-spacing: 0.56px;color: #000000;opacity: 1;margin: 5px 0}
+                    .matchwin{text-align: left;font: italic 400 12px/17px Arial;letter-spacing: 0.48px;color: #FAD65F;opacity: 1;}
+                    .recentmat li{padding:15px;border-bottom: 1px solid #ccc}
+                    .recentmat li:last-child{border-bottom: 0}
+                    .recentmatwrap{padding: 0 0 5px;border: 1px solid #DEDEDE;position: relative;top: -15px;margin: 0 10px 20px;border-bottom: 4px solid #000;}
+                    .allmat{text-align: center;font: italic  600 16px/20px Arial;letter-spacing: 0px;color: #000000;opacity: 1; display: block;margin-top: 20px}
+                    </style>
+                    <div class="cricket-score common-widget">
+                        <div class="double-title">
+                            <h3 class="title-txt">Recent matches</h3>
+                            <span class="title-shadow">Recent matches</span>
+                        </div>
+                        <div class="recentmatwrap">
+                           <ul class="recentmat">
+                                <% let count = 0; %>
+                                <% var reverseMatchList = Object.entries(resultMatchList).reverse();
+                                for (const [match_key, match_val] of reverseMatchList) { %>
+                                <% if (count >= 5) break;%>
+                                <% if (match_val['category'] == 'men') { %>
+                                    <li>
+                                        <a href="<%= constant.SITE_URL %>firstcricket/cricket-live-score/<%-match_val['teama'].replace(/\s+/g, '-').toLowerCase() %>-vs-<%-match_val['teamb'].replace(/\s+/g, '-').toLowerCase() %>-<%= match_val['matchtype'].replace(/\s+/g, '-').toLowerCase() %>-live-cricket-score-full/<%= match_val['series_Id']%>/<%= match_val['match_Id']%>.html" title="<%-match_val['teama'] %> vs <%-match_val['teamb'] %> Full Scorecard">
+                                        <div class="matchname"><%= match_val['teama_short']%> <span>Vs</span> <%= match_val['teamb_short']%></div>
+                                        <div class="matchdate"><%= match_val['seriesname']%></div>
+                                        <div class="matchwin"><%= match_val['matchresult']%></div>
+                                        </a>
+                                    </li>
+                                <% count++;%>    
+                                <% } } %>
+                            </ul>
+                            <a href="<%-constant.SITE_URL %>firstcricket/results/" class="allmat">All Recent Matches</a>
+                        </div>
+                    </div>
+                    <!--Cricket Scores-->
+
+                <!--Ad Slot-->
+                <% if ((typeof ads  !== 'undefined' && typeof ads['BTF_300'] !== 'undefined')){%>
+                    <div class="ad-center BTF_300" data-ad-id="<%-ads['BTF_300'][0]%>" data-ad-size="<%-ads['BTF_300'][1]%>">
+                        <%-common.displayAds(ads['BTF_300'][0]) %>
+                    </div>
+                <% } %>
+                <!--Ad Slot-->
+
+                
+                <!--Upcoming Matches-->
+                <%- include(viewpath+ '/widgets/cric-upcoming-rhs-widget'); %>
+                <!--Upcoming Matches-->
+
+                    <!--daily win-->
+                    <style type="text/css">
+        .dailywin{margin-bottom: 30px;}
+
+                    .wintop{background: #393939; display: flex;align-items: center;justify-content: space-between;padding: 10px}
+                    .winleft{text-align: left;font: 700 22px/17px Arial;letter-spacing: 0px;color: #FFAE00;text-transform: uppercase;}
+                    .winleft span{display: block;text-align: left;font: 400 15px/17px Arial;letter-spacing: 0px;color: #FFFFFF;text-transform: uppercase;margin-top: 3px}
+                    .copotext {text-align: left;text-decoration: underline;font: 400 11px/13px Arial; letter-spacing: 0px;color: #B1B1B1;text-transform: uppercase;opacity: 1;margin-bottom: 3px;}
+                    .dailywin .tab{background: #393939;padding: 0 10px}
+                    .dailywin .tab .tablinks{flex: 1;text-align: center;padding: 10px 35px;font: 700 14px/20px Arial;letter-spacing: 0px;color: #FAD65F;}
+                    .dailywin .tab .tablinks.active{background: #FCC33C; color: #000;border-radius: 4px 4px 0px 0px;}
+                    .dailywin .tab .tablinks span{text-align: left;font:  300 10px/20px Arial;letter-spacing: 0px;}
+                    .winyel{background: #FCC33C;padding: 10px}
+                    .quli {text-align: center;font: 700 14px/19px Arial;letter-spacing: 0px;color: #000000;}     
+                    .quli span{text-align: center;font: 400 14px/19px Arial;letter-spacing: 0px;color: #000000;display: block;}   
+                    .whowin{text-align: center;font: 900 20px/27px Arial;letter-spacing: 0px;color: #000000;text-transform: uppercase;opacity: 1;margin-top: 5px}  
+                    .dailywin .tabcontent{padding: 0}     
+                    .matchven{text-align: center;font: 400 14px/20px Arial;letter-spacing: 0px;color: #FFFFFF;background: #393939; padding:20px}
+                    .matchven span{text-align: center;font: 700 14px/20px Arial;letter-spacing: 0px;color: #FFFFFF;display: block;}
+                    .prediwin{text-align: center;font: normal normal bold 16px/19px Arial;letter-spacing: 0px;color: #FFFFFF;background: #393939;padding: 10px 10px 20px;border-top: 1px solid #747474}
+                    .prediwin span{display: block;font: 400 16px/19px Arial;}
+                    .teamflex{display: flex;overflow:hidden;}
+                    .teamleft{padding: 15px 10px;width: 50%;position: relative;}
+                    .teamright{padding:15px 10px;width: 50%; position: relative;}
+                    .teamleft::after{content: "";position: absolute;background:#4D4D4D;top: 0;bottom: 0;right: 0;width: 100%;    transform: skewX(-10deg);z-index: -1;}
+                    .teamright::before{content: "";position: absolute;background:#2D2D2D;top: 0;bottom: 0;left: 0;width: 100%;    transform: skewX(-10deg);z-index: -1;}
+                    .teamleft::before{content: "";position: absolute;background:#4D4D4D;top: 0;bottom: 0;left: 0;width: 20px;z-index: -1;}
+                    .teamright::after{content: "";position: absolute;background:#2D2D2D;top: 0;bottom: 0;right: 0;width: 20px;z-index: -1;}
+                    .temimg{text-align: center;}
+                    .temimg img{border-radius: 50%; border:3px solid #fff; text-align: center;}
+                    .temname{text-align: center;text-transform: uppercase; font: 700 15px/21px Arial;letter-spacing: 0px;color: #FFFFFF;opacity: 1;}
+                    .temper{text-align: center;font: 700 41px/45px Arial;letter-spacing: 0px;color: #FFFFFF;opacity: 1;}
+                    .temvot{text-align: center;font: 400 12px/15px Arial;letter-spacing: 0px;color: #FFFFFF;opacity: 1;}
+        </style>
+        <% if(typeof prediction !== 'undefined' && typeof prediction['ipl_cricket_prediction'] !== 'undefined' && prediction['ipl_cricket_prediction'] !== null) { %>
+        
+        <div class="dailywin" style="margin:0 auto; width:300px;">
+                        <!--Score Tabs Widget-->
+                        <div class="wintop">
+                            <div class="winleft">
+                                IPL <span>Daily Predictor</span>
+                            </div>
+                        
+                        </div>
+                        <% const getMatchNumber = (predictionUrlKey) => {
+                            const extractArr = prediction['ipl_cricket_prediction'][0][predictionUrlKey].toString().split('Match')
+                            const rightStr = extractArr[1].trim()
+                            const matchNumber = rightStr[0] + rightStr[1]
+                            return matchNumber
+                        } %>
+
+                        <div class="dailywin-tabs">
+                            <div class="tab" style="height: auto; display:flex; width:100%;">
+                                <a href="javascript:void(0);" title="" class="tablinks active" onclick="tabs(this, 'win1')">
+                                    <%- 'Match No. ' + getMatchNumber('prediction_url')%>
+                                </a>
+
+                                <%if(typeof prediction['ipl_cricket_prediction'][0]['prediction_url_2'] !== 'undefined' && prediction['ipl_cricket_prediction'][0]['prediction_url']){%>
+                                <a href="javascript:void(0);" title="" class="tablinks " onclick="tabs(this, 'win2')">
+                                    <%- 'Match No. ' + getMatchNumber('prediction_url_2')%>
+                                </a>
+                                <%}%>
+                            </div>
+                        
+                            
+                            <div id="win1" class="tabcontent" style="display: block;">
+                                <%- prediction['ipl_cricket_prediction'][0]['prediction_url'] %>
+                            </div>
+                            
+                            <div id="win2" class="tabcontent">
+                                <%- prediction['ipl_cricket_prediction'][0]['prediction_url_2'] %>
+                            </div>
+                        </div>
+                        <!--Score Tabs Widget-->
+        </div>
+
+        <% } %>
+                    <!--daily win-->
+
+                    <!--ipl tweets
+                    <style type="text/css">
+                    .ipltweet{margin:0 10px 30px;}
+                    .ipltweet img{width: 100%}
+                    </style>
+                    <div class="ipltweet">
+                        <img src="<%-constant.SITE_URL %>static/images/cricket/ipl/ipl-tweet.png" alt="">
+                    </div>
+                    ipl tweets-->
+            </div>
+            <style type="text/css">
+                .upcoming-team-div .flag-div.team-one, .upcoming-team-div .flag-div.team-two {
+                    border-radius: 0;
+                }
+                #ipl .top-slider-section .share-wrap {
+                    position: absolute;
+                    bottom: 7px;
+                    top: unset;
+                    right: -5px;
+                }
+                .copotext{text-align: center;width: 100%;}
+                .aoso {display: flex;align-items: center;flex-wrap: wrap;justify-content: center;}
+            </style>
+        </div>
+<%- include(viewpath+ '/layouts/m-footer'); %>

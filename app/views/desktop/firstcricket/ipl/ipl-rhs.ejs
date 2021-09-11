@@ -1,0 +1,162 @@
+    <div class="right-content">
+
+        <!--Ad Slot-->
+        <% if ((typeof ads  !== 'undefined' && typeof ads['ATF_300'] !== 'undefined')){%>
+            <div class="ad-center ATF_300 fixed-ad-banner-rhs" data-ad-id="<%-ads['ATF_300'][0]%>" data-ad-size="<%-ads['ATF_300'][1]%>">
+            <%-common.displayAds(ads['ATF_300'][0]) %>
+            </div>
+        <% } %>
+        <!--Ad Slot-->
+        
+        <!--Cricket Scores-->
+        <style type="text/css">
+        .matchname{text-align: left;font: 700 20px/26px Playfair Display;letter-spacing: 0px;color: #000000;} 
+        .matchname span{font-weight: 400;font-style: italic;}   
+        .matchdate{text-align: left;font: 400 14px/17px Arial;letter-spacing: 0.56px;color: #000000;opacity: 1;margin: 5px 0}
+        .matchwin{text-align: left;font: italic 400 12px/17px Arial;letter-spacing: 0.48px;color: #FAD65F;opacity: 1;}
+        .recentmat li{padding:15px;border-bottom: 1px solid #ccc}
+        .recentmat li:last-child{border-bottom: 0}
+        .recentmatwrap{padding: 0 0 5px;border: 1px solid #DEDEDE;position: relative;top: -15px;margin: 0 0 20px;border-bottom: 4px solid #000;}
+        .allmat{text-align: center;font: italic  600 16px/20px Arial;letter-spacing: 0px;color: #000000;opacity: 1; display: block;margin-top: 20px}
+        
+        </style>
+        <div class="cricket-score common-widget">
+            <div class="double-title">
+                <h3 class="title-txt">Recent matches</h3>
+                <span class="title-shadow">Recent matches</span>
+            </div>
+            <div class="recentmatwrap">
+               <ul class="recentmat">
+                <% let count = 0; %>
+                <% var reverseMatchList = Object.entries(resultMatchList).reverse();
+                for (const [match_key, match_val] of reverseMatchList) { %>
+                <% if (count >= 5) break;%>
+                <% if (match_val['category'] == 'men') { %>
+                  <li>
+                    <a href="<%= constant.SITE_URL %>firstcricket/cricket-live-score/<%-match_val['teama'].replace(/\s+/g, '-').toLowerCase() %>-vs-<%-match_val['teamb'].replace(/\s+/g, '-').toLowerCase() %>-<%= match_val['matchtype'].replace(/\s+/g, '-').toLowerCase() %>-live-cricket-score-full/<%= match_val['series_Id']%>/<%= match_val['match_Id']%>.html" title="<%-match_val['teama'] %> vs <%-match_val['teamb'] %> Full Scorecard">
+                        <div class="matchname"><%= match_val['teama_short']%> <span>Vs</span> <%= match_val['teamb_short']%></div>
+                        <div class="matchdate"><%= match_val['seriesname']%></div>
+                        <div class="matchwin"><%= match_val['matchresult']%></div>
+                    </a>
+                  </li>
+                  <% count++;%>
+                <%  } } %>                
+                </ul>
+                <a href="<%-constant.SITE_URL %>firstcricket/results/" class="allmat">All Recent Matches</a>
+            </div>
+        </div>
+        <!--Cricket Scores-->
+
+        <!--Ad Slot-->
+        <% if ((typeof ads  !== 'undefined' && typeof ads['MTF_300']  !== 'undefined')){%>
+            <div class="ad-center MTF_300" data-ad-id="<%-ads['MTF_300'][0]%>" data-ad-size="<%-ads['MTF_300'][1]%>">
+                <%-common.displayAds(ads['MTF_300'][0]) %>
+            </div>
+        <% } %>
+        <!--Ad Slot-->
+                
+        <!--Upcoming Matches-->
+        <%- include(viewpath+ '/widgets/cric-upcoming-rhs-widget'); %>
+        <!--Upcoming Matches-->
+
+        <!--daily win-->
+        <% if(typeof seriesSlug !== 'undefined' && seriesSlug == "ipl-2021"){ %>
+        <style type="text/css">
+        .dailywin{margin-bottom: 30px;}
+
+                    .wintop{background: #393939; display: flex;align-items: center;justify-content: space-between;padding: 10px}
+                    .winleft{text-align: left;font: 700 22px/17px Arial;letter-spacing: 0px;color: #FFAE00;text-transform: uppercase;}
+                    .winleft span{display: block;text-align: left;font: 400 15px/17px Arial;letter-spacing: 0px;color: #FFFFFF;text-transform: uppercase;margin-top: 3px}
+                    .copotext {text-align: left;text-decoration: underline;font: 400 11px/13px Arial; letter-spacing: 0px;color: #B1B1B1;text-transform: uppercase;opacity: 1;margin-bottom: 3px;}
+                    .dailywin .tab{background: #393939;padding: 0 10px}
+                    .dailywin .tab .tablinks{flex: 1;text-align: center;padding: 10px 35px;font: 700 14px/20px Arial;letter-spacing: 0px;color: #FAD65F;}
+                    .dailywin .tab .tablinks.active{background: #FCC33C; color: #000;border-radius: 4px 4px 0px 0px;}
+                    .dailywin .tab .tablinks span{text-align: left;font:  300 10px/20px Arial;letter-spacing: 0px;}
+                    .winyel{background: #FCC33C;padding: 10px}
+                    .quli {text-align: center;font: 700 14px/19px Arial;letter-spacing: 0px;color: #000000;}     
+                    .quli span{text-align: center;font: 400 14px/19px Arial;letter-spacing: 0px;color: #000000;display: block;}   
+                    .whowin{text-align: center;font: 900 20px/27px Arial;letter-spacing: 0px;color: #000000;text-transform: uppercase;opacity: 1;margin-top: 5px}  
+                    .dailywin .tabcontent{padding: 0}     
+                    .matchven{text-align: center;font: 400 14px/20px Arial;letter-spacing: 0px;color: #FFFFFF;background: #393939; padding:20px}
+                    .matchven span{text-align: center;font: 700 14px/20px Arial;letter-spacing: 0px;color: #FFFFFF;display: block;}
+                    .prediwin{text-align: center;font: normal normal bold 16px/19px Arial;letter-spacing: 0px;color: #FFFFFF;background: #393939;padding: 10px 10px 20px;border-top: 1px solid #747474}
+                    .prediwin span{display: block;font: 400 16px/19px Arial;}
+                    .teamflex{display: flex;overflow:hidden;}
+                    .teamleft{padding: 15px 10px;width: 50%;position: relative;}
+                    .teamright{padding:15px 10px;width: 50%; position: relative;}
+                    .teamleft::after{content: "";position: absolute;background:#4D4D4D;top: 0;bottom: 0;right: 0;width: 100%;    transform: skewX(-10deg);z-index: -1;}
+                    .teamright::before{content: "";position: absolute;background:#2D2D2D;top: 0;bottom: 0;left: 0;width: 100%;    transform: skewX(-10deg);z-index: -1;}
+                    .teamleft::before{content: "";position: absolute;background:#4D4D4D;top: 0;bottom: 0;left: 0;width: 20px;z-index: -1;}
+                    .teamright::after{content: "";position: absolute;background:#2D2D2D;top: 0;bottom: 0;right: 0;width: 20px;z-index: -1;}
+                    .temimg{text-align: center;}
+                    .temimg img{border-radius: 50%; border:3px solid #fff; text-align: center;}
+                    .temname{text-align: center;text-transform: uppercase; font: 700 15px/21px Arial;letter-spacing: 0px;color: #FFFFFF;opacity: 1;}
+                    .temper{text-align: center;font: 700 41px/45px Arial;letter-spacing: 0px;color: #FFFFFF;opacity: 1;}
+                    .temvot{text-align: center;font: 400 12px/15px Arial;letter-spacing: 0px;color: #FFFFFF;opacity: 1;}
+        </style>
+        <% if(typeof prediction !== 'undefined' && typeof prediction['ipl_cricket_prediction'] !== 'undefined' && prediction['ipl_cricket_prediction'] !== null) { %>
+        
+        <div class="dailywin">
+                        <!--Score Tabs Widget-->
+                        <div class="wintop">
+                            <div class="winleft">
+                                IPL <span>Daily Predictor</span>
+                            </div>
+                        
+                        </div>
+                        <% const getMatchNumber = (predictionUrlKey) => {
+                            const extractArr = prediction['ipl_cricket_prediction'][0][predictionUrlKey].toString().split('Match')
+                            const rightStr = extractArr[1].trim()
+                            const matchNumber = rightStr[0] + rightStr[1]
+                            return matchNumber
+                        } %>
+
+                        <div class="dailywin-tabs">
+                            <div class="tab" style="height: auto; display:flex; width:100%;">
+                                <a href="javascript:void(0);" title="" class="tablinks active" onclick="tabs(this, 'win1')">
+                                    <%- 'Match No. ' + getMatchNumber('prediction_url')%>
+                                </a>
+
+                                <%if(typeof prediction['ipl_cricket_prediction'][0]['prediction_url_2'] !== 'undefined' && prediction['ipl_cricket_prediction'][0]['prediction_url']){%>
+                                <a href="javascript:void(0);" title="" class="tablinks " onclick="tabs(this, 'win2')">
+                                    <%- 'Match No. ' + getMatchNumber('prediction_url_2')%>
+                                </a>
+                                <%}%>
+                            </div>
+                        
+                            
+                            <div id="win1" class="tabcontent" style="display: block;">
+                                <%- prediction['ipl_cricket_prediction'][0]['prediction_url'] %>
+                            </div>
+                            
+                            <div id="win2" class="tabcontent">
+                                <%- prediction['ipl_cricket_prediction'][0]['prediction_url_2'] %>
+                            </div>
+                        </div>
+                        <!--Score Tabs Widget-->
+        </div>
+
+        <% } %>
+        <!--daily win-->
+        <% } %>
+
+        <!--ipl tweets
+        <style type="text/css">
+        .ipltweet{margin-bottom: 30px;}
+        .ipltweet img{width: 100%}
+        </style>
+        <div class="ipltweet">
+            <img src="<%-constant.SITE_URL %>static/images/cricket/ipl/ipl-tweet.png" alt="">
+        </div>
+        ipl tweets-->
+
+        <!--Ad Slot-->
+        <% if (typeof ads  !== 'undefined' && typeof ads['BTF_300']  !== 'undefined'){%>
+        <div class="sticky-ad ad-slot">
+            <div class="ad-center sticky-ad ad-slot BTF_300"  data-ad-id="<%-ads['BTF_300'][0]%>" data-ad-size="<%-ads['BTF_300'][1]%>">
+                <%-common.displayAds(ads['BTF_300'][0]) %>
+            </div>
+        </div>
+        <% } %>
+        <!--Ad Slot-->
+    </div>

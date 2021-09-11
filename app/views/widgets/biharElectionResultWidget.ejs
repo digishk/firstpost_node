@@ -1,0 +1,246 @@
+<style>
+  .dle20-live-couting.live-data {
+    background: #fff;
+    padding: 10px;
+    margin-bottom: 0px;
+    position: relative;
+}
+.dle20-counting-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.counting-title.border span {
+    color: #ea5454;
+}
+.dle20-counting-header .full-results {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    font: 700 12px/14px Roboto,sans-serif;
+    letter-spacing: 0;
+    color: #11a0a4;
+    margin-left: auto;
+    text-decoration: none;
+}
+.dle20-counting-header .full-results svg {
+    margin-left: 5px;
+    width: 15px;
+    height: 15px;
+    fill: #11a0a4;
+}
+.dle20-counting-header .counting-title {
+    text-align: left;
+    font: 700 16px/19px Roboto,sans-serif;
+    letter-spacing: 0;
+    color: #272727;
+    opacity: 1;
+}
+.live-counting{
+  background: #f5f5f5;
+  padding: 10px;
+  margin-bottom: 20px;
+  position: relative;
+}
+.counts-data{
+  display: flex;
+  justify-content: space-between;
+}
+.live-counting .seats-count {
+  font: 900 16px/32px Roboto,sans-serif;
+  letter-spacing: 0;
+  color: #272727;
+  text-align: center;
+}
+.live-counting .seats-count .no{
+  display: block;
+  text-align: center;
+  font-size: 45px;
+}
+.live-counting .seats-count .to-win{
+  font: 400 16px/12px Roboto,sans-serif;
+  display: block;
+}
+.live-counting .counts-data .party-col {
+  display: flex;
+  width: 300px;
+}
+.live-counting .counts-data .party-name {
+  font: 900 24px/28px 'Roboto', sans-serif;
+  letter-spacing: 0;
+  color: #FFFFFF;
+  border-right: white solid 1px;
+  height: 60px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 10px;
+  width: 50%;
+}
+.live-counting .counts-data .result-count {
+  font: 900 42px/55px 'Roboto', sans-serif;
+  letter-spacing: 0;
+  color: #FFFFFF;
+  width: 50%;
+  text-align: center;
+  padding: 0 10px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.seat-count-live{
+  margin-left: 45px;
+}
+.result-count .status{
+  font: 400 11px/18px 'Roboto', sans-serif;
+  display: block;
+  text-align: right;
+}
+.live-counting .counts-data .party-col{ width: 173px}
+.live-counting .counts-data .party-name{width: auto;font: 900 24px/28px 'Roboto', sans-serif;}
+.live-counting .counts-data .party-col{width: 173px;}
+.live-counting .counts-data .result-count{width:auto; font: 900 33px/55px 'Roboto', sans-serif;}
+.live-counting .seats-count .no{ font-size: 30px;}
+.live-counting .seats-count .to-win{ font: 400 11px/12px Roboto,sans-serif;}
+.seat-count-live{margin-left:0px;}
+@media(max-width: 1280px){
+  .live-counting .counts-data .party-col{
+    width: 270px;
+  }
+}
+@media (max-width: 1024px){
+  .live-counting .counts-data .party-col {
+    width: 215px;
+  }
+}
+@media (max-width: 768px){
+   .dle20-counting-header{
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+   .dle20-counting-header .counting-title{
+        border: none;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .counts-data{
+      flex-direction: column;
+    }
+    .live-counting .counts-data .party-col{
+      width: 100%;
+      margin-bottom: 15px;
+    }
+}
+</style>
+<div class="dle20-live-couting live-data">
+
+<div class="dle20-counting-header">
+  <h1 class="counting-title">Bihar Assembly Election RESULTS LIVE 2020</h1>
+  <a href="https://www.firstpost.com/bihar-assembly-election-2020/alliance-party-wise-tally-live-results-updates" class="full-results">
+  Full Results
+  <svg version="1.1" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+  <g id="Bounding_Box">
+  <rect fill="none" width="24" height="24"></rect>
+  </g>
+  <g id="Master">
+  <g>
+  <polygon points="15.5,5 11,5 16,12 11,19 15.5,19 20.5,12 "></polygon>
+  <polygon points="8.5,5 4,5 9,12 4,19 8.5,19 13.5,12 "></polygon>
+  </g>
+  </g>
+  </svg>
+  </a>
+</div>
+</div>
+<div class="live-counting" id="biharResult">
+</div>
+<script>
+  
+  $(document).ready(function(){
+
+  var switchDataURL = 'https://election.nw18.com/electiondata/electionjson/bihar_assembly_election_2020/live/switchdata.json';
+
+  getResultData(switchDataURL);
+
+  setInterval(function(){
+    console.log("calling set interval result");
+        getResultData(switchDataURL);
+    },3000);
+
+    function getResultData(switchDataURL){
+      $.ajax({
+        url: switchDataURL,
+        type: 'GET',
+        cache: true,
+        dataType: 'jsonp',
+        jsonp: 'jsonp',
+        jsonpCallback: 'switchdata_bihar_assembly_elelction_2020',
+        crossDomain: true,
+        success: function (response) {
+          if(!response) { 
+              return false; 
+          }else{
+            $.ajax({
+              url: response['party_tally'],
+              type: 'GET',
+              cache: true,
+              dataType: 'jsonp',
+              jsonp: 'jsonp',
+              jsonpCallback: 'election_party_tally',
+              crossDomain: true,
+              success: function (response1) {
+                //console.log("electionjson bihar insideeee");
+                //console.log(response1);  
+                if(!response1) { 
+                    return false; 
+                }
+                var resultData = response1.party;   
+                var dataHtml = "";
+                dataHtml += '<div class="counts-data">';
+                dataHtml += '<div class="live-counts">';
+                dataHtml += '<p class="seats-count"><span class="no">243</span> Seats <span class="to-win">(122 to win)</span></p>';
+                dataHtml += '</div>';
+                $.each( resultData, function( key, filtArrvalue ) {''
+                  if(key == 'BJP' || key == 'INC' || key == 'JDU' || key == 'RJD') {
+                    //console.log(key);
+                    dataHtml += '<div class="live-counts">';
+                    dataHtml += '<div class="party-col" style="background-color:'+filtArrvalue['color']+'">';
+                    dataHtml += '<p class="party-name">'+key+'</p>';
+                    dataHtml += '<p class="result-count"><span class="seat-count-live">'+filtArrvalue['2020']['wonlead']+'</span> <span class="status">WIN + LEADS</span></p>';
+                    dataHtml += '</div>';
+                    dataHtml += '</div>';
+                  }
+                });
+                  dataHtml += '<div class="live-counts">';
+                  dataHtml += '<div class="party-col" style="background-color:#000000">';
+                  dataHtml += '<p class="party-name">OTH</p>';
+                  let wonleadCumilative = 0;
+                  $.each( resultData, function( key, filtArrvalue ) {
+                    //console.log(filtArrvalue['2020']['wonlead']);
+                    if(key != 'BJP' && key != 'INC' && key != 'JDU' && key != 'RJD') {
+                      wonleadCumilative = wonleadCumilative+filtArrvalue['2020']['wonlead'];
+                    }
+                  });  
+                    dataHtml += '<p class="result-count"><span class="seat-count-live">'+wonleadCumilative+'</span> <span class="status">WIN + LEADS</span></p>';
+                    dataHtml += '</div>';
+                    dataHtml += '</div>';
+                
+                  //console.log("wonleadCumilative");
+                  //console.log(wonleadCumilative);
+                dataHtml += '</div>';
+                $('#biharResult').html(dataHtml);
+              },error: function (error1) {
+                //console.log("error1 "+error1);
+                }
+            }); //2nd ajax closing
+          }  
+      
+        },error: function (error) {
+            //console.log("error "+error);
+          }
+      }); //main ajax closing
+    } // function closing
+  
+  });
+</script>

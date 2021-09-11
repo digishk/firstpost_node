@@ -1,0 +1,229 @@
+<style>
+  .dle20-live-couting.live-data {
+    background: #fff;
+    padding: 10px;
+    margin-bottom: 0px;
+    position: relative;
+}
+.dle20-counting-header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.counting-title.border span {
+    color: #ea5454;
+}
+.dle20-counting-header .full-results {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    font: 700 12px/14px Roboto,sans-serif;
+    letter-spacing: 0;
+    color: #11a0a4;
+    margin-left: auto;
+    text-decoration: none;
+}
+.dle20-counting-header .full-results svg {
+    margin-left: 5px;
+    width: 15px;
+    height: 15px;
+    fill: #11a0a4;
+}
+.dle20-counting-header .counting-title {
+    text-align: left;
+    font: 700 16px/19px Roboto,sans-serif;
+    letter-spacing: 0;
+    color: #272727;
+    opacity: 1;
+}
+.live-counting{
+  background: #f5f5f5;
+  padding: 10px;
+  margin-bottom: 20px;
+  position: relative;
+}
+.counts-data{
+  display: flex;
+  justify-content: space-between;
+}
+.live-counting .seats-count {
+  font: 900 16px/22px Roboto,sans-serif;
+  letter-spacing: 0;
+  color: #272727;
+  text-align: center;
+  margin-top: 10px;
+}
+.live-counting .seats-count .no{
+  display: block;
+  text-align: center;
+  font-size: 45px;
+}
+.live-counting .seats-count .to-win{
+  font: 400 16px/12px Roboto,sans-serif;
+  display: block;
+}
+.live-counting .counts-data .party-col {
+  display: flex;
+  width: 300px;
+}
+.live-counting .counts-data .party-name {
+  font: 900 24px/28px 'Roboto', sans-serif;
+  letter-spacing: 0;
+  color: #FFFFFF;
+  border-right: white solid 1px;
+  height: 60px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0 10px;
+  width: 50%;
+}
+.live-counting .counts-data .result-count {
+  font: 900 23px/35px 'Roboto', sans-serif;
+  letter-spacing: 0;
+  color: #FFFFFF;
+  width: 50%;
+  text-align: center;
+  padding: 0 10px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.seat-count-live{
+  margin-left: 45px;
+}
+.result-count .status{
+  font: 400 11px/18px 'Roboto', sans-serif;
+  display: block;
+  text-align: right;
+}
+.live-counting .counts-data .party-col{ width: 173px}
+.live-counting .counts-data .party-name{width: auto;font: 900 24px/28px 'Roboto', sans-serif;}
+.live-counting .counts-data .party-col{width: 173px;}
+.live-counting .counts-data .result-count{width:auto; font: 900 23px/35px 'Roboto', sans-serif;}
+.live-counting .seats-count .no{ font-size: 18px;}
+.live-counting .seats-count .to-win{ font: 400 11px/12px Roboto,sans-serif;}
+.seat-count-live{margin-left:0px;}
+@media(max-width: 1280px){
+  .live-counting .counts-data .party-col{
+    width: 270px;
+  }
+}
+@media (max-width: 1024px){
+  .live-counting .counts-data .party-col {
+    width: 215px;
+  }
+}
+@media (max-width: 768px){
+   .dle20-counting-header{
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+   .dle20-counting-header .counting-title{
+        border: none;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .counts-data{
+      flex-direction: column;
+    }
+    .live-counting .counts-data .party-col{
+      width: 100%;
+      margin-bottom: 15px;
+    }
+}
+@media(max-width:769px){
+.live-counting .counts-data .result-count
+
+{font: 900 33px/42px 'Roboto', sans-serif;}
+.result-count .status
+
+{text-align:center;}
+.live-counting .counts-data .party-name
+
+{width: 90px;}
+.live-counting .seats-count
+
+{margin-bottom:8px;}
+}
+</style>
+<div class="dle20-live-couting live-data">
+
+<div class="dle20-counting-header">
+  <h1 class="counting-title">Maharashtra Panchayat Election 2021</h1>
+  <a href="https://www.firstpost.com/politics/maharashtra-gram-panchayat-election-results-2021-live-updates-votes-counting-bjp-congress-ncp-shiv-sena-9211321.html" class="full-results">
+  More Details
+  <svg version="1.1" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+  <g id="Bounding_Box">
+  <rect fill="none" width="24" height="24"></rect>
+  </g>
+  <g id="Master">
+  <g>
+  <polygon points="15.5,5 11,5 16,12 11,19 15.5,19 20.5,12 "></polygon>
+  <polygon points="8.5,5 4,5 9,12 4,19 8.5,19 13.5,12 "></polygon>
+  </g>
+  </g>
+  </svg>
+  </a>
+</div>
+</div>
+<div class="live-counting" id="biharResult">
+</div>
+<script>
+  
+  $(document).ready(function(){
+
+  var switchDataURL = 'https://election.nw18.com/electiondata/electionjson/maharashtra_panchayat_election/maharashtra_panchayat_election_cross.json';
+
+  getResultData(switchDataURL);
+
+  setInterval(function(){
+    console.log("calling set interval result");
+        getResultData(switchDataURL);
+    },3000);
+
+    function getResultData(switchDataURL){
+      $.ajax({
+        url: switchDataURL,
+        type: 'GET',
+        cache: true,
+        dataType: 'jsonp',
+        jsonp: 'jsonp',
+        jsonpCallback: 'maharashtra_panchayat_election',
+        crossDomain: true,
+        success: function (response) {
+          //console.log(response);
+          if(!response) { 
+              return false; 
+          }
+                var resultData = response.maharashtra_panchayat_election;
+                var stateData = resultData.state;
+                var finalData = stateData.party;
+                //console.log(finalData);
+                var dataHtml = "";
+                dataHtml += '<div class="counts-data">';
+                dataHtml += '<div class="live-counts">';
+                dataHtml += '<p class="seats-count"><span class="no">'+stateData['total']+'</span> Seats</p>';
+                dataHtml += '</div>';
+                $.each( finalData, function( key, filtArrvalue ) {
+                    //console.log(key);
+                    dataHtml += '<div class="live-counts">';
+                    dataHtml += '<div class="party-col" style="background-color:'+filtArrvalue['colour']+'">';
+                    dataHtml += '<p class="party-name">'+filtArrvalue['party']+'</p>';
+                    dataHtml += '<p class="result-count"><span class="seat-count-live">'+filtArrvalue['seats']+'</span> <span class="status">WIN + LEADS</span></p>';
+                    dataHtml += '</div>';
+                    dataHtml += '</div>';
+                });
+                dataHtml += '</div>';
+                $('#biharResult').html(dataHtml);
+              },
+      
+        error: function (error) {
+          console.log("error "+error);
+        }
+      });
+    }
+  
+  });
+</script>

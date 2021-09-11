@@ -1,0 +1,45 @@
+<%- include(viewpath+ '/layouts/header'); %>
+<script>
+function gcseCallback() {
+  if (document.readyState == 'complete'){
+   //return google.setOnLoadCallback(gcseCallback, true);
+   google.search.cse.element.render({gname:'<%=searchSlug%>', div:'results', tag:'search', attributes:{linkTarget:''}});
+   var element = google.search.cse.element.getElement('<%=searchSlug%>');
+   element.execute('<%=searchSlug%>');
+          }else{
+    google.setOnLoadCallback(function() {
+ google.search.cse.element.render({gname:'<%=searchSlug%>', div:'results', tag:'search', attributes:{linkTarget:''}});
+ var element = google.search.cse.element.getElement('<%=searchSlug%>');
+ element.execute('<%=searchSlug%>');
+},true);
+  }
+        }
+        window.__gcse = {
+          parsetags: 'explicit',
+          callback: gcseCallback
+        };  
+        (function() {
+           var cx = '001287843699051511718:zmzeee-ti-e';
+          //var cx = '002175636342488870115:moy5ckj6aak';
+          var gcse = document.createElement('script');
+          gcse.type = 'text/javascript';
+          gcse.async = true;
+          gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(gcse, s);
+        })();
+                </script>
+ <div class="container">
+	 <% if (typeof ads  !== 'undefined' && typeof ads['ATF_728']  !== 'undefined'){%>
+        <div class="ad-center">
+            <%-common.displayAds(ads['ATF_728'][0]) %>
+        </div>
+    <% } %>  
+	<div class="main-container">
+		<div class="main-content">            
+		 <div id="results"></div>
+		</div>
+    <%- include(viewpath+ '/'+device+'/firstpost/rhs'); %>
+	</div>
+</div>
+<%- include(viewpath+ '/layouts/footer'); %>

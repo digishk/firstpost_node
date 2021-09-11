@@ -1,0 +1,85 @@
+<%- include(viewpath+ '/layouts/header'); %>
+
+        <div class="main-wrapper">
+
+            <!--728x90 Ad Space-->
+            <% if (typeof ads  !== 'undefined' && typeof ads['BTF_728']  !== 'undefined'){%>
+            <div class="ad-slot">
+                <%-common.displayAds(ads['ATF_728'][0]) %>
+            </div>
+            <% } %>
+            <!--728x90 Ad Space-->
+
+            <!--Cricket Ticker-->
+            <%- include(viewpath+ '/widgets/scorecard_caraousal'); %>
+            <!--Cricket Ticker-->
+
+            <!--Bread crumb-->
+            <%- include(viewpath+ '/widgets/breadCrumbs'); %>
+            <!--Bread crumb-->
+
+            <!--Cricket Inner Menu-->
+            <%- include(viewpath+ '/layouts/level-4-nav'); %>
+            <!--Cricket Inner Menu-->
+
+            <!--Main Page Content-->
+            <div class="content-wrap" id="photos">
+                <div class="left-content">
+                    <!--Ranking Section-->
+                    <section class="ranking-section">
+                        <h1 class="page-title"><span>ICC TEAMS RANKINGS</span></h1>
+                        <% for (const [rank_key, rank_val] of Object.entries(rankData)) { %>
+                        <div class="big-title-heading">
+                            <h2 class="big-heading-text">
+                                <%=rank_key%> Rankings
+                            </h2>
+                        </div>
+                        <table class="general-tbl">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Team</th>
+                                    <th>Matches</th>
+                                    <th>Points</th>
+                                    <th>Rating</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%                                 
+                                for (const [r_key, r_val] of Object.entries(rank_val['bat-rank']['rank'])) { %>
+                                <tr>
+                                    <td><%=r_val['no']%></td>
+                                    <td><%=r_val['Country']%></td>
+                                    <td><%=r_val['Matches']%></td>
+                                    <td><%=r_val['Points']%></td>
+                                    <td><%=r_val['Rating']%></td>
+                                </tr>
+                                <%}%>
+                            </tbody>
+                        </table>                        
+                        <% if (rank_key == "test" && typeof ads  !== 'undefined' && (typeof ads['MID1_300']  !== 'undefined' || typeof ads['MID2_300']  !== 'undefined')){%>
+                        <div class="two-ad-slot">
+                        <% if (typeof ads  !== 'undefined' && typeof ads['MID1_300']  !== 'undefined'){%>
+                        <div class="ad-slot">
+                        <%-common.displayAds(ads['MID1_300'][0]) %>
+                        </div>
+                        <% } %> 
+                        <% if (typeof ads  !== 'undefined' && typeof ads['MID2_300']  !== 'undefined'){%>
+                        <div class="ad-slot">
+                        <%-common.displayAds(ads['MID2_300'][0]) %>
+                        </div>
+                        <% } %>  
+                        </div>                        
+                    <% }%>
+                        <%}%>                       
+                    </section>
+                    <!--Ranking Section-->
+                    <% if (typeof outbrain_ads  !== 'undefined' && typeof outbrain_ads['AR_2']  !== 'undefined'){%>
+                        <%-outbrain_ads['AR_2'];%>
+                    <% } %>
+                </div>
+                <%- include(viewpath+ '/'+device+'/firstpost/rhs'); %>
+            </div>
+            <!--Main Page Content-->
+        </div>
+<%- include(viewpath+ '/layouts/footer'); %>

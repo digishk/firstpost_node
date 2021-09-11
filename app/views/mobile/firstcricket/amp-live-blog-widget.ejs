@@ -1,0 +1,93 @@
+<div class="main-highlight">
+    <div class="hghlight-img">
+        <amp-img width="320" height="180" src="<%-postPageJson.post.post_image%>" alt="<%-postPageJson.post.post_title%>" title="<%-postPageJson.post.post_title%>" ></amp-img>
+    </div>
+    <h1 class="hghlight-txt">
+         <%-postPageJson['post']['post_title'] %>
+    </h1>
+</div>
+
+<input type="hidden" id="post_title" value="<%-postPageJson.post.post_title %>" />
+<input type="hidden" id="post_url" value="<%-postPageJson.post.post_url %>" />
+<input type="hidden" id="commUrl" value="<%-commUrl%>" />
+<input type="hidden" id="togBtn" value="1" />
+<div class="timelineContent" id="blogDivScroll">
+<div class="detail-highlight refresh-live-blog live-blog" data-live-blog-id="<%-liveBlogKey %>" data-live-blog-page = "1" data-shareTitle="<%-shareArr.shareTitle %>" data-shareUrl="<%-shareArr.shareUrl %>">
+<amp-live-list  layout="container" data-poll-interval="15000" data-max-items-per-page="5" id="amp-live-list-insert-blog">
+        <button id="live-list-update-button" update on="tap:amp-live-list-insert-blog.update" class="button button-primary new-update">You have updates</button>
+
+        <div items>	
+	<% for (const [key, item] of Object.entries(liveBlog.data)) { 
+        if (key < 5 ){
+            var div_hidden = '';
+        }
+        else{
+            var div_hidden = 'hidden [hidden]=hideCricBlog';                
+        }
+    %>
+	<% striptagtitle = striptags(item.post.title) %> 
+	<% filteredDate = item['time'].substring(0,8) %> 
+	<% blogDate = filteredDate.substring(6, 8)+"-"+filteredDate.substring(4, 6) +"-"+filteredDate.substring(0, 4) %>
+	<% blogDateTimeSchema = item['time'].substring(6, 8)+"-"+item['time'].substring(4, 6) +"-"+item['time'].substring(0, 4) +"T"+ item['time'].substring(8, 10) +":"+ item['time'].substring(10, 12) +":"+ item['time'].substring(12, 14) %>
+	<% filteredTime = item['time'].substring(8) %> 
+    <div class="blog-entry-wrap timeline-content" id="post<%=key%>" data-sort-time="<%-item.time %>" data-id="live-blog-<%-item.time %>" <%=div_hidden%> >
+        <div class="blog-inner-wrap">
+            <div class="h-timestamp">
+                <h6 class="time-txt"><%-filteredTime.substring(0, 2) %>:<%-filteredTime.substring(2, 4) %> <span>(IST)</span></h6>
+            </div>
+            <div class="blog-txt">
+            	<% if (typeof item.post.img !== "undefined" && item.post.img != ""){ %>
+            	<div class="blog-img">
+                    <amp-img width="30" height="40" src="<%-constant.IMG_URL %>wp-content/uploads/firstcricket/milestones/2020/<%-item.post.img %>.png" title="<%-item.post.img %>" alt="<%-item.post.img %>"></amp-img>
+                </div>
+                <% } %>
+                <div class="blog-txt-wrap">
+                    <%-item.post.title %>
+                    <% if (item.post.data_type == 'embedded' && item.post.source_amp !=""){
+                        if(item.post.tweet_id != ''){%>
+                            <amp-twitter width=600 height=220 layout="responsive" data-tweetid="<%- item.post.tweet_id %>"></amp-twitter>   
+                        <% } else if(item.post.insta_postid != ''){%>
+                            <amp-instagram data-shortcode="<%- item.post.insta_postid %>" width="400" height="400" layout="responsive"></amp-instagram>
+                        <% } else {%>
+                            <p class="blog-source"><%-item.post.source %></p>
+                        <% } %> 
+                    <% } %>
+                </div>
+                
+            </div>                                
+            <div class="blog-author-div">
+                <% if (item.author_image != null) { %>
+                <div class="blog-auth-img">
+                    <amp-img width="64" height="64" src="<%-item.author_image %>"></amp-img>
+                </div>
+                <% } %>
+                <div class="blog-auth-details">
+                    <% if (item.author_name != "") { %>
+                    <h4 class="auth-blog-name">
+                        <%-item.author_name %>
+                    </h4>
+                    <div class="time-stamp">
+                        <%-filteredTime.substring(0, 2) %>:<%-filteredTime.substring(2, 4) %> <span>(IST)</span>
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+            <div class="blog-btn-div">
+                <%- include(viewpath+ '/widgets/amp_social_share_widget'); %>
+            	<% if ( typeof commUrl !== 'undefined' && commUrl != ""){ %> 
+                <div class="full-score-btn">
+                    <a href="<%-commUrl%>" title="Full Scorecard">
+                        Full Scorecard
+                    </a>
+                </div>
+                <% } %>                
+            </div>
+        </div>
+    </div>
+    <% } %>    
+    </div>
+    </amp-live-list>
+    <button id="loadCricBlog" class="button fadeout"  on="tap:AMP.setState({ hideCricBlog: false }),loadCricBlog.hide">LOAD MORE</button>
+</div>
+
+</div>

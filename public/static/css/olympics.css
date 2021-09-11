@@ -1,0 +1,324 @@
+.pagination{display:flex;justify-content:space-between;}
+.pagination .prev-btn, .pagination .next-btn, .pagination .submit-btn{background:#A7A7A7;border-radius:23px;display:flex;justify-content:space-between;}
+.pagination .prev-btn{padding:8px 14px 8px 8px;}
+.pagination .next-btn{padding:8px 8px 8px 14px;margin-left:auto}
+.pagination .submit-btn{padding:10px 20px 10px 20px}
+.pagination .prev-btn span, .pagination .next-btn span, .pagination .submit-btn span{font: 400 16px/20px Montserrat;color:#fff;display:flex;align-items:center;}
+.pagination .prev-btn .icon, .pagination .next-btn .icon{width:26px;height:26px;background:#fff;border-radius:50%}
+.pagination .prev-btn .icon{margin-right:10px}
+.pagination .next-btn .icon{margin-left:10px}
+.pagination .prev-btn .icon svg, .pagination .next-btn .icon svg{margin:1px 0 0;}
+
+/*ad css*/
+.ad-center{display:flex;width:100%;text-align:center;margin:30px auto;justify-content:center}
+.fixed-ad-banner {position: relative;display: flex;align-items: center;min-height: 150px;}
+.ft-sticky-ad {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	z-index: 999;
+	margin-bottom: 0;
+}
+.m-fixed-ad-banner {position: relative;margin: 10px 0 20px;display: flex;justify-content: center;align-items: center;min-height: 250px;}
+.m-fixed-ad-banner::before {position: absolute;z-index: 1;content: "Advertisement";height: 100%;
+width: 100%;font-family: inherit;display: flex;justify-content: center;align-items: center;}
+
+/* Tracker CSS */
+.tracker-wrap .glide__track .glide__slide img{height: 120px; width: 120px; border-radius: 50%; border:5px solid #fff;}
+
+/* Big Story CSS */
+#home-section .top-image-wrap a img{width:640px; height: 362px;}
+/* Latest News CSS */
+.latestnews-section{position:relative;}
+.latest{margin-bottom:20px}
+.latestnews-section .photo-box{width:98%}
+.latestnews-section .glide__slide{width:30%;margin:2px}
+.read-more{font:500 12px/15px Montserrat;letter-spacing:0;color:#747474;text-transform:uppercase;opacity:1;border:1px solid #BEBEBE;padding:8px 12px;display:inline-block;position:absolute;top:0;right:0;}
+.latestnews-section .glide__slide:nth-child(2){margin:0 25px}
+.latestnews-section .photo-box .photo-content{padding:8px 10px 0px;margin:0}
+/* Latest News CSS */
+/* India's Medal Section CSS */
+.medal-section{position:relative;margin-bottom:50px}
+/* .medal-section .read-more{top:37px;} */
+.medal-section .name{color:#000;font:700 16px/16px Playfair Display;padding-top:7px}
+.medal-wrap .glide__slides{justify-content:space-between;}
+.medal-wrap .photo-box{width:98%}
+.medal-wrap .glide__slide{width:30%}
+.medal-wrap .glide__slide:nth-child(2){margin:0 25px}
+.medal-wrap .glide__slide img{width:100%}
+/* India's Medal Section CSS */
+/* Videos Section CSS */
+.videos-section{position:relative;margin-bottom:20px}
+.videos-section .photo-box{width:98%}
+.videos-section .glide__slide{width:30%;margin:2px}
+.videos-section .glide__slide:nth-child(2){margin:0 25px}
+.videos-section .photo-box .photo-content{padding:8px 10px 0px;margin:0}
+.videos-slider .glide__arrow{background:#fff;border:1px solid #b9b9b9;outline:0;padding:2px 0 0;box-shadow:0 3px 6px rgba(0,0,0,.16);position:absolute;top:50%;cursor:pointer;}
+.videos-slider .glide__arrow.glide__arrow--left{left:-15px;}
+.videos-slider .glide__arrow.glide__arrow--right{right:-15px}
+.videos-slider .glide__arrow svg{fill:rgba(144,144,144,.5);}
+/* Videos Section CSS */
+/* Photos Section CSS */
+.photos-section{position:relative;}
+.photos-section .phgallery-wrap-big .photo-box{width:100%;box-shadow:none;padding:0;margin:0 0 15px;}
+.photos-section .phgallery-wrap-big .photo-box .icon-photo{position:absolute;top:15px;left:15px;background:#fff;border-radius:50%;width:50px;height:50px;display:flex;align-items:center;justify-content:center;}
+.photos-section .phgallery-wrap-big .photo-box .icon-photo svg{margin:2px 0 0}
+.photos-section .phgallery-wrap-big .photo-box .photo-content{position:absolute;bottom:0;width:100%;background:linear-gradient(180deg,rgba(0,0,0,0) 0,#000 100%) no-repeat;margin:0;padding:20px 20px 30px;}
+.photos-section .phgallery-wrap-big .photo-box .ph-ttl a{font:Bold 31px/35px 'Playfair Display';letter-spacing:0;color:#fff;}
+.photos-section .phgallery-wrap-big .photo-box .share-wrap{bottom:20px;right:-5px;}
+.photos-section .phgallery-wrap-big .photo-box .share-wrap svg{fill:#fff;width:20px;height:20px;}
+.photos-section .glide__slide{width:30%;margin:2px}
+.photos-section .glide__slide .photo-box{width:98%}
+.photos-section .glide__slide:nth-child(2){margin:0 25px}
+.photos-section .glide__slide:nth-child(1) .ph-ttl a{font:700 15px/20px 'Playfair Display';letter-spacing:0;color:#000;max-height:78px;min-height:78px;overflow:hidden;}
+/* Photos Section CSS */
+/* Firstpost Explains CSS */
+.fpexplains-section{position:relative;margin-bottom:20px}
+.fpexplains-section .glide__slides{flex-wrap:wrap;}
+.fpexplains-section .glide__slide{width:49%;margin:2px}
+.fpexplains-section .glide__slide .photo-box{width:98%}
+.fpexplains-section .glide__slide{margin:0 10px 0 2px;}
+.fpexplains-section .glide__slide:nth-of-type(even){margin:0;}
+.main-ttl{font:bold 17px/22px Playfair Display;color:#FFCF2E;padding-bottom:10px}
+.sub-ttl{font:400 12px/15px Montserrat;color:#000;}
+.fpexplains-section .photo-box .photo-content{margin:0}
+/* Firstpost Explains CSS */
+/* India's Olympic CSS */
+.slider-wrap ul li a img{height: 100px;width: 106px;}
+.slider-wrap ul{display:flex;justify-content:space-between;margin-bottom:40px;padding-bottom:40px;z-index:9}
+.slider-wrap ul li{position:relative;width:106px}
+.slider-wrap ul li::before{content:'|';position:absolute;bottom:-7px;background:#b7b7b7;width:0;left:50%}
+.slider-wrap ul li::after{content:'';position:absolute;bottom:-15px;background:#FAD65F;width:14px;height:14px;border-radius:50%;left:45%;}
+.slider-wrap ul li span{position:absolute;left:38%;bottom:-35px;font:700 14px/17px Roboto;color:#FAD65F;}
+.slider-wrap .slider__arrow{position:absolute;top:40%;z-index:1;width:32px;height:32px;margin-top:-16px;border-radius:50%;background-color:#e8e8e8;-webkit-transition:all .2s ease-in-out;transition:all .2s ease-in-out;border:none}
+.slider-wrap .slider__arrow--prev{left:-17px;top:56%;z-index:99}
+.slider-wrap .glide__arrow--next{right:-17px;top:56%;z-index:99}
+.slider-wrap .slider__arrow:focus{outline:none}
+.slider-wrap .slider__arrow svg{margin-left:-3px;margin-top:2px}
+.slideborder{border-bottom:1px solid #b7b7b7;display:flex;justify-content:space-between;position:relative;margin-top:-72px;margin-bottom:80px}
+/* India's Olympic CSS */
+/* Daily Quiz CSS */
+.errOption{font:700 12px Montserrat;color: red;margin-bottom: 10px;}
+.daily-quiz-wrap{background:#fff;margin-bottom:20px;width:300px}
+.daily-quiz-wrap .ttl{background:#FAD65F;font:700 16px/19px Montserrat;color:#000;padding:12px 16px;}
+.daily-cont{padding:20px 10px 10px;border:1px solid #E5E5E5;}
+.ques{font:500 18px/20px Montserrat;color:#000;padding-bottom:15px}
+.options ol{margin-left:20px}
+.options ol li{list-style:upper-alpha;margin-bottom:10px;font:500 16px/20px Montserrat;position: relative;}
+.options ol li input{width:22px;height:22px;display:inline-block;vertical-align:middle;position: absolute;z-index: 99;left: 10px;top:2px;}
+/* .options ol li input{width:80px;height:22px;display:inline-block;vertical-align:middle;} */
+.options ol li em{vertical-align:middle;font-style:normal;line-height:28px}
+/*.daily-quiz-wrap .pagination{justify-content:flex-end;}*/
+.quesnos{align-items:center;display:flex;font:700 16px/20px Montserrat;color:#313131;}
+.answer{align-items:center;display:flex;font:700 18px Montserrat;color:#313131;}
+.quesnos span{margin-right:5px}
+.quesItem{display:none}
+.quesItem.active{display:block;}
+/* Daily Quiz CSS */
+/* Schedule CSS */
+#schedule .date-list{padding:9px 10px;text-align:center;font:400 11px/12px Montserrat;cursor:pointer;color:#000;margin:0 auto}
+#schedule .date-list span{display:block;color:#666;font:700 14px/12px Montserrat;padding-top:10px}
+#schedule .glide__slide{border-bottom:1px solid #FAD65F;}
+#schedule .glide__slide--active{border:1px solid #FAD65F;border-bottom:none}
+#schedule .glide__slide--active span{color:#FFCF2E;}
+#schedule .slider__arrow--prev{right:0;top:26px;position:absolute;width:30px;height:30px;border:none;background:#BDBDBD;}
+#schedule .slider__arrow--prev svg{margin:0 -2px}
+#schedule .slider__arrow--prev:focus{outline:none}
+#schedule .slider__arrow--next{right:0;top:-5px;position:absolute;width:30px;height:30px;border:none;background:#BDBDBD;}
+#schedule .slider__arrow--next svg{margin:0 -2px}
+#schedule .slider__arrow--next:focus{outline:none}
+.schedule-wrap p{color:#000;font:400 12px/20px Montserrat;margin-top:30px}
+.schedule-data{margin-top:22px}
+.schedule-data .ttl{font:700 12px/12px Montserrat;color:#666;padding-bottom:14px}
+
+#schedule2 .date-list{padding:9px 10px;text-align:center;font:400 11px/12px Montserrat;cursor:pointer;color:#000;margin:0 auto}
+#schedule2 .date-list span{display:block;color:#666;font:700 14px/12px Montserrat;padding-top:10px}
+#schedule2 .glide__slide{border-bottom:1px solid #FAD65F;}
+#schedule2 .glide__slide--active{border:1px solid #FAD65F;border-bottom:none}
+#schedule2 .glide__slide--active span{color:#FFCF2E;}
+#schedule2 .slider__arrow--prev{right:0;top:26px;position:absolute;width:30px;height:30px;border:none;background:#BDBDBD;}
+#schedule2 .slider__arrow--prev svg{margin:0 -2px}
+#schedule2 .slider__arrow--prev:focus{outline:none}
+#schedule2 .slider__arrow--next{right:0;top:-5px;position:absolute;width:30px;height:30px;border:none;background:#BDBDBD;}
+#schedule2 .slider__arrow--next svg{margin:0 -2px}
+#schedule2 .slider__arrow--next:focus{outline:none}
+
+.sports-main-wrap p{color:#000;font:400 12px/20px Montserrat;margin-top:30px}
+table{border: 1px solid #D6D6D6;}
+table tr th{background:#D6D6D6;padding:12px;font:600 11px/12px Montserrat;color:#000;vertical-align:middle;text-transform: capitalize; text-align: left;}
+table tr td{padding:15px;color:#333;font:400 11px/15px Montserrat;border-right:1px solid #D6D6D6;border-bottom:1px solid #D6D6D6;}
+/* Schedule CSS */
+.result-wrap table tr th{padding:7px}
+.medal-wrap table tr th{padding:7px 15px}
+.medal-wrap .read-more{position:relative;margin:30px auto 0}
+.medal-wrap .hidecont tr:nth-child(2){border-bottom:none}
+.medal-wrap .hidecont th{display: none;}
+.medal-wrap p{font:400 12px/20px Montserrat;color:#000;padding:50px 0}
+.result-wrap table tr:nth-child(2){border-bottom:4px solid #D6D6D6}
+.result-wrap p{font:400 12px/20px Montserrat;color:#000;padding:50px 0}
+.result-wrap .read-more{position:relative;margin:30px auto 0}
+.center{text-align:center;}
+.hidecont{display:none}
+.result-wrap .hidecont tr:nth-child(2){border-bottom:none}
+.flags{width: 22px;height: 22px;box-shadow: 0px 3px 6px #00000029;
+border: 1px solid #707070;border-radius: 50%;margin-right: 10px}
+.medal-wrap table tr td span {
+    display: flex;
+    align-items: center;
+}
+.widg table tr td {
+    border-right: 0 solid #D6D6D6;}
+.medal-wrap  table tr td{   display: table-cell;
+    vertical-align: middle;
+}
+.widg table tr td{text-transform: uppercase;font: 600 13px/15px Montserrat;padding: 15px 7px;text-align: center;}
+.medal-wrap.widg table tr th {
+    padding: 10px;
+}
+.medal-wrap.widg{margin-bottom: 20px}
+.medal-wrap.widg table tr th {
+    padding: 12px 7px;
+    font: 400 13px/12px Montserrat;
+    color: #fff;
+    background:#313131;}
+   .medal-wrap.widg .flags {
+    width: 20px;
+    height: 20px;}
+ .medal-wrap tr.active   {
+    background: #FAD65F;
+}
+
+/*Custom Radio Button CSS */
+input[type=checkbox]:not(old), input[type=radio]:not(old){width:1em;margin:0;padding:0;font-size:1em;opacity:0;}
+input[type=checkbox]:not(old) + label, input[type=radio]:not(old) + label{display:inline-block;margin-left:-6px;line-height:1.5em;}
+input[type=checkbox]:not(old) + label > span, input[type=radio   ]:not(old) + label > span{display:inline-block;width:21px;height:23px;margin:0.25em 0.8em 0.25em 0.25em;border:0.0625em solid rgb(0,0,0);border-radius:0.25em;background:rgb(255,255,255);background-image:-moz-linear-gradient(rgb(255,255,255),rgb(255,255,255));background-image:-ms-linear-gradient(rgb(255,255,255),rgb(255,255,255));background-image:-o-linear-gradient(rgb(255,255,255),rgb(255,255,255));background-image:-webkit-linear-gradient(rgb(255,255,255),rgb(255,255,255));background-image:linear-gradient(rgb(255,255,255),rgb(255,255,255));vertical-align:bottom;margin-top: 0;margin-left: 15px;}
+input[type=checkbox]:not(old):checked + label > span, input[type=radio   ]:not(old):checked + label > span{background-image:-moz-linear-gradient(rgb(255,255,255),rgb(240,240,240));background-image:-ms-linear-gradient(rgb(255,255,255),rgb(240,240,240));background-image:-o-linear-gradient(rgb(255,255,255),rgb(240,240,240));background-image:-webkit-linear-gradient(rgb(255,255,255),rgb(240,240,240));background-image:linear-gradient(rgb(255,255,255),rgb(240,240,240));}
+input[type=checkbox]:not(old):checked + label > span:before{content:'✓';display:block;width:1em;color:rgb(153,204,102);font-size:0.875em;line-height:1em;text-align:center;text-shadow:0 0 0.0714em rgb(115,153,77);font-weight:bold;}
+input[type=radio]:not(old):checked +  label > span > span{display:block;width:16px;height:16px;margin:0.131em;border:0.0625em solid rgb(115,153,77);border-radius:0.125em;background:rgb(153,204,102);background-image:-moz-linear-gradient(rgb(179,217,140),rgb(153,204,102));background-image:-ms-linear-gradient(rgb(179,217,140),rgb(153,204,102));background-image:-o-linear-gradient(rgb(179,217,140),rgb(153,204,102));background-image:-webkit-linear-gradient(rgb(179,217,140),rgb(153,204,102));background-image:linear-gradient(rgb(179,217,140),rgb(153,204,102));}
+/*Custom Radio Button CSS */
+
+.left-section #back2Top{width:45px;overflow:hidden;z-index:999;cursor:pointer;-moz-transform:rotate(0deg);-webkit-transform:rotate(0deg);-o-transform:rotate(0deg);-ms-transform:rotate(0deg);transform:rotate(0deg);position:fixed;bottom:0;left:50%;margin-left:-100px;background-color:#aaa;color:#fff;text-align:center;text-decoration:none;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:50%;opacity:.8;}
+.left-section #back2Top:hover{opacity:1}
+.left-section #back2Top svg{opacity:0.3}
+.left-section #back2Top:hover svg{opacity:1}
+.readmore-wrap{display:none}
+#quiztest .quesnos{display:none}
+.daily-cont #quiztest .quesnos{display:flex;}
+
+/* select change value */
+.formobile{display: none;}
+.formobile select{width: 100%; padding: 5px 7px;border: 1px solid #707070; text-transform: capitalize;  outline: none;text-align: left;font: 400 14px/19px Montserrat;letter-spacing: 0px;color: #707070;opacity: 1;}
+.formobile option{text-transform: capitalize;}
+.spacebot{margin-bottom: 30px}
+
+@media screen and (max-width:480px){
+	.medal-wrap .read-more {
+    display: block;
+}
+	.flags{width: 18px;height: 18px;}
+.photos-wrap .medal-wrap table tr td {
+    padding: 10px 10.3px;
+}
+	.flags{width: 18px;height: 18px;}
+.medal-wrap table tr th{padding:7px}
+.result-wrap th:first-child, .result-wrap td:first-child{display: none;}
+.photos-wrap table tr td{padding: 10px 7px;}
+.result-wrap table tr th:nth-child(2){text-align: left;}
+.result-wrap table tr:nth-child(2){border-bottom: 0}
+.result-wrap p{padding: 30px 0}
+.formobile{display: block;}
+.fordesktop{display: none;}
+.schedule-data{overflow-x:auto;}
+.schedule-data table tr th {padding: 5px 7px;}
+.readmore-wrap{display:flex;justify-content: flex-end;}
+.readmore{color:#fff;font:400 14px/23px Playfair Display;display:flex;}
+.readmore .arwdwn{margin:2px 0 2px 4px}
+.readmore .arwup{margin:-2px 0 2px 4px;transform:rotate(180deg)}
+.history-box.history-box-gray .readmore{color:#000}
+.history-box.history-box-gray .readmore .arwdwn svg{fill:#000;}
+.history-box.history-box-gray .readmore .arwup svg{fill:#000;}
+#quiztest .quesnos{display:flex;}
+#quiztest .prev-btn{display:none}
+}
+/* select change value */
+
+
+@media screen and (max-width:980px){
+.fpexplains-section .glide__slides{flex-wrap:nowrap;}
+.videos-slider .glide__arrow.glide__arrow--left{display:none}
+.videos-slider .glide__arrow.glide__arrow--right{display:none}
+.photos-section .phgallery-wrap-big .photo-box .share-wrap{right:0}
+.daily-quiz-wrap{width:100%;max-width:360px;margin:0 auto}
+.read-more{top: 43px;padding: 4px 3px;}
+.medal-wrap .glide__slide img{opacity:0.5}
+.medal-wrap .glide__slide--active img{opacity:1}
+.slider-wrap .slider__arrow--prev{display:none}
+.slider-wrap .glide__arrow--next{display:none}
+.medal-section{margin-bottom:30px}
+.fpexplains-section{margin-bottom:0}
+.videos-section{margin-bottom:0}
+.slideborder{margin-bottom:50px}
+.latest{margin-bottom:10px}
+.left-section #back2Top{margin:0 auto}
+.pagination{margin-bottom:20px}
+#home-section .top-image-wrap a img{width:394px; height: 222px;}
+}
+
+.schedule-filter
+
+{display: flex;justify-content: space-between;margin-bottom: 30px;}
+.switch
+
+{position: relative;display: inline-block;width: 70px;height: 36px;margin:0 15px;}
+.switch .switch-ip
+
+{ opacity: 0;width: 0;height: 0;}
+.sw-name
+
+{font: 600 14px/12px Montserrat;color:#666;}
+.schedule-flt
+
+{display: flex;align-items: center;}
+.tog-sw
+
+{position: absolute;cursor: pointer;top: 0;left: 0;right: 0;bottom: 0;background-color: #ccc;-webkit-transition: .4s;transition: .4s;}
+.tog-sw:before
+
+{position: absolute;content: "";height: 32px;width: 32px;left: 2px;bottom: 2px;background-color: white;-webkit-transition: .4s;transition: .4s;}
+.switch-ip:checked + .tog-sw
+
+{background-color: #FAD65F;}
+.switch-ip:focus + .tog-sw
+
+{box-shadow: 0 0 1px #FAD65F;}
+.switch-ip:checked + .tog-sw:before {-webkit-transform: translateX(34px);-ms-transform: translateX(34px);transform: translateX(34px);}
+.tog-sw.round
+
+{border-radius: 23px;}
+.tog-sw.round:before
+
+{border-radius: 50%;}
+.sport-flt
+
+{padding: 7px 15px;width: 250px;height: 36px;border:1px solid #707070;outline:0;font: 400 14px/19px Segoe UI;opacity: 1;color:#707070;}
+@media(max-width: 769px){
+.tog-place{
+    display:block;
+    margin: 0 auto;
+}
+.schedule-filter
+
+{flex-direction: column;}
+.switch
+
+{margin-bottom: 15px;}
+.sport-flt
+
+{width: 100%;}
+.sw-name
+
+{position: relative;top: 12px;}
+.schedule-flt
+
+{align-items: unset;}
+}

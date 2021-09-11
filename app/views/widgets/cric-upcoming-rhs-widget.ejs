@@ -1,0 +1,53 @@
+                    <div class="upcoming-matches common-widget">
+                        <div class="double-title">
+                            <h3 class="title-txt">Upcoming Matches</h3>
+                            <span class="title-shadow">Upcoming Matches</span>
+                        </div>
+                        <div class="upcoming-wrap widget-wrapper">
+                            <% let count = 0%>
+                            <% for (const [live_match_key, match_val] of Object.entries(upcomingMatchList)) { %>
+                            <%if(count>= 5) break;%>
+                            <% if (match_val['category'] == 'men') { %>
+                            <div class="match-link-div">
+                                <a href="<%= constant.SITE_URL %>firstcricket/cricket-live-score/<%-match_val['teama'].replace(/\s+/g, '-').toLowerCase() %>-vs-<%-match_val['teamb'].replace(/\s+/g, '-').toLowerCase() %>-<%= match_val['matchtype'].replace(/\s+/g, '-').toLowerCase() %>-live-cricket-score-full/<%= match_val['series_Id']%>/<%= match_val['match_Id']%>.html" title="<%-match_val['teama'] %> vs <%-match_val['teamb'] %> Full Scorecard">
+                                    <div class="date-wrap">
+                                        <span class="date-txt">
+                                            <%= dateFormat(match_val["matchdate_ist"] , "mmmm dd','yyyy") %>
+                                        </span>
+                                    </div>
+                                    <div class="upcoming-team-div">
+                                        <div class="flag-div team-one">
+                                            <img loading="lazy" width="45" height="25" src="https://xmlns.cricketnext.com/cktnxt/scorecard/crk_player_images/flags/90x50/<%= match_val['teama_Id']%>.png" alt="<%=match_val['teama']%>" title="<%=match_val['teama']%>" />
+                                        </div>
+                                        <div class="flag-team-name">
+                                            <%=match_val['teama_short']%>
+                                        </div>
+                                        <div class="flag-vs-txt">
+                                            vs
+                                        </div>
+                                        <div class="flag-team-name">
+                                            <%=match_val['teamb_short']%>
+                                        </div>
+                                        <div class="flag-div team-two">
+                                           <img loading="lazy" width="45" height="25" src="https://xmlns.cricketnext.com/cktnxt/scorecard/crk_player_images/flags/90x50/<%= match_val['teamb_Id']%>.png" alt="<%=match_val['teamb']%>" title="<%=match_val['teamb']%>" />
+                                        </div>
+                                    </div>
+                                    <div class="upcoming-details">
+                                        <h3 class="upcoming-venue">
+                                            <%=match_val['venue']%>
+                                        </h3>
+                                        <!-- <h3 class="upcoming-venue">
+                                            SuperSport Park, Centurion 2019-20
+                                        </h3> -->
+                                        <h4 class="upcoming-time">                                            
+                                            <%=match_val['matchtime_ist']%> Hrs IST                                            
+                                            <br><span class="upcoming-venue"><%=match_val['matchstatus']%></span>
+                                        </h4>
+                                    </div>
+                                </a>
+                            </div>
+                            <% count++; %>
+                            <% } } %>
+                        </div>
+                    </div>
+                    <!--Upcoming Matches

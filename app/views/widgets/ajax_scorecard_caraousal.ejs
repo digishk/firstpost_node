@@ -1,0 +1,263 @@
+<style>
+.country-name{width: 50px;}
+.live-score-details{margin: 0 0 0 6px;}
+.team-score{font: 400 17px/20px Arial;letter-spacing: normal;}
+</style>
+<div class="score-widget">
+    <div class="glide" id="score">
+        <div data-glide-el="track" class="glide__track">
+            <ul class="glide__slides">                           
+                <% for (const [match_key, match_val] of Object.entries(liveMatchList)) { %>
+                <% if(match_val['teama'] != undefined){ %>
+                <li class="glide__slide live_slide">                                
+                    <%if(match_val['teama'] != undefined){%>
+                    <a href="<%= constant.SITE_URL %>firstcricket/cricket-live-score/<%-match_val['teama'].replace(/\s+/g, '-').toLowerCase() %>-vs-<%-match_val['teamb'].replace(/\s+/g, '-').toLowerCase() %>-<%= match_val['matchtype'].replace(/\s+/g, '-').toLowerCase() %>-live-cricket-score-full/<%= match_val['series_Id']%>/<%= match_val['match_Id']%>.html" title="<%-match_val['teama'] %> vs <%-match_val['teamb'] %> Full Scorecard" class="live-click">
+                        <% } else {%>
+                        <a href="javascript:void(0);" title="" class="live-click">
+                        <% } %>
+                        <div class="match-name-div">
+                            <h5 class="match-name">
+                                <%= match_val['teama']%> vs <%-match_val['teamb']%>
+                            </h5>                                                                                
+                            <div class="status-div live">
+                                <span class="circle white"></span>
+                                Live
+                            </div>
+                        </div>
+                        <div class="match-details-div">
+                            <!-- First Inning Start-->
+                            <% if(match_val['inn_team_1'] == match_val['teama_Id']) {
+                                var Inn2TeamId = match_val['teamb_Id'];
+                                var Inn2TeamName = match_val['teamb'];
+                                var Inn2Short = match_val['teamb_short'];
+                            %> 
+                            <div class="team-score-details team-one">    
+                                <span>                
+                                <img loading="lazy" width="30" height="16.6" alt="<%= match_val['teama']%>" src="https://xmlns.cricketnext.com/cktnxt/scorecard/crk_player_images/flags/90x50/<%= match_val['teama_Id']%>.png" title="<%= match_val['teama']%>">
+                                </span>                                            
+                                <span class="country-name"><%= match_val['teama_short']%></span>                                            
+                                <div class="live-score-details">
+                                    <span class="team-score"><%= match_val['inn_score_1']%></span> <span class="team-rate-details 11"><!--  R/R :
+                                        8.2 --></span>
+                                        <% if(typeof match_val['inn_team_3'] !== 'undefined' && match_val['inn_team_3'] == match_val['teama_Id']) { %>
+                                        <span class="team-score">&<br> <%= match_val['inn_score_3']%></span> <span class="team-rate-details 11">
+                                        <%}%>
+                                        <% if(typeof match_val['inn_team_4'] !== 'undefined' && match_val['inn_team_4'] == match_val['teama_Id']) { %>
+                                        <span class="team-score">&<br> <%= match_val['inn_score_4']%></span> <span class="team-rate-details 11">
+                                        <%}%>
+                                </div>
+                            </div>
+                             <% } else {
+                                var Inn2TeamId = match_val['teama_Id'];
+                                var Inn2TeamName = match_val['teama'];
+                                var Inn2Short = match_val['teama_short'];
+                              %>
+                             <div class="team-score-details team-one">                                
+                                <span>
+                                   <img loading="lazy" width="30" height="16.6" alt="<%= match_val['teamb']%>" src="https://xmlns.cricketnext.com/cktnxt/scorecard/crk_player_images/flags/90x50/<%= match_val['teamb_Id']%>.png" title="<%= match_val['teamb']%>">
+                                </span>                                                                                        
+                                <span class="country-name"><%= match_val['teamb_short']%></span>                                            
+                                <div class="live-score-details">
+                                    <span class="team-score"><%= match_val['inn_score_1']%></span> <span class="team-rate-details 22"><!--  R/R :
+                                        8.2 --></span>
+                                        <% if(typeof match_val['inn_team_3'] !== 'undefined' && match_val['inn_team_3'] == match_val['teamb_Id']) { %>
+                                        <span class="team-score">&<br> <%= match_val['inn_score_3']%></span> <span class="team-rate-details 11">
+                                        <%}%>
+                                        <% if(typeof match_val['inn_team_4'] !== 'undefined' && match_val['inn_team_4'] == match_val['teamb_Id']) { %>
+                                        <span class="team-score">&<br> <%= match_val['inn_score_4']%></span> <span class="team-rate-details 11">
+                                        <%}%>
+                                </div>
+                            </div>
+                             <% } %>
+                            <!-- First Inning End-->   
+                            <!-- Second Inning Start-->                            
+                            <div class="team-score-details team-two">
+                                <span>                                               
+                                <img loading="lazy" width="30" height="16.6" alt="<%= Inn2TeamName %>" src="https://xmlns.cricketnext.com/cktnxt/scorecard/crk_player_images/flags/90x50/<%= Inn2TeamId %>.png" title="<%= Inn2TeamName%>">
+                                </span>                                            
+                                <span class="country-name"><%= Inn2Short %></span>
+                                <div class="live-score-details to-play">
+                                    <% if(match_val['inn_score_2'] != ""){%>
+                                     <span class="team-score"><%= match_val['inn_score_2']%></span> <span class="team-rate-details"><!--  R/R :
+                                        8.2 --></span>
+                                        <% } %>
+                                        <% if(typeof match_val['inn_team_3'] !== 'undefined' && match_val['inn_team_3'] == Inn2TeamId) { %>
+                                        <span class="team-score">&<br> <%= match_val['inn_score_3']%></span> <span class="team-rate-details 11">
+                                        <%}%>
+                                        <% if(typeof match_val['inn_team_4'] !== 'undefined' && match_val['inn_team_4'] == Inn2TeamId) { %>
+                                        <span class="team-score">&<br> <%= match_val['inn_score_4']%></span> <span class="team-rate-details 11">
+                                        <%}%>
+
+                                     <% if(match_val['inn_team_2'] == '') { %>
+                                     Yet To Bat
+                                    <% } %>
+                                </div>
+                            </div>                             
+                             <div class="match-res-txt">
+                            <%= match_val['matchstatus'] %> 
+                            <% if(typeof match_val['equation'] !== 'undefined' && match_val['equation'] != "") {%>
+                            - <%= match_val['equation'] %>
+                            <% } %>
+                            </div>
+                            <!-- Second Inning End-->
+                        </div>
+                    </a>                
+                </li>
+                <% } } %>
+                <%
+                var i = 1;
+                var reverseMatchList = Object.entries(resultMatchList).reverse();
+                for (const [match_key, match_val] of reverseMatchList) { %>
+                <%if(match_val['category'] == 'men'){%>
+                <li class="glide__slide">                                
+                    <%if(match_val['teama'] != undefined){%>
+                    <a href="<%= constant.SITE_URL %>firstcricket/cricket-live-score/<%-match_val['teama'].replace(/\s+/g, '-').toLowerCase() %>-vs-<%-match_val['teamb'].replace(/\s+/g, '-').toLowerCase() %>-<%= match_val['matchtype'].replace(/\s+/g, '-').toLowerCase() %>-live-cricket-score-full/<%= match_val['series_Id']%>/<%= match_val['match_Id']%>.html" title="<%-match_val['teama'] %> vs <%-match_val['teamb'] %> Full Scorecard" class="live-click">
+                        <% } else {%>
+                        <a href="javascript:void(0);" title="" class="live-click">
+                        <% } %>
+                        <div class="match-name-div">
+                            <h5 class="match-name">
+                                <%= match_val['teama']%> vs <%-match_val['teamb']%>
+                            </h5>                                                                                
+                            <div class="status-div results">
+                                results
+                            </div>
+                        </div>
+                        <div class="match-details-div">
+                            <!-- First Inning Start-->
+                            <% if(match_val['inn_team_1'] == match_val['teama_Id']) {
+                                var Inn2TeamId = match_val['teamb_Id'];
+                                var Inn2TeamName = match_val['teamb'];
+                                var Inn2Short = match_val['teamb_short'];
+                            %> 
+                            <div class="team-score-details team-one">    
+                                <span>                
+                                <img loading="lazy" width="30" height="16.6" alt="<%= match_val['teama']%>" src="https://xmlns.cricketnext.com/cktnxt/scorecard/crk_player_images/flags/90x50/<%= match_val['teama_Id']%>.png" title="<%= match_val['teama']%>">
+                                </span>                                            
+                                <span class="country-name"><%= match_val['teama_short']%></span>                                            
+                                <div class="live-score-details">
+                                    <span class="team-score"><%= match_val['inn_score_1']%></span> <span class="team-rate-details 11"><!--  R/R :
+                                        8.2 --></span>
+                                        <% if(typeof match_val['inn_team_3'] !== 'undefined' && match_val['inn_team_3'] == match_val['teama_Id']) { %>
+                                        <span class="team-score">&<br> <%= match_val['inn_score_3']%></span> <span class="team-rate-details 11">
+                                        <%}%>
+                                        <% if(typeof match_val['inn_team_4'] !== 'undefined' && match_val['inn_team_4'] == match_val['teama_Id']) { %>
+                                        <span class="team-score">&<br> <%= match_val['inn_score_4']%></span> <span class="team-rate-details 11">
+                                        <%}%>
+                                </div>
+                            </div>
+                             <% } else {
+                                var Inn2TeamId = match_val['teama_Id'];
+                                var Inn2TeamName = match_val['teama'];
+                                var Inn2Short = match_val['teama_short'];
+                              %>
+                             <div class="team-score-details team-one">                                
+                                <span>
+                                   <img loading="lazy" width="30" height="16.6" alt="<%= match_val['teamb']%>" src="https://xmlns.cricketnext.com/cktnxt/scorecard/crk_player_images/flags/90x50/<%= match_val['teamb_Id']%>.png" title="<%= match_val['teamb']%>">
+                                </span>                                                                                        
+                                <span class="country-name"><%= match_val['teamb_short']%></span>                                            
+                                <div class="live-score-details">
+                                    <span class="team-score"><%= match_val['inn_score_1']%></span> <span class="team-rate-details 22"><!--  R/R :
+                                        8.2 --></span>
+                                        <% if(typeof match_val['inn_team_3'] !== 'undefined' && match_val['inn_team_3'] == match_val['teamb_Id']) { %>
+                                        <span class="team-score">&<br> <%= match_val['inn_score_3']%></span> <span class="team-rate-details 11">
+                                        <%}%>
+                                        <% if(typeof match_val['inn_team_4'] !== 'undefined' && match_val['inn_team_4'] == match_val['teamb_Id']) { %>
+                                        <span class="team-score">&<br> <%= match_val['inn_score_4']%></span> <span class="team-rate-details 11">
+                                        <%}%>
+                                </div>
+                            </div>
+                             <% } %>
+                            <!-- First Inning End-->   
+                            <!-- Second Inning Start-->                            
+                            <div class="team-score-details team-two">
+                                <span>                                               
+                                <img loading="lazy" width="30" height="16.6" alt="<%= Inn2TeamName %>" src="https://xmlns.cricketnext.com/cktnxt/scorecard/crk_player_images/flags/90x50/<%= Inn2TeamId %>.png" title="<%= Inn2TeamName%>">
+                                </span>                                            
+                                <span class="country-name"><%= Inn2Short %></span>
+                                <div class="live-score-details to-play">
+                                    <% if(match_val['inn_score_2'] != ""){%>
+                                     <span class="team-score"><%= match_val['inn_score_2']%></span> <span class="team-rate-details"><!--  R/R :
+                                        8.2 --></span>
+                                        <% } %>
+                                        <% if(typeof match_val['inn_team_3'] !== 'undefined' && match_val['inn_team_3'] == Inn2TeamId) { %>
+                                        <span class="team-score">&<br> <%= match_val['inn_score_3']%></span> <span class="team-rate-details 11">
+                                        <%}%>
+                                        <% if(typeof match_val['inn_team_4'] !== 'undefined' && match_val['inn_team_4'] == Inn2TeamId) { %>
+                                        <span class="team-score">&<br> <%= match_val['inn_score_4']%></span> <span class="team-rate-details 11">
+                                        <%}%>
+                                </div>
+                            </div>                                                         
+                            <!-- Second Inning End-->
+                        </div>
+                        <div class="match-res-txt">
+                            <%= match_val['matchresult'] %>
+                        </div>
+                    </a>                
+                </li>                   
+                <% 
+                    i++;
+                    if(i >= 6){
+                        break;
+                    }
+                } } %>
+                <% for (const [match_key, match_val] of Object.entries(upcomingMatchList)) { %>
+                <li class="glide__slide">
+                    <%if(match_val['teama'] != undefined){%>
+                    <a href="<%= constant.SITE_URL %>firstcricket/cricket-live-score/<%-match_val['teama'].replace(/\s+/g, '-').toLowerCase() %>-vs-<%-match_val['teamb'].replace(/\s+/g, '-').toLowerCase() %>-<%= match_val['matchtype'].replace(/\s+/g, '-').toLowerCase() %>-live-cricket-score-full/<%= match_val['series_Id']%>/<%= match_val['match_Id']%>.html" title="<%-match_val['teama'] %> vs <%-match_val['teamb'] %> Full Scorecard" class="live-click">
+                        <% } else {%>
+                        <a href="javascript:void(0);" title="" class="live-click">
+                        <% } %>
+                        <div class="match-name-div">
+                            <h5 class="match-name">
+                                <%= match_val['teama']%> vs <%=match_val['teamb']%>
+                            </h5>
+                            <div class="status-div upcoming">
+                                upcoming
+                            </div>
+                        </div>
+                        <div class="match-details-div">
+                            <div class="team-score-details team-one">
+                                <span>                                                
+                                    <img loading="lazy" width="30" height="16.6" alt="<%= match_val['teama']%>" src="https://xmlns.cricketnext.com/cktnxt/scorecard/crk_player_images/flags/90x50/<%= match_val['teama_Id']%>.png" title="<%= match_val['teama']%>">
+                                </span>
+                                <span class="country-name"><%=match_val['teama_short']%></span>
+                                <div class="details">
+                                    <span>
+                                        <%= dateFormat(match_val["matchdate_ist"] , "mmmm dd','yyyy") %>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="team-score-details team-two">
+                                <span>
+                                    <img loading="lazy" width="30" height="16.6" alt="<%= match_val['teamb']%>" src="https://xmlns.cricketnext.com/cktnxt/scorecard/crk_player_images/flags/90x50/<%= match_val['teamb_Id']%>.png" title="<%= match_val['teamb']%>">
+                                </span>
+                                <span class="country-name"><%=match_val['teamb_short']%></span>
+                                <div class="details">
+                                    <span>
+                                        <%= match_val['matchtime_ist'] %> IST
+                                    </span>
+                                </div>
+                            </div>
+                        </div>                                    
+                        <div class="match-res-txt">
+                            <%= match_val['matchstatus'] %>
+                        </div>
+                    </a>
+                </li>
+                <%}%>
+            </ul>
+    
+            <div data-glide-el="controls" class="button-control">
+                <button data-glide-dir="<" class="prev-btn glide__arrow glide__arrow--left">&lt;</button>
+                <button data-glide-dir=">" class="next-btn glide__arrow glide__arrow--right">&gt;</button>
+            </div>
+        </div>
+    </div>
+</div>
+<%if(isMobile != 1){ %>
+<script type="text/javascript">
+    var scoreglide = new Glide('#score', {type: 'slider',perView: 3,});
+    scoreglide.mount();
+</script>
+<%}%>

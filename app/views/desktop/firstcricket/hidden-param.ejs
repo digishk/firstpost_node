@@ -1,0 +1,12 @@
+<input type="hidden" name="matchStatus" id="matchStatus" value="<%= scoreData['status'] %>">
+<input type="hidden" name="isMatchLive" id="isMatchLive" value="<%= isMatchLive %>">
+<input type="hidden" name="matchFile" id="matchFile" value="<%=matchFile%>">
+<input type="hidden" name="seriesID" id="seriesID" value="<%=seriesID%>">
+<input type="hidden" name="matchID" id="matchID" value="<%=matchID%>">
+<input type="hidden" name="pageType" id="pageType" value="<%=pageType%>">
+<input type="hidden" name="postSlug" id="postSlug" value="<%=blogUrl%>">
+<input type="hidden" name="postId" id="postId" value="<%=postId%>">
+<input type="hidden" name="pseudo_value" id="pseudo_value" value="<%=pseudo_value%>">
+ <% if (typeof outbrain_ads !== 'undefined' && typeof outbrain_ads['MB_2'] !== 'undefined'){%>
+        <%-outbrain_ads['MB_2'];%>  
+ <% } %>

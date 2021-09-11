@@ -1,0 +1,166 @@
+<%- include(viewpath+ '/layouts/header'); %>    
+        <div class="main-wrapper">
+
+            <!--Score-Widget-->
+            <%- include(viewpath+ '/widgets/scorecard_caraousal'); %>
+            <input type="hidden" name="" id="checkDevice" value="<%=device%>">
+            <!--Score-Widget-->
+
+            <!--728x90 Ad Space-->
+            <% if (typeof ads  !== 'undefined' && typeof ads['ATF_728']  !== 'undefined'){%>
+            <div class="ad-slot fixed-ad-banner-fc">
+                <%-common.displayAds(ads['ATF_728'][0]) %>
+            </div>
+            <% } %>
+            <!--728x90 Ad Space-->
+
+            <!--Bread crumb-->
+            <%- include(viewpath+ '/widgets/breadCrumbs'); %>
+            <!--Bread crumb-->
+
+            <% if(typeof seriesSlug !== 'undefined' && seriesSlug != 'ipl-2021') {%>
+            <!--Cricket Inner Menu-->
+            <%- include(viewpath+ '/layouts/level-4-nav'); %>
+            <!--Cricket Inner Menu-->
+            <% } %>
+
+            <!--Main Page Content-->
+            <div class="content-wrap" id="home">
+                <div class="left-content">
+                    <h1 class="page-title"><span><%= seriesName %></span></h1>
+
+                    <!--Tab container-->
+                    <%- include(viewpath+ '/widgets/cric-series-menu'); %>
+                    <!--Tab container-->
+
+                    <!--Top Slider Section-->
+                    <% if(seriesSlug == 'ipl-2020' && rankingData !== null && typeof rankingData !== 'undefined') { %>
+                    <section class="top-slider-section">
+                        <div class="glide" id="topSlider">
+                            <div data-glide-el="track" class="glide__track">
+                                <ul class="glide__slides">
+                                    <% for (const [rankDataKey, rankDataValue] of Object.entries(rankingData['main_ranking'])) { %>
+                                    <li class="glide__slide">
+                                        <div class="top-story-slide">
+                                            <div class="top-image-wrap">
+                                                <a href="<%=rankDataValue['post_url']%>" title="<%=rankDataValue['post_title']%>">
+                                                    <img src="<%=rankDataValue['desktop_img']%>" alt="<%=rankDataValue['post_title']%>" title="<%=rankDataValue['post_title']%>"/>
+                                                </a>
+                                                <div class="main-title-div">
+                                                    <h2 class="main-title-wrap">
+                                                        <a href="<%=rankDataValue['post_url']%>" title="<%=rankDataValue['post_title']%>">
+                                                            <%=rankDataValue['post_title']%>
+                                                        </a>
+                                                    </h2>
+                                                    <div class="share-wrap">
+                                                        <% var shareArr = []; 
+                                                    shareArr['shareTitle'] = rankDataValue['post_title'];
+                                                    shareArr['shareUrl'] = rankDataValue['post_url']; %>
+                                                <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <% } %>
+                                </ul>
+                            </div>
+                            <div class="glide__bullets" data-glide-el="controls[nav]">
+                                <% i = 0; %>
+                                <% for (const [rankDataKey, rankDataValue] of Object.entries(rankingData['main_ranking'])) { %>
+                                    <button class="glide__bullet" data-glide-dir="=<%=i %>">
+                                </button>
+                                <% i++; %>
+                                <% } %>
+                            </div>
+                        </div>
+                    </section>
+                    <% } %>
+                    <!--Top Slider Section-->
+                    
+                    <!--Top Slider Section-->
+                    <% if(showRanking == "yes") { %>
+                    <section class="top-slider-section">
+                        <div class="glide" id="topSlider">
+                            <div data-glide-el="track" class="glide__track">
+                                <ul class="glide__slides">
+                                    <li class="glide__slide">
+                                        <div class="top-story-slide">
+                                            <div class="top-image-wrap">
+                                                <a href="<%=rankMainData['post_url']%>" title="<%=rankMainData['post_title']%>">
+                                                    <img src="<%-constant.PLACEHOLDER_IMG_640x362 %>" class="fp-lazy" data-src="<%-common.firstpost_imageOptimization(rankMainData['img'], 640, 362, '') %>" alt="<%=rankMainData['post_title']%>" title="<%=rankMainData['post_title']%>"/>
+                                                </a>
+                                                <div class="main-title-div">
+                                                    <h2 class="main-title-wrap">
+                                                        <a href="<%=rankMainData['post_url']%>" title="<%=rankMainData['post_title']%>">
+                                                            <%=rankMainData['post_title']%>
+                                                        </a>
+                                                    </h2>
+                                                    <div class="share-wrap">
+                                                        <% var shareArr = []; 
+                                                    shareArr['shareTitle'] = rankMainData['post_title'];
+                                                    shareArr['shareUrl'] = rankMainData['post_url']; %>
+                                                <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <% for (const [rankKey, rankValue] of Object.entries(rankOtherData)) { %>
+                                    <li class="glide__slide">
+                                        <div class="top-story-slide">
+                                            <div class="top-image-wrap">
+                                                <a href="<%=rankValue['post_url']%>" title="">
+                                                    <img src="<%-constant.PLACEHOLDER_IMG_640x362 %>" class="fp-lazy" data-src="<%-common.firstpost_imageOptimization(rankValue['img'], 640, 362, '') %>" alt="<%=rankValue['post_title']%>" title="<%=rankValue['post_title']%>"/>
+                                                </a>
+                                                <div class="main-title-div">
+                                                    <h2 class="main-title-wrap">
+                                                        <a href="<%=rankValue['post_url']%>" title="<%=rankValue['post_title']%>">
+                                                            <%=rankValue['post_title']%>
+                                                        </a>
+                                                    </h2>
+                                                    <div class="share-wrap">
+                                                        <% var shareArr = []; 
+                                                    shareArr['shareTitle'] = rankValue['post_title'];
+                                                    shareArr['shareUrl'] = rankValue['post_url']; %>
+                                                <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <% } %>
+                                </ul>
+                            </div>
+                            <div class="glide__bullets" data-glide-el="controls[nav]">
+                                <button class="glide__bullet" data-glide-dir="=0"></button>
+                                <% var rankkv = 1; for (const [rankKey, rankValue] of Object.entries(rankOtherData)) {  %><button class="glide__bullet" data-glide-dir="=<%-rankkv%>"></button>
+                                <% rankkv = rankkv+1; } %>                                
+                            </div>
+                        </div>
+                    </section>
+                    <% } %>
+                    <!--Top Slider Section-->
+                    
+                    <!--Misc Story Section-->
+                    <%- include(viewpath+ '/desktop/firstcricket/news-widget'); %>
+                    <!--Misc Story Section-->
+
+                    <!--Pagination-->
+                    <%- include(viewpath+ '/widgets/paginationDefault'); %>                
+                    <!--Pagination-->
+                    
+                </div>
+                <%- include(viewpath+ '/desktop/firstcricket/ipl/ipl-rhs'); %>
+            </div>
+            <!--Main Page Content-->
+        </div>
+
+        <% if (typeof outbrain_ads !== 'undefined' && typeof outbrain_ads['AR_2'] !== 'undefined'){%>
+                    <%-outbrain_ads['AR_2'];%>  
+        <% } %>
+
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+<%- include(viewpath+ '/layouts/footer'); %>               

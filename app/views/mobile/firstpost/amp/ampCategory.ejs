@@ -1,0 +1,556 @@
+<%- include(viewpath+ '/layouts/amp-header'); %>
+  <style amp-custom>
+    .transition{-webkit-transition: all 500ms ease;-moz-transition: all 500ms ease;-ms-transition: all 500ms ease;-o-transition: all 500ms ease;transition: all 500ms ease}
+    @font-face{font-family:'Playfair Display';font-style:normal;font-weight:400;src:url(/static/fonts/playfair-display-v20-latin-regular.eot);src:local(''), url(/static/fonts/playfair-display-v20-latin-regular.eot?#iefix) format('embedded-opentype'), url(/static/fonts/playfair-display-v20-latin-regular.woff2) format('woff2'), url(/static/fonts/playfair-display-v20-latin-regular.woff) format('woff'), url(/static/fonts/playfair-display-v20-latin-regular.ttf) format('truetype'), url(/static/fonts/playfair-display-v20-latin-regular.svg#PlayfairDisplay) format('svg')}
+    @font-face{font-family: 'Playfair Display';font-style: normal;font-weight: 700;src: url(/static/fonts/playfair-display-v20-latin-700.eot);src: local(''), url(/static/fonts/playfair-display-v20-latin-700.eot?#iefix) format('embedded-opentype'), url(/static/fonts/playfair-display-v20-latin-700.woff2) format('woff2'), url(/static/fonts/playfair-display-v20-latin-700.woff) format('woff'), url(/static/fonts/playfair-display-v20-latin-700.ttf) format('truetype'), url(/static/fonts/playfair-display-v20-latin-700.svg#PlayfairDisplay) format('svg')}
+    * {box-sizing:border-box}
+    body{padding:0;margin: 0;-webkit-overflow-scrolling: touch;color:#000;font-family: Arial,sans-serif;box-sizing: border-box}
+    a,h1,h2,h3,h4,h5,h6{padding:0;margin:0}
+    ul{padding:0;margin:0;list-style:none}
+    a {display:block;text-decoration:none;cursor:pointer;outline:0;color:#000}
+    a:hover{text-decoration:none}
+    img{vertical-align:top;width:100%}
+    .ad-center{display:flex;width:100%;text-align:center;margin:0 0 20px;justify-content:center}
+    .tab-container{display:flex}
+    .tab{background-color:#fff;width:100%;height:300px}
+    .tablinks{display:block;background-color:inherit;color:#000;padding:13px 10px;border:none;outline:0;
+    text-align: left;cursor:pointer;transition:.3s;font-size:17px}
+    .tablinks:hover{background-color:#ddd}
+    .tabcontent{padding:0;width:100%;border-left:none;background:#fff}
+    .category-name{font:600 12px/15px Arial;color:#585858;text-transform:uppercase;position:relative;  padding-right:5px;z-index:1;display:inline-block;margin:0 10px}
+    .category-name:before{content:'';position:absolute;height:4px;background:#fad65f;left:0;right:0; bottom:2px;z-index:-1}
+    .main-story-title{display:flex;flex-direction:column;align-items:center;font:Bold 22px/23px Arial;  letter-spacing:0;color:#000;position:relative;margin-bottom:15px;text-transform:uppercase;text-align:center}
+    .main-story-title:before{content:'';position:absolute;left:0;right:0;bottom:2px;border-bottom:#707070 solid 1px;z-index:-1}
+    .main-story-title span{display:inline-block;width:83px;height:4px;background:#FAD65F;margin-top:8px;position:relative}
+    .main-story-title span:before{content:'';background:#fff;width:10px;height:5px;position:absolute;left:-10px;top:0}
+    .main-story-title span:after{content:'';background:#fff;width:10px;height:5px;position:absolute; right:-10px;top:0}
+    .double-title{position:relative;margin:0 0 0 11px}
+    .title-shadow:after{content:'';display:inline-block;width:100%;height:6px;background:#F5D672;position:absolute;bottom:12px;left:0}
+    .title-txt{font:900 Italic 20px/45px Arial;color:#000;text-transform:uppercase;position:relative;z-index:2}
+    .title-shadow{font: 900 Italic 24px/53px Arial;color:#F2F2F2;text-transform:uppercase;position:absolute;left:-11px;z-index:1;top:-8px;letter-spacing:1px}
+    .see-all{display:flex;color:#333;font:400 12px/18px Arial;text-transform:capitalize;justify-content:flex-end}
+    .see-all svg{fill:#333;width:18px}
+    .breadcrumb{margin:0 10px 20px}
+    .breadcrumb-list{display:flex;align-items:center}
+    .breadcrumb-list li{text-transform:capitalize}
+    .breadcrumb-list li a{display:inline-block;font:400 12px/15px Arial;letter-spacing:0;color:#000;text-transform:capitalize}
+    .breadcrumb-list li:after{content:'>';display:inline-block;color:#B2B2B2;margin:3px 10px;font-family:Consolas;font-size:12px}
+    .breadcrumb-list .current{font:400 12px/15px Arial;color:#838383}
+    .breadcrumb-list .current:after{display:none}
+    header{background:#000;padding:22px 0;position:sticky;top:0;z-index:9}
+    header .header-wrap{display:flex;justify-content:space-between;align-items:center;padding:0 10px}
+    header .sidenav-menu-btn{display:flex;flex-direction:column;padding:5px;background:none;border:none;}
+    header .sidenav-menu-btn span{width:25px;height:3px;margin-bottom:3px;background:#fff}
+    #sidenav-wrap{opacity:1;z-index:-9;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0, 0, 0, .3);-webkit-transition:all 500ms ease;-moz-transition:all 500ms ease;-ms-transition:all 500ms ease;-o-transition:all 500ms ease;transition:all 500ms ease}
+    #mySidenav{position:absolute;top:0;left:-320px;bottom:0;width:320px;background:#fff;-webkit-transition:all 500ms ease;-moz-transition:all 500ms ease;-ms-transition:all 500ms ease;-o-transition:all 500ms ease;transition:all 500ms ease;overflow-y:scroll;display:flex;flex-direction:column}
+    #mySidenav .horizontal-share{display:flex;margin:10px 0}
+    #sidenav-wrap.open #mySidenav{left:0;-webkit-transition:all 500ms ease;-moz-transition:all 500ms ease;
+  -ms-transition:all 500ms ease;-o-transition:all 500ms ease;transition:all 500ms ease}
+    .close-sidenav{display:flex;justify-content:flex-end;padding:10px;background:#fff;border:none}
+    button:focus{outline:none}
+    .close-sidenav svg{width:24px;height:24px}
+    .menu-list, .menu-list li{display:block}
+    .menu-list li a{display:block;padding:7px 10px 7px 30px;font:700 12px/24px Arial;color:#000;border-bottom: #B9B9B9 solid 1px}
+    .logo{margin: 0 auto}
+    #mySidenav .tablinks{border-bottom:#ccc solid 2px;text-align:left;font:600 10px/10px Arial;letter-spacing:0;color:#585858;opacity:1;display:flex;justify-content:center;align-items:center;flex-direction:column;text-transform:capitalize;width:68px}
+    #mySidenav .tablinks svg{fill:#B9B9B9;width:16px;height:16px;margin-bottom:6px}
+    #mySidenav .tab{height:100%}
+    #mySidenav .tab-container{border-top:#B9B9B9 solid 1px;flex-grow:1}
+    .main-menu-wrap{-webkit-box-shadow:0 3px 6px 0 #d6d6d6;box-shadow:0 3px 6px 0 #d6d6d6;overflow-x:scroll}
+    .main-menu-wrap .menu-wrap{display:flex;white-space:nowrap;padding:0 15px}
+    .main-menu-wrap .main-menu, .main-menu-wrap .sub-menu{display:flex;padding:6px 0}
+    .main-menu-wrap .main-menu a, .main-menu-wrap .sub-menu a{display:inline-block;font:400 12px/15px Arial;
+      padding:0 15px}
+    .main-menu-wrap .main-menu li:first-child a, .main-menu-wrap .sub-menu li:first-child a{padding-left:0;  border-left:none}
+    .main-menu-wrap .main-menu a{border-left:#C4C4C4 solid 1px}
+    .main-menu-wrap .netflix{color:#D32F27}
+    .main-menu-wrap .breathfree{color:#F29F46}
+    .main-menu-wrap .nine-month{color:#357FC0}
+    .main-menu-wrap .main-menu{margin-right:15px;border-right:#9F9F9F solid 1px}
+    .main-story-thumb-wrap{position:relative;margin-bottom:30px}
+    .main-story-thumb{position:relative;margin-bottom:15px}
+    .main-story-thumb .slider .main-story-thumb{padding:10px}
+    .main-story-thumb .title-wrap{background:#fff;padding:5px 10px 10px;margin:0 22px;position:absolute;
+      bottom:12px;left:0;right:0}
+    .main-story-thumb .category-name{display:inline-flex;margin-left:0}
+    .main-story-thumb .main-title{font:700 22px/25px 'Playfair Display', sans-serif;letter-spacing:0;color:#000;margin-top:10px}
+    .main-story-thumb .live-txt{background:#DF5B43;padding:0 7px;font:Bold 10px/18px Arial;color:#FFF;text-transform:uppercase;position:absolute;top:20px;left:30px;border-radius:2px}
+    .main-story-thumb .blinking{display:inline-block;width:9px;height:9px;background:#fff;border-radius:30px;
+      animation:blinkingText 1s linear infinite;margin-right:5px}
+    @keyframes blinkingText {
+      50% {opacity:0}
+    }
+    .main-story-thumb .thumb-social-wrap{position:absolute;top:9px;right:10px}
+    .main-story-thumb .live-txt{display:flex;align-items:center;justify-content:center;z-index:99;}
+    .main-story-thumb .thumb{display:flex;justify-content:center;padding:0 10px}
+    .main-story-thumb .video-icon{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;justify-content:center;align-items:center}
+    .sc-icon{width:26px;height:26px;background:url(../images/m-sprite.png)}
+    .fb{background-position-x:0}
+    .tw{background-position-x:-28px}
+    .wa{background-position-x:-56px}
+    .ev{background-position-x:-83px}
+    .in {background-position-x:54px}
+    .yu {background-position-x:right}
+    .horizontal-share{display:flex;padding-right:6px}
+    .horizontal-share li{padding:0 2px}
+    .big-thumb{position:relative;margin-bottom:20px}
+    .big-thumb .thumb-img{position:relative}
+    .big-thumb .category-name{margin-left:0}
+    .big-thumb .title-wrap{background:#fff;padding:5px 5px 10px;margin:-28px 0 0 10px;position:relative}
+    .big-thumb .main-title{font:700 22px/25px 'Playfair Display', sans-serif;letter-spacing:0;color:#000; margin-top:15px}
+    .big-thumb .copy{font:400 13px/18px Arial;letter-spacing:0;color:#333;margin-top:10px}
+    .big-thumb .video-icon{display:flex;justify-content:center;align-items:center;position:absolute;top:0;left:0;width:100%;height:100%}
+    .big-thumb .podcast-icon{position:absolute;top:15px;left:15px;width:30px;height:30px}
+    .big-thumb .podcast-icon circle, .big-thumb .podcast-icon path{fill:#fff}
+    .big-thumb .photo-icon{position:absolute;top:15px;left:15px;width:30px}
+    .big-thumb .photo-icon img{width:100%}
+    .big-thumb .sponsor-logo{position:absolute;top:8px;right:30px}
+    .photos-wrap .big-thumb .main-title{margin:5px 18px 0 0}
+    .common-widget{margin:0 10px 30px}
+    .top-stories-wrap{border:1px solid #DEDEDE;position:relative;top:-15px;border-bottom:4px solid #000}
+    .top-stories-wrap .story-list-ul{list-style-type:none}
+    .top-stories-wrap .story-list-ul li{border-bottom:1px solid #D5D5D5;position:relative;counter-increment: inst;padding:15px 5px 15px 45px}
+    .top-stories-wrap .story-list-ul li::after{background:#efefef;content:'';display:inline-block;width:27px;
+      height:27px;border-radius:50%;position:absolute;z-index:0;left:9px;top:23px}
+    .top-stories-wrap .story-list-ul li::before{content:counter(inst);text-align:center;position:absolute;
+      transition:all .2s ease-in-out;z-index:1;font:700 37px/17px 'Playfair Display';color:#000;text-transform:uppercase;left:9px}
+    .top-play{position:absolute;right:5px;top:5px;border:1px dashed #000;border-radius:30px;padding:4px 4px 0
+    }
+    .top-head-title{font:700 20px/26px 'Playfair Display';letter-spacing:0;color:#000;margin:0 0 5px}
+    .top-head-sum{font:400 14px/17px Arial;letter-spacing:.56px;color:#000}
+    .pagination-wrap{margin:0 0 55px}
+    .pagination{width:100%;text-align:center;margin-top:0}
+    .pagination li{display:inline-block;vertical-align:top;margin:0 6px;border:1px solid #FAD65F; border-radius:3px;transition:.2s ease all}
+    .pagination li a{font:400 12px/15px Arial;letter-spacing:0;color:#000;display:flex;width:26px;height:26px;justify-content:center;align-items:center}
+    .pagination li a:hover{border:none;background:0 0}
+    .pagination li.active, .pagination li:hover{background-color:#FAD65F}
+    .pagination li.active a, .pagination li:hover a{color:#fff}
+    .pagination li.disabled{border-top-color:#ccc}
+    .pagination li.disabled a{color:#bbb}
+    .pagination li.next a, .pagination li.prev a{font-family:Consolas}
+    .footer{border-top:#585858 solid 6px;padding:10px 0 0}
+    .footer .footer-main{display:flex;justify-content:space-between}
+    .footer-link-wrap{display:flex;margin-top:10px;padding:0;border-top:#ddd solid 1px;border-bottom:#ddd solid 1px}
+    .footer-link-wrap .footer-column{flex:1;border-right:#ddd solid 1px;padding:0 8px 15px}
+    .footer-link-wrap .footer-column:last-child{border-right:none}
+    .footer-link-wrap .footer-heading{font:800 13px/18px Arial;letter-spacing:0;color:#333;margin-top:15px;
+      margin-bottom:7px;text-transform:capitalize}
+    .footer-link-wrap .footer-links a{font:400 12px/22px Arial;letter-spacing:0;color:#333}
+    .other-sites{display:flex;align-items:center;padding:8px;border-bottom:#ddd solid 1px;margin-bottom:10px}
+    .company-name{display:flex;align-items:center;font:800 13px/18px Arial;letter-spacing:0;color:#333; margin-right:10px;flex-shrink:0}
+    .company-name svg{width:18px;margin-left:5px;fill:#999}
+    .other-sites-links{display:flex;overflow-x:scroll;white-space:nowrap}
+    .other-sites-links li{padding:0 8px}
+    .other-sites-links li a{font:400 12px/22px Arial;letter-spacing:.24px;color:#333}
+    .copywrite{display:flex;justify-content:center;font:400 10px/22px Arial;letter-spacing:0;color:#333}
+    .tnc-links{display:flex;justify-content:center;align-items:center;margin:5px 0 10px}
+    .tnc-links li{padding:0 5px;border-right:#ccc solid 1px}
+    .tnc-links li:last-child {border:none}
+    .tnc-links li a{font:700 10px/10px Arial;letter-spacing:0;color:#000}
+    .logo-size{display: inline-block;color: #000; position: absolute;left: -25%;top: 5px;left: -88px;}  
+    .hamburger-menu{position: relative;z-index: 999}  
+
+    /* AMP Sidebar Tabs CSS */
+    :root {
+      --color-primary: #005AF0;
+      --space-1: .5rem;  /* 8px */
+      --space-4: 2rem;   /* 32px */
+    }
+    #sections ul li:last-child a{border-bottom:none}
+    /* Styles for the flex layout based tabs */
+    amp-selector[role=tablist].tabs-with-flex {
+        display: flex;
+        flex-wrap: wrap;
+        background:#f1f1f1;
+        flex-direction:column;
+        border-bottom:1px solid #B9B9B9;
+    }
+    amp-selector[role=tablist].tabs-with-flex [role=tab] {
+        flex-grow: 1;
+        /* custom styling, feel free to change */
+        text-align: center;
+        padding: var(--space-1);
+    }
+    amp-selector[role=tablist].tabs-with-flex [role=tab][selected] {
+        outline: none;
+        /* custom styling, feel free to change */
+        background: #fff;
+    }
+    amp-selector[role=tablist].tabs-with-flex [role=tabpanel] {
+        display: none;
+        width: 100%;
+        order: 1; /* must be greater than the order of the tab buttons to flex to the next line */
+        /* custom styling, feel free to change */
+        
+    }
+    amp-selector[role=tablist].tabs-with-flex [role=tab][selected] + [role=tabpanel] {
+        display: block;width:76%;margin-left:68px;margin-top:-200px;border-left:1px solid #B9B9B9;min-height:300px;background:#fff;
+    }
+
+    /* Styles for the selector based tabs */
+    amp-selector[role=tablist].tabs-with-selector {
+        display: flex;
+    }
+    amp-selector[role=tablist].tabs-with-selector [role=tab][selected] {
+        outline: none;
+        /* custom styling, feel free to change */
+        border-bottom: 2px solid var(--color-primary);
+    }
+    amp-selector[role=tablist].tabs-with-selector {
+        display: flex;
+    }
+    amp-selector[role=tablist].tabs-with-selector [role=tab] {
+      /* custom styling, feel free to change */
+      width: 100%;
+      text-align: center;
+      padding: var(--space-1);
+    }
+    amp-selector.tabpanels [role=tabpanel] {
+      display: none;
+      /* custom styling, feel free to change */
+      padding: var(--space-4);
+    }
+    amp-selector.tabpanels [role=tabpanel][selected] {
+      outline: none;
+      display: block;
+    }
+    .sports-menu-wrap {background: #EAEAEA;margin-bottom:10px;}
+    .category-wrap {max-width: 100%;margin: 0 auto;overflow-x: scroll;}
+    .sports-menu-wrap .category-wrap {display: flex;}
+    .sports-menu-wrap .main-category-div {padding: 10px 0;display: flex;align-items: center;border: none;}
+    .sports-menu-wrap .main-category-div a {border-right: 1px solid #c4c4c4;font: 400 12px/14px Arial;letter-spacing: .24px;color: #000; padding: 2px 14px;white-space: nowrap;position: relative;}
+    .sports-menu-wrap {background: #EAEAEA;}
+    .category-wrap {max-width: 100%;margin: 0 auto;overflow-x: scroll;}
+    .sports-menu-wrap .category-wrap {display: flex;}
+    .sports-menu-wrap .main-category-div {padding: 10px 0;display: flex;align-items: center;}
+    .sports-menu-wrap .main-category-div {border: none;}
+    .sports-menu-wrap .main-category-div a {border-right: 1px solid #c4c4c4;font: 400 12px/14px Arial;letter-spacing: .24px;color: #000;padding: 2px 14px;white-space: nowrap;position: relative;}
+    .small-thumb-row .thumbnail .video-icon {position: absolute;top: 0;left: 0;width: 30px;height: 30px;}
+    .small-thumb-wrap {margin-bottom: 30px;overflow: hidden;position: relative;}
+    .photos .small-thumb-row {background: #F2F2F2;padding: 25px 0; margin-top: -10px;}
+    .small-thumb-row {overflow-x: scroll;white-space: nowrap;padding-bottom: 10px;}
+    .small-thumb-row .small-thumb {display: inline-block;max-width: 192px;background: #fff;white-space: normal;-webkit-box-shadow: 0 3px 6px 0 #d6d6d6;box-shadow: 0 3px 6px 0 #d6d6d6;position: relative;padding-bottom: 10px;margin: 0 10px;}
+    .small-thumb-row .thumbnail {position: relative;}
+    .see-all {display: flex;color: #333;font: 400 12px/18px Arial;text-transform: capitalize;justify-content: flex-end;}
+    .small-thumb-row .thumbnail .s-photo-icon {position: absolute;top: 15px;left: 15px;width: 30px;}
+    .small-thumb-row .copy {font: 700 15px/20px 'Playfair Display',sans-serif;letter-spacing: 0;color: #000;padding: 10px;}
+    .page-title{margin:0 0 15px;padding:2px;text-align:center;text-transform:uppercase;border-bottom:1px solid #707070;position:relative}.page-title span{text-align:left;font:700 22px/30px arial;letter-spacing:0;color:#000;opacity:1;padding:2px}.page-title:after{content:"";width:83px;height:4px;background:#fad65f;position:absolute;bottom:-3px;left:0;right:0;margin:0 auto;border-left:10px solid #ffff;border-right:10px solid #fff}.video-slider{padding:20px 0 10px 10px;background:#f2f2f2}.video-slider .video-slides{max-width:100%;overflow-x:scroll;display:flex;padding:0 0 10px}.video-slider .video-slides li{min-width:60%;margin:0 20px 0 0}.video-wrap{position:relative;box-shadow:0 3px 6px rgba(0,0,0,.16);padding:0 0 10px;background:#fff}.video-wrap .video-img-wrap{position:relative}.video-wrap .video-icon{position:absolute;bottom:0;left:0;z-index:1}.video-wrap .video-title-div{padding:10px 10px 0;margin:0 0 10px}.video-wrap .video-title-div .video-title{height:100px;overflow:hidden}.video-wrap .video-title a{font:700 15px/20px 'Playfair Display';letter-spacing:0;color:#000;display:block}.see-all-btn{display:flex;align-items:center;justify-content:flex-end}.see-all-btn a{font:400 12px/18px Arial;letter-spacing:0;color:#333;display:flex;align-items:center;justify-content:flex-end}
+    .main-menu-wrap{margin-bottom: 10px;}
+    .big-thumb{margin-bottom:0px;}
+    .small-thumb-row .copy{max-height: 111px;overflow: hidden;}
+    .small-thumb-row .small-thumb{margin: 0 5px 0 0;max-width: 166px;}
+    footer {background: #000;color: #fff;padding: 20px;text-align: center;}
+    .social-icons ul{ margin: 0 10px }
+    .social-icons ul li{ margin: 0 10px 0  0; }
+</style>
+
+  </head>
+  <body>
+    <%- include(viewpath+ '/layouts/amp-hamburger'); %>
+
+    <% if (typeof ads  !== 'undefined' && typeof ads['ATF_320']  !== 'undefined'){%>
+        <div class="ad-center" >
+            <%-common.displayAmpAds(ads['ATF_320'][0] , ads['ATF_320'][1] , ads['ATF_320'][2] , ads['ATF_320'][3]) %>
+        </div>
+    <% } %>
+    <%- include(viewpath+ '/widgets/breadCrumbs'); %>
+    <%/* if((pgNo == '1' || typeof pgNo =='undefined') && categoryData !== null) { */%> 
+    <% if(categoryData !== null && typeof categoryData !== 'undefined') { %> 
+        <div class="main-story-thumb-wrap">
+          <h3 class="main-story-title">
+            <a href="">THE BIG story</a>
+            <span></span>
+          </h3>
+          <% if (category_name == "health") { %>
+               <!--<a style="padding: 0 0 10px 10px;padding: 0 10px 10px 10px;font-size: 14px;display: flex;justify-content: space-between;" href="https://www.myupchar.com/en" rel="nofollow noindex" target="_blank" class="sponsor-logo">content powered by  
+                    <amp-img width="80" height="16" src="<%-constant.SITE_URL%>static/images/myupchar-logo.png"/></amp-img>
+                </a>-->
+           <% } %>
+          <% if(categoryData['CatMainRanking'] !== null && categoryData['CatMainRanking']['main_ranking'] !== null){%> 
+            <amp-carousel width="400" height="300" layout="responsive" type="slides">
+               <% for (const [categoryData_key, categoryData_val] of Object.entries(categoryData['CatMainRanking']['main_ranking'])) { %>
+                  <div class="main-story-thumb slide">
+                      <% if(categoryData_val['isliveBlog'] != 0) { %> 
+                          <div class="live-txt"><span class="blinking"></span>live</div>
+                      <% } %>
+                    <amp-img src="<%-categoryData_val['mobile_img'] %>" width="363" height="495" layout="responsive" alt="<%=categoryData_val['modified_title'] %>" title="<%=categoryData_val['modified_title'] %>"></amp-img>
+                    <div class="title-wrap">
+                      <a href="<%-categoryData_val['category_url'] %>" class="category-name"><%-categoryData_val['category'] %></a>
+                      <h1 class="main-title">
+                          <a href="<%-categoryData_val['modified_posturl'].replace(constant.MAIN_SITE_URL, constant.SITE_URL) %>"><%-categoryData_val['modified_title'] %></a>
+                      </h1>
+                    </div>
+                  </div>
+              <% } %>
+            </amp-carousel>
+          <% } %>  
+        </div><!--main-story-thumb-->
+        <% if(categoryData['CatMainRanking'] !== null && categoryData['CatMainRanking']['related_ranking'] !== null){%> 
+          <% for (const [categoryData_key, categoryData_val] of Object.entries(categoryData['CatMainRanking']['related_ranking'])) { %>
+              <div class="big-thumb">
+                   <a href="<%- categoryData_val['modified_posturl'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" class="thumb-img">
+                      <amp-img src="<%-common.firstpost_imageOptimization(categoryData_val['post_image'], 320, 180, '') %>" width="320" height="180" layout="responsive" alt="<%= categoryData_val['modified_title']%>" title="<%= categoryData_val['modified_title']%>">
+                      </amp-img>
+                      <% if (categoryData_val['category'].replace(/\s+/g, '-').toLowerCase() == "video") { %>
+                      <div class="video-icon">
+                        <svg width="70.182" height="70.182" viewBox="0 0 70.182 70.182"><defs><filter id="a" x="0" y="0" width="70.182" height="70.182" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="4.5" result="b"/><feFlood flood-opacity="0.294"/><feComposite operator="in" in2="b"/><feComposite in="SourceGraphic"/></filter></defs><g transform="matrix(1, 0, 0, 1, 0, 0)"><path fill="#fff" d="M23.591,2A21.591,21.591,0,1,0,45.182,23.591,21.6,21.6,0,0,0,23.591,2ZM19.273,33.307V13.875l12.955,9.716Z" transform="translate(11.5 8.5)"/></g></svg>
+                      </div>
+                      <% } else if (categoryData_val['content_type'].toLowerCase() == "podcast") { %>
+                          <svg class="podcast-icon" viewBox="0 0 48 58">
+                            <g id="Page-1" fill="none" fill-rule="evenodd">
+                               <g id="077---Podcast" fill="rgb(0,0,0)" fill-rule="nonzero" transform="translate(-1 -1)">
+                                  <circle id="Oval" cx="25" cy="25" r="7"/>
+                                  <path id="Shape" d="m41 25c.0043835 3.8369583-1.381053 7.5456651-3.9 10.44-.8816497-1.0158408-1.9600185-1.8424768-3.17-2.43 4.3150268-4.8070778 4.0504913-12.1673491-.5984984-16.6522513-4.6489898-4.4849021-12.0140134-4.4849021-16.6630032 0-4.6489897 4.4849022-4.9135252 11.8451735-.5984984 16.6522513-1.2099815.5875232-2.2883503 1.4141592-3.17 2.43-4.63398704-5.3707457-5.17622072-13.1522935-1.3318892-19.1138252 3.8443314-5.9615317 11.1563967-8.67818511 17.9606345-6.67291902 6.8042379 2.00526612 11.4743714 8.25317422 11.4712547 15.34674422z"/>
+                                  <path id="Shape" d="m49 25c-.0020711 7.5935583-3.6000328 14.7375524-9.7 19.26l.03-.14c.3603606-1.6531373.2915082-3.3710057-.2-4.99 5.7270739-5.7172575 7.4444796-14.3223043 4.3508714-21.8000042-3.0936081-7.47769995-10.3885041-12.35425664-18.4808714-12.35425664s-15.38726325 4.87655669-18.48087142 12.35425664c-3.09360816 7.4776999-1.37620243 16.0827467 4.35087142 21.8000042-.4915082 1.6189943-.5603606 3.3368627-.2 4.99l.03.14c-9.07806131-6.7351009-12.22594977-18.8917939-7.5576155-29.1864253 4.66833428-10.29463137 15.887313-15.93634235 26.9351117-13.54491516 11.0477988 2.39142719 18.9293761 12.16768026 18.9225038 23.47134046z"/>
+                                  <path id="Shape" d="m29.556 36h-9.112c-1.8151552-.0000102-3.5327417.8217028-4.6717465 2.2350168s-1.576974 3.2662842-1.1912535 5.0399832l3.077 14.15c.1998936.9191918 1.0133242 1.5748485 1.954 1.575h10.776c.9406758-.0001515 1.7541064-.6558082 1.954-1.575l3.077-14.15c.3857205-1.773699-.0522487-3.6266692-1.1912535-5.0399832s-2.8565913-2.235027-4.6717465-2.2350168zm-11.026 9.242-.5-2c-.0959435-.3498693.0051249-.72426.2641012-.9783171.2589762-.2540571.635236-.3479281.9832013-.2452935.3479652.1026346.6130526.385675.6926975.7396106l.5 2c.1334945.5356925-.1923791 1.0782184-.728 1.212-.0791715.0196698-.1604221.0297422-.242.03-.4589705-.0001268-.8589292-.3126718-.97-.758zm2.712 6.728c-.0791715.0196698-.1604221.0297422-.242.03-.4585975-.0005854-.8580197-.3130332-.969-.758l-.531-2.117c-.1024987-.3519028-.0042666-.731682.2560049-.9897522.2602716-.2580703.6408715-.353073.991891-.2475891s.616204.3945496.6911041.7533413l.53 2.117c.1335558.5353845-.1917847 1.0777678-.727 1.212zm9.258-2.845-.529 2.117c-.111161.44569-.5116567.7583324-.971.758-.0819126-.0001775-.1635037-.0102505-.243-.03-.5356209-.1337816-.8614945-.6763075-.728-1.212l.53-2.117c.0749001-.3587917.3400846-.6478574.6911041-.7533413s.7316194-.0104812.991891.2475891c.2602715.2580702.3585036.6378494.2560049.9897522zm1.471-5.883-.5 2c-.111161.44569-.5116567.7583324-.971.758-.0819126-.0001775-.1635037-.0102505-.243-.03-.5356209-.1337816-.8614945-.6763075-.728-1.212l.5-2c.1436734-.5239217.6793531-.8373021 1.2064607-.7057969.5271075.1315052.8528058.6597861.7335393 1.1897969z"/>
+                               </g>
+                            </g>
+                         </svg>
+                      <% } %>
+                   </a>
+                   <div class="title-wrap">
+                      <% if (categoryData_val['category'].toLowerCase() == 'health' && categoryData_val['post_authorslug'] == "myupchar") { %>
+                          <a href="https://www.myupchar.com/en" rel="nofollow noindex" target="_blank" class="sponsor-logo">
+                              <amp-img src="<%-constant.SITE_URL%>static/images/myupchar-logo.png" width="80" height="16"></amp-img>
+                          </a>
+                      <% } %>
+                      <a href="<%-categoryData_val['category_url'] %>" class="category-name"><%- categoryData_val['category']%></a>
+                      <h3 class="main-title">
+                        <a href="<%- categoryData_val['modified_posturl'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>"><%= categoryData_val['modified_title']%></a>
+                      </h3>
+                      <p class="copy">
+                        <%= categoryData_val['post_excerpt']%>
+                      </p>
+                   </div><!--big-thumb-->
+              </div>
+          <% } %>
+        <% } %>
+        <% if (typeof ads  !== 'undefined' && typeof ads['ATF_300']  !== 'undefined'){%>
+            <div class="ad-center" >
+                <%-common.displayAmpAds(ads['ATF_300'][0] , ads['ATF_300'][1] , ads['ATF_300'][2] , ads['ATF_300'][3]) %>
+            </div>
+        <% } %> 
+        <!-- Video section for sports category -->
+       <% if (category_name == 'sports') { %>
+            <div class="video-section">
+                <h2 class="page-title"><span>Videos</span></h2>
+                <div class="video-slider">
+                    <div>
+                        <ul class="video-slides">
+                            <% for (const [categoryVideos_key, categoryVideos_val] of Object.entries(categoryVideosJson['Sports'].slice(0,3))) { %>
+                            <li>
+                                <div class="video-wrap">                                    
+                                    <div class="video-img-wrap">
+                                        <div class="video-icon">
+                                            <svg fill="#fff" width="57.887" height="57.887" viewBox="0 0 57.887 57.887"><defs><filter id="a" x="0" y="0" width="57.887" height="57.887" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="4.5" result="b"></feGaussianBlur><feFlood flood-opacity="0.294"></feFlood><feComposite operator="in" in2="b"></feComposite><feComposite in="SourceGraphic"></feComposite></filter></defs><g class="b" transform="matrix(1, 0, 0, 1, 0, 0)"><path class="a" d="M17.443,2A15.443,15.443,0,1,0,32.887,17.443,15.449,15.449,0,0,0,17.443,2ZM14.355,24.393v-13.9l9.266,6.95Z" transform="translate(11.5 8.5)"></path></g></svg>
+                                        </div>
+                                        <a href="<%=categoryVideos_val['VidPostURL'].replace(constant.MAIN_SITE_URL, constant.SITE_URL) %>" title="<%=categoryVideos_val['PostTitle'] %>">
+                                            <amp-img src="<%-common.firstpost_imageOptimization(categoryVideos_val['PostImageThumbnail'], 192, 104, '') %>" width="192" height="104" alt="<%= categoryVideos_val['PostTitle'] %>" title="<%= categoryVideos_val['PostTitle'] %>" layout="responsive"></amp-img>
+                                        </a>
+                                    </div>
+                                
+                                    <div class="video-title-div">
+                                        <h3 class="video-title">
+                                            <a href="<%=categoryVideos_val['VidPostURL'].replace(constant.MAIN_SITE_URL, constant.SITE_URL) %>" title="<%=categoryVideos_val['PostTitle'] %>">
+                                                <%=categoryVideos_val['PostTitle'] %>
+                                            </a>
+                                        </h3> 
+                                    </div>
+                                </div>
+                            </li>
+                            <% } %>                                
+                        </ul>
+                    </div>
+                </div>
+            </div>
+       <% } %><!-- Video section for sports category end-->
+
+        <% for (const [categoryData_key, categoryData_val] of Object.entries(categoryData['CatLatestStories'])) { %>
+            <div class="big-thumb">
+                 <a href="<%- categoryData_val['url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" class="thumb-img">
+                    <amp-img src="<%-common.firstpost_imageOptimization(categoryData_val['post_image'], 320, 180, '') %>" width="320" height="180" layout="responsive" alt="<%= categoryData_val['title']%>" title="<%= categoryData_val['title']%>"></amp-img>
+                    <% if (categoryData_val['category'].toLowerCase() == "video") { %>
+                        <div class="video-icon">
+                          <svg width="70.182" height="70.182" viewBox="0 0 70.182 70.182"><defs><filter id="a" x="0" y="0" width="70.182" height="70.182" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="4.5" result="b"/><feFlood flood-opacity="0.294"/><feComposite operator="in" in2="b"/><feComposite in="SourceGraphic"/></filter></defs><g transform="matrix(1, 0, 0, 1, 0, 0)"><path fill="#fff" d="M23.591,2A21.591,21.591,0,1,0,45.182,23.591,21.6,21.6,0,0,0,23.591,2ZM19.273,33.307V13.875l12.955,9.716Z" transform="translate(11.5 8.5)"/></g></svg>
+                        </div>
+                    <% } else if (categoryData_val['content_type'].toLowerCase() == "podcast") { %>
+                         <svg class="podcast-icon" viewBox="0 0 48 58">
+                            <g id="Page-1" fill="none" fill-rule="evenodd">
+                               <g id="077---Podcast" fill="rgb(0,0,0)" fill-rule="nonzero" transform="translate(-1 -1)">
+                                  <circle id="Oval" cx="25" cy="25" r="7"/>
+                                  <path id="Shape" d="m41 25c.0043835 3.8369583-1.381053 7.5456651-3.9 10.44-.8816497-1.0158408-1.9600185-1.8424768-3.17-2.43 4.3150268-4.8070778 4.0504913-12.1673491-.5984984-16.6522513-4.6489898-4.4849021-12.0140134-4.4849021-16.6630032 0-4.6489897 4.4849022-4.9135252 11.8451735-.5984984 16.6522513-1.2099815.5875232-2.2883503 1.4141592-3.17 2.43-4.63398704-5.3707457-5.17622072-13.1522935-1.3318892-19.1138252 3.8443314-5.9615317 11.1563967-8.67818511 17.9606345-6.67291902 6.8042379 2.00526612 11.4743714 8.25317422 11.4712547 15.34674422z"/>
+                                  <path id="Shape" d="m49 25c-.0020711 7.5935583-3.6000328 14.7375524-9.7 19.26l.03-.14c.3603606-1.6531373.2915082-3.3710057-.2-4.99 5.7270739-5.7172575 7.4444796-14.3223043 4.3508714-21.8000042-3.0936081-7.47769995-10.3885041-12.35425664-18.4808714-12.35425664s-15.38726325 4.87655669-18.48087142 12.35425664c-3.09360816 7.4776999-1.37620243 16.0827467 4.35087142 21.8000042-.4915082 1.6189943-.5603606 3.3368627-.2 4.99l.03.14c-9.07806131-6.7351009-12.22594977-18.8917939-7.5576155-29.1864253 4.66833428-10.29463137 15.887313-15.93634235 26.9351117-13.54491516 11.0477988 2.39142719 18.9293761 12.16768026 18.9225038 23.47134046z"/>
+                                  <path id="Shape" d="m29.556 36h-9.112c-1.8151552-.0000102-3.5327417.8217028-4.6717465 2.2350168s-1.576974 3.2662842-1.1912535 5.0399832l3.077 14.15c.1998936.9191918 1.0133242 1.5748485 1.954 1.575h10.776c.9406758-.0001515 1.7541064-.6558082 1.954-1.575l3.077-14.15c.3857205-1.773699-.0522487-3.6266692-1.1912535-5.0399832s-2.8565913-2.235027-4.6717465-2.2350168zm-11.026 9.242-.5-2c-.0959435-.3498693.0051249-.72426.2641012-.9783171.2589762-.2540571.635236-.3479281.9832013-.2452935.3479652.1026346.6130526.385675.6926975.7396106l.5 2c.1334945.5356925-.1923791 1.0782184-.728 1.212-.0791715.0196698-.1604221.0297422-.242.03-.4589705-.0001268-.8589292-.3126718-.97-.758zm2.712 6.728c-.0791715.0196698-.1604221.0297422-.242.03-.4585975-.0005854-.8580197-.3130332-.969-.758l-.531-2.117c-.1024987-.3519028-.0042666-.731682.2560049-.9897522.2602716-.2580703.6408715-.353073.991891-.2475891s.616204.3945496.6911041.7533413l.53 2.117c.1335558.5353845-.1917847 1.0777678-.727 1.212zm9.258-2.845-.529 2.117c-.111161.44569-.5116567.7583324-.971.758-.0819126-.0001775-.1635037-.0102505-.243-.03-.5356209-.1337816-.8614945-.6763075-.728-1.212l.53-2.117c.0749001-.3587917.3400846-.6478574.6911041-.7533413s.7316194-.0104812.991891.2475891c.2602715.2580702.3585036.6378494.2560049.9897522zm1.471-5.883-.5 2c-.111161.44569-.5116567.7583324-.971.758-.0819126-.0001775-.1635037-.0102505-.243-.03-.5356209-.1337816-.8614945-.6763075-.728-1.212l.5-2c.1436734-.5239217.6793531-.8373021 1.2064607-.7057969.5271075.1315052.8528058.6597861.7335393 1.1897969z"/>
+                               </g>
+                            </g>
+                         </svg>
+                    <% } %>   
+                 </a>
+                 <div class="title-wrap">
+                    <% if (categoryData_val['category'].toLowerCase() == 'health' && categoryData_val['post_authorslug'] == "myupchar") { %>
+                        <a href="https://www.myupchar.com/en" rel="nofollow noindex" target="_blank" class="sponsor-logo">
+                            <amp-img src="<%-constant.SITE_URL%>static/images/myupchar-logo.png" width="80" height="16"></amp-img>
+                        </a>
+                    <% } %>
+                    <a href="<%=constant.SITE_URL%>category/<%- categoryData_val['category'].replace(/\s+/g, '-').toLowerCase()%>" class="category-name">
+                        <%- categoryData_val['category']%>
+                    </a>
+                    <h3 class="main-title">
+                      <a href="<%- categoryData_val['url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>"><%= categoryData_val['title']%></a>
+                    </h3>
+                    <p class="copy">
+                      <%= categoryData_val['post_excerpt']%>
+                    </p>
+                 </div>
+            </div><!--big-thumb-->
+        <% } %>
+    <% } else { %>
+        <% for (const [catData_key, catData_val] of Object.entries(catData['solarResults'])) { %>
+         <div class="big-thumb">
+            <a href="<%- catData_val['url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" class="thumb-img">
+            <amp-img src="<%-common.firstpost_imageOptimization(catData_val['image'], 320, 180, '') %>" width="320" height="180" layout="responsive" alt="<%= catData_val['title']%>" title="<%= catData_val['title']%>"></amp-img>
+            <% if (catData_val['category'].toLowerCase() == "video") { %>
+                <div class="video-icon">
+                      <svg width="70.182" height="70.182" viewBox="0 0 70.182 70.182"><defs><filter id="a" x="0" y="0" width="70.182" height="70.182" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="4.5" result="b"/><feFlood flood-opacity="0.294"/><feComposite operator="in" in2="b"/><feComposite in="SourceGraphic"/></filter></defs><g transform="matrix(1, 0, 0, 1, 0, 0)"><path fill="#fff" d="M23.591,2A21.591,21.591,0,1,0,45.182,23.591,21.6,21.6,0,0,0,23.591,2ZM19.273,33.307V13.875l12.955,9.716Z" transform="translate(11.5 8.5)"/></g></svg>
+                </div>
+            <% } else if (catData_val['ContentType'].toLowerCase() == "podcast") { %>
+                <svg class="podcast-icon" viewBox="0 0 48 58">
+                    <g id="Page-1" fill="none" fill-rule="evenodd">
+                       <g id="077---Podcast" fill="rgb(0,0,0)" fill-rule="nonzero" transform="translate(-1 -1)">
+                          <circle id="Oval" cx="25" cy="25" r="7"/>
+                          <path id="Shape" d="m41 25c.0043835 3.8369583-1.381053 7.5456651-3.9 10.44-.8816497-1.0158408-1.9600185-1.8424768-3.17-2.43 4.3150268-4.8070778 4.0504913-12.1673491-.5984984-16.6522513-4.6489898-4.4849021-12.0140134-4.4849021-16.6630032 0-4.6489897 4.4849022-4.9135252 11.8451735-.5984984 16.6522513-1.2099815.5875232-2.2883503 1.4141592-3.17 2.43-4.63398704-5.3707457-5.17622072-13.1522935-1.3318892-19.1138252 3.8443314-5.9615317 11.1563967-8.67818511 17.9606345-6.67291902 6.8042379 2.00526612 11.4743714 8.25317422 11.4712547 15.34674422z"/>
+                          <path id="Shape" d="m49 25c-.0020711 7.5935583-3.6000328 14.7375524-9.7 19.26l.03-.14c.3603606-1.6531373.2915082-3.3710057-.2-4.99 5.7270739-5.7172575 7.4444796-14.3223043 4.3508714-21.8000042-3.0936081-7.47769995-10.3885041-12.35425664-18.4808714-12.35425664s-15.38726325 4.87655669-18.48087142 12.35425664c-3.09360816 7.4776999-1.37620243 16.0827467 4.35087142 21.8000042-.4915082 1.6189943-.5603606 3.3368627-.2 4.99l.03.14c-9.07806131-6.7351009-12.22594977-18.8917939-7.5576155-29.1864253 4.66833428-10.29463137 15.887313-15.93634235 26.9351117-13.54491516 11.0477988 2.39142719 18.9293761 12.16768026 18.9225038 23.47134046z"/>
+                          <path id="Shape" d="m29.556 36h-9.112c-1.8151552-.0000102-3.5327417.8217028-4.6717465 2.2350168s-1.576974 3.2662842-1.1912535 5.0399832l3.077 14.15c.1998936.9191918 1.0133242 1.5748485 1.954 1.575h10.776c.9406758-.0001515 1.7541064-.6558082 1.954-1.575l3.077-14.15c.3857205-1.773699-.0522487-3.6266692-1.1912535-5.0399832s-2.8565913-2.235027-4.6717465-2.2350168zm-11.026 9.242-.5-2c-.0959435-.3498693.0051249-.72426.2641012-.9783171.2589762-.2540571.635236-.3479281.9832013-.2452935.3479652.1026346.6130526.385675.6926975.7396106l.5 2c.1334945.5356925-.1923791 1.0782184-.728 1.212-.0791715.0196698-.1604221.0297422-.242.03-.4589705-.0001268-.8589292-.3126718-.97-.758zm2.712 6.728c-.0791715.0196698-.1604221.0297422-.242.03-.4585975-.0005854-.8580197-.3130332-.969-.758l-.531-2.117c-.1024987-.3519028-.0042666-.731682.2560049-.9897522.2602716-.2580703.6408715-.353073.991891-.2475891s.616204.3945496.6911041.7533413l.53 2.117c.1335558.5353845-.1917847 1.0777678-.727 1.212zm9.258-2.845-.529 2.117c-.111161.44569-.5116567.7583324-.971.758-.0819126-.0001775-.1635037-.0102505-.243-.03-.5356209-.1337816-.8614945-.6763075-.728-1.212l.53-2.117c.0749001-.3587917.3400846-.6478574.6911041-.7533413s.7316194-.0104812.991891.2475891c.2602715.2580702.3585036.6378494.2560049.9897522zm1.471-5.883-.5 2c-.111161.44569-.5116567.7583324-.971.758-.0819126-.0001775-.1635037-.0102505-.243-.03-.5356209-.1337816-.8614945-.6763075-.728-1.212l.5-2c.1436734-.5239217.6793531-.8373021 1.2064607-.7057969.5271075.1315052.8528058.6597861.7335393 1.1897969z"/>
+                       </g>
+                    </g>
+                </svg>
+            <% } %>
+            </a>
+            <div class="title-wrap">
+               <% if (catData_val['category'].toLowerCase() == 'health' && catData_val['author_id'] == "19541") { %>
+                    <a href="https://www.myupchar.com/en" rel="nofollow noindex" target="_blank" class="sponsor-logo">
+                        <amp-img src="<%-constant.SITE_URL%>static/images/myupchar-logo.png" width="80" height="16"></amp-img>
+                    </a>
+               <% } %>
+               <a href="<%=constant.SITE_URL%>/category/<%- catData_val['category'].replace(/\s+/g, '-').toLowerCase()%>" class="category-name"><%- catData_val['category']%></a>
+               <h3 class="main-title">
+                  <a href="<%- catData_val['url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>"><%= catData_val['title']%></a>
+               </h3>
+               <p class="copy">
+                  <%= catData_val['description']%>
+               </p>
+            </div>
+         </div>
+   <% } %>
+   <% } %>    
+
+   <% if (typeof ads  !== 'undefined' && typeof ads['BTF_300']  !== 'undefined'){%>
+        <div class="ad-center" >
+            <%-common.displayAmpAds(ads['BTF_300'][0] , ads['BTF_300'][1] , ads['BTF_300'][2] , ads['BTF_300'][3]) %>
+        </div>
+    <% } %>
+
+       <!-- Sports Section -->
+   <% if (category_name == 'sports') { %>
+      <% if (footerTags != '') {
+            var footerTags_cnt = 1;
+      %>
+      <% for (const [footerTags_key, footerTags_val] of Object.entries(footerTags)) { %>
+      <div class="photos-wrap">
+         <h3 class="main-story-title">
+            <a href="<%- footerTags_val['url'] %>"><%- footerTags_key %></a>
+            <span></span>
+         </h3>
+
+         <div class="big-thumb">
+            <a href="<%- footerTags_val.data[0].post_url %>" class="thumb-img">
+                <amp-img width="320" height="180" layout="responsive" src="<%-common.firstpost_imageOptimization(footerTags_val.data[0].post_thumbnail, 320, 180, '') %>" alt="<%= footerTags_val.data[0].post_title %>" title="<%= footerTags_val.data[0].post_title %>"></amp-img>
+            </a>
+            <div class="title-wrap">
+                  <h3 class="main-title">
+                    <a href="<%- footerTags_val.data[0].post_url %>"><%- footerTags_val.data[0].post_title %></a>
+                  </h3>
+            </div>
+         </div>
+      </div><!--photos-wrap-->
+      <div class="photos small-thumb-wrap">
+          <div class="small-thumb-row">
+             <% for (const [footerTagsData_key, footerTagsData_val] of Object.entries(footerTags_val['data'].slice(1,4))) { %>
+             <div class="small-thumb">
+                <a href="<%- footerTagsData_val.post_url %>" class="thumbnail">
+                   <amp-img width="192" height="110" layout="responsive" src="<%-common.firstpost_imageOptimization(footerTagsData_val.PostImageThumbnail, 192, 110, '') %>" alt="<%= footerTagsData_val.post_title %>" title="<%= footerTagsData_val.post_title %>"></amp-img>
+                </a>
+                <a href="<%- footerTagsData_val.post_url %>" class="copy">
+                   <%- footerTagsData_val.post_title %>
+                </a>
+             </div>
+             <% } %>
+          </div>
+      </div><!--videos-->
+      <% if(footerTags_cnt == 1 && typeof outbrain_ads  !== 'undefined' && typeof outbrain_ads['AMP_2']  !== 'undefined'){%>
+            <%-outbrain_ads['AMP_2'];%>	
+      <% } footerTags_cnt++;%>
+      <% } %>
+
+
+   <div class="photos-wrap">
+      <h3 class="main-story-title">
+         <a href="">photos</a>
+         <span></span>
+      </h3>
+
+      <div class="big-thumb">
+         <a href="<%- sportsPhotos['solarResults'][0]['url']%>" class="thumb-img">
+               <amp-img width="320" height="180" layout="responsive" src="<%-common.firstpost_imageOptimization(sportsPhotos['solarResults'][0]['image'], 320, 180, '') %>" alt="<%= sportsPhotos['solarResults'][0]['title']%>" title="<%= sportsPhotos['solarResults'][0]['title']%>"></amp-img>
+               <div class="photo-icon">
+                  <amp-img width="58" height="58" layout="responsive" src="<%-constant.SITE_URL%>static/images/photo-icon-large.png"></amp-img>
+               </div>
+         </a>
+         <div class="title-wrap">
+               <h3 class="main-title">
+                  <a href="<%- sportsPhotos['solarResults'][0]['url']%>"><%- sportsPhotos['solarResults'][0]['title']%></a>
+               </h3>   
+         </div>
+      </div>
+   </div><!--photos-wrap-->
+   <div class="photos small-thumb-wrap">
+      <div class="small-thumb-row">
+      <% for (const [sportsPhotos_key, sportsPhotos_val] of Object.entries(sportsPhotos['solarResults'].slice(1,4))) { %>
+         <div class="small-thumb">
+            <a href="<%- sportsPhotos_val['url']%>" class="thumbnail">
+               <amp-img src="<%-common.firstpost_imageOptimization(sportsPhotos_val['image'], 192, 192, '') %>" alt="<%= sportsPhotos_val['title']%>" title="<%= sportsPhotos_val['title']%>" width="192" height="192" layout="responsive"></amp-img>
+               <div class="s-photo-icon">
+                  <amp-img src="<%-constant.SITE_URL%>static/images/photo-icon-small.png" width="30" height="30" layout="responsive"></amp-img>
+               </div>
+            </a>
+            <a href="<%- sportsPhotos_val['url']%>" class="copy">
+               <%= sportsPhotos_val['title']%>
+            </a>
+            <!--<a href="" class="category-name">
+               #SPORTS
+            </a>-->
+         </div>
+      <% } %>
+      </div>
+      </div><!--videos-->
+      <% } %>
+   <% } %> <!--sports page condition end-->  
+    <% if (typeof outbrain_ads  !== 'undefined' && typeof outbrain_ads['AMP_2']  !== 'undefined' && category_name != 'sports'){%>
+          <%-outbrain_ads['AMP_2'];%>	
+    <% } %>
+
+    <!-- Apester code -->
+    <!--<amp-apester-media height="390" data-apester-channel-token="57026ab0d51383a359ae688c"> </amp-apester-media>-->
+    <!-- Apester code -->
+
+    <%- include(viewpath+ '/widgets/most_read_widget'); %>
+
+    <% if(category_name == 'health') { %>
+        <div class="myupchar_widget" style="display: table;margin: 0 auto;">
+            <a target='_blank' href='https://www.myupchar.com/en?utm_source=firstpost&utm_medium=banner'>
+                <amp-img width="300" height="250" src="https://asset.myupchar.com/consultation_banner_v2.png"/></amp-img>   
+            </a>
+        </div>
+    <% } %>
+    
+    <%- include(viewpath+ '/layouts/amp-footer'); %>

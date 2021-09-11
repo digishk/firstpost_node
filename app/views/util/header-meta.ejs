@@ -1,0 +1,186 @@
+    <% if(typeof seoData['pageUrl'] !== 'undefined' && seoData['pageUrl'] != ""){
+        seoData['pageUrl'] = seoData['pageUrl'].replace('http://','https://');
+    } %>
+    <% if(typeof seoData['canonicalURL'] !== 'undefined' && seoData['canonicalURL'] != ""){
+        seoData['canonicalURL'] = seoData['canonicalURL'].replace('http://','https://');
+    } %>
+    <% var metaHTML = ''; %>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="HandheldFriendly" content="true" />
+    <% if(typeof seoData['newMetaTitle'] !== 'undefined' && seoData['newMetaTitle'] != ""){ %>
+        <title><%- seoData['newMetaTitle'] %></title>
+    <% }else if(typeof seoData['metaTitle'] !== 'undefined' && seoData['metaTitle'] != ""){ %>
+        <title><%- seoData['metaTitle'] %></title>
+    <% } %>
+    <% if(typeof seoData['newMetaDescription'] !== 'undefined' && seoData['newMetaDescription'] != ""){ %>
+        <meta name="description" content="<%- seoData['newMetaDescription'] %>" />
+    <% }else if(typeof seoData['metaDesc'] !== 'undefined' && seoData['metaDesc'] != ""){ %>
+        <meta name="description" content="<%- seoData['metaDesc'] %>" />
+    <% } %>
+    <% if(typeof seoData['newMetaKeywords'] !== 'undefined' && seoData['newMetaKeywords'] != ""){ %>
+        <meta name="news_keywords" content="<%- seoData['newMetaKeywords'] %>" />
+        <meta name="Keywords" content="<%- seoData['newMetaKeywords'] %>">
+    <% }else if(typeof seoData['tags'] !== 'undefined' && seoData['tags'] != ""){ %>
+        <meta name="news_keywords" content="<%- seoData['tags'] %>" />
+        <meta name="Keywords" content="<%- seoData['tags'] %>">
+    <% } %>
+    <% if(typeof seoData['newMetaTitle'] !== 'undefined' && seoData['newMetaTitle'] != ""){ %>
+        <meta property="og:title" content="<%- seoData['newMetaTitle'] %>" />
+    <% }else if(typeof seoData['metaTitle'] !== 'undefined' && seoData['metaTitle'] != ""){ %>
+        <meta property="og:title" content="<%- seoData['metaTitle'] %>" />
+    <% } %>
+    <% if(typeof seoData['newMetaDescription'] !== 'undefined' && seoData['newMetaDescription'] != ""){ %>
+        <meta property="og:description" content="<%- seoData['newMetaDescription'] %>"/>
+    <% }else if(typeof seoData['metaDesc'] !== 'undefined' && seoData['metaDesc'] != ""){ %>
+        <meta property="og:description" content="<%- seoData['metaDesc'] %>"/>
+    <% } %>
+    <% var contentType = (typeof seoData['contentType'] !== 'undefined' && seoData['contentType'] != "") ? seoData['contentType'] : "website"; %>
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Firstpost" />
+    <meta property="og:type" content="<%-contentType %>" />
+    <meta property="fb:app_id" content="1162386820478832" />
+    <meta property="fb:admins" content="500851548" />
+    <meta property="fb:pages" content="165818073477856" />
+    <% if(typeof seoData['ogImg'] !== 'undefined' && seoData['ogImg'] != ""){ %>
+        <meta property="og:image" content="<%- seoData['ogImg'] %>"/> 
+    <% }else{ %>
+        <meta property="og:image" content="<%- constant['SITE_URL'] %><%-constant.config_flags.FP_SOCIAL_SHARE_LOGO %>" />
+    <% } %>
+    <% if(typeof seoData['newMetaTitle'] !== 'undefined' && seoData['newMetaTitle'] != ""){ %>
+        <meta name="twitter:title" content="<%- seoData['newMetaTitle'] %>"/>
+    <% }else if(typeof seoData['metaTitle'] !== 'undefined' && seoData['metaTitle'] != ""){ %>
+        <meta name="twitter:title" content="<%- seoData['metaTitle'] %>"/>
+    <% } %>
+    <% if(typeof seoData['newMetaDescription'] !== 'undefined' && seoData['newMetaDescription'] != ""){ %>
+        <meta name="twitter:description" content="<%- seoData['newMetaDescription'] %>"/>
+    <% }else if(typeof seoData['metaDesc'] !== 'undefined' && seoData['metaDesc'] != ""){ %>
+        <meta name="twitter:description" content="<%- seoData['metaDesc'] %>"/>
+    <% } %>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta property="twitter:account_id" content="4503599627804328" />
+    <% if(typeof seoData['twitImg'] !== 'undefined' && seoData['twitImg'] != ""){ %>
+        <meta property="twitter:image:src" content="<%- seoData['twitImg'] %>" />
+    <% }else{ %>
+        <meta property="twitter:image:src" content="<%- constant['SITE_URL'] %><%-constant.config_flags.FP_SOCIAL_SHARE_LOGO %>" />
+    <% } %>
+    <meta name="twitter:widgets:csp" content="on">
+    <meta name="twitter:domain" content="Firstpost"/>
+    <meta name="twitter:site" value="@firstpost">
+    <meta name="twitter:url" content="<%- seoData['pageUrl'] %>">
+    
+    <% if(typeof seoData['canonicalUrl'] !== 'undefined' && seoData['canonicalUrl'] != ""){ %>
+        <link rel="canonical" href="<%- seoData['canonicalUrl'] %>"/>
+    <% }else if(typeof seoData['pageUrl'] !== 'undefined' && seoData['pageUrl'] != ""){ %>
+        <link rel="canonical" href="<%- seoData['pageUrl'] %>"/>
+    <% } %>
+    <% if(typeof seoData['next'] !== 'undefined' && seoData['next'] != ""){ %>
+        <link rel="next" href="<%- seoData['next'] %>"/>
+    <% } %> 
+    <% if(typeof seoData['prev'] !== 'undefined' && seoData['prev'] != ""){ %>
+        <link rel="prev" href="<%- seoData['prev'] %>"/>
+    <% } %>
+    <% var meta_exist = 0;
+    if(typeof constant.config_flags.STOP_META_REFRESH_FLAG !== 'undefined' && constant.config_flags.STOP_META_REFRESH_FLAG == "1"){meta_exist = 1;}else{ %>
+        <% if(typeof constant.config_flags.PAGE_WISE_META_REFRESH_SECONDS !== 'undefined' && constant.config_flags.PAGE_WISE_META_REFRESH_SECONDS != ""){
+                page_wise_refresh_seconds = constant.config_flags.PAGE_WISE_META_REFRESH_SECONDS;
+                splpage_wise_refresh_seconds = page_wise_refresh_seconds.split(",");
+                meta_exist = 1;
+                for (const [splpage_wise_refresh_seconds_key, splpage_wise_refresh_seconds_val] of Object.entries(splpage_wise_refresh_seconds)) {
+                    page_and_seconds = splpage_wise_refresh_seconds_val.split("=");
+                    Nameofpage = page_and_seconds[0].trim();
+                    refreshseconds = page_and_seconds[1].trim();
+
+                    if(typeof refreshseconds === 'undefined' || refreshseconds == "")
+                    {
+                        refreshseconds = 180;
+                    }
+
+                    if(Nameofpage == pageName)
+                    { %>
+                        <meta http-equiv="refresh" content="<%-refreshseconds %>">
+         <%         
+                }
+            } %>
+        <% } %>
+    <% } %>
+    <% if(meta_exist == 0) {%>
+    <meta http-equiv="refresh" content="180">
+    <% } %>
+    <% if((typeof seoData['solarSlug'] !== 'undefined' && (seoData['solarSlug'] == 'amazon-fp' || seoData['solarSlug'] == 'amazon')) || (typeof postPageJson  !== 'undefined' && postPageJson !== null && typeof postPageJson['meta'] !== 'undefined' && postPageJson['meta'] !== null && postPageJson['meta']['push-to-amazonfeed'] == 'yes')){%>
+        <meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
+    <% }%>
+    <meta property="og:url" content="<%- seoData['pageUrl'] %>" />
+    <link rel="shortcut icon prefetch" href="<%- constant['SITE_URL'] %>static/images/favicon.ico?v=<%-constant.config_flags.VERSION_NO %>" />
+    <link rel="icon prefetch" type="image/vnd.microsoft.icon" href="<%- constant['SITE_URL'] %>static/images/favicon.ico?v=<%-constant.config_flags.VERSION_NO %>"/>
+    <link href="<%- constant['SITE_URL'] %>static/images/favicon.ico?v=<%-constant.config_flags.VERSION_NO %>" rel="shortcut icon prefetch" type="image/x-icon">
+    <link href="<%- constant['SITE_URL'] %>static/images/favicon.ico?v=<%-constant.config_flags.VERSION_NO %>" rel="icon prefetch" type="image/x-icon"/>
+    <link href="//b.scorecardresearch.com" rel="dns-prefetch"/>
+    <link href="//b.scorecardresearch.com" rel="preconnect"/>
+    <link href="https://securepubads.g.doubleclick.net" rel="dns-prefetch"/>
+    <link href="https://securepubads.g.doubleclick.net" rel="preconnect"/>
+    <link href="https://pubads.g.doubleclick.net" rel="dns-prefetch"/>
+    <link href="https://pubads.g.doubleclick.net" rel="preconnect"/>
+    <link href="https://www.google-analytics.com" rel="dns-prefetch"/>
+    <link href="https://www.google-analytics.com" rel="preconnect"/>
+    <link href="//www.googletagservices.com" rel="dns-prefetch"/>
+    <link href="//www.googletagservices.com" rel="preconnect"/>
+    <link href="//tpc.googlesyndication.com" rel="dns-prefetch"/>
+    <link href="//tpc.googlesyndication.com" rel="preconnect"/>
+    <link href="https://fonts.gstatic.com" rel="dns-prefetch"/>
+    <link href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="//connect.facebook.net" rel="dns-prefetch" />
+    <link href="//connect.facebook.net" rel="preconnect" />
+    <link href="//static.xx.fbcdn.net" rel="dns-prefetch" />
+    <link href="//static.xx.fbcdn.net" rel="preconnect" />
+    <link rel="apple-touch-icon" href="<%- constant.AKAMAI_STATIC%>static/images/icons/apple-touch-icon.png">
+    <link rel="manifest" href="<%- constant.AKAMAI_STATIC%>manifest.json">
+    <% if(constant.IO_SCRIPT_FLAG == 1){
+        if(constant.hideJSforEU != 'yes'){ %>
+           <script async src="https://cdn.onthe.io/io.js/xmKBQHduOqzQ"></script>
+    <%  }
+     } %>
+    <% var ignore_amp_cat = ['press-release','breathefree'];%>
+    <% 
+        var hasAmpHtml = 0;
+        if(typeof postPageJson !== 'undefined' && postPageJson !== null && typeof postPageJson['post'] !== 'undefined' && !ignore_amp_cat.includes(seoData['solarSlug']) && postPageJson['meta']['no-amp-page'] != "yes"  && typeof seoData['ampUrl'] !== 'undefined' && seoData['ampUrl'] != "")
+        { %>
+            <!--- enter in first condition new = <%-postPageJson['post']['ID'] %> -->
+        <%    hasAmpHtml = 1;
+        }
+        if(typeof postPageJson === 'undefined' && seoData['page_name'] != 'home' && typeof seoData['ampUrl'] !== 'undefined' && seoData['ampUrl'] != "")
+        { %>
+            <!--- enter in second condition -->
+        <%    hasAmpHtml = 1;
+        }        
+    %>
+    <% 
+    if(hasAmpHtml == 1) {
+    %>
+        <!--- enter in hasAmpHtml condition -->
+        <link rel="amphtml" href="<%-seoData['ampUrl'] %>"> 
+    <% } %>
+    <% if(seoData['page_name'] == 'home'){ %>
+        <link rel="alternate" type="application/rss+xml" title="Firstpost" href="https://www.firstpost.com/news-sitemap.xml" />
+    <% } %> 
+    <% if(seoData['page_name'] == 'category'){ %>
+        <link rel="alternate" type="application/rss+xml" title="<%=common.capitalizeFLetter(seoData['solarSlug'])%>" href="https://www.firstpost.com/rss/<%-seoData['solarSlug'].toLowerCase() %>.xml" />
+        <link rel="alternate" type="application/rss+xml" title="<%=common.capitalizeFLetter(seoData['solarSlug'])%>" href="https://www.firstpost.com/rss/<%-seoData['solarSlug'].toLowerCase() %>-news-feed.xml" />
+    <% } %>
+    <%  if(typeof seoData['tags_arr'] !== 'undefined' && seoData['tags_arr'] !== null && seoData['tags_arr'] != ""){
+            for (const [tag_key, tag_val] of Object.entries(seoData['tags_arr'])) {%>
+                <meta property="article:tag" content="<%=tag_val['name']%>" />
+    <%      }
+        } %>
+    <%
+    var includeInPage =['article','photoArticle','videoArticle','liveBlog'];
+    if(includeInPage.includes(seoData['page_name'])){ %>    
+        <meta property="article:section" content="<%=common.capitalizeFLetter(seoData['solarSlug'])%>" />
+        <meta property="article:published_time" content="<%= seoData['published_time'] %>" />
+        <meta property="article:modified_time" content="<%= seoData['modified_time'] %>" />
+        <meta property="og:updated_time" content="<%= seoData['updated_time'] %>" />
+    <% } %>
+    
+    <%- include(viewpath+ '/util/ad-meta'); %>
+    

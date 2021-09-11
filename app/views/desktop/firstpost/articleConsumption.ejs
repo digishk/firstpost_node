@@ -1,0 +1,241 @@
+<%- include(viewpath+ '/layouts/header'); %>
+
+<%
+   
+    const {ATF_728} = ads || {}
+    const {AR_1,AR_2} = outbrain_ads || {}
+    const {SITE_URL, config_flags, PLACEHOLDER_IMG_640x362, IO_SCRIPT_FLAG} = constant || {}
+    const {post, meta, tag } = postPageJson || {};
+    const {POLLPIDEA, Featured_image_caption} = meta || {}
+    const {
+        ID,
+        post_authorname,
+        post_url,
+        post_title,
+        post_excerpt,
+        post_authorslug,
+        post_date,
+        post_content,
+        post_modified,
+        post_image
+    } = post ||{}
+    const tagEntries = tag ? Object.entries(tag) : null
+%>
+
+<% if(post_authorname == 'Myupchar'){%>
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-88592708-1', {name: 'myUpchar'});
+        ga('myUpchar.send', 'pageview');
+    </script>    
+<% } %>
+
+<div class="container mainArticlediv" data-url="<%-post_url.replace("https://www.firstpost.com/", SITE_URL)%>" data-title="<%-post_title%>">
+
+    <% if (ATF_728){%>
+        <div class="ad-center ATF_728 fixed-ad-banner"  data-ad-id="<%-ATF_728[0]%>" data-ad-size="<%-ATF_728[1]%>">
+            <%-common.displayAds(ATF_728[0]) %>
+        </div>
+    <% } %>  
+
+    <!--exitpoll-election-widget-->
+    <%- include(viewpath+ '/widgets/exitpoll_widget_desktop'); %>
+    <!--exitpoll-election-widget-->
+    <!--cricket-ticker-wrap-->
+    <%- include(viewpath+ '/widgets/cricketscore_strip'); %>
+    <!--cricket-ticker-wrap-->
+
+    <% if(config_flags && config_flags.EXIT_POLL_FLAG && config_flags.EXIT_POLL_FLAG == '1') { %>
+        <!--exitpoll-election-widget-->
+        <%- include(viewpath+ '/widgets/five_states_result_widget_2021.ejs'); %> 
+        <!--exitpoll-election-widget-->
+    <% } %>
+    
+    <%- include(viewpath+ '/widgets/breadCrumbs'); %>
+    <!-- main container wrapper -->
+    <div class="main-container">
+        <div class="main-content">
+            <div class="article-div-wrap">
+                <%- include(viewpath+ '/widgets/floating_social_share_widget'); %>
+                <div class="article-sect">
+                    <div class="innerpage-share">
+                        <% if (typeof liveBlog  !== 'undefined' && typeof liveBlogIncludeFlag  !== 'undefined' && liveBlogIncludeFlag == true){ %>
+                            <script type="text/javascript" src="<%=SITE_URL%>static/js/live-blog-fp.js?v=<%-config_flags.VERSION_NO%>"></script>
+                            <div class="live-bnt"><span class="blinking"></span>live</div>
+                        <% } else { %>
+                            <h2 class="category-name">
+                                <a class="section-btn" href="<%=SITE_URL%>category/<%=catSlug%>">
+                                    <%=common.capitalizeFLetter(catSlug)%>
+                                </a>
+                            </h2>
+                        <% } %>
+                    <%# include(viewpath+ '/widgets/social_share_widget'); %>
+                    </div>
+                    <h1 class="inner-main-title" id="headlineitem">
+                        <%=post_title%>
+                    </h1>
+                    <p class="inner-copy">
+                        <%=post_excerpt%>
+                    </p>
+                    <% if(catSlug == 'health'){%>
+                    <div class="author-health-wrap">
+                    <% } %>
+                        <div class="author-info">
+                            <a href="<%=SITE_URL%>author/<%=post_authorslug%>">
+                                <span class="article-by <% if(catSlug == 'health'){%> health-category <% } %>">
+                                    <%=post_authorname%>
+                                </span>
+                            </a>
+                            <% if((typeof postPageJson.meta.byline_authorname !== 'undefined') && (postPageJson.meta.byline_authorname != '') && post_authorslug !== postPageJson.meta.byline_authorslug){%>
+                                <a href="<%=SITE_URL%>author/<%=postPageJson.meta.byline_authorslug%>">
+                                    <span class="article-by <% if(catSlug == 'health'){%> health-category <% } %>" style="margin-left: 10px;">
+                                        <%=postPageJson.meta.byline_authorname%>
+                                    </span>
+                                </a>
+                            <% } %>
+                            <span>
+                                <%=dateFormat(post_date , "mmmm dd',' yyyy HH:MM:ss")%> IST
+                            </span>
+                            <% if(POLLPIDEA == "yes"){%>
+                                <svg id="Layer_1" data-name="Layer 1" viewBox="0 0 43 24.1" width="70" height="25" style="vertical-align: middle;"><title>pollpedia</title><path d="M914.9,376.6h2.6c1.5,0,3.1.5,3.1,3.9,0,3.9-1.7,4.1-3.2,4.1h-.1v3.5h-2.4V376.6Zm2.6,6c.4,0,.7-.1.7-2s-.3-1.8-.7-1.8h-.1v3.9h.1Z" transform="translate(-914.9 -372)"/><path d="M920.7,384c0-2.8.9-4.3,2.7-4.3s2.7,1.5,2.7,4.3-1,4.3-2.7,4.3S920.7,386.9,920.7,384Zm3.1,0c0-2-.1-2.3-.4-2.3s-.4.2-.4,2.3.1,2.4.4,2.4S923.8,386.2,923.8,384Z" transform="translate(-914.9 -372)"/><path d="M932.6,379.9h2.3v.9a1.71,1.71,0,0,1,1.4-1c1,0,1.7,1.1,1.7,4.3s-.7,4.3-1.7,4.3a1.61,1.61,0,0,1-1.4-1v8.7h-2.3Zm3,4.1c0-2-.1-2.2-.4-2.2s-.3.1-.4.1v4.2c.1,0,.2.1.4.1C935.6,386.3,935.6,386.1,935.6,384Z" transform="translate(-914.9 -372)"/><path d="M938.3,384c0-2.8.9-4.3,2.7-4.3,2.4,0,2.6,2.3,2.6,4.2v.9h-3c0,1,.1,1.6.5,1.6s.4-.2.4-1.1l2.1.1c-.2,1.7-.8,2.9-2.6,2.9S938.3,386.9,938.3,384Zm3.1-.5c0-1.5-.1-1.8-.4-1.8s-.5.4-.5,1.8Z" transform="translate(-914.9 -372)"/><path d="M943.8,384c0-3.2.7-4.3,1.7-4.3a1.61,1.61,0,0,1,1.4,1v-4.1h2.3v9.5a9.81,9.81,0,0,0,.1,2H947a7.75,7.75,0,0,0-.1-.9,1.71,1.71,0,0,1-1.4,1C944.5,388.3,943.8,387.2,943.8,384Zm3.1,2.1V382c-.1,0-.2-.1-.4-.1s-.3.2-.3,2.2.1,2.2.4,2.2C946.7,386.2,946.8,386.2,946.9,386.1Z" transform="translate(-914.9 -372)"/><path d="M949.9,379.9h2.3v8.4h-2.3Z" transform="translate(-914.9 -372)"/><path d="M952.7,386c0-1.8,1-2.8,2.9-3.3v-.5c0-.5,0-.6-.3-.6s-.3.1-.4.7l-2-.3c.4-1.9,1.4-2.3,2.7-2.3,1.5,0,2.2.7,2.2,2.4v4.1a9.81,9.81,0,0,0,.1,2h-2.2a2.24,2.24,0,0,1-.1-1,1.5,1.5,0,0,1-1.4,1C953.4,388.3,952.7,387.7,952.7,386Zm2.9.1v-1.8a1.34,1.34,0,0,0-.7,1.4c0,.3.1.5.3.5S955.5,386.2,955.6,386.1Z" transform="translate(-914.9 -372)"/><circle cx="36.2" cy="6.2" r="1.2" fill="#d4145a"/><path d="M926.6,389.2h2.3v-3.9h-2.3Z" transform="translate(-914.9 -372)" fill="#d4145a"/><path d="M926.6,376.3h2.3v9h-2.3Z" transform="translate(-914.9 -372)" fill="#9e005d"/><path d="M929.6,393.5h2.3v-8.2h-2.3Z" transform="translate(-914.9 -372)" fill="#d4145a"/><path d="M929.6,372h2.3v13.3h-2.3Z" transform="translate(-914.9 -372)" fill="#9e005d"/></svg>
+                            <% } %>
+                    </div>
+                    <% if(catSlug == 'health'){
+                        if(post_authorslug == "myupchar"){%>
+                            <a class="powered-by" href="https://www.myupchar.com/en" rel="nofollow" target="_blank">
+                                <span> content powered by </span>
+                                <img src="/static/images/myupachar-ls.png"></img>
+                            </a>
+                         <% } %>
+                    </div>
+                    <% } %>
+
+            <% if (typeof liveBlog  !== 'undefined' && typeof liveBlogIncludeFlag  !== 'undefined' &&  liveBlogIncludeFlag == true){ %>
+                <div class="auto-refresh">Auto refresh feeds
+                    <label class="switch">
+                        <input type="checkbox" checked="" id="togBtn" value="1">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            <% } %>
+
+            <%  if(typeof videoURLArr !== 'undefined' && videoURLArr != ''){ %>
+                <%- include(viewpath+ '/widgets/video_player_widget',{videoURLArr}); %>
+            <%  } else if (typeof movieActorSchemaString !== 'undefined' && movieActorSchemaString !== null && movieActorSchemaString != ""){%>
+                <%- include(viewpath+ '/widgets/movie_review_widget',{postPageJson}); %>    
+            <%	} else { %>
+                <div class="article-img">
+
+                    <% if(ID != '8945371' && ID != '8944631' && ID != '8944621' && ID != '8945391'){ %>
+                        <img class="fp-lazy" title="<%=post_title%>" alt="<%=post_title%>" src="<%-PLACEHOLDER_IMG_640x362 %>" data-src="<%-common.firstpost_imageOptimization(post_image, 640, 363, '') %>"></img>
+                    <% } %>
+
+                    <% if(Featured_image_caption){ %>
+                        <p class="wp-caption-text">
+                            <%=Featured_image_caption%>
+                        </p>
+                    <% } %>
+                </div>
+            <%  } %>
+
+            <ul class="bullets-list">
+                <% for ( let bullCount=1 ; bullCount <=5 ; bullCount++ ){ %>
+                    <% if (meta[`heading-${bullCount}`]) { %>
+                        <li>
+                            <h2 class="bullets">
+                                <%=meta[`heading-${bullCount}`]%>
+                            </h2>
+                        </li>
+                    <% } %>
+                <% } %>
+            </ul>
+
+            <% if (IO_SCRIPT_FLAG == 1){ %>
+                <script>
+                    window._io_config = window._io_config || {};
+                    window._io_config["0.2.0"] = window._io_config["0.2.0"] || [];
+                    window._io_config["0.2.0"].push({
+                        page_url:"<%=post_url%>",
+                        page_url_canonical: "<%=post_url%>",
+                        page_title: `<%=post_title.replace('"','')%>`,
+                        page_type: "article",
+                        page_language: "en",
+                        article_authors: ["<%=post_authorname%>"],
+                        article_categories: ["<%=postPageJson.category[0].cat_name%>"],
+                        article_type: "longread",
+                        article_word_count: `<%=post_content.split(" ").length%>`,
+                        article_publication_date: "<%=dateFormat(post_date , 'ddd, dd mmm yyyy HH:MM:ss')%> IST"
+                    });
+                </script>
+            <% } %>
+
+            <% if (typeof liveBlog  !== 'undefined' && typeof liveBlogIncludeFlag  !== 'undefined' && liveBlogIncludeFlag == true){ %>
+                <%- include(viewpath+ '/'+device+'/firstpost/live-blog-widget'); %>
+                <% if(AR_2){ %> 
+			        <%-AR_2;%>	
+		        <% } %>
+            <% } %>
+
+            <div class="inner-copy article-full-content">
+                <%- postContent %>
+            </div>
+            
+            <p class="author-info">
+                Updated Date:
+                <span class="article-date">
+                    <%=dateFormat(post_modified , "mmmm dd',' yyyy HH:MM:ss")%> IST
+                </span>
+            </p>   
+
+            <% if(tag){ %>
+                <div class="tags-wrap">
+                    <p class="tags-heading">
+                        TAGS:
+                    </p>
+                    <ul class="tags-list">
+                        <% tagEntries.forEach(([key, {url, name}]) => { %>
+                            <% if(key >= 4) return %>
+                            <li>
+                                <a href="<%=url.replace('http://www.firstpost.com/' , SITE_URL)%>">
+                                    <%= common.capitalizeEWLetter(name) %>
+                                </a>
+                            </li>
+                        <% }) %>
+                    </ul>
+                </div>
+            <% } %>
+
+            <% if (AR_1){%>
+                <%-AR_1;%>	
+            <% } %>
+
+            <%- include(viewpath+ '/widgets/whatsapp_text_widget'); %>
+            <%- include(viewpath+ '/widgets/health_disclamer_widget'); %>
+            
+                <!--<div class="share-page innerpage-share">
+                    <p>
+                        Share this article
+                    </p>
+                    <%# include(viewpath+ '/widgets/social_share_widget'); %>
+                </div>-->
+            </div>
+            
+        </div>
+            <%- include(viewpath+ '/widgets/alsosee_article_widget'); %>
+        </div>
+        <!--main-content-->
+        <!--- sidebar  start --->
+        <%- include(viewpath+ '/'+device+'/firstpost/rhs'); %>
+        <input id="nxtarticle" name="" type="hidden" value="1">
+        </input>
+    </div>
+</div>
+<!--container-->
+<%  if(typeof infiniteArticlesList !== 'undefined' && infiniteArticlesList != ''){
+	if(liveBlog.data == '' || typeof liveBlog.data == 'undefined'){%>
+	   <%- include(viewpath+ '/widgets/continuous_scroll'); %>
+    <% 	}
+    } %>
+<%- include(viewpath+ '/layouts/footer'); %>

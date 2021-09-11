@@ -1,0 +1,95 @@
+<%- include(viewpath+ '/layouts/m-header'); %>
+        <div class="main-wrapper">
+            <!--Ad Slot-->
+            <% if (typeof ads  !== 'undefined' && typeof ads['ATF_320']  !== 'undefined'){%>
+                <div class="ad-center m-fixed-ad-banner">
+                    <%-common.displayAds(ads['ATF_320'][0]) %>
+                </div>
+            <% } %>
+            <!--Ad Slot-->
+            
+            <!--Score-Widget-->
+            <%- include(viewpath+ '/widgets/scorecard_caraousal'); %>
+            <!--Score-Widget-->
+
+            <!--Bread crumb-->
+            <%- include(viewpath+ '/widgets/breadCrumbs'); %>
+            <!--Bread crumb-->
+
+            <div class="main-content" id="">
+                <!--Top Slider Section-->
+                <section class="ranking-section">
+                    <h1 class="page-title"><span><%= seriesName %></span></h1>
+                    <!--Tab container-->
+                    <%- include(viewpath+ '/widgets/cric-series-menu'); %>
+                        
+                        <% if(templateVars && templateVars['pointsData'] && templateVars['pointsData']['standings'] && templateVars['pointsData']['standings']['stage1'] && templateVars['pointsData']['standings']['stage1']['team']) { %>                             
+                            <div class="big-title-heading">
+                                <h2 class="big-heading-text">
+                                    <%= seriesName %> Points Table
+                                </h2>
+                            </div>
+                            <div class="table-wrapper">
+                                <table class="general-tbl ipl-points-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Pos</th>
+                                            <th>Team</th>
+                                            <th>Plyd.</th>
+                                            <th>Won</th>
+                                            <th>Lost</th>
+                                            <th>Tied</th>
+                                            <th>Net RR.</th>
+                                            <th>Pts</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% const pointsData = templateVars['pointsData']['standings']['stage1']['team'] %>          
+                                            <% pointsData.forEach((data, index) => { 
+                                                const {name,short_name,pts,nrr,p,w,l,t,pos} = data%>
+                                                <tr>
+                                                    <td><%= pos %></td>
+                                                    <td>
+                                                        <a href="https://www.firstpost.com/firstcricket/teams/<%= name.replace(/\s/g,'-').toLowerCase() %>-team-players/series/ipl-<%=iplYear%>.html">
+                                                            <%= name %> <p>(<%= short_name %>)</p>
+                                                        </a>
+                                                    </td>
+                                                    <td><%= p %></td>
+                                                    <td><%= w %></td>
+                                                    <td><%= l%></td>
+                                                    <td><%= t %></td>
+                                                    <td><%= nrr %></td>
+                                                    <td><%= pts %></td>
+                                                </tr>                     
+                                            <% }) %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <% } %>
+
+                        <div class="ipl-summary-wrap">
+                            <h1 class="article-title">
+                                <%= seriesName %> Points table
+                            </h1>
+                            <div class="article-desc">
+                                <%- iplText %>
+                            </div>
+                        </div>
+                        
+                        <h2 class="page-title"><span><%= seriesName %> more stories</span></h2>
+
+                        <%- include(viewpath+ '/desktop/firstcricket/ipl/ipl-news-widget'); %>
+
+                    </section>
+                        <!--Misc Story Section-->
+                    <!--Ranking Section-->                      
+                </div>
+                <% if ((typeof ads  !== 'undefined' && typeof ads['BTF_300'] !== 'undefined')){%>
+                <div class="ad-center BTF_300" data-ad-id="<%-ads['BTF_300'][0]%>" data-ad-size="<%-ads['BTF_300'][1]%>">
+                <%-common.displayAds(ads['BTF_300'][0]) %>
+                </div>
+                <% } %>                
+            </div>
+            <!--Main Page Content-->
+        </div>
+<%- include(viewpath+ '/layouts/m-footer'); %>

@@ -1,0 +1,233 @@
+<script type="text/javascript" src="https://api.dmcdn.net/all.js" async></script>
+<div id="<%=video_player['divid'] %>" style="width:<%=video_player['width'] %>;height:<%=video_player['height'] %>;<%=video_player['style'] %>"></div>
+   <% if(video_player['comscoreflag']){ %> <script src="{SITE_URL}static/js/comscore.min.js" type="text/javascript"></script><% } %>
+    <script type="text/javascript">
+        
+        var time_frame<%=video_player['divid'] %> = [5,10,15,20,30,40,50,60,70,80,90,100];
+        var time_duration<%=video_player['divid'] %> = 0;
+        var duration<%=video_player['divid'] %> = "";
+        var autoplayvalue<%=video_player['divid'] %> = true;
+        var time_frame<%=video_player['divid'] %>_tracked= new Array();
+        var ten_second_tracked_count<%=video_player['divid'] %>=1;
+        var thirty_second_tracked_count<%=video_player['divid'] %>=1;
+        var onetwenty_second_tracked_count<%=video_player['divid'] %>=1;
+        var player_video_id<%=video_player['divid'] %> = '{$dm_vid_arr.video_id}';
+        var player_div_id<%=video_player['divid'] %> = '<%=video_player['divid'] %>';
+        var solarSlug<%=video_player['divid'] %> = '{$dm_vid_arr.solarSlug}';
+        var metadataArray<%=video_player['divid'] %> = {};
+        var duration<%=video_player['divid'] %> = "";
+        var playerRHS<%=video_player['divid'] %> = '';
+
+$(window).on( 'load' , function(){
+        DM.init({ apiKey: '7a9249b0df1895007b72', status: true, cookie: true });
+        var playerRHS<%=video_player['divid'] %> = DM.player(document.getElementById('<%=video_player['divid'] %>'), {
+            video: "<%=video_player['video_id'] %>",
+            width: "<%=video_player['width'] %>",
+            height: "<%=video_player['height'] %>",
+            params: {
+                autoplay: <%=video_player['autoplay'] %>,
+                mute: <%=video_player['mute'] %>,
+                'queue-autoplay-next':false,
+                'queue-enable':false,
+            }
+        });
+        
+        /*To fire event tracking on GA*/    
+        playerRHS<%=video_player['divid'] %>.addEventListener('ad_start', function (e){
+            duration<%=video_player['divid'] %> = playerRHS<%=video_player['divid'] %>.duration;
+            metadataArray<%=video_player['divid'] %> = {
+                            ns_st_cl: duration<%=video_player['divid'] %>, 
+                            ns_st_ci: "vdo_{$dm_vid_arr.post_id}",
+                            ns_st_pu:"First Post",
+                            ns_st_pr:"{$dm_vid_arr.post_title}",
+                            ns_st_ge:solarSlug<%=video_player['divid'] %>, 
+                            ns_st_st:"First Post", 
+                            ns_st_ce:"1", 
+                            c3:"3", 
+                            c4:"null", 
+                            c6:"null"
+                        };
+            // console.log('ad_start');
+           <% if(video_player['comscoreflag']){ %>
+            /*======================Comscore========================*/
+            addType<%=video_player['divid'] %> = 'AdType.LinearOnDemandPreRoll';
+            comScoreAnalytics(metadataArray<%=video_player['divid'] %>,addType<%=video_player['divid'] %>);
+            /*======================Comscore========================*/
+            <% } %>
+        });
+
+        playerRHS<%=video_player['divid'] %>.addEventListener('ad_play', function (e){
+           <% if(video_player['comscoreflag']){ %>
+            /*======================Comscore========================*/
+            addType<%=video_player['divid'] %> = 'AdType.LinearOnDemandPreRoll';
+            comScoreAnalytics(metadataArray<%=video_player['divid'] %>,addType<%=video_player['divid'] %>);
+            /*======================Comscore========================*/
+            <% } %>
+            // if(adCount == 1){
+            //     console.log('ad_play');
+            //     /*======================Comscore========================*/
+            //     addType<%=video_player['divid'] %> = 'AdType.LinearOnDemandPreRoll';
+            //     comScoreAnalytics(metadataArray<%=video_player['divid'] %>,addType<%=video_player['divid'] %>);
+            //     /*======================Comscore========================*/
+            //     adCount++;
+            // }
+        });
+
+        playerRHS<%=video_player['divid'] %>.addEventListener('Video_AdSkip', function (e){
+            console.log('Video_AdSkip');
+            // ga('send', 'event', 'Video Advertisement', 'Skip', player_video_id<%=video_player['divid'] %>);
+           <% if(video_player['comscoreflag']){ %>
+            /*======================Comscore========================*/
+            addType<%=video_player['divid'] %> = 'AdType.LinearOnDemandPreRoll';
+            comScoreAnalytics(metadataArray<%=video_player['divid'] %>,addType<%=video_player['divid'] %>);
+            /*======================Comscore========================*/
+            <% } %>
+        });
+        
+        playerRHS<%=video_player['divid'] %>.addEventListener('play', function (e){
+            duration<%=video_player['divid'] %> = playerRHS<%=video_player['divid'] %>.duration;
+            console.log(playerRHS<%=video_player['divid'] %>.duration+"======"+playerRHS<%=video_player['divid'] %>.currentTime);
+            metadataArray<%=video_player['divid'] %> = {
+                            ns_st_cl: duration<%=video_player['divid'] %>, 
+                            ns_st_ci: "vdo_{$dm_vid_arr.post_id}",
+                            ns_st_pu:"First Post",
+                            ns_st_pr:"{$dm_vid_arr.post_title}",
+                            ns_st_ge:solarSlug<%=video_player['divid'] %>, 
+                            ns_st_st:"First Post", 
+                            ns_st_ce:"1", 
+                            c3:"3", 
+                            c4:"null", 
+                            c6:"null"
+                        };
+            play = 0;       
+            /*ga('send', 'event', 'DM Video Player', 'Buffer - '+count+' sec', player_video_id<%=video_player['divid'] %>);*/
+            // if(pauseVal == 1){                                    
+            //     pauseVal = 0;
+            //     console.log('play');
+            //     /*======================Comscore========================*/
+            //     addType<%=video_player['divid'] %> = 'ContentType.ShortFormOnDemand';
+            //     comScoreAnalytics(metadataArray<%=video_player['divid'] %>,addType<%=video_player['divid'] %>);
+            //     /*======================Comscore========================*/
+            //     // ga('send', 'event', 'DM Video Player', 'Resume', player_video_id<%=video_player['divid'] %>);
+            // }
+           <% if(video_player['comscoreflag']){ %>
+            if(autoplayvalue<%=video_player['divid'] %> == true){
+                console.log('AutoPlay');  
+                /*======================Comscore========================*/
+                addType<%=video_player['divid'] %> = 'ContentType.ShortFormOnDemand';
+                comScoreAnalytics(metadataArray<%=video_player['divid'] %>,addType<%=video_player['divid'] %>);
+                /*======================Comscore========================*/
+                // ga('send', 'event', 'DM Video Player', 'AutoPlay', player_video_id<%=video_player['divid'] %>);
+            }
+            <% } %>
+                
+            
+            // if(adCount == 1 && playCount == 1) {
+            //     /*======================Comscore========================*/
+            //     addType<%=video_player['divid'] %> = 'ContentType.ShortFormOnDemand';
+            //     comScoreAnalytics(metadataArray<%=video_player['divid'] %>,addType<%=video_player['divid'] %>);
+            //     /*======================Comscore========================*/
+            //     // ga('send', 'event', 'VP_load_DM', count, 'adplay', '1');
+            //     // ga('send', 'event', 'ad Block', 'count', player_video_id<%=video_player['divid'] %>);
+            // }
+
+            // if(playCount == 1 && userclick == 0) {    
+            //     /*======================Comscore========================*/
+            //     addType<%=video_player['divid'] %> = 'ContentType.ShortFormOnDemand';
+            //     comScoreAnalytics(metadataArray<%=video_player['divid'] %>,addType<%=video_player['divid'] %>);
+            //     /*======================Comscore========================*/                               
+            //     // ga('send', 'event', 'DM Video Play', 'Play', player_video_id<%=video_player['divid'] %>);
+            //     playCount++;
+            // }
+        });
+
+        playerRHS<%=video_player['divid'] %>.addEventListener('pause', function (e){
+           <% if(video_player['comscoreflag']){ %>
+            /*======================Comscore========================*/
+                addType<%=video_player['divid'] %> = 'ContentType.ShortFormOnDemand';
+                comScoreAnalytics(metadataArray<%=video_player['divid'] %>,addType<%=video_player['divid'] %>);
+            /*======================Comscore========================*/
+            <% } %>
+            // ga('send', 'event', 'DM Video Player', 'Pause', player_video_id<%=video_player['divid'] %>);
+        });
+        playerRHS<%=video_player['divid'] %>.addEventListener('end', function (e){
+            <% if(video_player['endfunctionality']){ %>
+                {$dm_vid_arr.endfunctionality}
+           <% } %>
+           <% if(video_player['comscoreflag']){ %>
+            /*======================Comscore========================*/
+                addType<%=video_player['divid'] %> = 'ContentType.ShortFormOnDemand';
+                comScoreAnalytics(metadataArray<%=video_player['divid'] %>,addType<%=video_player['divid'] %>);
+            /*======================Comscore========================*/
+            <% } %>
+            // ga('send', 'event', 'DM Video Player', 'Pause', player_video_id<%=video_player['divid'] %>);
+        });
+        playerRHS<%=video_player['divid'] %>.addEventListener('timeupdate', function (e){
+            var cur = playerRHS<%=video_player['divid'] %>.currentTime;
+            duration<%=video_player['divid'] %> = playerRHS<%=video_player['divid'] %>.duration;
+            var chapter = Math.floor(cur/10);
+            // console.log(cur+" - "+duration<%=video_player['divid'] %>+"======="+time_duration<%=video_player['divid'] %>);  
+            // console.log(cur);
+            if(typeof(time_frame<%=video_player['divid'] %>) != "undefined"){
+                for (i = 0; i < time_frame<%=video_player['divid'] %>.length; i++) {
+                    var completion_time = parseFloat(duration<%=video_player['divid'] %>)*time_frame<%=video_player['divid'] %>[i]/100;
+                    if(Math.round(cur) ==  Math.round(completion_time) && time_duration<%=video_player['divid'] %> != Math.round(cur) ){
+                        time_duration<%=video_player['divid'] %> = Math.round(cur);                                
+                        if(time_frame<%=video_player['divid'] %>_tracked.indexOf(time_duration<%=video_player['divid'] %>==-1)){
+                        // ga('send', 'event', 'Hola Video Player', 'Play - '+time_frame<%=video_player['divid'] %>[i]+ '%' , player_video_id<%=video_player['divid'] %>);
+                       <% if(video_player['comscoreflag']){ %>
+                        /*======================Comscore========================*/
+                        addType<%=video_player['divid'] %> = 'ContentType.ShortFormOnDemand';
+                        comScoreAnalytics(metadataArray<%=video_player['divid'] %>,addType<%=video_player['divid'] %>);
+                        /*======================Comscore========================*/
+                        <% } %>
+                        time_frame<%=video_player['divid'] %>_tracked[time_duration<%=video_player['divid'] %>]=time_duration<%=video_player['divid'] %>;
+                        // console.log("Time Completion - "+time_frame<%=video_player['divid'] %>[i]+ " %  "+player_div_id<%=video_player['divid'] %>);
+                    }
+                    break;
+                    }
+                }
+            }
+                if(Math.round(cur) ==  10  && ten_second_tracked_count<%=video_player['divid'] %> == 1){
+                   <% if(video_player['comscoreflag']){ %>
+                    /*======================Comscore========================*/
+                    addType<%=video_player['divid'] %> = 'ContentType.ShortFormOnDemand';
+                    comScoreAnalytics(metadataArray<%=video_player['divid'] %>,addType<%=video_player['divid'] %>);
+                    /*======================Comscore========================*/
+                    <% } %>
+                    // console.log("Time Completion - "+Math.round(cur)+ " sec "+player_div_id<%=video_player['divid'] %>);
+                    // ga('send', 'event', 'Hola Video Player', 'Time Completion - '+Math.round(cur)+ ' sec ' , player_video_id<%=video_player['divid'] %>);
+                    ten_second_tracked_count<%=video_player['divid'] %>++;
+                }
+                if(Math.round(cur) ==  30 && thirty_second_tracked_count<%=video_player['divid'] %> == 1){
+                   <% if(video_player['comscoreflag']){ %>
+                    /*======================Comscore========================*/
+                    addType<%=video_player['divid'] %> = 'ContentType.ShortFormOnDemand';
+                    comScoreAnalytics(metadataArray<%=video_player['divid'] %>,addType<%=video_player['divid'] %>);
+                    /*======================Comscore========================*/
+                    <% } %>
+                    // console.log("Time Completion - "+Math.round(cur)+ " sec "+player_div_id<%=video_player['divid'] %>);
+                    // ga('send', 'event', 'Hola Video Player', 'Time Completion - '+Math.round(cur)+ ' sec ' , player_video_id<%=video_player['divid'] %>);
+                    thirty_second_tracked_count<%=video_player['divid'] %>++;
+                }
+                else if (Math.round(cur) ==  120 && onetwenty_second_tracked_count<%=video_player['divid'] %> == 1){
+                   <% if(video_player['comscoreflag']){ %>
+                    /*======================Comscore========================*/
+                    addType<%=video_player['divid'] %> = 'ContentType.ShortFormOnDemand';
+                    comScoreAnalytics(metadataArray<%=video_player['divid'] %>,addType<%=video_player['divid'] %>);
+                    /*======================Comscore========================*/
+                    <% } %>
+                    // console.log("Time Completion - "+Math.round(cur)+ " sec "+player_div_id<%=video_player['divid'] %>);
+                    // ga('send', 'event', 'Hola Video Player', 'Time Completion - '+Math.round(cur)+ ' sec ' , player_video_id<%=video_player['divid'] %>);
+                    onetwenty_second_tracked_count<%=video_player['divid'] %>++;
+                }
+        });
+});
+        function comScoreAnalytics(metadataArray,addType)
+        {
+            var streamingAnalytics = new ns_.ReducedRequirementsStreamingAnalytics( { publisherId: '6683813' } );
+            
+            streamingAnalytics.playVideoAdvertisement( metadataArray, addType);
+            // console.log(streamingAnalytics);
+        }
+    </script>   

@@ -1,0 +1,29 @@
+<% if(typeof relatedArticle !== 'undefined' && relatedArticle.length > 0){ %>
+<div class="related-stories common-widget">
+    <div class="double-title">
+        <h3 class="title-txt">Related Articles</h3>
+        <span class="title-shadow">Related Articles</span>
+    </div>
+    <div class="related-story-wrap widget-wrapper">
+        <ul class="related-story-list">
+            <% for (const [relatedArticle_key, relatedArticle_val] of Object.entries(relatedArticle)) { %>
+            <li>
+                <a  href="<%-relatedArticle_val['url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL) %>" title="<%-relatedArticle_val['title'].replace(/"/gim,"'") %>">
+                    <div class="w-img-holder">
+                        <img class="fp-lazy" src="<%-constant.PLACEHOLDER_IMG_120x120 %>" data-src="<%-common.firstpost_imageOptimization(relatedArticle_val['PostImageThumbnail'], 150, 150, '') %> " alt="<%-relatedArticle_val['title'].replace(/"/gim,"'") %>" title="<%-relatedArticle_val['title'].replace(/"/gim,"'") %>">
+                    </div>
+                    <div class="w-title-holder">
+                        <h3 class="rel-title">
+                            <%-relatedArticle_val['title'] %>
+                        </h3>
+                        <h6 class="rel-sum-txt">
+                            <%-relatedArticle_val['description'] %>
+                        </h6>
+                    </div>
+                </a>
+            </li>
+            <% } %>
+          </ul>
+    </div>
+</div>
+<% } %>

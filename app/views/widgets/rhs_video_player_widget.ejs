@@ -1,0 +1,67 @@
+<!-- New video widget start-->
+	<div class="rhs-video-div">
+		<div class="panel-heading">
+			<h3 class="panel-title text-center">
+				<a  href="https://www.youtube.com/embed/4RHoJWfJ9AY?autoplay=1&mute=1&rel=0" target="_blank" style="text-transform: none;">9 Months Season 5 Episode 1 | Pregnancy & Gearing Up for Delivery</a>
+			</h3>
+		</div>
+		<iframe width="100%" height="250" src="https://www.youtube.com/embed/4RHoJWfJ9AY?autoplay=1&mute=1&rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	</div>
+<!-- New video widget end-->
+
+	<% 
+    includeOutbrainWidgetInPage =['home'];
+    if(typeof pageName !== 'undefined' && includeOutbrainWidgetInPage.includes(pageName)) { %>
+    	<div id='div-gpt-ad-1629290693512-0' style='min-width: 300px; min-height: 250px;'>
+		  <script>
+		    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1629290693512-0'); });
+		  </script>
+		</div>
+	<% } %>
+
+<%= /*JSON.stringify(rhs_video_fp)*/ %>
+<% if(typeof rhs_video_fp['utube']['VideoSTATUS'] !== 'undefined' && rhs_video_fp['utube']['VideoSTATUS'] == 1) { 
+
+	var displayRhsYoutubeVideo = 1;
+	var includeRhsYoutubeVideoInPage = {};
+	if(typeof rhs_video_fp['utube']['pagename'] !== 'undefined' && rhs_video_fp['utube']['pagename'] != "") {
+		includeRhsYoutubeVideoInPage = rhs_video_fp['utube']['pagename'].split(",");
+		if(pageName != 'undefined' && includeRhsYoutubeVideoInPage.includes(pageName)) {
+			displayRhsYoutubeVideo = 1;
+		}
+		else
+		{
+			displayRhsYoutubeVideo = 0;
+		}
+	}
+	if(typeof rhs_video_fp['utube']['pagenameexclude'] !== 'undefined' && rhs_video_fp['utube']['pagenameexclude'] != "") {
+		excludeRhsYoutubeVideoInPage = rhs_video_fp['utube']['pagenameexclude'].split(",");
+		if(pageName != 'undefined' && excludeRhsYoutubeVideoInPage.includes(pageName)) {
+			displayRhsYoutubeVideo = 0;
+		}
+		else
+		{
+			displayRhsYoutubeVideo = 1;
+		}
+	}
+}%>
+
+<%if(displayRhsYoutubeVideo == 1) { %>
+	<div class="rhs-video-div">
+		<div class="panel-heading">
+			<h3 class="panel-title text-center">
+				<a  href="<%-rhs_video_fp['utube']['link']%>" target="_blank" style="text-transform: none;"><%-rhs_video_fp['utube']['title']%></a>
+			</h3>
+		</div>
+		<iframe width="100%" height="250" src="<%-rhs_video_fp['utube']['url']%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	</div>
+<% } else if(typeof rhs_video_player !== 'undefined') { %>
+	<div class="rhs-video-div">
+		<% if(RHS_LIVE_VIDEO_HIDE_TITLE_URL == '') { %>
+			<a href="<%-rhs_video_url%>" title="<%-rhs_video_player['post_title']%>" class="rhs-video-title"><%-rhs_video_player['post_title']%></a>
+		<% } else { %>
+			<div class="rhs-video-title"><%-rhs_video_player['post_title']%></div>
+		<% } %>
+		<%- include(viewpath+ '/util/'+rhs_player,{video_player:rhs_video_player}); %>
+	</div>
+<% } %>

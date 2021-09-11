@@ -1,0 +1,50 @@
+<!--highlights-wrap-->
+<% if ((typeof liveBlog  !== 'undefined' && typeof liveBlog.data !== 'undefined')){%>
+<h2 class="h2class">LIVE NEWS and UPDATES</h2>
+<amp-live-list  layout="container" data-poll-interval="15000" data-max-items-per-page="5" id="amp-live-list-insert-blog">
+        <button id="live-list-update-button" update on="tap:amp-live-list-insert-blog.update" class="button button-primary new-update">You have updates</button>
+	<div class="timeline" items>
+		<% for (var [key, item] of Object.entries(liveBlog.data)) {
+			if(key < 5){
+				var div_hidden = '';
+			}else{
+				var div_hidden = 'hidden [hidden]="hideGreeting"';
+			}
+			%>
+			<% striptagtitle = striptags(item.post.title) %> 
+			<% filteredDate = item['time'].substring(0,8) %> 
+			<% blogDate = filteredDate.substring(6, 8)+"-"+filteredDate.substring(4, 6) +"-"+filteredDate.substring(0, 4) %>
+			<% blogDateTimeSchema = item['time'].substring(6, 8)+"-"+item['time'].substring(4, 6) +"-"+item['time'].substring(0, 4) +"T"+ item['time'].substring(8, 10) +":"+ item['time'].substring(10, 12) +":"+ item['time'].substring(12, 14) %>
+
+			<div id="post<%-key%>" <%-div_hidden%> class="timeline-content big-thumb" data-sort-time="<%- item.time %>">
+				<div>
+				    
+				    <div class="time-date">
+					<%-constant.monthsWNos[filteredDate.substring(4, 6)] %> <%-filteredDate.substring(6, 8) %>, <%-filteredDate.substring(0, 4) %>
+					<span>
+					    - <% filteredTime = item['time'].substring(8) %> 
+					      <%-filteredTime.substring(0, 2) %>:<%-filteredTime.substring(2, 4) %> (IST)
+					</span>
+				    </div>
+				    <%-item.post.title_amp %>
+    
+				    <% if (item.post.image_path != "") { %>
+					    <amp-img width="320" height="180" class="timeline-image" src="<%-item.post.image_path %>" layout="responsive"></amp-img>
+				    <% } %>	
+				    <% if (item.post.data_type == 'embedded' && item.post.source_amp !=""){
+					    if(item.post.hasOwnProperty("tweet_id") && item.post.tweet_id != ""){%>
+						    <amp-twitter width=600 height=220 layout="responsive" data-tweetid="<%- item.post.tweet_id %>"></amp-twitter>	
+					    <% } else if(item.post.hasOwnProperty("insta_postid") && item.post.insta_postid != ""){%>
+						    <amp-instagram data-shortcode="<%- item.post.insta_postid %>" width="400" height="400" layout="responsive"></amp-instagram>
+					    <% } else {%>
+						    <p class="blog-source"><%-item.post.source_amp %></p>
+					    <% } %> 
+				    <% } %>
+				    <%- include(viewpath+ '/widgets/amp_social_share_widget'); %>
+				</div>
+			</div>
+		<% } %>
+	</div>
+</amp-live-list>
+<button id="playerbutton2" class="button fadeout"  on="tap:AMP.setState({ hideGreeting: false }),playerbutton2.hide">LOAD MORE</button>
+<% } %>

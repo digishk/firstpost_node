@@ -1,0 +1,133 @@
+<% if(seoData['pageUrl'] != undefined && seoData['pageUrl'] != ""){
+      seoData['pageUrl'] = seoData['pageUrl'].replace('http://','https://');
+ } %>
+ <% if(seoData['canonicalURL'] != undefined && seoData['canonicalURL'] != ""){
+     seoData['canonicalURL'] = seoData['canonicalURL'].replace('http://','https://');
+ } %>
+<!doctype html>
+<html amp>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+
+    <% if(typeof seoData['newMetaTitle'] !== 'undefined' && seoData['newMetaTitle'] != ""){ %>
+        <title><%- seoData['newMetaTitle'] %></title>
+    <% }else if(typeof seoData['metaTitle'] !== 'undefined' && seoData['metaTitle'] != ""){ %>
+        <title><%- seoData['metaTitle'] %></title>
+    <% } %>
+    <% if(typeof seoData['newMetaDescription'] !== 'undefined' && seoData['newMetaDescription'] != ""){ %>
+      <meta name="description" content="<%- seoData['newMetaDescription'] %>" />
+    <% }else if(typeof seoData['metaDesc'] !== 'undefined' && seoData['metaDesc'] != ""){ %>
+      <meta name="description" content="<%- seoData['metaDesc'] %>" />
+    <% } %>
+    <% if(typeof seoData['newMetaKeywords'] !== 'undefined' && seoData['newMetaKeywords'] != ""){ %>
+        <meta name="news_keywords" content="<%- seoData['newMetaKeywords'] %>" />
+        <meta name="Keywords" content="<%- seoData['newMetaKeywords'] %>">
+    <% }else if(seoData['tags'] != undefined && seoData['tags'] != ""){ %>
+        <meta name="news_keywords" content="<%- seoData['tags'] %>" />
+        <meta name="keywords" content="<%- seoData['tags'] %>">
+    <% } %>
+
+    <% if(typeof seoData['newMetaTitle'] !== 'undefined' && seoData['newMetaTitle'] != ""){ %>
+        <meta property="og:title" content="<%- seoData['newMetaTitle'] %>" />
+    <% }else if(seoData['metaTitle'] != undefined && seoData['metaTitle'] != ""){ %>
+        <meta property="og:title" content="<%- seoData['metaTitle'] %>" />
+    <% } %>
+    <% if(typeof seoData['newMetaDescription'] !== 'undefined' && seoData['newMetaDescription'] != ""){ %>
+        <meta property="og:description" content="<%- seoData['newMetaDescription'] %>"/>
+    <% }else if(seoData['metaDesc'] != undefined && seoData['metaDesc'] != ""){ %>
+        <meta property="og:description" content="<%- seoData['metaDesc'] %>"/>
+    <% } %>
+    <% var contentType = (seoData['contentType'] != undefined && seoData['contentType'] != "") ? seoData['contentType'] : "website"; %>
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Firstpost" />
+    <meta property="og:type" content="<%-contentType %>" />
+    <meta property="fb:app_id" content="1162386820478832" />
+    <meta property="fb:admins" content="500851548" />
+    <meta property="fb:pages" content="165818073477856" />
+    <% if(seoData['ogImg'] != undefined && seoData['ogImg'] != ""){ %>
+        <meta property="og:image" content="<%- seoData['ogImg'] %>"/> 
+    <% }else{ %>
+        <meta property="og:image" content="<%- constant['SITE_URL'] %><%-constant.config_flags.FP_SOCIAL_SHARE_LOGO %>" />
+    <% } %>
+    <% if( typeof postPageJson !== 'undefined' && postPageJson['post'] && postPageJson['post']['post_modified'] != ""){ %>
+    <meta property="og:updated_time" content="<%=dateFormat(postPageJson['post']['post_modified'] , "yyyy-mm-ddTHH:MM:ss")%>+05:30" />
+    <% } %>
+    
+    <% if((seoData['solarSlug'] != undefined && (seoData['solarSlug'] == 'amazon-fp' || seoData['solarSlug'] == 'amazon')) || (typeof postPageJson  !== 'undefined' && postPageJson['meta'] && postPageJson['meta']['push-to-amazonfeed'] != undefined && postPageJson['meta']['push-to-amazonfeed'] == 'yes')){%>
+    <meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
+    <% } %>
+    
+    <% if(typeof seoData['newMetaTitle'] !== 'undefined' && seoData['newMetaTitle'] != ""){ %>
+        <meta name="twitter:title" content="<%- seoData['newMetaTitle'] %>"/>
+    <% }else if(typeof seoData['metaTitle'] !== 'undefined' && seoData['metaTitle'] != ""){ %>
+        <meta name="twitter:title" content="<%- seoData['metaTitle'] %>"/>
+    <% } %>
+    <% if(typeof seoData['newMetaDescription'] !== 'undefined' && seoData['newMetaDescription'] != ""){ %>
+        <meta name="twitter:description" content="<%- seoData['newMetaDescription'] %>"/>
+    <% }else if(typeof seoData['metaDesc'] !== 'undefined' && seoData['metaDesc'] != ""){ %>
+        <meta name="twitter:description" content="<%- seoData['metaDesc'] %>"/>
+    <% } %>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta property="twitter:account_id" content="4503599627804328" />
+    <% if(seoData['twitImg'] != undefined && seoData['twitImg'] != ""){ %>
+        <meta property="twitter:image:src" content="<%- seoData['twitImg'] %>" />
+    <% }else{ %>
+        <meta property="twitter:image:src" content="<%- constant['SITE_URL'] %><%-constant.config_flags.FP_SOCIAL_SHARE_LOGO %>" />
+    <% } %>
+    <meta name="twitter:widgets:csp" content="on">
+    <meta name="twitter:domain" content="Firstpost"/>
+    <meta name="twitter:site" content="@firstpost">
+    <meta name="twitter:url" content="<%- seoData['pageUrl'] %>">
+
+
+    <% if(seoData['canonicalUrl'] != undefined && seoData['canonicalUrl'] != ""){ %>
+        <link rel="canonical" href="<%- seoData['canonicalUrl'] %>"/>
+    <% }else{ %>
+        <link rel="canonical" href="<%- seoData['pageUrl'] %>"/>
+    <% } %>
+    <% if(seoData['next'] != undefined && seoData['next'] != ""){ %>
+        <link rel="next" href="<%- seoData['next'] %>"/>
+    <% } %> 
+    <% if(seoData['prev'] != undefined && seoData['prev'] != ""){ %>
+        <link rel="prev" href="<%- seoData['prev'] %>"/>
+    <% } %>
+    
+      <% if(typeof schema_meta !== 'undefined'){ %>
+      <%- include(viewpath+ '/util/schema',{schema_type_arr:schema_meta['schema_type'],schema_meta:schema_meta,flag:schema_meta['flag']}); %>
+      <% } %>
+
+    <link rel="shortcut icon prefetch" href="<%- constant['SITE_URL'] %>static/images/favicon.ico?v=<%-constant.config_flags.VERSION_NO %>" />
+    <link rel="icon prefetch" type="image/vnd.microsoft.icon" href="<%- constant['SITE_URL'] %>static/images/favicon.ico?v=<%-constant.config_flags.VERSION_NO %>"/>
+    <link href="<%- constant['SITE_URL'] %>static/images/favicon.ico?v=<%-constant.config_flags.VERSION_NO %>" rel="shortcut icon prefetch" type="image/x-icon">
+    <link href="<%- constant['SITE_URL'] %>static/images/favicon.ico?v=<%-constant.config_flags.VERSION_NO %>" rel="icon prefetch" type="image/x-icon"/>
+    
+   
+    <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
+    <script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
+    <script async custom-element="amp-selector" src="https://cdn.ampproject.org/v0/amp-selector-0.1.js"></script>
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+    <script async custom-element="amp-fx-flying-carpet" src="https://cdn.ampproject.org/v0/amp-fx-flying-carpet-0.1.js"></script>
+    <script async custom-element="amp-twitter" src="https://cdn.ampproject.org/v0/amp-twitter-0.1.js"></script>
+      <script async custom-element="amp-audio" src="https://cdn.ampproject.org/v0/amp-audio-0.1.js"></script>
+      <script async custom-element="amp-soundcloud" src="https://cdn.ampproject.org/v0/amp-soundcloud-0.1.js"></script>
+      <!--<script async custom-element="amp-apester-media" src="https://cdn.ampproject.org/v0/amp-apester-media-0.1.js"></script>-->
+      <script async custom-element="amp-dailymotion" src="https://cdn.ampproject.org/v0/amp-dailymotion-0.1.js"></script>
+       <script custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js" async></script>
+      <% if( typeof iframeExist !== 'undefined' && iframeExist == "1"){ %>
+        <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script> 
+      <% } %>
+      <% if( typeof iframes !== 'undefined' && iframes == "1"){ %>
+        <script async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script> 
+      <% } %>
+      <% if (typeof videoURLArr !== 'undefined' && videoURLArr['hls'] != ''){%>
+        <script async custom-element="amp-video" src="https://cdn.ampproject.org/v0/amp-video-0.1.js"></script>
+      <% }  %>
+      <% if(typeof liveBlogIncludeFlag !== 'undefined' && liveBlogIncludeFlag == true){%>
+      <script custom-element="amp-live-list" src="https://cdn.ampproject.org/v0/amp-live-list-0.1.js" async></script>      
+      <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
+      <% } %>
+      <script async custom-element="amp-instagram" src="https://cdn.ampproject.org/v0/amp-instagram-0.1.js"></script>
+      <script async custom-element="amp-sticky-ad" src="https://cdn.ampproject.org/v0/amp-sticky-ad-1.0.js"></script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>

@@ -1,0 +1,184 @@
+
+<!--Score Table-->
+    <div class="score-tbl-wrap">
+        <table class="score-tbl">
+            <thead>
+                <tr>
+                <th><%= scoreData['firstInnings']['Battingteam'].replace("-"," "); %></th>
+                <% if(typeof scoreData['firstInnings']['Bowlingteam'] !== 'undefined') {%>
+                <th><%= scoreData['firstInnings']['Bowlingteam'].replace("-"," "); %></th>
+                <%}%>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                <td><%= scoreData['firstInnings']['Equation']['Total']%>/<%= scoreData['firstInnings']['Equation']['Wickets']%> (<%= scoreData['firstInnings']['Equation']['Overs']%> ov) - R/R <%= scoreData['firstInnings']['Equation']['Runrate']%></td>
+                <% if(scoreData['secondInnings']['status'] == "1") {%>
+                <td><%= scoreData['secondInnings']['Equation']['Total']%>/<%= scoreData['secondInnings']['Equation']['Wickets']%> (<%= scoreData['secondInnings']['Equation']['Overs']%> ov) - R/R <%= scoreData['secondInnings']['Equation']['Runrate']%></td>
+                <%}%>
+                </tr>
+                <tr>                            
+                <% if(scoreData['thirdInnings']['status'] == "1" && scoreData['thirdInnings']['Battingteam'] == scoreData['firstInnings']['Battingteam']) {%>
+                <td><%= scoreData['thirdInnings']['Equation']['Total']%>/<%= scoreData['thirdInnings']['Equation']['Wickets']%> (<%= scoreData['thirdInnings']['Equation']['Overs']%> ov) - R/R <%= scoreData['thirdInnings']['Equation']['Runrate']%></td>
+                <% } %>
+                <% if(scoreData['fourthInnings']['status'] == "1" && scoreData['fourthInnings']['Battingteam'] == scoreData['firstInnings']['Battingteam']) {%>
+                <td><%= scoreData['fourthInnings']['Equation']['Total']%>/<%= scoreData['fourthInnings']['Equation']['Wickets']%> (<%= scoreData['fourthInnings']['Equation']['Overs']%> ov) - R/R <%= scoreData['fourthInnings']['Equation']['Runrate']%></td>
+                <% } %>
+                <% if(scoreData['thirdInnings']['status'] == "1" && scoreData['thirdInnings']['Battingteam'] == scoreData['secondInnings']['Battingteam']) {%>
+                <td><%= scoreData['thirdInnings']['Equation']['Total']%>/<%= scoreData['thirdInnings']['Equation']['Wickets']%> (<%= scoreData['thirdInnings']['Equation']['Overs']%> ov) - R/R <%= scoreData['thirdInnings']['Equation']['Runrate']%></td>
+                <% } %>
+                <% if(scoreData['fourthInnings']['status'] == "1" && scoreData['fourthInnings']['Battingteam'] == scoreData['secondInnings']['Battingteam']) {%>
+                <td><%= scoreData['fourthInnings']['Equation']['Total']%>/<%= scoreData['fourthInnings']['Equation']['Wickets']%> (<%= scoreData['fourthInnings']['Equation']['Overs']%> ov) - R/R <%= scoreData['fourthInnings']['Equation']['Runrate']%></td>
+                <% } %>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--Score Table-->
+
+    <!--Current Status-->
+    <div class="current-status">
+        <h2 class="sub-sec-title">
+            <%= scoreData['status']%>
+        </h2>
+        <h3 class="current-team"><%= scoreData['equation']%></h3>
+
+        <div class="q-play-score">            
+        <% if(typeof scoreData[currentInn]['Equation']['partnership']['players_new'] !== 'undefined'){
+             var playersInfo = scoreData[currentInn]['Equation']['partnership']['players_new'] }else{
+                var playersInfo = scoreData[currentInn]['Equation']['partnership']['players'];
+             }
+        for (const [equ_Key, equ_val] of Object.entries(playersInfo)) { 
+            if(typeof equ_val['name'] !== 'undefined'){
+            var batSName = equ_val['name'].toLowerCase().replace(" (c)","").replace(" (w)","").replace(/\ /g,"-"); 
+            var playerUrl = deFUrl+batSName+'-'+equ_val['id'];
+            %>
+        <h4 class="q-play-name"><a href="<%= playerUrl %>"><%= equ_val['name'] %></a> - <%= equ_val['runs'] %></h4>
+        <% }} %>                                
+        </div>
+    </div>
+    <!--Current Status-->
+
+    <!--Over Timeline-->
+    <div class="over-timeline">
+        <div class="over-label">This Over</div>
+        <div class="ball-div">
+<% for (const [overd_Key, overd_val] of Object.entries(scoreData[currentInn]['Equation']['overdetails_mov'])) { %>
+            <div class="ball-circle">
+                <span><%= overd_val %></span>
+            </div>
+            <% } %>
+            <!-- <div class="ball-circle">
+                <span>NB</span>
+            </div>
+            <div class="ball-circle">
+                <span>2</span>
+            </div>
+            <div class="ball-circle">
+                <span>0</span>
+            </div>
+            <div class="ball-circle">
+                <span>W</span>
+            </div> -->
+        </div>
+    </div>
+    <!--Over Timeline-->
+
+    <!--Batting Table-->
+    <table class="score-big-tbl">
+        <thead>
+            <tr>
+                <th>Batsman</th>
+                <th>Status</th>
+                <th>R</th>
+                <th>B</th>
+                <th>4s</th>
+                <th>6s</th>
+            </tr>
+        </thead>
+        <tbody>
+<% for (const [bat_Key, bat_val] of Object.entries(scoreData[currentInn]['batsmen']['list'])) { 
+var batSName = bat_val['name'].toLowerCase().replace(" (c)","").replace(" (w)","").replace(/\ /g,"-"); 
+var BatUrl = deFUrl+batSName+'-'+bat_val['id'];
+%>
+            <tr <% if(bat_val['Striker'].toLowerCase() == "yes"){ %>class="current"<% } %>>
+                <td><a href="<%= BatUrl %>"><%= bat_val['name'] %></a></td>
+                <td><%= bat_val['Howout'] %></td>
+                <td><%= bat_val['Runs'] %></td>
+                <td><%= bat_val['BallsFaced'] %></td>
+                <td><%= bat_val['four'] %></td>
+                <td><%= bat_val['six'] %></td>
+            </tr>  
+            <% } %>                              
+        </tbody>
+    </table>
+    <!--Batting Table-->
+
+    <!--Bowling Table-->
+    <table class="score-big-tbl">
+        <thead>
+            <tr>
+                <th>Bowling</th>
+                <th>0</th>
+                <th>M</th>
+                <th>R</th>
+                <th>W</th>
+            </tr>
+        </thead>
+        <tbody>
+<% for (const [bowl_Key, bowl_val] of Object.entries(scoreData[currentInn]['bowler']['list'])) { %>
+<% if(bowl_val['id'] == scoreData[currentInn]['Currentbowler_id'] || bowl_val['id'] == scoreData[currentInn]['Previousbowler_id']) { 
+var bowlName = bowl_val['name'].toLowerCase().replace(" (c)","").replace(" (w)","").replace(/\ /g,"-"); 
+var bowlUrl = deFUrl+bowlName+'-'+bowl_val['id'];
+%>
+            <tr>
+                <td <% if(bowl_val['Bowling'] == "yes"){ %>class="current"<% } %>>
+                    <a href="<%= bowlUrl %>"><%= bowl_val['name'] %></a></td>
+                <td><%= bowl_val['Over'] %></td>
+                <td><%= bowl_val['Maiden'] %></td>
+                <td><%= bowl_val['Runs'] %></td>
+                <td><%= bowl_val['Wicket'] %></td>
+            </tr>
+            <% } } %>                                
+        </tbody>
+    </table>
+    <!--Bowling Table-->
+
+    <!--Current Status Table-->
+    <table class="current-status-table">
+        <thead>
+            <tr>
+                <th>Current Partnership</th>
+                <th>Last Wicket <span><%= scoreData[currentInn]['LastWicket']['scores'] %>/<%= scoreData[currentInn]['LastWicket']['wickets'] %> (<%= scoreData[currentInn]['LastWicket']['overs'] %>)</span> </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <p><%= scoreData[currentInn]['Equation']['partnership']['Runs'] %> (<%= scoreData[currentInn]['Equation']['partnership']['Runs'] %>) R/R: <%= scoreData[currentInn]['Equation']['partnership']['RR'] %></p>
+                    <% if(typeof scoreData[currentInn]['Equation']['partnership']['players_new'] !== 'undefined') { var playersInfo = scoreData[currentInn]['Equation']['partnership']['players_new'] }else{
+                            var playersInfo = scoreData[currentInn]['Equation']['partnership']['players']
+                        }
+                    for (const [equ_Key, equ_val] of Object.entries(playersInfo)) { 
+                        if(typeof equ_val['name'] !== 'undefined'){
+var partName = equ_val['name'].toLowerCase().replace(" (c)","").replace(" (w)","").replace(/\ /g,"-"); 
+var partUrl = deFUrl+partName+'-'+equ_val['id'];
+
+var lastWname = scoreData[currentInn]['LastWicket']['name'].toLowerCase().replace(" (c)","").replace(" (w)","").replace(/\ /g,"-"); 
+var lastWUrl = deFUrl+lastWname+'-'+scoreData[currentInn]['LastWicket']['id'];
+                        %>
+                        <div>
+                        <a href="<%= partUrl %>"><%= equ_val['name'] %></a> <span><%= equ_val['runs'] %>(<%= equ_val['balls'] %>)</span> 
+                    </div>
+                    <% }}  %>
+                </td>
+                <td>
+                    <p><a href="<%= lastWUrl %>"><%= scoreData[currentInn]['LastWicket']['name'] %></a> <%= scoreData[currentInn]['LastWicket']['Runs'] %>(<%= scoreData[currentInn]['LastWicket']['BallsFaced'] %>) S.R (<%= scoreData[currentInn]['LastWicket']['SR'] %>)</p>
+                    <div>
+                        <%= scoreData[currentInn]['LastWicket']['Howout'] %>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!--Current Status Table-->

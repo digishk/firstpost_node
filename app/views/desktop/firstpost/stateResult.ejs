@@ -1,0 +1,88 @@
+<%- include(viewpath+ '/layouts/header'); %>
+<style type="text/css">
+    .health-title{display:flex;justify-content:space-between;align-items:center}.health-title .title{font-family:'Open sans',sans-serif;font-size:28px;text-transform:capitalize}.health-title .powered-by{display:flex;align-items:center}.health-title .powered-by span{font-size:14px;color:#666;font-family:'Open sans',sans-serif;font-style:italic;margin-right:10px;text-transform:capitalize}.health-main-story{position:relative;display:flex;margin-bottom:20px}.health-main-story .health-main-title{position:absolute;bottom:0;left:0;padding:20px;background:rgba(0,0,0,.6);color:#fff;font-family:'Open sans',sans-serif;font-size:35px;margin:0;line-height:1.3}.health-main-story img{width:100%}.health-article-row a{display:block;text-decoration:none}.health-article-row .copy{font-size:20px;color:#333;font-family:'Open sans',sans-serif;margin:10px 0 20px 0;font-weight:700;line-height:1.2}.health-article-list-title{font-size:25px;font-weight:700;color:#00a0a3;font-family:'Open sans',sans-serif;margin-bottom:20px;padding-bottom:10px;border-bottom:#00a0a3 solid 1px;text-transform:capitalize}.health-article-list{display:block;padding:0;margin:0}.health-article-list li{list-style:none;margin-bottom:40px}.health-article-list li a{display:flex;align-items:flex-start;text-decoration:none}.health-article-list li a img{width:360px;flex-shrink:0;padding-right:20px}.health-article-list .title{font-family:'Open sans',sans-serif;font-size:20px;color:#333;margin-top:0}.health-article-list .copy{font-family:'Open sans',sans-serif;font-size:16px;color:#333;margin-top:0}.health-most-popular .panel-body{padding:15px 11px}.health-most-popular .list.side-img li a p{color:#333;font-family:'Open sans',sans-serif;font-weight:700}.top-story-wrap.health-most-popular .panel-danger{border-color:#00a0a3}.top-story-wrap.health-most-popular .panel-danger>.panel-heading{background:#00a0a3;border-color:#00a0a3}.health-most-popular .panel.panel-danger .panel-body{max-height:none}.health-most-popular .list.side-img li{border-bottom:none}.top-story-wrap.health-most-popular .list.side-img li a img,.top-story-wrap.health-trending .list.side-img li a img{width:40%}.top-story-wrap.health-most-popular .list.side-img li a p,.top-story-wrap.health-trending .list.side-img li a p{width:60%}.load-more-wrap{display:flex;justify-content:center;align-items:center}.load-more-wrap .btn{font-family:"Alegreya Sans",sans-serif;font-size:16px;text-transform:uppercase;color:#00a0a3;padding:9px 20px;border-radius:20px;border:#00a0a3 solid 1px;font-weight:700}.health-trending .panel-body{padding:15px 11px}.health-trending .list.side-img li a p{color:#fff;font-family:'Open sans',sans-serif;font-weight:700}.top-story-wrap.health-trending .panel-danger{border-color:#00a0a3;border:none;background:#00a0a3}.top-story-wrap.health-trending .panel-danger>.panel-heading{background:#4fbb7f;border-color:#4fbb7f}.health-trending .panel.panel-danger .panel-body{max-height:none}.health-trending .list.side-img li{border-bottom:none}.health-trending .featured-item{border-bottom:#abfcc1 solid 1px!important;padding-bottom:15px!important;margin-bottom:25px!important}.health-trending .list.side-img li.featured-item p{font-size:21px;font-family:'Open sans',sans-serif;font-weight:700;color:#fff;line-height:1}.health-trending .hashtag{font-size:12px;font-family:'Open sans',sans-serif;color:#abfcc1;padding:0 0 0 10px;text-transform:capitalize;display:inline-block}.health-trending .featured-item .hashtag{padding:10px 0 0 0;font-size:16px}.health-trending .list.side-img li.featured-item img{width:100%!important}.top-story-wrap.health-trending li.featured-item p{width:100%!important}.come-in{transform:translateY(40px);animation:come-in .6s ease forwards}.commonBtn{padding:10px 30px;border-radius:30px;background:#00a0a3;color:#fff;border:none;font-size:18px;margin:0 auto;display:inherit;border:#00a0a3 solid 2px;-webkit-transition:all .5s ease;-moz-transition:all .5s ease;-ms-transition:all .5s ease;-o-transition:all .5s ease;transition:all .5s ease}.commonBtn:hover{background:#fff;color:#00a0a3;-webkit-transition:all .5s ease;-moz-transition:all .5s ease;-ms-transition:all .5s ease;-o-transition:all .5s ease;transition:all .5s ease}.desCription{font-size:18px;font-family:'Open sans',sans-serif;margin:15px 0}
+/* Board Results */
+    .cust_link:hover{text-decoration:none}.board_default h3{font-size:18px;font-family:'Open sans',sans-serif;color:#707070;margin-top:0}.board_default .title{font-family:'Open sans',sans-serif;font-size:14px;color:#333;margin:0;display: block;width: 78%;}.board-flex-wrap{display:flex;justify-content:space-between;flex-wrap:wrap}.board_default{width:32%;border:1px solid #f2f2f2;padding:20px;margin:10px 0}.board_default:hover{box-shadow:0 3px 6px 0 #d6d6d6;background:#f2f2f2;-webkit-transition:all .5s ease;-moz-transition:all .5s ease;-ms-transition:all .5s ease;-o-transition:all .5s ease;transition:all .5s ease}.board-flex.align-items{display:flex;justify-content:space-between;align-items:center}.board-flex img{width:50px;margin-right:-15px}.view-details{font-size:14px;padding:5px 10px;border-radius:10px;text-decoration:underline;margin:10px auto 0;display:inline-block}.board_default:hover .view-details{-webkit-transition:all .5s ease;-moz-transition:all .5s ease;-ms-transition:all .5s ease;-o-transition:all .5s ease;transition:all .5s ease;opacity:1;color:#fff;font-size:14px;background:#da4432;text-decoration:none}#boardresults{width:100%;height:360px;margin:0 auto;display:block}#iframe2{width:99%;height:441px;margin:0 auto;display:block}@media screen and (max-width:767px){#iframe2{height:500px}}@media screen and (max-width:480px){.board_default{width:90%;margin:10px auto}#boardresults{width:92%;height:615px}}
+    .page-title {margin: 0 0 30px;padding: 2px;text-align: center;text-transform: uppercase;border-bottom: 1px solid #707070;position: relative;}
+    figure {margin: 0;display: block;width: 21%;}
+	.board_default {width: 48%;}
+	.health-title{margin-top: 20px;}
+	#boardresults {width: 100%; height: 590px;}
+/* Board Results */
+</style>
+<div class="container">
+   <% if (typeof ads  !== 'undefined' && typeof ads['ATF_728']  !== 'undefined'){%>
+        <div class="ad-center">
+            <%-common.displayAds(ads['ATF_728'][0]) %>
+        </div>
+    <% } %> 
+   <!--cricket-ticker-wrap-->
+   <%-/* include(viewpath+ '/widgets/cricketscore_strip');*/ %>
+   <!--cricket-ticker-wrap-->
+   <%/*- include(viewpath+ '/widgets/breadCrumbs');*/ %>
+   <!--<h1 class="inner-main-title"><span>Latest News on <%- common.capitalizeEWLetter(tag_name.replace('-',' ')) %></span></h1>-->
+
+   	<div class="main-container">
+      <div class="main-content">
+
+      	<div class="main-story-thumb-wrap">
+			<h1 class="main-story-title">
+				<a href="javascript:void(0);"><%- common.capitalizeEWLetter(board.replace(/-/g, ' ')) %>  Exam Results 2020</a>
+				<span></span>
+			</h1>
+			<div class="board_results_iframe">
+                <%-stateBoardIframeUrl%>
+            </div>
+			<div class="health-title">
+                <h1 class="title">Board Results</h1>
+            </div>
+            <div class="board-flex-wrap">
+                <% for (const [list_key, list_val] of Object.entries(boardData)) { %>
+                <div class="board_default">
+                    <h3><%- list_val['name']['english']%></h3>
+                    <a href="<%=constant.SITE_URL%>board-results/<%- list_val['name']['english'].replace(/\s+/g,'-').toLowerCase() %>-exam-result" class="board-flex align-items cust_link">
+                        <figure><img src="<%- list_val['logo']%>" alt="<%- list_val['name']['english']%>"></figure>
+                        <p class="duration title"><%- list_val['message']['english']%></p>
+                    </a>
+                    <a href="<%=constant.SITE_URL%>board-results/<%- list_val['name']['english'].replace(/\s+/g,'-').toLowerCase() %>-exam-result" class="view-details">View Details</a>
+                </div>
+               <% } %>
+            </div>
+			<!-- <div class="tags-results">Showing of <%- tagData['currentOffset']+1 %>  - <%- tagData['nextOffset'] %> from <%- tagData['solarCount'] %> results</div>
+			<div class="tags-total-result"><%- common.capitalizeEWLetter(tag_name.replace('-',' ')) %> - Total results - <%- tagData['solarCount'] %></div> -->
+		</div><!--main-story-thumb-->
+	 	<section class="news-section">
+            <h2 class="page-title"><span>Latest News</span></h2>
+		 	<% if(tag_name != '') { %>
+		    <% for (const [tagData_key, tagData_val] of Object.entries(tagData['solarResults'])) { %>
+			    <div class="big-thumb">
+			        <a href="<%- tagData_val['url']%>" class="thumb-img">
+			        	<img src="<%-constant.PLACEHOLDER_IMG_640x362 %>" class="fp-lazy" data-src="<%-common.firstpost_imageOptimization(tagData_val['image'], 640, 362, '') %>" alt="<%- tagData_val['title']%>" title="<%- tagData_val['title']%>">
+			        </a>
+			        <div class="title-wrap">
+			           	<a href="<%=constant.SITE_URL%>category/<%- tagData_val['category'].replace(/\s+/g, '-').toLowerCase()%>" class="category-name"><%- tagData_val['category']%></a>
+			           </a>
+			           	<h3 class="main-title">
+			              	<a href="<%- tagData_val['url']%>"><%= tagData_val['title']%></a>
+			           	</h3>
+			           	<p class="copy">
+			             	<%= tagData_val['description']%>
+			           	</p>
+			           	<% var shareArr = []; 
+				            shareArr['shareTitle'] = tagData_val['title'];
+			              	shareArr['shareUrl'] = tagData_val['url']; 
+				       	%>
+				       	<%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+			        </div>
+			    </div>
+		    <% } %>
+		    <% } %>
+		</section>    
+        <%- include(viewpath+ '/widgets/paginationDefault'); %>  
+      </div>
+
+      <!--main-content-->
+      <%- include(viewpath+ '/'+device+'/firstpost/rhs'); %>
+   	</div>
+</div>
+<%- include(viewpath+ '/layouts/footer'); %>

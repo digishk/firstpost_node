@@ -1,0 +1,39 @@
+<% if (constant.whatsAppSubTxt_Enable == '1' && catSlug != 'health'){%>
+    <% if (typeof ampWidget !== 'undefined' && ampWidget == '1'){
+    }else{%>
+	<style type="text/css">
+		.whats-app-desc{clear:both;margin: 15px 0 25px;padding:25px 50px;border-left:#ed2824 solid 5px;background:#f5f5f5;font-style:normal;font-family:'Open Sans','Segoe UI','Avenir Next',sans-serif;color:#666;line-height:1.5}.whats-app-desc a,.whats-app-desc em{font-family:'Open Sans','Segoe UI','Avenir Next',sans-serif}@media (max-width:768px){.whats-app-desc{font-size:16px!important;padding:15px!important;margin-bottom:20px;}}
+		.cust-strike{text-decoration: line-through;}
+	</style>
+    <% } %>
+    <% if (typeof section !== 'undefined' && section == 'tech'){%>
+        <p class="whats-app-desc"><em>Welcome to <a href="https://www.firstpost.com/tech2-innovate" class="external-link" title="Tech2 Innovate" style="color:#ff0000;">Tech2 Innovate,</a> India�s most definitive youth festival celebrating innovation is being held at GMR Grounds, Aerocity Phase 2, on 14th and 15th February 2020. Come and experience an amalgamation of tech, gadgets, automobiles, music, technology, and pop culture along with the who�s who of the online world. Book your tickets now.</em></p>
+    <% } %>
+    
+    <% if (typeof section !== 'undefined' && section == 'firstpost'){%>
+
+        <!-- Desktop Ad-->
+        <% if (typeof ads  !== 'undefined' && typeof ads['Footer_728']  !== 'undefined'){%>
+            <div class="ad-center Footer_728"  data-ad-id="<%-ads['Footer_728'][0]%>" data-ad-size="<%-ads['Footer_728'][1]%>">
+                <%-common.displayAds(ads['Footer_728'][0]) %>
+            </div>
+        <% } %>
+
+        <!-- Mobile Ad-->
+        <% if (typeof ads  !== 'undefined' && typeof ads['Footer_320']  !== 'undefined'){%>
+            <div class="ad-center Footer_320"  data-ad-id="<%-ads['Footer_320'][0]%>" data-ad-size="<%-ads['Footer_320'][1]%>">
+                <%-common.displayAds(ads['Footer_320'][0]) %>
+            </div>
+        <% } %>
+
+    <% } %>
+    
+    <% if (typeof section !== 'undefined' && section == 'firstcricket'){%>
+       <p class="whats-app-desc"><em>Find latest and upcoming tech gadgets online on <a href="https://www.firstpost.com/tech/gadgets" class="external-link" title="Tech2 Gadgets">Tech2 Gadgets.</a> Get technology news, gadgets reviews & ratings. Popular gadgets including laptop, tablet and mobile specifications, features, prices, comparison.</em></p>
+    <% } %>
+    
+    <% if (typeof section !== 'undefined' && section == 'entertainment'){%>
+        <p class="whats-app-desc"><em>Find latest and upcoming tech gadgets online on <a href="https://www.firstpost.com/tech/gadgets" class="external-link" title="Tech2 Gadgets">Tech2 Gadgets.</a> Get technology news, gadgets reviews & ratings. Popular gadgets including laptop, tablet and mobile specifications, features, prices, comparison.</em></p>
+    <% } %>
+<% } %>
+

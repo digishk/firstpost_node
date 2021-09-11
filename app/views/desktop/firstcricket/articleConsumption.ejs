@@ -1,0 +1,161 @@
+<%- include(viewpath+ '/layouts/header'); %>
+<%
+    const {ATF_728} =  (typeof ads !== 'undefined' && ads) ? ads : {};
+    const {post, tag, meta} = (typeof postPageJson !== 'undefined' && postPageJson) ? postPageJson : {};
+    const {post_url, post_title, post_authorname, post_modified} = post || {}
+%>
+
+
+          <div class="main-wrapper">
+
+            <!--728x90 Ad Space-->
+            <% if (ATF_728){%>
+            <div class="ad-slot ATF_728 fixed-ad-banner-fc"  data-ad-id="<%-ATF_728[0]%>" data-ad-size="<%-ATF_728[1]%>">
+            <%-common.displayAds(ATF_728[0]) %>
+            </div>
+            <% } %>              
+            <!--728x90 Ad Space-->
+
+            <!--Score-Widget-->
+             <%- include(viewpath+ '/widgets/scorecard_caraousal'); %>
+             <input type="hidden" name="" id="checkDevice" value="<%=device%>">
+            <!--Score-Widget-->
+        </div>
+        <div class="main-wrapper mainArticlediv" data-url="<%-post_url.replace("https://www.firstpost.com/", constant.SITE_URL)%>" data-title="<%-post_title%>">
+            <!--728x90 Ad Space-->
+            <% if (ATF_728){%>
+            <div class="ad-slot ATF_728 ad-center"  data-ad-id="<%-ATF_728[0]%>" data-ad-size="<%-ATF_728[1]%>">
+            </div>
+            <% } %>              
+            <!--728x90 Ad Space-->
+	    <!--Bread crumb-->
+            <%- include(viewpath+ '/widgets/breadCrumbs'); %>
+            <!--Bread crumb-->
+        
+            <!--Cricket Inner Menu-->
+            <% if(typeof seriesID !== 'undefined' && seriesID != '3978') { %>
+                <%- include(viewpath+ '/layouts/level-4-nav'); %>
+            <% } %>
+            <!--Cricket Inner Menu-->
+                    
+            <!--Main Page Content-->
+            <div class="content-wrap" id="home">
+                <div class="left-content">
+                    <div class="article-wrap-div article-div-wrap">
+                        <%- include(viewpath+ '/widgets/floating_social_share_widget'); %>
+
+
+                        <div class="article-sect">
+                            <% if (liveBlogIncludeFlag == true){ %>
+                                <script type="text/javascript" src="<%=constant.SITE_URL%>static/js/live-blog-fc.js?v=<%-constant.config_flags.VERSION_NO%>"></script>
+                                <% } else{ %>
+                                    <div class="article-top-wrap">
+                                        <h2 class="category-name">
+                                            <a href="/category/cricket" title="Cricket">
+                                                Cricket
+                                            </a>
+                                        </h2>                                
+                                        <div class="art-social-share">
+                                            
+                                        </div>
+                                    </div>
+                                <% } %>
+                                <% if (typeof matchFile != "undefined" && typeof scoreData != "undefined" && (liveBlogIncludeFlag == true || pseudo_value == "1")){ %>
+                                <div class="ajax_widget team_widget_<%=matchFile%>">
+                                    <%- include(viewpath+'/'+device+'/firstcricket/quick-score-ajax-widget'); %>
+                                </div>
+                                <%- include(viewpath+ '/desktop/firstcricket/hidden-param'); %>
+                                <% } if (liveBlogIncludeFlag == true){ %>                         
+                                    <%- include(viewpath+ '/'+device+'/firstcricket/live-blog-widget'); %>
+                                <% } else{ %>
+                                <div class="article-title-wrap">
+                                    <h1 class="article-title">
+                                        <%-post_title%>
+                                    </h1>
+                                </div>
+                                <div class="article-details-wrap">
+                                    <ul class="article-details-list">
+                                        <li>
+                                            <%-post_authorname %>  
+                                        </li>
+                                        <li>
+                                            <%-dateFormat(post_modified, "mmmm dS, yyyy") %>  
+                                        </li>
+                                        <li>
+                                            <%-dateFormat(post_modified, "H:MM:ss") %> IST
+                                        </li>
+                                    </ul>
+                                </div>
+                                <% } %>
+                                <div class="article-desc ">
+                                    <% if (liveBlogIncludeFlag == true){ %>
+                                    <% } else{ %>
+                                    <ul class="bullet-points">
+                                        <% for ( let bullCount=1 ; bullCount <=5 ; bullCount++ ){ %>
+                                            <% if (typeof postPageJson['meta']["heading-"+bullCount] !== 'undefined' && postPageJson['meta']["heading-"+bullCount] != "") { %>
+                                              <li><h2 class="bullets"><%=postPageJson['meta']["heading-"+bullCount]%></h2></li>
+                                            <% } %>
+                                        <% } %>
+                                    </ul>
+                                    <% } %>
+                                    <div class="inner-copy">
+                                    <%  if(typeof videoURLArr != 'undefined' && videoURLArr != ''){ %>
+                                        <%- include(viewpath+ '/widgets/video_player_widget',{videoURLArr}); %>
+                                    <%}%>        
+                                    <%- postContent %>
+                                    </div>
+                                    
+                                </div>
+        
+                                <div class="update-div">
+                                    Updated Date: <%=dateFormat(postPageJson['post']['post_modified'] , "mmmm dd',' yyyy HH:MM:ss")%> IST
+                                </div>
+        
+                                <% if(tag){ %>
+                                <div class="tag-div">
+                                    <h4 class="tag-title">
+                                        Tags:
+                                    </h4>
+                                    <div class="tag-text-div">
+                                        <ul>
+                                            <%Object.entries(tag).forEach(([key, {url,name}])=> {%>
+                                                <%if(key >= 4) return %>
+                                                <li>
+                                                    <a href="<%=url.replace('http://www.firstpost.com/' , constant.SITE_URL)%>">
+                                                        <%= common.capitalizeEWLetter(name) %>
+                                                    </a>
+                                                </li>
+                                            <%})%>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <% } %>
+                <% if (typeof outbrain_ads !== 'undefined' && typeof outbrain_ads['AR_1'] !== 'undefined'){%>
+                    <%-outbrain_ads['AR_1'];%>  
+                <% } %>                                
+				<%- include(viewpath+ '/widgets/whatsapp_text_widget'); %>
+                                <!-- <div class="share-page innerpage-share">
+                                  <p>Share this article</p>
+                                  <%- /*include(viewpath+ '/widgets/social_share_widget');*/ %>
+                                </div> -->
+                        </div>
+                        
+                        <%- include(viewpath+ '/widgets/alsosee_article_widget'); %>
+                    </div>
+
+                </div>
+                <%- include(viewpath+ '/'+device+'/firstpost/rhs'); %>
+            </div>
+            <!--Main Page Content-->
+        </div>
+        <input type="hidden" name="" id="nxtarticle" value="1">   
+    
+        <%  if(infiniteArticlesList != '' && typeof infiniteArticlesList != 'undefined'){
+            if(liveBlog.data == '' || typeof liveBlog.data == 'undefined'){%>
+                <%- include(viewpath+ '/widgets/continuous_scroll'); %>
+            <%  }
+            } %>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->               
+<%- include(viewpath+ '/layouts/footer'); %>               

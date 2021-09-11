@@ -1,0 +1,421 @@
+<%- include(viewpath+ '/desktop/microsites/olympics-header'); %>
+	<div class="wrapper">
+		<div class="breadcrumbs">
+			<ul>
+				<li><a href="<%=constant.SITE_URL%>sports/olympics/">Olympic 2020</a></li>
+				<li><span>Tokyo Olympics 2020 Schedule</span></li>
+			</ul>
+		</div>
+		<div class="cont-wrap">
+			<div class="left-section">
+				<div class="photos-wrap">
+					<h1 class="pgttl">
+						<span>Tokyo Olympics 2020 Schedule</span>
+					</h1>
+					<% var FilterSport = "" %>
+					<div class="schedule-filter">
+						<div class="schedule-flt tog-place">
+						<span class="sw-name">All</span>
+						<label class="switch">
+						<input class="switch-ip" type="checkbox" >
+						<span class="tog-sw round"></span>
+						</label>
+						<span class="sw-name">India</span>
+						</div>
+						<div class="schedule-flt">
+						<select class="sport-flt" >
+						<option class="filt-opt" >Select Sport</option>
+						<option class="filt-opt">All</option>
+						<option class="filt-opt">Aquatics</option>
+						<option class="filt-opt">Archery</option>
+						<option class="filt-opt">Athletics</option>
+						<option class="filt-opt">Badminton</option>					
+						<option class="filt-opt">Baseball</option>
+						<option class="filt-opt">Basketball</option>
+						<option class="filt-opt">Boxing</option>
+						<option class="filt-opt">Canoeing</option>
+						<option class="filt-opt">Equatorian</option>
+						<option class="filt-opt">Fencing</option>
+						<option class="filt-opt">Football</option>
+						<option class="filt-opt">Field hockey</option>
+						<option class="filt-opt">Gymnastics</option>
+						<option class="filt-opt">Hocky</option>
+						<option class="filt-opt">Judo</option>
+						<option class="filt-opt">Karate</option>
+						<option class="filt-opt">Modern Pentathlon</option>
+						<option class="filt-opt">Relay</option>
+						<option class="filt-opt">Rowing</option>
+						<option class="filt-opt">Rugby Sevens</option>
+						<option class="filt-opt">Running</option>
+						<option class="filt-opt">Shooting</option>
+						<option class="filt-opt">Skateboarding</option>
+						<option class="filt-opt">Softball</option>
+						<option class="filt-opt">Sports climbing</option>
+						<option class="filt-opt">Surfing</option>
+						<option class="filt-opt">Table tennis</option>
+						<option class="filt-opt">Taekwondo</option>
+						<option class="filt-opt">Tennis</option>
+						<option class="filt-opt">Triathlon</option>
+						<option class="filt-opt">Vollyball</option>
+						<option class="filt-opt">Wrestling</option>
+						<option class="filt-opt">Weightlifting</option>				
+						</select>
+						</div>
+						</div>
+					<div class="schedule-wrap">
+						<div class="fordesktop">
+							<div class="glide" id="schedule">
+								<div class="glide__track" data-glide-el="track">
+									<ul class="glide__slides">
+										<% console.log("schedule_olympics_india",schedule_olympics_india); %>
+										
+										<% for (const [glide_key, glide_val] of Object.entries(schedule_olympics[0]['content'])) { %>
+											<% let day = glide_val.date.slice(0, 2) %>
+
+											
+
+											<% if (glide_val.date.slice(4, 5)==7){ %>
+												<% var month = "JUL"  %>
+												<%}else{ %>
+													<%var month = "AUG" %>
+													<%} %>
+											
+										<li class="glide__slide">
+											<div class="date-list"><%= month %><span><%= day %></span></div>
+										</li>
+										<% } %>
+									</ul>
+								</div>
+								<div data-glide-el="controls">
+								    <button class="slider__arrow slider__arrow--prev glide__arrow glide__arrow--prev" data-glide-dir="<">
+								      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#fff"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12l4.58-4.59z"/></svg>
+								    </button>
+
+								    <button class="slider__arrow slider__arrow--next glide__arrow glide__arrow--next" data-glide-dir=">">
+								      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#fff"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6-6-6z"/></svg>
+								    </button>
+								</div>
+							</div>
+							<div class="glide" id="scheduledata">
+								<div class="glide__track" data-glide-el="track">
+									<ul class="glide__slides">
+										<% for (const [glide_key, glide_val] of Object.entries(schedule_olympics[0]['content'])) { %>
+											
+											
+											<% var days=glide_key; var no = parseInt(glide_key)+1; var index = "day" + no  %>
+										<li class="glide__slide slide-nav" data-index="<%= index %>">
+											<div class="schedule-data">
+												<div class="ttl">Day <%= no %></div>
+												<table cellpadding="0" cellspacing="0" border="0" width="100%">
+													<tr>
+														<th>Sport</th>
+														<th>Event</th>
+														<th>Start Time</th>
+														<th>Venue</th>
+													</tr>
+
+												 
+
+													<% for (const mainVal of glide_val.events) { %>
+
+														<tr class="sports-filter">
+															<td><%= mainVal.sport %></td>
+															<td><%= mainVal.event_display_name %></td>
+															<td><%=  mainVal.start_time %></td>
+															<td><%= mainVal.venue %></td>
+														</tr>
+													<% } %>										
+												</table>
+											</div>
+										</li>
+										<% } %>
+									</ul>
+									
+								</div>
+							</div>
+						</div>
+
+						<div class="fordesktop" id="india"> 
+							<div class="glide" id="schedule2">
+								<div class="glide__track" data-glide-el="track">
+									<ul class="glide__slides">
+										<% console.log("schedule_olympics_india",schedule_olympics_india); %>
+										
+										<% for (const [glide_key, glide_val] of Object.entries(schedule_olympics_india)) { %>
+											<% let day = glide_val.date.slice(0, 2) %>
+
+											
+
+											<% if (glide_val.date.slice(4, 5)==7){ %>
+												<% var month = "JUL"  %>
+												<%}else{ %>
+													<%var month = "AUG" %>
+													<%} %>
+											
+										<li class="glide__slide">
+											<div class="date-list"><%= month %><span><%= day %></span></div>
+										</li>
+										<% } %>
+									</ul>
+								</div>
+								<div data-glide-el="controls">
+								    <button class="slider__arrow slider__arrow--prev glide__arrow glide__arrow--prev" data-glide-dir="<">
+								      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#fff"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12l4.58-4.59z"/></svg>
+								    </button>
+
+								    <button class="slider__arrow slider__arrow--next glide__arrow glide__arrow--next" data-glide-dir=">">
+								      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#fff"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6-6-6z"/></svg>
+								    </button>
+								</div>
+							</div>
+							<div class="glide" id="scheduledata2">
+								<div class="glide__track" data-glide-el="track">
+									<ul class="glide__slides">
+										<% for (const [glide_key, glide_val] of Object.entries(schedule_olympics_india)) { %>
+											
+											
+											<% var days=glide_key; var no = parseInt(glide_key)+1; var index = "day" + no  %>
+										<li class="glide__slide slide-nav" data-index="<%= index %>">
+											<div class="schedule-data">
+												<div class="ttl">Day <%= no %></div>
+												<table cellpadding="0" cellspacing="0" border="0" width="100%">
+													<tr>
+														<th>Sport</th>
+														<th>Event</th>
+														<th>Start Time</th>
+														<th>Venue</th>
+													</tr>
+
+												 
+
+													<% for (const mainVal of glide_val.events) { %>
+
+														<tr class="sports-filter">
+															<td><%= mainVal.sport %></td>
+															<td><%= mainVal.event_display_name %> </td>
+															<td><%=  mainVal.start_time %></td>
+															<td><%= mainVal.venue %></td>
+														</tr>
+													<% } %>											
+													
+												</table>
+											</div>
+										</li>
+										<% } %>
+									</ul>
+									
+								</div>
+							</div>
+						</div>
+						<div class="formobile">
+								<div>
+						 			<select class="selectFormobile">
+										<% for (const [glide_key, glide_val] of Object.entries(schedule_olympics[0]['content'])) { %>
+											<% var no = parseInt(glide_key)+1; var index = "day" + no  %>
+											
+	        								<option value="<%= index %>"><%= glide_val['date'] %></option>
+	        							<% } %>
+	   								</select>
+								</div>
+								<ul>
+									<% for (const [glide_key, glide_val] of Object.entries(schedule_olympics[0]['content'])) { %>
+										<% var no = parseInt(glide_key)+1; var index = "day" + no  %>
+									<li class="<%= index %> box" data-index="<%= no %>" >
+										<div class="schedule-data">
+											<div class="ttl">Day <%= no %></div>
+											<table cellpadding="0" cellspacing="0" border="0" width="100%">
+												<tr>
+													<th width="20%">Sport</th>
+													<th width="45%">Event</th>
+													<th width="15%">Start Time</th>
+													<th width="20%">Venue</th>
+												</tr>
+												
+												
+													<% for (const mainVal of glide_val.events) { %>
+
+														<tr class="sports-filter-mobile">
+															<td><%= mainVal.sport %></td>
+															<td><%= mainVal.event_display_name %></td>
+															<td><%=  mainVal.start_time %></td>
+															<td><%= mainVal.venue %></td>
+														</tr>
+													<% } %>
+											
+											
+											</table>
+										</div>
+									</li>
+									<% } %>
+								</ul>
+								
+						</div>
+						<div class="formobile">
+							<div>
+								 <select class="selectFormobile">
+									<% for (const [glide_key, glide_val] of Object.entries(schedule_olympics_india)) { %>
+										<% var no = parseInt(glide_key)+1; var index = "day" + no  %>
+										
+										<option value="<%= index %>"><%= glide_val['date'] %></option>
+									<% } %>
+								   </select>
+							</div>
+							<ul>
+								<% for (const [glide_key, glide_val] of Object.entries(schedule_olympics_india)) { %>
+									<% var no = parseInt(glide_key)+1; var index = "day" + no  %>
+								<li class="<%= index %> box" data-index="<%= no %>" >
+									<div class="schedule-data">
+										<div class="ttl">Day <%= no %></div>
+										<table cellpadding="0" cellspacing="0" border="0" width="100%">
+											<tr>
+												<th width="20%">Sport</th>
+												<th width="45%">Event</th>
+												<th width="15%">Start Time</th>
+												<th width="20%">Venue</th>
+											</tr>
+											
+											
+												<% for (const mainVal of glide_val.events) { %>
+
+													<tr class="sports-filter-mobile">
+														<td><%= mainVal.sport %></td>
+														<td><%= mainVal.event_display_name %></td>
+														<td><%=  mainVal.start_time %></td>
+														<td><%= mainVal.venue %></td>
+													</tr>
+												<% } %>
+										
+										
+										</table>
+									</div>
+								</li>
+								<% } %>
+							</ul>
+							
+					</div>
+						
+						<div>
+							<p>Tokyo Olympics 2020 will be held in Japan from 23 July to 8 August, followed by the Tokyo Paralympics from 24 August to 5 September. The Games were initially scheduled for last year but had to be deferred by a year due to the coronavirus pandemic. The Opening Ceremony of the Olympics will be held on 23 July, while the Closing Ceremony will be held on 8 August. This will be the 32nd edition of the modern Olympics, and also the first edition of the Games that have been postponed (previously Olympics have been cancelled due to the World Wars).</p>
+						<p>Want to know when, where and at what time Indian athletes and teams are competing? Here's a comprehensive look at the Tokyo Olympics 2020 schedule in Indian Standard Time (IST).</p>
+
+						</div>
+						
+					</div>
+				</div>
+			</div>
+            <%- include(viewpath+ '/desktop/microsites/olympics-rhs'); %>
+		</div>
+	</div>
+    
+    <script type="text/javascript">
+    	$(document).ready(function(){
+    		$('#back2Top').hide();
+    		$('.anchor-wrap a').on('click', function(){
+    			$('#back2Top').show();
+    		});
+    		$("#back2Top").click(function(event) {
+	          event.preventDefault();
+	          $(this).hide();
+	          $("html, body").animate({scrollTop: 0}, 1000);
+	          return false;
+	        });
+	        $(window).scroll(function(){
+				var scroll = $(window).scrollTop();
+				if (scroll >= 500) {
+					$('#back2Top').show()
+				}
+				else{
+					$('#back2Top').hide()
+				}
+			});
+
+			var indiaSchedule = $(".fordesktop")[1];
+				indiaSchedule.style.display="none";
+
+			var indiaScheduleMobile = $(".formobile")[1];
+				indiaScheduleMobile.style.display="none";
+			
+    	});
+
+
+				$("select.sport-flt").change(function(){
+				var selectedSport = $(this).children("option:selected").val();
+
+				let Mobile= <%= isMobile %>;
+
+				if(Mobile!=1){
+					var row = $(".sports-filter");
+				}
+				else {
+					var row = $(".sports-filter-mobile");
+				}
+
+				
+
+
+				for(i=0; i<row.length ; i++){
+					var td = row[i].getElementsByTagName("td")[0].innerHTML;
+					// console.log("td", td);
+					// console.log("row", row[i]);
+					// console.log("td",td);
+					if (selectedSport == "All"){
+						row[i].style.display = "";
+
+				}else if (selectedSport == td) {
+							
+							row[i].style.display = "";
+						} 
+						else {
+							row[i].style.display = "none";
+						}
+					}
+						
+				})
+
+
+
+				$('input[type="checkbox"]').click(function(){
+					// console.log("isMobile" , <%= isMobile %>);
+					let Mobile = <%= isMobile %>;
+
+					if(Mobile != 1){
+						if($(this).prop("checked") == true){
+								var allSchedule = $(".fordesktop")[0];
+								var indiaSchedule = $(".fordesktop")[1];
+								indiaSchedule.style.display="block";
+								allSchedule.style.display="none";
+								
+							}
+							else if($(this).prop("checked") == false){
+								var allSchedule = $(".fordesktop")[0];
+								var indiaSchedule = $(".fordesktop")[1];
+								allSchedule.style.display="block";
+								indiaSchedule.style.display="none";
+							}
+					}
+					else {
+						if($(this).prop("checked") == true){
+								var allScheduleMobile = $(".formobile")[0];
+								var indiaScheduleMobile = $(".formobile")[1];
+								indiaScheduleMobile.style.display="block";
+								allScheduleMobile.style.display="none";
+								
+							
+								
+							}
+							else if($(this).prop("checked") == false){
+								var allScheduleMobile = $(".formobile")[0];
+								var indiaScheduleMobile = $(".formobile")[1];
+								allScheduleMobile.style.display="block";
+								indiaScheduleMobile.style.display="none";
+								
+							}
+
+					}
+							
+						});
+
+					</script>
+
+<%- include(viewpath+ '/desktop/microsites/olympics-footer'); %>
+

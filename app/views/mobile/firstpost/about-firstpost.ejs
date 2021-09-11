@@ -1,0 +1,59 @@
+<%- include(viewpath+ '/layouts/m-header'); %>
+<% if (typeof ads  !== 'undefined' && typeof ads['ATF_320'] !== 'undefined'){%>
+        <div class="ad-center">
+            <%-common.displayAds(ads['ATF_320'][0]) %>
+        </div>
+<% } %>
+<div class="main-mid">
+        <div class="pgwrapper">
+            <div class="grid-left">
+                <%- include(viewpath+ '/widgets/breadCrumbs'); %>
+                <h1 class="big-ti"><span>ABOUT FIRSTPOST</span></h1>
+                <p>Firstpost.com will serve as a trusted guide to the crush of news and ideas around you. With thoughtful analysis and fearless views our team of editors and writers will track news in India and the world and provide a perspective that is reflective of a changing dynamic.
+                </p>
+
+                <div class="red-ti"><%/* Leadership Team */%></div>
+                <p><span class="strong"> Executive Editor: </span>Jaideep V Giridhar
+                    <%/* <br><span class="strong"> Deputy Executive Editor:</span> Sanjay Singh */%>
+                </p>
+
+                <div class="red-ti">Postal Address:</div>
+                <p> Network18 Media & Investment Ltd
+                    <br>Shree Ram Mill Compound,
+                    <br> Vrindavan Building,
+                    <br> Ganpatrao Kadam Marg,
+                    <br> Worli, Mumbai-400013 </p>
+                <div class="red-ti">Send your press release to</div>
+                <a rel="nofollow" target="_blank" class="boldlink" href="mailto:pressrelease@firstpost.com">pressrelease@firstpost.com</a>
+
+                <div class="red-ti">Do give us feedback at</div>
+                <a rel="nofollow" target="_blank" class="boldlink" href="mailto:feedback@firstpost.com">feedback@firstpost.com</a>
+
+                <div class="red-ti">To work for us write to</div>
+                <a rel="nofollow" target="_blank" class="boldlink" href="mailto:jobs@firstpost.com">jobs@firstpost.com</a>
+
+                <div class="red-ti">For advertising please contact </div>
+                <a rel="nofollow" target="_blank" class="boldlink" href="javascript:void(0);"> ads@firstpost.com</a>
+
+                <div class="red-ti"></div>
+                <a rel="nofollow" target="_blank" class="boldlink" href="<%-constant.SITE_URL%>static/FRAUD-ALERT-NW18.pdf"> Recruitment Fraud Alert</a>
+
+            </div>
+            <div class="grid-right">
+                <% if (typeof ads  !== 'undefined' && typeof ads['ATF_300']  !== 'undefined'){%>
+                    <div class="ad-center"  data-ad-id="<%-ads['ATF_300'][0]%>" data-ad-size="<%-ads['ATF_300'][1]%>">
+                    <%-common.displayAds(ads['ATF_300'][0]) %>
+                    </div>
+                <% } %>
+                <% if (typeof ads  !== 'undefined' && typeof ads['BTF_300']  !== 'undefined'){%>
+                    <div class="ad-center"  data-ad-id="<%-ads['BTF_300'][0]%>" data-ad-size="<%-ads['BTF_300'][1]%>">
+                    <%-common.displayAds(ads['BTF_300'][0]) %>
+                    </div>
+                <% } %>
+
+            </div>
+
+        </div>
+    </div>
+
+<%- include(viewpath+ '/layouts/m-footer'); %>

@@ -1,0 +1,54 @@
+<div class="photos-wrap">
+    <h3 class="main-story-title">
+        <a href="/category/photos" title="Photos">Photos</a>
+        <span></span>
+    </h3>
+
+    <div class="big-thumb">
+       <a href="<%=homePageJson['HPPhotos'][0]['photoURL'].replace(constant.MAIN_SITE_URL, constant.SITE_URL); %>" class="thumb-img" title="<%=homePageJson['HPPhotos'][0]['PostTitle'] %>">
+            <img class="fp-lazy" src="<%-constant.PLACEHOLDER_IMG_320x180 %>" data-src="<%-common.firstpost_imageOptimization(homePageJson['HPPhotos'][0]['PostImage'], 320, 180, '') %>" alt="<%=homePageJson['HPPhotos'][0]['PostTitle'] %>">
+            <div class="photo-icon">
+                <img src="static/images/photo-icon-small.png" alt="Photo Icon">
+            </div>
+       </a>
+       <div class="title-wrap">
+            <h3 class="main-title">
+                <a href="<%=homePageJson['HPPhotos'][0]['photoURL'].replace(constant.MAIN_SITE_URL, constant.SITE_URL) %>" title="<%=homePageJson['HPPhotos'][0]['PostTitle'] %>">
+                    <%=homePageJson['HPPhotos'][0]['PostTitle'] %>
+                </a>
+            </h3>
+            <% var shareArr = []; 
+             shareArr['shareTitle'] = homePageJson['HPPhotos'][0]['PostTitle'];
+             shareArr['shareUrl'] = homePageJson['HPPhotos'][0]['photoURL']; %>
+            <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+       </div>
+    </div>
+</div><!--photos-wrap-->
+
+
+<div class="photos small-thumb-wrap">
+    <div class="small-thumb-row inner-fp-lazy">
+        <% for (const [homePageJson_key, homePageJson_val] of Object.entries(homePageJson['HPPhotos'].slice(1,homePageJson['HPPhotos'].length))) { %>
+        <div class="small-thumb">
+            <a href="<%=homePageJson_val['photoURL'].replace(constant.MAIN_SITE_URL, constant.SITE_URL); %>" class="thumbnail" title="<%=homePageJson_val['PostTitle'] %>">
+                <img class="fp-lazy" src="<%-constant.PLACEHOLDER_IMG_192x104 %>" data-src="<%-common.firstpost_imageOptimization(homePageJson_val['PostImage'], 192, 104, '') %>" src="<%=homePageJson_val['PostImage'] %>" alt="<%=homePageJson_val['PostTitle'] %>">
+                <div class="s-photo-icon">
+                    <img src="/static/images/photo-icon-small.png" alt="Photo Icon">
+                </div>
+            </a>
+            <a href="<%=homePageJson_val['photoURL'].replace(constant.MAIN_SITE_URL, constant.SITE_URL) %>" title="<%=homePageJson_val['PostTitle'] %>" class="copy">
+                <%=homePageJson_val['PostTitle'] %>
+            </a>
+            <div class="trending-bottom">
+                <a href="<%-homePageJson_val['category_url'].toLowerCase().replace(constant.MAIN_SITE_URL, constant.SITE_URL) %>" class="category-name" title="<%=homePageJson_val['cat_slug'] %>">
+                    #<%=homePageJson_val['cat_slug'] %>
+                </a>
+                <% var shareArr = []; 
+                shareArr['shareTitle'] = homePageJson_val['PostTitle'];
+                shareArr['shareUrl'] = homePageJson_val['photoURL']; %>
+                <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+            </div>
+        </div>
+        <% } %>
+    </div>
+</div>

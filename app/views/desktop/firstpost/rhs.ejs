@@ -1,0 +1,131 @@
+<aside class="sidebar">
+    <% if ((typeof ads  !== 'undefined' && typeof ads['ATF_300'] !== 'undefined')){%>
+        <div class="ad-center ATF_300 fixed-ad-banner-rhs" data-ad-id="<%-ads['ATF_300'][0]%>" data-ad-size="<%-ads['ATF_300'][1]%>">
+            <%-common.displayAds(ads['ATF_300'][0]) %>
+        </div>
+    <% } %>  
+
+    <%- include(viewpath+ '/widgets/mailChimp'); %>
+
+    <% excludeWidgetInPage =['static'];    
+    if(typeof pageName !== 'undefined' && !excludeWidgetInPage.includes(pageName)) { %>   
+    <!--Most Read Widget-->    
+    <%- include(viewpath+ '/widgets/most_read_widget'); %>
+    <!--Most Read Widget-->
+    <% } %>
+
+    <!-- Apester code -->
+    <!--div class="apester-media" data-token="57026ab0d51383a359ae688c" data-context="true" data-tags="" data-fallback="true" height="350"></div><script async src="https://static.apester.com/js/sdk/latest/apester-sdk.js"></script-->
+    <!-- Apester code end-->
+
+    <% if (typeof catSlug !== 'undefined' && catSlug == 'health' && (typeof postPageJson === 'undefined' || postPageJson.post.post_authorslug == "myupchar") && (typeof liveBlogIncludeFlag === 'undefined' || liveBlogIncludeFlag != true)){%>
+        <%- include(viewpath+ '/widgets/myUpchar'); %>
+        <br/>
+    <% } %>
+    <% if ((typeof ads  !== 'undefined' && typeof ads['MTF_300']  !== 'undefined')){%>
+        <div class="ad-center MTF_300" data-ad-id="<%-ads['MTF_300'][0]%>" data-ad-size="<%-ads['MTF_300'][1]%>">
+            <%-common.displayAds(ads['MTF_300'][0]) %>
+        </div>
+    <% } %>
+    <%
+    includeWidgetInPage =['boardResult','stateResult'];
+    if(typeof pageName !== 'undefined' && includeWidgetInPage.includes(pageName)) { %>
+    <!--Board Result Widget-->
+        <iframe id="iframe2" frameborder="0" src= "https://www.news18.com/board-results-pubstack/career_rhs.html"></iframe>
+    <!--Board Result Widget-->
+    <% } %>
+    <% 
+    includeOutbrainWidgetInPage =['category' , 'tag' , 'showsCategory', 'shows' , 'entertainmentSubCat','firstcricket-video','firstcricket-photos'];
+    if(typeof pageName !== 'undefined' && includeOutbrainWidgetInPage.includes(pageName)) { %>
+        <% if (typeof outbrain_ads  !== 'undefined' && typeof outbrain_ads['SB_4']  !== 'undefined'){%>
+            <%-outbrain_ads['SB_4'];%>	
+        <% } %>
+    <% } %>
+    <% 
+    includeWidgetInPage =['home'];
+    if(typeof pageName !== 'undefined' && includeWidgetInPage.includes(pageName) && typeof ads  !== 'undefined' && typeof ads['ATF_SLUG_300']  !== 'undefined') { %>
+    <div class="ad-center ATF_SLUG_300" data-ad-id="<%-ads['ATF_SLUG_300'][0]%>" data-ad-size="<%-ads['ATF_SLUG_300'][1]%>">
+    <%-common.displayAds(ads['ATF_SLUG_300'][0]) %>
+    </div>
+    <% if (typeof outbrain_ads  !== 'undefined' && typeof outbrain_ads['SB_4']  !== 'undefined'){%>
+        <%-outbrain_ads['SB_4'];%>	
+    <% } %>
+    <!--Podcast Widget-->
+    <%- include(viewpath+ '/'+device+'/firstpost/home-podcast-widget'); %>
+    <!--Podcast Widget-->
+    <% } %>
+    <%
+    includeWidgetInPage =['article'];
+    if(typeof pageName !== 'undefined' && includeWidgetInPage.includes(pageName)) { %>
+        <% if(typeof amazonWidget !== 'undefined' && amazonWidget == 'yes') { %>
+            <div id='div-gpt-ad-1605175602964-0' style='width: 300px; height: 250px;'>
+              <script>
+                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1605175602964-0'); });
+              </script>
+            </div>
+        <% } %>
+    <% } %>
+    <%
+    includeWidgetInPage =['article','photoArticle','videoArticle','firstcricket-article','liveBlog'];
+    if(typeof pageName !== 'undefined' && includeWidgetInPage.includes(pageName)) { %>
+    <!--Podcast Widget-->
+    <%- include(viewpath+ '/widgets/related_article_widget'); %>
+    <!--Podcast Widget-->
+    <% } %>
+
+    <% includeWidgetInPage = ['firstcricket-article','firstcricket-photoarticle'];
+    if(typeof pageName !== 'undefined' && includeWidgetInPage.includes(pageName)) { %>
+    <% if (typeof outbrain_ads  !== 'undefined' && typeof outbrain_ads['SB_4']  !== 'undefined'){%>
+        <%-outbrain_ads['SB_4'];%>  
+    <% } }%>
+
+    <% if(typeof showRhsOrangeCap !== 'undefined' && showRhsOrangeCap == 'yes' && menuHighlight != 'orange') {%>
+        <!--cricket Orange Cap Widget-->
+        <%- include(viewpath+ '/widgets/ipl_orange_cap_widget'); %>
+        <!--cricket Orange Cap Widget-->
+    <% } %>
+
+    <% if(typeof showRhsScore !== 'undefined' && showRhsScore == 'yes') {%>
+    <!--cricket score Widget-->
+    <%- include(viewpath+ '/widgets/cric-score-rhs-widget'); %>
+    <!--cricket Score Widget-->    
+    <% } 
+    includeWidgetInPage = ['firstcricket-home','sports-news','quickscore','fullscore','ballbyballScore'];
+    if(typeof pageName !== 'undefined' && includeWidgetInPage.includes(pageName)) { %>
+    <% if (typeof outbrain_ads  !== 'undefined' && typeof outbrain_ads['SB_4']  !== 'undefined'){%>
+        <%-outbrain_ads['SB_4'];%>  
+    <% } } %>
+    <% if(typeof showRhsScore !== 'undefined' && showRhsResults == 'yes') {%>
+    <!--cricket upcoming matches Widget-->
+    <%- include(viewpath+ '/widgets/cric-upcoming-rhs-widget'); %>
+    <!--cricket Widget-->
+    <% } %>
+
+    <% if(typeof showRhsPurpleCap !== 'undefined' && showRhsPurpleCap == 'yes' && menuHighlight != 'purple') {%>
+        <!--cricket Purple Cap Widget-->
+        <%- include(viewpath+ '/widgets/ipl_purple_cap_widget'); %>
+        <!--cricket Purple Cap Widget-->
+    <% } %>
+    
+    <%- include(viewpath+ '/widgets/rhs_video_player_widget'); %>
+
+    <!--sticky ad slot-->
+    
+        
+    
+    <% 
+    includeOutbrainWidgetInPage =['article' , 'photoArticle', 'videoArticle'  , 'showsArticle','schedule','series','results','firstcricket-ranking' , 'liveBlog'];
+    if(typeof pageName !== 'undefined' && includeOutbrainWidgetInPage.includes(pageName)) { %>
+        <% if (typeof outbrain_ads  !== 'undefined' && typeof outbrain_ads['SB_1']  !== 'undefined'){%>
+            <%-outbrain_ads['SB_1'];%>  
+        <% } %>
+    <% } %>
+    <% if (typeof ads  !== 'undefined' && typeof ads['BTF_300']  !== 'undefined'){%>
+    <div class="sticky-ad ad-slot">
+        <div class="ad-center sticky-ad ad-slot BTF_300"  data-ad-id="<%-ads['BTF_300'][0]%>" data-ad-size="<%-ads['BTF_300'][1]%>">
+            <%-common.displayAds(ads['BTF_300'][0]) %>
+        </div>
+    </div>
+    <% } %>    
+    <!--sticky ad slot-->
+</aside>

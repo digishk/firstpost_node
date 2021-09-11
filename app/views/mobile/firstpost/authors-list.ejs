@@ -1,0 +1,145 @@
+<%- include(viewpath+ '/layouts/m-header'); %>
+<% if (typeof ads  !== 'undefined' && typeof ads['ATF_320'] !== 'undefined'){%>
+        <div class="ad-center">
+            <%-common.displayAds(ads['ATF_320'][0]) %>
+        </div>
+  <% } %>
+<%- include(viewpath+ '/widgets/breadCrumbs'); %>
+<div class="main-mid">
+<ul class="pgwrapper pagination">
+            <!-- <li class="active letter_all char_sel">
+              <a href="javascript:void(0);" onClick="getName('all');">All</a>
+            </li> -->
+            <li class="active letter_a char_sel">
+              <a href="javascript:void(0);" onClick="getName('a');">a</a>
+            </li>
+            <li class="letter_b char_sel">
+              <a href="javascript:void(0);" onClick="getName('b');">b</a>
+            </li>
+            <li class="letter_c char_sel">
+              <a href="javascript:void(0);" onClick="getName('c');">c</a>
+            </li>
+            <li class="letter_d char_sel">
+              <a href="javascript:void(0);" onClick="getName('d');">d</a>
+            </li>
+            <li class="letter_e char_sel">
+              <a href="javascript:void(0);" onClick="getName('e');">e</a>
+            </li>
+            <li class="letter_f char_sel">
+              <a href="javascript:void(0);" onClick="getName('f');">f</a>
+            </li>
+             <li class="letter_g char_sel">
+              <a href="javascript:void(0);" onClick="getName('g');">g</a>
+            </li>
+            <li class="letter_h char_sel">
+              <a href="javascript:void(0);" onClick="getName('h');">h</a>
+            </li>
+            <li class="letter_i char_sel">
+              <a href="javascript:void(0);" onClick="getName('i');">i</a>
+            </li>
+            <li class="letter_j char_sel">
+              <a href="javascript:void(0);" onClick="getName('j');">j</a>
+            </li>
+            <li class="letter_k char_sel">
+              <a href="javascript:void(0);" onClick="getName('k');">k</a>
+            </li>
+            <li class="letter_l char_sel">
+              <a href="javascript:void(0);" onClick="getName('l');">l</a>
+            </li>
+             <li class="letter_m char_sel">
+              <a href="javascript:void(0);" onClick="getName('m');">m</a>
+            </li>
+            <li class="letter_n char_sel">
+              <a href="javascript:void(0);" onClick="getName('n');">n</a>
+            </li>
+            <li class="letter_o char_sel">
+              <a href="javascript:void(0);" onClick="getName('o');">o</a>
+            </li>
+            <li class="letter_p char_sel">
+              <a href="javascript:void(0);" onClick="getName('p');">p</a>
+            </li>
+            <li class="letter_q char_sel">
+              <a href="javascript:void(0);" onClick="getName('q');">q</a>
+            </li>
+             <li class="letter_r char_sel">
+              <a href="javascript:void(0);" onClick="getName('r');">r</a>
+            </li>
+            <li class="letter_s char_sel">
+              <a href="javascript:void(0);" onClick="getName('s');">s</a>
+            </li>
+            <li class="letter_t char_sel">
+              <a href="javascript:void(0);" onClick="getName('t');">t</a>
+            </li>
+            <li class="letter_u char_sel">
+              <a href="javascript:void(0);" onClick="getName('u');">u</a>
+            </li>
+            <li class="letter_v char_sel">
+              <a href="javascript:void(0);" onClick="getName('v');">v</a>
+            </li>
+            <li class="letter_w char_sel">
+              <a href="javascript:void(0);" onClick="getName('w');">w</a>
+            </li>
+             <li class="letter_x char_sel">
+              <a href="javascript:void(0);" onClick="getName('x');">x</a>
+            </li>
+            <li class="letter_y char_sel">
+              <a href="javascript:void(0);" onClick="getName('y');">y</a>
+            </li>
+            <li class="letter_z char_sel">
+              <a href="javascript:void(0);" onClick="getName('z');">z</a>
+            </li>
+            
+          </ul>
+
+        <div class="pgwrapper two-grid">
+            <div class="grid-left">
+               <ul class="authors-container">
+               	<% for (const [authors_key, authors_val] of Object.entries(authors_list)) {
+               		var res = authors_key.charAt(0);
+
+               	 %>
+                    <li class="grid-wrap name_<%-res%> all_char">
+                        <a href="<%-constant.SITE_URL%>author/<%-authors_val['authorslug']%>" class="authors-wrap">
+                           <%-authors_val['displayname']%>
+                        </a>
+                    </li>
+                <% } %>      
+                   
+                </ul>
+
+            </div>
+            <div class="grid-right">
+             <% if (typeof ads  !== 'undefined' && typeof ads['ATF_300']  !== 'undefined'){%>
+                <div class="ad-center"  data-ad-id="<%-ads['ATF_300'][0]%>" data-ad-size="<%-ads['ATF_300'][1]%>">
+              <%-common.displayAds(ads['ATF_300'][0]) %>
+              </div>
+              <% } %>
+            <% if (typeof ads  !== 'undefined' && typeof ads['BTF_300']  !== 'undefined'){%>
+              <div class="ad-center"  data-ad-id="<%-ads['BTF_300'][0]%>" data-ad-size="<%-ads['BTF_300'][1]%>">
+            <%-common.displayAds(ads['BTF_300'][0]) %>
+              </div>
+            <% } %>
+
+            </div>
+
+        </div>
+    </div>
+
+<%- include(viewpath+ '/layouts/m-footer'); %>
+
+<script type="text/javascript">
+	function getName(charID){
+		$(".all_char").hide();
+		$(".name_"+charID).show();
+		$(".char_sel").removeClass('active');
+		$(".letter_"+charID).addClass('active');
+		if(charID =='all'){
+		$(".all_char").show();	
+		}
+	}
+
+	$(document).ready(function(){
+		$(".all_char").hide();
+		$(".name_a").show();
+	});
+</script>

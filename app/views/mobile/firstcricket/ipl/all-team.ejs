@@ -1,0 +1,119 @@
+<%- include(viewpath+ '/layouts/m-header'); %>
+        <div class="main-wrapper">
+            <!--Ad Slot-->
+            <% if (typeof ads  !== 'undefined' && typeof ads['ATF_320']  !== 'undefined'){%>
+                <div class="ad-center m-fixed-ad-banner">
+                    <%-common.displayAds(ads['ATF_320'][0]) %>
+                </div>
+            <% } %>
+            <!--Ad Slot-->
+            
+            <!--Score-Widget-->
+            <%- include(viewpath+ '/widgets/scorecard_caraousal'); %>
+            <!--Score-Widget-->
+
+            <!--Bread crumb-->
+            <%- include(viewpath+ '/widgets/breadCrumbs'); %>
+            <!--Bread crumb-->
+
+            <div class="main-content" id="">
+                <!--Top Slider Section-->
+                <section class="ranking-section">
+                    <h1 class="page-title"><span><%= seriesName %></span></h1>
+                        <%- include(viewpath+ '/widgets/cric-series-menu'); %>                        
+                        <div class="big-title-heading">
+                            <h2 class="big-heading-text">
+                                 <%= seriesName %> 
+                            </h2>
+                        </div>
+                        <div class="team-grid">
+                            <a href="<%= constant.SITE_URL %>firstcricket/teams/chennai-super-kings-team-players/series/ipl-<%=iplYear%>.html" title="">
+                                <div class="team-block chennai">
+                                    <div class="team-img-cell">
+                                        <img src="https://images.firstpost.com/wp-content/uploads/assets/images/cricket/ipl-2020/CSK.png" alt="Chennai Super Kings, Captain MS Dhoni" title="Chennai Super Kings, Captain MS Dhoni"/>
+                                        <h4 class="team-name">Chennai</h4>
+                                    </div>
+                                    <div class="team-color"></div>
+                                </div>
+                            </a>          
+                            <a href="<%= constant.SITE_URL %>firstcricket/teams/delhi-capitals-team-players/series/ipl-<%=iplYear%>.html" title="">
+                                <div class="team-block chennai">
+                                    <div class="team-img-cell">
+                                        <img src="https://images.firstpost.com/wp-content/uploads/assets/images/cricket/ipl-2020/DC.png" alt="Delhi Daredevils, Captain Shreyas Iyer" title="Delhi Daredevils, Captain Shreyas Iyer"/>
+                                        <h4 class="team-name">Delhi</h4>
+                                    </div>
+                                    <div class="team-color"></div>
+                                </div>
+                            </a>          
+                            <a href="<%= constant.SITE_URL %>firstcricket/teams/punjab-kings-team-players/series/ipl-<%=iplYear%>.html" title="">
+                                <div class="team-block delhi">
+                                    <div class="team-img-cell">
+                                        <img src="https://images.firstpost.com/wp-content/uploads/assets/images/cricket/ipl-2020/KXIP.png" alt="Kings XI Punjab, Captain KL Rahul" title="Kings XI Punjab, Captain KL Rahul" />
+                                        <h4 class="team-name">Punjab</h4>
+                                    </div>
+                                    <div class="team-color"></div>
+                                </div>
+                            </a>
+                            <a href="<%= constant.SITE_URL %>firstcricket/teams/kolkata-knight-riders-team-players/series/ipl-<%=iplYear%>.html" title="">
+                                <div class="team-block punjab">
+                                    <div class="team-img-cell">
+                                        <img src="https://images.firstpost.com/wp-content/uploads/assets/images/cricket/ipl-2020/KKR.png" alt="Kolkata Knight Riders, Captain Dinesh Karthik" title="Kolkata Knight Riders, Captain Dinesh Karthik" />
+                                        <h4 class="team-name">Kolkata</h4>
+                                    </div>
+                                    <div class="team-color"></div>
+                                </div>
+                            </a>
+                            <a href="<%= constant.SITE_URL %>firstcricket/teams/mumbai-indians-team-players/series/ipl-<%=iplYear%>.html" title="">
+                                <div class="team-block kolkata">
+                                    <div class="team-img-cell">
+                                        <img src="https://images.firstpost.com/wp-content/uploads/assets/images/cricket/ipl-2020/MI.png" alt="Mumbai Indians, Captain Rohit Sharma "  title="Mumbai Indians, Captain Rohit Sharma " />
+                                        <h4 class="team-name">Mumbai</h4>
+                                    </div>
+                                    <div class="team-color"></div>
+                                </div>
+                            </a>
+                            <a href="<%= constant.SITE_URL %>firstcricket/teams/rajasthan-royals-team-players/series/ipl-<%=iplYear%>.html" title="">
+                                <div class="team-block mumbai">
+                                    <div class="team-img-cell">
+                                        <img src="https://images.firstpost.com/wp-content/uploads/assets/images/cricket/ipl-2020/RR.png" alt="Rajasthan Royals, Captain Steve Smith" title="Rajasthan Royals, Captain Steve Smith" />
+                                        <h4 class="team-name">Rajasthan</h4>
+                                    </div>
+                                    <div class="team-color"></div>
+                                </div>
+                            </a>
+                            <a href="<%= constant.SITE_URL %>firstcricket/teams/royal-challengers-bangalore-team-players/series/ipl-<%=iplYear%>.html" title="">
+                                <div class="team-block rajasthan">
+                                    <div class="team-img-cell">
+                                        <img src="https://images.firstpost.com/wp-content/uploads/assets/images/cricket/ipl-2020/RCB.png" alt="Royal Challengers Bangalore, Captain Virat Kohli" title="Royal Challengers Bangalore, Captain Virat Kohli " />
+                                        <h4 class="team-name">Bangalore</h4>
+                                    </div>
+                                    <div class="team-color"></div>
+                                </div>
+                            </a>
+                            <a href="<%= constant.SITE_URL %>firstcricket/teams/sunrisers-hyderabad-team-players/series/ipl-<%=iplYear%>.html" title="">
+                                <div class="team-block bangalore">
+                                    <div class="team-img-cell">
+                                        <img src="https://images.firstpost.com/wp-content/uploads/assets/images/cricket/ipl-2020/SH.png" alt="Sunrisers Hyderabad, Captain David Warner" title="Sunrisers Hyderabad, Captain David Warner" />
+                                        <h4 class="team-name">Hyderabad</h4>
+                                    </div>
+                                    <div class="team-color"></div>
+                                </div>
+                            </a>                  
+                        </div>
+                        <h2 class="page-title"><span><%= seriesName %> more stories</span></h2>
+
+                        <%- include(viewpath+ '/desktop/firstcricket/ipl/ipl-news-widget'); %>
+
+                    </section>
+                        <!--Misc Story Section-->
+                    <!--Ranking Section-->                      
+                </div>
+                <% if ((typeof ads  !== 'undefined' && typeof ads['BTF_300'] !== 'undefined')){%>
+                <div class="ad-center BTF_300" data-ad-id="<%-ads['BTF_300'][0]%>" data-ad-size="<%-ads['BTF_300'][1]%>">
+                <%-common.displayAds(ads['BTF_300'][0]) %>
+                </div>
+                <% } %>                
+            </div>
+            <!--Main Page Content-->
+        </div>
+<%- include(viewpath+ '/layouts/m-footer'); %>

@@ -1,0 +1,387 @@
+<% if(typeof schema_meta['metaTitle'] !== 'undefined'){
+	var metaTitle = '';
+	schema_meta['metaTitle'] = schema_meta['metaTitle'].replace(/'/g , '');
+	schema_meta['metaTitle'] = schema_meta['metaTitle'].replace(/"/g , '');
+	
+	schema_meta['metaName'] = schema_meta['metaTitle'];
+	
+	if(schema_meta['metaTitle'].length > 108){
+		metaTitle = common.htmlEntities(schema_meta['metaTitle'].substring(0,52))+'..';
+		metaTitle += common.htmlEntities(schema_meta['metaTitle'].slice(-54));
+	}else{
+		metaTitle = common.htmlEntities(schema_meta['metaTitle']);
+	}
+	schema_meta['metaTitle'] = metaTitle;
+} %>
+    
+<% if(typeof schema_meta['metaDesc'] !== 'undefined'){ 
+	schema_meta['metaDesc'] = schema_meta['metaDesc'].replace(/"/g , '');
+	schema_meta['metaDesc'] = schema_meta['metaDesc'].replace(/'/g , '');
+} %>
+
+<% if(typeof schema_meta['post_content'] !== 'undefined'){ 
+	schema_meta['post_content'] = schema_meta['post_content'].replace(/"/g , '');
+	schema_meta['post_content'] = schema_meta['post_content'].replace(/'/g , '');
+} %>
+<% for (const [schema_key, schema_val] of Object.entries(schema_type_arr)) { %>
+<%= /*JSON.stringify(schema_meta)*/ %>
+
+<% switch(schema_val) {
+	case 'organisation' : %>
+	<script type="application/ld+json">
+		{
+			"@context": "http://schema.org",
+			"@type": "Organization",
+			"name": "Firstpost",
+			"url": "https://www.firstpost.com/",
+			"logo": "https://images.firstpost.com/wp-content/uploads/2016/03/FP-Logo.png",
+			"sameAs": 
+				[
+					"https://www.facebook.com/firstpostin","https://twitter.com/firstpost",
+					"https://plus.google.com/+Firstpost"
+				]
+		}
+	</script>
+	<% break;
+	case 'website' : %>
+	<script type="application/ld+json">
+	{
+		"@context": "http://schema.org",
+		"@type": "WebSite",
+		"url": "https://www.firstpost.com/",
+		"potentialAction": 
+			{ 
+				"@type": "SearchAction",
+				"target": "https://www.firstpost.com/search/{search_term_string}",
+				"query-input": "required name=search_term_string"
+			}
+	} 
+	</script>
+	<% break;
+	case 'webpage' : 
+	if(schema_meta.includes(schema_meta['tag'])){
+        //console.log("insdeeee tag if");
+        if(Array.isArray(schema_meta['tag'])){
+            var tags = '';
+            for (const [tag_k, tag_v] of Object.entries(schema_meta['tag'])) {
+                tags +=  tag_v['name'].replace("&amp;", "&")+',';
+            }    
+                tags = tags.trim(',');
+        }    
+    } %>
+	<script type="application/ld+json">
+	[
+		{
+			"@context": "http://schema.org",
+			"@type": "WebPage",
+			"name": "<%-schema_meta.metaName %>",
+			"description": "<%-schema_meta.metaDesc %>",
+			"keywords":"<%-schema_meta.tags %>",
+			"url" : "<%-schema_meta.contentUrl%>",
+			"publisher":
+			{
+				"@context": "http://schema.org",
+				"@type": "Organization",
+				"name": "Firstpost",
+				"logo": 
+					{ 
+						"@context": "http://schema.org",
+						"@type": "ImageObject",
+						"width": "100px",
+						"height": "100px",
+						"url": "<%-constant['WP_IMG_UPLOAD_URL'] %>2016/03/FP-Logo-resize.png"
+					},
+				"url":"<%- constant['SITE_URL'] %>"
+			}
+		}
+	]
+	</script>
+	<% break;
+	case 'newsarticle' : 
+		var width = "100px";
+		var height = "100px";
+		if(typeof schema_meta.isAmp !== 'undefined' && schema_meta.isAmp == 1)
+		{
+			schema_meta.post_image = common.firstpost_imageOptimization(schema_meta.post_image , 1200 , 800 , '')
+			width = 1200;
+			height = 800; 
+		}
+	%>
+	<script type="application/ld+json">
+	    [{
+		"@context": "http://schema.org",
+		"mainEntityOfPage" : "<%-schema_meta.contentUrl%>",
+		"@type": "NewsArticle",
+		"url" : "<%-schema_meta.contentUrl%>",
+		"articleBody" : "<%-schema_meta.post_content%>",
+		"articleSection" : "<%-schema_meta.catSlug%>",
+		"headline" : "<%-schema_meta.metaTitle%>",
+		"description" : "<%-schema_meta.metaDesc%>",
+		"author" : "<%-schema_meta.metaAuthor%>",
+		"datePublished": "<%-schema_meta.post_published%>",
+		"dateModified": "<%-schema_meta.post_modified%>",
+		"keywords":"<%-schema_meta.tags %>",
+		"image":{
+		    "@context": "http://schema.org",
+		    "@type": "ImageObject",
+		    "width": "<%-width %>",
+		    "height": "<%-height %>",
+		    "url":"<%-schema_meta.post_image%>"
+		  },
+		"publisher":{
+		    "@context": "http://schema.org",
+		    "@type": "Organization",
+		    "name": "Firstpost",
+		    "logo": {
+			    "@context": "http://schema.org",
+			    "@type": "ImageObject",
+			    "width": 177,
+			    "height": 22,
+			    "url": "<%-constant['WP_IMG_UPLOAD_URL'] %>2016/03/FP-Logo.png"
+			},
+		    "url":"<%- constant['SITE_URL'] %>"
+		}
+	    }]
+	</script>
+<% break;
+case 'photos' : %>
+	<script type="application/ld+json">
+		{
+		    "@context": "http://schema.org",
+		    "@type": "ImageObject",
+		    "name": "<%-schema_meta.metaTitle %>",
+		    "author": "<%-schema_meta.metaAuthor %>",
+		    "contentUrl": "<%-schema_meta.contentUrl %>",
+		    "datePublished":"<%-schema_meta.datePublished %>"
+		}
+	</script>
+<% break;
+	case 'HowTo' : %>
+	<script type="application/ld+json">
+		{
+		    "@context": "http://schema.org",
+		    "@type": "HowTo",
+		    "name": "<%-schema_meta.metaTitle %>",
+		    "description": "<%-schema_meta.metaDesc%>",
+		    "keywords":"<%-schema_meta.tags.replace("&amp;", "&")%>",
+		    "url" : "<%-schema_meta.contentUrl %>",
+		    "step" : [{<%-schema_meta.allTagsOfHowTo %>}]
+		}
+	</script>
+<% 	break;
+	case 'FAQPage' :  %>
+	<script type="application/ld+json">
+		{
+		  "@context": "https://schema.org",
+		  "@type": "FAQPage",
+		   "mainEntity": [{<%-schema_meta.allQuestionAns %>}]
+	      }
+	</script>
+<%	break;
+	case 'VideoObject' :%>
+	<script type="application/ld+json">
+		[{
+			"@context": "http://schema.org",
+			"@type": "VideoObject",
+			"name": "<%-schema_meta.metaTitle %>",
+			"description": "<%-schema_meta.metaDesc%>",
+			"thumbnailUrl": "<%-schema_meta.post_image%>",
+			"uploadDate": "<%-schema_meta.post_published %>",
+			"duration": "PT1M33S",
+			"contentUrl": "<%-schema_meta.contentUrl %>",
+			"interactionCount": "2347"
+		}]
+	</script>
+<%	break;
+	case 'Review' : %>
+	<script type="application/ld+json">
+		{
+			"@context": "http://schema.org",
+			"@type": "Review",
+			"author": {
+				"@type": "Person",
+				"name": "<%-schema_meta.metaAuthor %>",
+				"sameAs": "https://www.firstpost.com/author/<%-schema_meta.metaAuthorSlug %>"
+			},
+			"datePublished": "<%-schema_meta.post_published %>",
+			"description": "<%-schema_meta.metaMovieReview %>",
+			"inLanguage": "en",
+			"itemReviewed": {
+					"@type": "Movie",
+					"name": "<%-schema_meta.movieName %>",
+					"sameAs": "<%-schema_meta.contentUrl %>",
+					"image": "<%-schema_meta.post_image %>",
+					"datePublished": "<%-schema_meta.post_published %>",
+					"director": {
+							"@type": "Person",
+							"name": "<%-schema_meta.movieDirector %>",
+							"sameAs": ""
+					},
+					"actor": [<%-schema_meta.movieActorSchemaString %>]
+			},
+			"publisher": {
+					"@type": "Organization",
+					"name": "Firstpost",
+					"sameAs": "https://www.firstpost.com"
+			},
+			"reviewRating": {
+					"@type": "Rating",
+					"worstRating": 1,
+					"bestRating": 5,
+					"ratingValue": "<%-schema_meta.movieRating %>"
+			}
+		}
+	</script>
+<%	break;
+	case 'event' :%>
+		<script type="application/ld+json">
+			{
+				"@context": "http://schema.org",
+				"@type": "Event",
+				"location": {
+					"@type": "Place",
+					"address": {
+						"@type": "PostalAddress",
+						"addressLocality": "<%=schema_meta['matchVenue']%>"
+					},
+					"name": "<%=schema_meta['matchVenue']%>"
+				},
+				"name": "<%=schema_meta['matchHeading']%>",  
+				"description": "<%=schema_meta['metaDesc']%>",  
+				"startDate": "<%=schema_meta['matchDate']%>T<%=schema_meta['matchIndTime']%>",
+				"endDate": "<%=schema_meta['matchDate']%>"
+			}
+		</script>
+<%	break;
+	case 'LiveBlogPosting' :
+		var liveBlogSchemaString = ''; 
+		for (const [liveblog_key , liveblog_val] of Object.entries(liveBlog.data)){
+			/***** code added for  Blogposting data *******/
+			var lb_headline = lb_title = ''
+			if(liveblog_val['post']['title'] != null && liveblog_val['post']['title'] != ''){
+			    lb_headline = striptags(liveblog_val['post']['title']);
+			}else{
+			    lb_headline = striptags(postPageJson['post']['post_title']);
+			}
+			
+			if(lb_headline.length > 108){
+			    lb_title = common.htmlEntities(lb_headline.substring(0,52))+'..';
+			    lb_title += common.htmlEntities(lb_headline.slice(-54));
+			}else{
+			    lb_title = common.htmlEntities(lb_headline);
+			}
+			lb_headline = striptags(lb_title);
+			
+			var pub_date = liveblog_val['time'].substring(0 , 4)+"-"+liveblog_val['time'].substring(4 , 6)+"-"+liveblog_val['time'].substring(6 , 8)+" "+liveblog_val['time'].substring(8 , 10)+":"+liveblog_val['time'].substring(10 , 12)+":"+liveblog_val['time'].substring(12 , 14);
+			pub_date = dateFormat(pub_date , "yyyy-mm-dd'T'HH:MM:ss");
+			
+			var lb_artcleBody = '';
+			
+			if(liveblog_val['post']['content'] != ""){
+				lb_artcleBody = striptags(liveblog_val['post']['content']).replace('"' , '');
+			}else if(liveblog_val['post']['title'] != ""){
+				lb_artcleBody = striptags(liveblog_val['post']['title']).replace('"' , '');	
+			}else{
+				lb_artcleBody = striptags(liveblog_val['post']['title']).replace('"' , '');	
+			}
+			var lb_img_path = '';
+			if ( liveblog_val['post']['image_path'] != ''){
+				lb_img_path = liveblog_val['post']['image_path'];
+			}else{
+				lb_img_path = constant.IMG_URL+"wp-content/uploads/FP-LiveCoverage-Box.jpg";
+			}
+			
+			liveBlogSchemaString += `{
+				"@type": "BlogPosting",
+				"headline": "${lb_headline}",
+				"url": "${postPageJson['post']['post_url']}#${liveblog_val['time']}",
+				"datePublished": "${pub_date}+00:00",
+				"articleBody": "${lb_artcleBody}",
+				"image": {
+                                  "@type": "ImageObject",
+                                  "contentUrl": "${lb_img_path}",
+                                  "width": "1200",
+                                  "height": "800",
+                                  "url": "${lb_img_path}"
+                                },
+				"publisher": {
+                                  "@type": "Organization",
+                                  "name": "Firstpost.com",
+                                  "logo": {
+                                    "@type": "ImageObject",
+                                    "url": "${constant.WP_IMG_UPLOAD_URL}2016/03/FP-Logo.png",
+                                    "width": 177,
+                                    "height": 22
+                                  }
+                                },
+				"author": "firstpost.com",
+                                "mainEntityOfPage": "${schema_meta.contentUrl}",
+                                "dateModified": "${pub_date}+05:30"
+			}`;
+			
+			if(liveblog_key != (liveBlog.data.length-1)){
+				liveBlogSchemaString += ",";
+			}
+			/***** code added for  Blogposting data *******/
+		}
+	%>
+		<script type="application/ld+json">
+		{
+			"@context": "http://schema.org",
+			"@type": "LiveBlogPosting",
+			"about":"event",
+			"url":"<%-schema_meta.contentUrl%>",
+			"mainEntityOfPage": "<%-schema_meta.contentUrl%>",
+			"coverageStartTime": "<%-schema_meta.post_published%>",
+			"datePublished": "<%-schema_meta.post_published%>",
+			"dateModified": "<%-schema_meta.post_modified%>",
+			"headline": "<%-schema_meta.metaTitle%>",
+			"description": "<%-schema_meta.metaDesc%>",
+			"image": {
+				"@type": "ImageObject",
+				"url": "<%-schema_meta.post_image%>",
+				"height": 1200,
+				"width": 800
+			      },
+			"publisher":{
+				"@type":"Organization",
+				"name":"Firstpost",
+				"logo":
+				{
+					"@type": "ImageObject",
+					"url": "<%-constant['WP_IMG_UPLOAD_URL'] %>2016/03/FP-Logo.png",
+					"width": 177,
+					"height": 22
+				}
+			},
+			"author": {
+			   "type": "Person",
+			    "sameAs":"https://www.firstpost.com/",
+			    "name":"firstpost.com"
+			},
+			"liveBlogUpdate": [<%- liveBlogSchemaString %>]
+				
+		}
+		</script>
+<%	break;
+	case 'SportsTeam' :%>
+		<script type="application/ld+json">
+		{
+		  "@context": "http://schema.org",
+		  "@type": "SportsTeam",
+		  "name": "<%= team_name %>"
+		}
+		</script>
+<%	break;
+	case 'person' :%>
+	<script type="application/ld+json">
+		{
+			"@context": "http://www.schema.org",
+		  	"@type": "Person",
+			"name": "<%= tag_name.replace('-',' ') %>",
+			"sameAs": "<%= seoData['pageUrl'] %>"
+		}
+		</script>
+<%	break;
+} %>
+<% } %>

@@ -1,0 +1,328 @@
+<%- include(`${viewpath}/layouts/m-header`); %>
+
+<%
+// Data For View
+const {ATF_320, BTF_300} = (typeof ads !== 'undefined' && ads) ? ads : {}
+const liveMatchEntries = (typeof liveMatchList !== 'undefined' && liveMatchList) ? Object.entries(liveMatchList) : null;
+const scheduleMonthEntries = (typeof scheduleMonthList !== 'undefined' && scheduleMonthList) ? Object.entries(scheduleMonthList) : null;
+
+// Helper Functions
+const makeMatchUrl = (teama, teamb, matchtype) => {
+    const replaceRegex = /\s+/g;
+    const baseUrl = `${constant.SITE_URL}firstcricket/cricket-live-score`;
+    const replacedTeama = teama && teama.replace(replaceRegex, '-').toLowerCase();
+    const replacedTeamb = teamb && teamb.replace(replaceRegex, '-').toLowerCase();
+    const replacedMatchtype = matchtype && matchtype.replace(replaceRegex, '-').toLowerCase();
+    const matchUrl = `${baseUrl}/${replacedTeama}-vs-${replacedTeamb}-${replacedMatchtype}`;
+    return matchUrl;
+}
+
+%>
+
+        <div class="main-wrapper">
+            <!--Ad Slot-->
+            <% if (ATF_320){%>
+                <div class="ad-center m-fixed-ad-banner" width="360px" height="50px">
+                    <%-common.displayAds(ATF_320[0]) %>
+                </div>
+            <% } %>
+            <!--Ad Slot-->
+            
+            <!--Score-Widget-->
+            <%- include(`${viewpath}/widgets/scorecard_caraousal`); %>
+            <!--Score-Widget-->
+
+            <!--Bread crumb-->
+            <%- include(`${viewpath}/widgets/breadCrumbs`); %>
+            <!--Bread crumb-->
+
+            <!--Cricket Inner Menu-->
+            <%- include(`${viewpath}/layouts/level-4-nav`); %>            
+            <!--Cricket Inner Menu-->
+
+             <div class="main-content" id="schedule">
+                <!--Schedule Section-->
+           
+                <section class="schedule-section">                
+                    <%- /*include(viewpath+ '/widgets/cricket-menu-four');*/ %>
+                    <!--Livescore Slider-->
+                    <%if(liveMatchEntries){%>
+                    <section class="live-score-wrap">
+                        <h1 class="page-title"><span>LIVE CRICKET SCORE</span></h1>  
+                    <div class="glide live-score-widget" id="liveScoreSlider">
+                        <div class="glide__track" data-glide-el="track">
+                            <ul class="glide__slides">
+                                <% liveMatchEntries.forEach(([liveMatchKey, liveMatchValue])=>{
+                                     // Destructuring
+                                    const {
+                                        teama, teamb,
+                                        teama_Id, teamb_Id,
+                                                    matchtype, match_Id,
+                                                    series_Id, venue,
+                                                    matchdate_ist, matchtime_ist,
+                                                    inn_team_1, inn_team_2, inn_team_3, inn_team_4,
+                                                    inn_score_1, inn_score_2, inn_score_3, inn_score_4,
+                                                    matchnumber, matchresult, matchstatus
+                                                } = liveMatchValue;
+
+                                                // Making matchUrl
+                                                const matchUrl = makeMatchUrl(teama, teamb, matchtype)
+
+                                                // Tab Urls
+                                                const quickUrl = `${matchUrl}-live-cricket-score-quick/${series_Id}/${match_Id}.html`;
+                                                const fullUrl = `${matchUrl}-live-cricket-score-full/${series_Id}/${match_Id}.html`;
+                                                const commentaryUrl = `${matchUrl}-live-cricket-score-commentary/${series_Id}/${match_Id}.html`;
+                                                
+                                                const teamVs = `${teama} Vs ${teamb}`;
+                                                const formatedDate = dateFormat(matchdate_ist , "mmmm dd','yyyy")
+                                    %>                                     
+                                <li>
+                                    <div class="livescore-tabs">
+                                    <div class="tab">
+                                        <a href="<%= quickUrl %>" title="<%= teamVs %> Quick Scorecard" class="tablinks">Quick Scorecard</a>
+                                        <a href="<%= fullUrl %>" title="<%= teamVs %> Full scorecard"  class="tablinks">Full scorecard</a>
+                                        <a href="<%= commentaryUrl %>" title="<%= teamVs %> Ball by ball commentary"  class="tablinks">Ball by ball commentary</a>
+                                        <% /*if(postId != "" && postId != null){ */%>
+                                        <!-- <a href="" title="" class="blog-url tablinks">FP commentary</a> -->
+                                        <% /*}*/ %>
+                                    </div>                                             
+                                    </div>
+                                    <div class="big-title-heading">         
+                                        <h2 class="big-heading-text">
+                                        <%= teamVs %> At <%= venue %>, <span><%= formatedDate %></span>
+                                        </h2>                                                      
+                                    </div>
+                                    <section class="live-sc-div">
+                                        <div class="live-match-details">
+                                            <h6 class="l-match-date"><%= formatedDate %></h6>
+                                            <h6 class="l-match-time">Starts <%= matchtime_ist %> (IST)</h6>
+                                            <h5 class="red-txt" id="matchStatus">
+                                                <%= matchstatus %>
+                                            </h5>
+                                        </div>
+        
+                                        <div class="l-team-flex">
+                                            <div class="l-team-div team-one">
+                                                <div class="l-team-name">
+                                                    <a href="javascript:void(0);" title="">
+                                                        <img width="44" height="24.44" src="https://xmlns.cricketnext.com/cktnxt/scorecard/crk_player_images/flags/90x50/<%= inn_team_1 %>.png" alt="" title="" />
+                                                        <h4 class="l-team">
+                                                            <% if(inn_team_1 == teama_Id) { var checkTeamA = teama %>
+                                                            <%= teama %>
+                                                            <%}else{%>
+                                                            <%= teamb %>
+                                                            <%}%>
+                                                        </h4>
+                                                    </a>
+                                                </div>
+                                                <div class="l-score-div">
+                                                    <h4 class="l-score-txt">
+                                                        <span class="l-total"><%= inn_score_1%></span>
+                                                    </h4>                                            
+                                                    <% if(inn_score_3 && inn_team_3 == inn_team_1) {%>
+                                                    <h4 class="l-score-txt">
+                                                        <span class="l-total"><%= inn_score_3%></span>
+                                                    </h4>
+                                                    <% } %>
+                                                    <% if(inn_score_4 && inn_team_4 == inn_team_1) {%>
+                                                    <h4 class="l-score-txt">
+                                                        <span class="l-total"><%= inn_score_4%></span>
+                                                    </h4>
+                                                    <% } %>
+                                                </div>
+                                            </div>
+                                            <div class="l-match-no">
+                                                <%= matchnumber%>
+                                            </div>
+                                            <div class="l-team-div team-two">
+                                                <div class="l-team-name">
+                                                    <% if(checkTeamA == teama){
+                                                    var teambFlag = teamb_Id
+                                                }else{
+                                                    var teambFlag = teama_Id
+                                                } %>
+                                                    <a href="javascript:void(0);" title="">
+                                                        <img width="44" height="24.44" src="https://xmlns.cricketnext.com/cktnxt/scorecard/crk_player_images/flags/90x50/<%= teambFlag %>.png" alt="" title="">
+                                                        <h4 class="l-team">
+                                                            <% if(checkTeamA == teama) {%>
+                                                            <%= teamb %>
+                                                        <%}else{%>
+                                                            <%= teama %>
+                                                        <%}%>                                    
+                                                        </h4>
+                                                    </a>
+                                                </div>
+                                                <div class="l-score-div">
+                                                    <h4 class="l-score-txt">
+                                                        <% if(inn_score_2) { %>                        
+                                                        <span class="l-total"><%= inn_score_2%></span>
+                                                        <%}else{%>
+                                                        Yet To Bat
+                                                        <% } %>
+                                                        <% if(inn_score_3 && inn_team_3 == inn_team_2) {%>
+                                                    <h4 class="l-score-txt">
+                                                        <span class="l-total"><%= inn_score_3%></span>
+                                                    </h4>
+                                                    <% } %>
+                                                    <% if(inn_score_4 && inn_team_4 == inn_team_2) {%>
+                                                    <h4 class="l-score-txt">
+                                                        <span class="l-total"><%= inn_score_4%></span>
+                                                    </h4>
+                                                    <% } %>
+                                                    </h4>                        
+                                                </div>
+                                            </div>
+                                        </div>
+        
+                                        <div class="l-match-res">
+                                            <p><%= match_val['matchresult']%></p>
+                                        </div>
+        
+                                        <% if(typeof pseudo_value !== 'undefined' && pseudo_value == 0) { %>
+                                        <div class="btn-div">
+                                            <a href="<%= blogUrl %>" title="" class="blog-url live-scr-btn">
+                                        Live Blog 
+                                            </a>
+                                        </div>                
+                                        <%}%>                
+                                    </section>
+                                </li>
+                                <% }) %>                                
+                            </ul>
+                        </div>
+                        <%if(liveMatchEntries && liveMatchEntries.length != 0 ){ %>
+                                    <div class="glide glide-arrows">
+                                        <div class="glide__arrows" data-glide-el="controls">
+                                            <button class="glide__arrow glide__arrow--prev" data-glide-dir="<">&lt;</button>
+                                            <button class="glide__arrow glide__arrow--next" data-glide-dir=">">&gt;</button>
+                                        </div>
+                        
+                                        <div class="glide__bullets" data-glide-el="controls[nav]">
+                                            <%liveMatchEntries.forEach((_, index)=>{%>
+                                                <button class="glide__bullet" data-glide-dir="=<%=index%>"></button>
+                                            <%})%>                              
+                                        </div>
+                                    </div>
+                                    <% }else{ %>
+                                            <div class="big-title-heading"> Currently There Is No Live Match </div>
+                                        <% } %>
+                    </div>
+                    <!--Livescore Slider-->
+                </section>
+                <%}%>
+
+                    <%if(scheduleMonthEntries){%>
+                    <h2 class="page-title"><span>Upcoming Matches</span></h2>
+
+                    <div class="dd-wrap">
+                        <div class="custom-select-wrapper">
+                            <span class="arr"></span>
+                            <select>
+                                <option value="">Select Month</option>
+                                <%  scheduleMonthEntries.forEach(()=>{ %>
+                                <option value="">January</option>
+                                <% }) %>
+                            </select>
+                        </div>
+                    </div>
+                    <% scheduleMonthEntries.forEach(([scheduleMonthKey, scheduleMonthValue], index)=>{ %>
+                    <div class="schedule-block-wrap">
+                        <div class="big-title-heading">
+                            <h2 class="big-heading-text">
+                                <% var strplit = scheduleMonthKey.split("_") %>
+                                <%= monthL[strplit[0]] %> <span><%= strplit[1] %></span>
+                            </h2>
+                        </div>
+
+                        <div class="schedule-block-grid">
+                            <%if(scheduleMonthValue && scheduleMonthValue.data) {%>
+                            <%  Object.entries(scheduleMonthValue.data).forEach(([scheduleMonthDataKey, scheduleMonthDataValue])=> { 
+
+                                const {
+                                        teama, teamb, matchtype,
+                                        series_Id, match_Id, 
+                                        matchdate_ist,matchtime_ist, end_matchtime_ist,
+                                        venue, matchnumber, live,
+                                        series_short_display_name,
+                                    } = scheduleMonthDataValue;
+
+                                const teamVs = `${teama} vs ${teamb}`
+                                const replacedTeamA = teama.toLowerCase().replace(' ','-')
+                                const replacedTeamB = teamb.toLowerCase().replace(' ','-')
+
+                                var matchUrl = `${constant.SITE_URL}cricket-live-score/${replacedTeamA}-vs-${replacedTeamB}-${matchtype.toLowerCase()}-live-cricket-score-full/${series_Id}/${match_Id}.html`;
+                            %>
+                            <!-- Schema Start -->
+                            <!--Refer to schema.ejs--> 
+                            <!-- Schema End -->
+                            <div class="schedule-block-cell">
+                                <div class="schedule-head">
+                                    <h3 class="schedule-txt">
+                                        <% var dt = matchdate_ist.split('/') %>
+                                        <%= dt[1] %> <%= monthS[dt[0]] %>
+                                    </h3>
+                                    <div class="schedule-label-div">
+                                        <h4 class="sc-match-txt">
+                                            <%= matchnumber %>
+                                        </h4>
+                                        <%if(live == '1'){ %>
+                                        <div class="live-txt-div">
+                                            <div class="status-div live">
+                                                <span class="circle white"></span>
+                                                Live
+                                            </div>
+                                        </div>
+                                        <%}%>
+                                    </div>
+                                </div>
+
+                                <div class="schedule-content">
+                                    <h4 class="sc-match-name">
+                                        <a href="javascript:void(0);" title="<%= teamVs %> Full Scorecard"><%=teamVs %></a>
+                                    </h4>
+                                    <h6 class="sc-match-no">
+                                        <a href="javascript:void(0);" title="<%= teamVs %> Full Scorecard"><%= series_short_display_name %></a>
+                                    </h6>
+
+                                    <div class="sc-match-details">
+                                        <div class="sc-ventue-txt">
+                                            <label for="" class="sc-label">
+                                                Venue: 
+                                            </label>
+                                            <span class="sc-label-val">
+                                                <%= venue %>
+                                            </span>
+                                        </div>
+                                        <div class="sc-venue-time">
+                                            <label for="" class="sc-label">
+                                                Time: 
+                                            </label>
+                                            <span class="sc-label-val">
+                                                <%= matchtime_ist %> To <%= end_matchtime_ist%> (IST)
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <%})%> 
+                            <%}%>                           
+                        </div>
+                    </div> 
+                    <!--Ad Slot-->
+                    <% if(index == '1'){
+                        if (BTF_300){%>
+                        <div class="ad-center BTF_300" data-ad-id="<%-BTF_300[0]%>" data-ad-size="<%-BTF_300[1]%>">
+                            <%-common.displayAds(BTF_300[0]) %>
+                        </div>
+                    <% } } %>
+                    <!--Ad Slot-->
+                    <%})%>  
+                    <%}%>                 
+                </section>
+                <!--Schedule Section-->
+            </div>
+        </div>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+<%- include(viewpath+ '/layouts/m-footer'); %>               

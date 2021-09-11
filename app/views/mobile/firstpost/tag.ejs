@@ -1,0 +1,166 @@
+<%- include(viewpath+ '/layouts/m-header'); %>
+
+<style>
+  .tags-results {
+    font: 400 15px/25px Arial;
+    color: #333;
+    text-align: center;
+}
+.tags-total-result {
+    font: 700 18px/25px Arial;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+</style>
+<!-- schema for reference, place it in header if required -->
+
+   <!--cricket-ticker-wrap-->
+        <%- include(viewpath+ '/widgets/m-cricketscore_strip'); %>
+    <!--cricket-ticker-wrap-->
+
+    <% if(typeof constant.config_flags.EXIT_POLL_FLAG !== 'undefined' && constant.config_flags.EXIT_POLL_FLAG == '1') { %>
+        <!--panchayat-election-widget-->
+        <%- include(viewpath+ '/widgets/five_states_result_widget_2021.ejs'); %> 
+        <!--panchayat-election-widget-->
+    <% } %>
+
+   <!--cricket-ticker-wrap-->
+   <% if (typeof ads  !== 'undefined' && typeof ads['ATF_320']  !== 'undefined'){%>
+      <div class="ad-center">
+          <%-common.displayAds(ads['ATF_320'][0]) %>
+      </div>
+    <% } %> 
+   <%- include(viewpath+ '/widgets/breadCrumbs'); %>
+
+   <div class="main-story-thumb-wrap">
+      <h1 class="main-story-title">
+        <a href="javascript:void(0);"><%- common.capitalizeEWLetter(tag_name.replace('-',' ')) %></a>
+        <span></span>
+      </h1>
+      
+      <% if(tagData['solarCount'] < 20) { %>
+        <div class="tags-results">Showing <%- tagData['currentOffset']+1 %> of <%- tagData['solarCount'] %> from <%- tagData['solarCount'] %> results</div>
+      <% } else { %>
+        <div class="tags-results">Showing of <%- tagData['currentOffset']+1 %> - <%- tagData['nextOffset'] %> from <%- tagData['solarCount'] %> results</div>
+      <% } %>  
+      <div class="tags-total-result"><%- common.capitalizeEWLetter(tag_name.replace('-',' ')) %> - Total results - <%- tagData['solarCount'] %></div>
+      <% if(tag_name != '') { %>
+      <%/* if(pgNo == '1' || typeof pgNo =='undefined') { %> 
+      <h3 class="main-story-title">
+         <a href="javascript:void(0);">THE BIG story</a>
+         <span></span>
+      </h3>
+      <div class="slider-wrap main-story-slider" id="mainstoryslider">
+         <div class="glide__track" data-glide-el="track">
+            <ul class="slider">
+                <% for (const [tagData_key, tagData_val] of Object.entries(tagData['solarResults'].slice(0, 2))) { %>
+               <li class="main-story-thumb">
+                  <a href="<%- tagData_val['url']%>" class="thumb-img">
+                   <img src="<%- tagData_val['image']%>" alt="<%- tagData_val['title']%>" title="<%- tagData_val['title']%>">
+                  </a>
+                  <div class="title-wrap">
+                     <a href="<%=constant.SITE_URL%>category/<%- tagData_val['category'].replace(/\s+/g, '-').toLowerCase()%>" class="category-name"><%- tagData_val['category']%></a>
+                     <h1 class="main-title">
+                        <a href="<%- tagData_val['url']%>"><%= tagData_val['title']%></a>
+                     </h1>
+                     <% var shareArr = []; 
+                        shareArr['shareTitle'] = tagData_val['modified_title'];
+                        shareArr['shareUrl'] = tagData_val['modified_posturl']; 
+                     %>
+                       <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+                  </div>
+               </li>
+               <% } %>
+            </ul>
+            <div class="glide__bullets" data-glide-el="controls[nav]">
+                <button class="glide__bullet" data-glide-dir="=0"></button>
+                <button class="glide__bullet" data-glide-dir="=1"></button>
+            </div>
+         </div>
+      </div>
+      <% } %>
+       <% if(pgNo == '1' || typeof pgNo =='undefined') { %> 
+          <% var dataCnt = tagData['solarResults'].slice(2, 20) %>;
+       <% } else { %>
+         <% var dataCnt = tagData['solarResults'] %>;
+       <% } */%>
+      <% for (const [tagData_key, tagData_val] of Object.entries(tagData['solarResults'])) { %>
+         <div class="big-thumb">
+            <a href="<%- tagData_val['url']%>" class="thumb-img">
+            <img src="<%-constant.PLACEHOLDER_IMG_320x180 %>" class="fp-lazy" data-src="<%-common.firstpost_imageOptimization(tagData_val['image'], 320, 180, '') %>" alt="<%- tagData_val['title']%>" title="<%- tagData_val['title']%>">
+            <% if (tagData_val['category'].toLowerCase() == "video") { %>
+              <div class="video-icon">
+                  <svg width="70.182" height="70.182" viewBox="0 0 70.182 70.182">
+                     <defs>
+                        <filter id="a" x="0" y="0" width="70.182" height="70.182" filterUnits="userSpaceOnUse">
+                           <feOffset dy="3" input="SourceAlpha"/>
+                           <feGaussianBlur stdDeviation="4.5" result="b"/>
+                           <feFlood flood-opacity="0.294"/>
+                           <feComposite operator="in" in2="b"/>
+                           <feComposite in="SourceGraphic"/>
+                        </filter>
+                     </defs>
+                     <g transform="matrix(1, 0, 0, 1, 0, 0)">
+                        <path fill="#fff" d="M23.591,2A21.591,21.591,0,1,0,45.182,23.591,21.6,21.6,0,0,0,23.591,2ZM19.273,33.307V13.875l12.955,9.716Z" transform="translate(11.5 8.5)"/>
+                     </g>
+                  </svg>
+              </div>
+        <% } else if (tagData_val['ContentType'].toLowerCase() == "podcast") { %>
+         <svg class="podcast-icon" viewBox="0 0 48 58">
+            <g id="Page-1" fill="none" fill-rule="evenodd">
+               <g id="077---Podcast" fill="rgb(0,0,0)" fill-rule="nonzero" transform="translate(-1 -1)">
+                  <circle id="Oval" cx="25" cy="25" r="7"/>
+                  <path id="Shape" d="m41 25c.0043835 3.8369583-1.381053 7.5456651-3.9 10.44-.8816497-1.0158408-1.9600185-1.8424768-3.17-2.43 4.3150268-4.8070778 4.0504913-12.1673491-.5984984-16.6522513-4.6489898-4.4849021-12.0140134-4.4849021-16.6630032 0-4.6489897 4.4849022-4.9135252 11.8451735-.5984984 16.6522513-1.2099815.5875232-2.2883503 1.4141592-3.17 2.43-4.63398704-5.3707457-5.17622072-13.1522935-1.3318892-19.1138252 3.8443314-5.9615317 11.1563967-8.67818511 17.9606345-6.67291902 6.8042379 2.00526612 11.4743714 8.25317422 11.4712547 15.34674422z"/>
+                  <path id="Shape" d="m49 25c-.0020711 7.5935583-3.6000328 14.7375524-9.7 19.26l.03-.14c.3603606-1.6531373.2915082-3.3710057-.2-4.99 5.7270739-5.7172575 7.4444796-14.3223043 4.3508714-21.8000042-3.0936081-7.47769995-10.3885041-12.35425664-18.4808714-12.35425664s-15.38726325 4.87655669-18.48087142 12.35425664c-3.09360816 7.4776999-1.37620243 16.0827467 4.35087142 21.8000042-.4915082 1.6189943-.5603606 3.3368627-.2 4.99l.03.14c-9.07806131-6.7351009-12.22594977-18.8917939-7.5576155-29.1864253 4.66833428-10.29463137 15.887313-15.93634235 26.9351117-13.54491516 11.0477988 2.39142719 18.9293761 12.16768026 18.9225038 23.47134046z"/>
+                  <path id="Shape" d="m29.556 36h-9.112c-1.8151552-.0000102-3.5327417.8217028-4.6717465 2.2350168s-1.576974 3.2662842-1.1912535 5.0399832l3.077 14.15c.1998936.9191918 1.0133242 1.5748485 1.954 1.575h10.776c.9406758-.0001515 1.7541064-.6558082 1.954-1.575l3.077-14.15c.3857205-1.773699-.0522487-3.6266692-1.1912535-5.0399832s-2.8565913-2.235027-4.6717465-2.2350168zm-11.026 9.242-.5-2c-.0959435-.3498693.0051249-.72426.2641012-.9783171.2589762-.2540571.635236-.3479281.9832013-.2452935.3479652.1026346.6130526.385675.6926975.7396106l.5 2c.1334945.5356925-.1923791 1.0782184-.728 1.212-.0791715.0196698-.1604221.0297422-.242.03-.4589705-.0001268-.8589292-.3126718-.97-.758zm2.712 6.728c-.0791715.0196698-.1604221.0297422-.242.03-.4585975-.0005854-.8580197-.3130332-.969-.758l-.531-2.117c-.1024987-.3519028-.0042666-.731682.2560049-.9897522.2602716-.2580703.6408715-.353073.991891-.2475891s.616204.3945496.6911041.7533413l.53 2.117c.1335558.5353845-.1917847 1.0777678-.727 1.212zm9.258-2.845-.529 2.117c-.111161.44569-.5116567.7583324-.971.758-.0819126-.0001775-.1635037-.0102505-.243-.03-.5356209-.1337816-.8614945-.6763075-.728-1.212l.53-2.117c.0749001-.3587917.3400846-.6478574.6911041-.7533413s.7316194-.0104812.991891.2475891c.2602715.2580702.3585036.6378494.2560049.9897522zm1.471-5.883-.5 2c-.111161.44569-.5116567.7583324-.971.758-.0819126-.0001775-.1635037-.0102505-.243-.03-.5356209-.1337816-.8614945-.6763075-.728-1.212l.5-2c.1436734-.5239217.6793531-.8373021 1.2064607-.7057969.5271075.1315052.8528058.6597861.7335393 1.1897969z"/>
+               </g>
+            </g>
+         </svg>
+      <% } %>
+            </a>
+            <div class="title-wrap">
+               <% if (tagData_val['category'].toLowerCase() == 'health') { %>
+                  <a href="javascript:void(0);" class="sponsor-logo">
+                     <img src="<%=constant.SITE_URL%>static/images/myupchar-logo.png"/>
+                  </a>
+               <% } %>
+               <a href="<%=constant.SITE_URL%>category/<%- tagData_val['category'].replace(/\s+/g, '-').toLowerCase()%>" class="category-name"><%- tagData_val['category']%></a>
+               <h3 class="main-title">
+                  <a href="<%- tagData_val['url']%>"><%= tagData_val['title']%></a>
+               </h3>
+               <p class="copy">
+                  <%= tagData_val['description']%>
+               </p>
+               <% var shareArr = []; 
+                  shareArr['shareTitle'] = tagData_val['title'];
+                  shareArr['shareUrl'] = tagData_val['url']; 
+               %>
+               <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+            </div>
+         </div>
+         <% } %>
+      <% } %>
+   </div>
+   <!--main-story-thumb-->
+   <!--big-thumb-->
+   <%- include(viewpath+ '/widgets/paginationDefault'); %>
+   <% if (typeof ads  !== 'undefined' && typeof ads['ATF_300']  !== 'undefined'){%>
+      <div class="ad-center">
+          <%-common.displayAds(ads['ATF_300'][0]) %>
+      </div>
+    <% } %>
+   <% if (typeof outbrain_ads  !== 'undefined' && typeof outbrain_ads['MB_2']  !== 'undefined'){%>
+         <%-outbrain_ads['MB_2'];%>	
+   <% } %>
+   <%- include(viewpath+ '/widgets/most_read_widget'); %>
+   <% if (typeof ads  !== 'undefined' && typeof ads['BTF_300']  !== 'undefined'){%>
+          <div class="ad-center">
+              <%-common.displayAds(ads['BTF_300'][0]) %>
+          </div>
+        <% } %>
+</div>
+<!--wrapper-->
+
+<%- include(viewpath + '/layouts/m-footer'); %>
+

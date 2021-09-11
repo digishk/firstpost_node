@@ -1,0 +1,59 @@
+<%- include(viewpath+ '/layouts/m-header'); %>
+<script>
+function gcseCallback() {
+  if (document.readyState == 'complete'){
+   //return google.setOnLoadCallback(gcseCallback, true);
+   google.search.cse.element.render({gname:'<%=searchSlug%>', div:'results', tag:'search', attributes:{linkTarget:''}});
+   var element = google.search.cse.element.getElement('<%=searchSlug%>');
+   element.execute('<%=searchSlug%>');
+          }else{
+    google.setOnLoadCallback(function() {
+ google.search.cse.element.render({gname:'<%=searchSlug%>', div:'results', tag:'search', attributes:{linkTarget:''}});
+ var element = google.search.cse.element.getElement('<%=searchSlug%>');
+ element.execute('<%=searchSlug%>');
+},true);
+  }
+        }
+        window.__gcse = {
+          parsetags: 'explicit',
+          callback: gcseCallback
+        };  
+        (function() {
+           var cx = '001287843699051511718:zmzeee-ti-e';
+          //var cx = '002175636342488870115:moy5ckj6aak';
+          var gcse = document.createElement('script');
+          gcse.type = 'text/javascript';
+          gcse.async = true;
+          gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(gcse, s);
+        })();
+                </script>
+ <div class="container">
+	  <% if (typeof ads  !== 'undefined' && typeof ads['ATF_320'] !== 'undefined'){%>
+        <div class="ad-center">
+            <%-common.displayAds(ads['ATF_320'][0]) %>
+        </div>
+    <% } %>   
+	<div class="main-container">
+		<div class="main-content">            
+		 <div id="results"></div>
+		</div>
+	</div>
+      <div class="grid-right">
+          <% if (typeof ads  !== 'undefined' && typeof ads['ATF_300']  !== 'undefined'){%>
+          <div class="ad-center"  data-ad-id="<%-ads['ATF_300'][0]%>" data-ad-size="<%-ads['ATF_300'][1]%>">
+          <%-common.displayAds(ads['ATF_300'][0]) %>
+          </div>
+          <% } %>
+          <% if (typeof ads  !== 'undefined' && typeof ads['BTF_300']  !== 'undefined'){%>
+          <div class="ad-center"  data-ad-id="<%-ads['BTF_300'][0]%>" data-ad-size="<%-ads['BTF_300'][1]%>">
+          <%-common.displayAds(ads['BTF_300'][0]) %>
+          </div>
+          <% } %>
+
+      </div>
+
+</div>
+</div>
+<%- include(viewpath+ '/layouts/m-footer'); %>

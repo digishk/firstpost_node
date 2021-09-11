@@ -1,0 +1,32 @@
+<nav class="main-menu-wrap">
+	<div class="menu-wrap">
+		<ul class="main-menu">
+			<% i = 0 %>
+			<% for (const [menuKey, menuitems] of Object.entries(constant.fp_menu[2]['section'])) { %>
+			<% if(menuitems.displayOnTopNav != 'undefined' && menuitems.displayOnTopNav == '1') { %>
+				<li class="nav-events <% if(typeof active_level2_nav_slug !== 'undefined' && menuitems.menu_slug == active_level2_nav_slug){ %>active<% } %>">
+					<a href="<%=menuitems.menu_url.replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" title="<%=menuitems.menu_name%>" <% if(menuitems.menu_target != 'undefined'){ %><%=menuitems.menu_target%><% } %> class="<% if(menuitems.menu_class != 'undefined'){ %><%=menuitems.menu_class%><% } %>"><%=menuitems.menu_name%></a>
+				</li>
+				<% if(i >= 7) { break; } %>
+				<% i++ %>
+			<% } %>
+			<% } %>
+		</ul>
+		<ul class="sub-menu">
+			<% i = 0 %>
+			<% for (const [key, items] of Object.entries(constant.fp_menu[2])) { %>
+			<% if(key != "section") { %>
+			<% for (const [menuKey, menuitems] of Object.entries(items)) { %>
+			<% if(menuitems.displayOnTopNav != 'undefined' && menuitems.displayOnTopNav == '1') { %>
+				<li class="nav-events <% if(typeof active_level2_nav_slug !== 'undefined' && menuitems.menu_slug == active_level2_nav_slug){ %>active<% } %>">
+					<a href="<%=menuitems.menu_url.replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" title="<%=menuitems.menu_name%>" <% if(menuitems.menu_target != 'undefined'){ %><%=menuitems.menu_target%><% } %> class="<% if(menuitems.menu_class != 'undefined'){ %><%=menuitems.menu_class%><% } %>" ><strong><%=menuitems.menu_name%></strong></a>
+				</li>
+				<% if(i >= 3) { break; } %>
+				<% i++ %>
+			<% } %>
+			<% } %>
+			<% } %>
+			<% } %>
+		</ul>
+	</div>
+</nav>

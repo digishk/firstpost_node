@@ -1,0 +1,110 @@
+<%- include(viewpath+ '/layouts/header'); %>
+
+        <div class="main-wrapper">
+
+            <!--Cricket Ticker-->
+            <%- include(viewpath+ '/widgets/scorecard_caraousal'); %>
+            <input type="hidden" name="" id="checkDevice" value="<%=device%>">
+            <!--Cricket Ticker-->
+
+            <!--728x90 Ad Space-->
+            <% if (typeof ads  !== 'undefined' && typeof ads['ATF_728']  !== 'undefined'){%>
+            <div class="ad-slot fixed-ad-banner-fc">
+                <%-common.displayAds(ads['ATF_728'][0]) %>
+            </div>
+            <% } %>
+            <!--728x90 Ad Space-->
+
+            <!--Bread crumb-->
+            <%- include(viewpath+ '/widgets/breadCrumbs'); %>
+            <!--Bread crumb-->
+
+            <!--Main Page Content-->
+            <div class="content-wrap" id="photos">
+                <div class="left-content">
+                    <!--Ranking Section-->
+                    <% if(templateVars && templateVars['teamsData'] && templateVars['teamsData']['squads'] && templateVars['teamsData']['squads']['teams'] && templateVars['teamsData']['squads']['teams']['team']) { %>
+                    <section class="ranking-section">
+                        <h1 class="page-title"><span><%= seriesName %></span></h1>
+                        <%- include(viewpath+ '/widgets/cric-series-menu'); %>
+
+                        <div class="player-profile-wrap">   
+                            <div class="share-btn">                                
+                                <div class="share-wrap">
+                                <%- include(viewpath+ '/widgets/popup_social_share_widget'); %>
+                                </div>
+                            </div>                     
+                            <!--Slider wrap for flags-->
+                            <div class="glide" id="flagSlider" >
+                                <div class="glide__track" data-glide-el="track">
+                                    <ul class="glide__slides">
+                                    <% const teamsData = templateVars['teamsData']['squads']['teams']['team'] %>    
+                                    <% var active = ""; var count = 0; for (const [team_key, team_val] of Object.entries(teamsData)) {                                         
+                                        active = ""                                        
+                                        if(team_name.toLowerCase() == team_val['name'].toLowerCase()){
+                                            active = "active";
+                                            var currteamPos = count;
+                                        }                                        
+                                    %>
+                                        <li class="glide__slide <%= active %>">
+                                            <div class="flag-wrap">
+                                                <a href="<%= constant.SITE_URL %>firstcricket/teams/<%= team_val['name'].replace(/\s+/g, '-').toLowerCase() %>-team-players/series/ipl-<%= iplYear %>.html" title="">
+                                                <div class="flag-img ipl-flag chennai <%= team_val['short_name'].toLowerCase() %>">
+                                                    <p><%= team_val['short_name'] %></p>
+                                                </div>
+                                                <h4 class="country-txt">
+                                                    <%= team_val['short_name'] %>
+                                                </h4>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    <% count = count+1; } %>
+                                    </ul>
+                                </div>
+                                <div class="glide__arrows" data-glide-el="controls">
+                                    <button class="glide__arrow glide__arrow--left prev-btn" data-glide-dir="<">&lt;</button>
+                                    <button class="glide__arrow glide__arrow--right next-btn" data-glide-dir=">">&gt;</button>
+                                </div>
+                            </div>
+                            <!--Slider wrap for flags-->
+
+                            <!--Team Player List-->
+                            <div class="team-player-wrap">
+                                <ul class="team-player-list">
+                                    <% 
+                                    if(typeof teamsData[currteamPos] !== 'undefined'){
+                                    var teamsPlayer = teamsData[currteamPos]['players']['player'];
+                                    for (let i = 0; i < teamsPlayer.length; i++) { %>    
+                                    <li>
+                                        <a href="<%= constant.SITE_URL %>firstcricket/player-profile/<%=teamsPlayer[i]['name'].replace(/\s+/g, '-').toLowerCase() %>-<%=teamsPlayer[i]['id']%>" title="">
+                                            <img src="https://xmlns.cricketnext.com/cktnxt/scorecard/crk_player_images/players/128X128/<%= teamsPlayer[i]['id'] %>.png" onerror="this.onerror=null; this.src='<%-constant.SITE_URL%>static/images/cricket/default-cri.jpg'" title="<%= teamsPlayer[i]['name'] %>" alt="<%= teamsPlayer[i]['name'] %>" />
+                                            <h4 class="team-player-name">
+                                                <%= teamsPlayer[i]['name'] %>
+                                            </h4>
+                                        </a>
+                                    </li>
+                                    <% } }else{ %>
+                                    <div class="page-title">currently We dont have any data for this</div>
+                                    <% } %>                                    
+                                </ul>
+                            </div>
+                            <!--Team Player List-->
+                        </div>
+                    </section>
+                    <% } %>
+                        <!--Misc Story Section-->
+                    <!--Ranking Section-->
+                    <% if (typeof outbrain_ads  !== 'undefined' && typeof outbrain_ads['AR_2']  !== 'undefined'){%>
+                        <%-outbrain_ads['AR_2'];%>
+                    <% } %>
+
+                    <h2 class="page-title"><span><%= teamFullName %> stories</span></h2>
+                    <!--Misc Story Section-->
+                    <%- include(viewpath+ '/desktop/firstcricket/ipl/team-news-widget'); %>
+                    <!--Misc Story Section-->
+                </div>
+                <%- include(viewpath+ '/desktop/firstcricket/ipl/ipl-rhs'); %>
+            </div>
+            <!--Main Page Content-->
+        </div>
+<%- include(viewpath+ '/layouts/footer'); %>

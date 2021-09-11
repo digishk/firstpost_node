@@ -1,0 +1,31 @@
+<div class="floating-social-div">
+    <ul>
+        <li>
+            <a href="whatsapp://send?text=<%-shareArr.shareTitle%> - <%-shareArr.shareUrl %>" class="whatsapp shareicon" title="Whatsapp" >    
+                <amp-img src="/static/images/wapp.png" title="Whatsapp" alt="Whatsapp" width="40" height="40" layout="responsive"></amp-img>
+            </a>
+        </li>
+        <li>
+            <a href="https://www.facebook.com/sharer.php?u=<%-shareArr.shareUrl %>&t=<%-shareArr.shareTitle%>"  class="facebook shareicon" title="Facebook" target="_blank">
+                <amp-img src="/static/images/fb.png" title="Facebook" alt="Facebook" width="40" height="40" layout="responsive"></amp-img>
+            </a>
+        </li>
+        <li>
+            <a href="https://twitter.com/share?text=<%-shareArr.shareTitle%>&url=<%-shareArr.shareUrl %>" class="twitter shareicon" title="Twitter" target="_blank">
+                <amp-img src="/static/images/tw.png" title="Twitter" alt="Twitter" width="40" height="40" layout="responsive"></amp-img>
+            </a>
+        </li>
+
+        <li>
+            <a  href="mailto:?subject=<%-shareArr.shareTitle %>&amp;body=<%-shareArr.shareUrl %>" title="Email" class="mail" target="_blank">
+                <amp-img src="/static/images/mail.png" title="Email" alt="Email" width="40" height="40" layout="responsive"></amp-img>
+            </a>
+        </li>
+
+        <li>
+            <a href="/" title="Home" class="home">
+                <amp-img src="/static/images/hp.png" title="Home" alt="Home" width="40" height="40" layout="responsive"></amp-img>
+            </a>
+        </li>
+    </ul>
+</div>

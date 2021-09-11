@@ -1,0 +1,144 @@
+<%- include(viewpath+ '/layouts/m-header'); %>
+        <div class="main-wrapper">
+            <!--Ad Slot-->
+            <% if (typeof ads  !== 'undefined' && typeof ads['ATF_320']  !== 'undefined'){%>
+                <div class="ad-center">
+                    <%-common.displayAds(ads['ATF_320'][0]) %>
+                </div>
+            <% } %>
+            <!--Ad Slot-->
+
+            <!--Score-Widget-->
+            <%- include(viewpath+ '/widgets/scorecard_caraousal'); %>
+            <!--Score-Widget-->
+
+            <!--Bread crumb-->
+            <%- include(viewpath+ '/widgets/breadCrumbs'); %>
+            <!--Bread crumb-->
+
+            <!--Cricket Inner Menu-->
+            <%- include(viewpath+ '/layouts/level-4-nav'); %>            
+            <!--Cricket Inner Menu-->
+
+            <div class="main-content" id="photos">
+
+                <!--Top Slider Section-->
+                <section class="top-slider-section">
+                    <h1 class="page-title"><span>Latest photos</span></h1>
+                    <div class="glide" id="topSlider">
+                        <div data-glide-el="track" class="glide__track">
+                            <ul class="glide__slides">
+                            <% for (const [homePageJson_key, homePageJson_photos] of Object.entries(templateVars['photoGallery']['solarResults'])) { %>
+                            <% if(homePageJson_key == '0' || homePageJson_key == '1'){ %>
+                                <li class="glide__slide">
+                                    <div class="top-story-slide">
+                                        <div class="top-image-wrap">                
+                                            <a href="<%=templateVars['photoGallery']['solarResults'][homePageJson_key]['url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL).replace("photos/sports-gallery","firstcricket/photo-gallery")%>" title="<%=templateVars['photoGallery']['solarResults'][homePageJson_key]['title']%>">
+                                                <img src="<%-constant.PLACEHOLDER_IMG_320x180 %>" class="fp-lazy" data-src="<%-common.firstpost_imageOptimization(templateVars['photoGallery']['solarResults'][homePageJson_key]['image'], 320, 180, '') %>" alt="<%=templateVars['photoGallery']['solarResults'][homePageJson_key]['title']%>" title="<%=templateVars['photoGallery']['solarResults'][homePageJson_key]['title']%>"/>
+                                            </a>
+                                            <div class="photo-icon">
+                                                <svg width="50.45" height="45.239" viewBox="0 0 50.45 45.239"><defs><filter id="a" x="0" y="0" width="50.45" height="45.239" filterUnits="userSpaceOnUse"><feOffset dy="3" input="SourceAlpha"/><feGaussianBlur stdDeviation="4.5" result="b"/><feFlood flood-opacity="0.161"/><feComposite operator="in" in2="b"/><feComposite in="SourceGraphic"/></filter></defs><g transform="translate(13.5 10.5)"><g style="filter:url(#a);" transform="matrix(1, 0, 0, 1, -13.5, -10.5)"><path style="fill:#000;" d="M23.147,3H2.3A1.3,1.3,0,0,0,1,4.3V19.936a1.3,1.3,0,0,0,1.3,1.3H23.147a1.3,1.3,0,0,0,1.3-1.3V4.3A1.3,1.3,0,0,0,23.147,3ZM16.959,7.56A1.628,1.628,0,1,1,15.33,9.188,1.628,1.628,0,0,1,16.959,7.56ZM4.908,17.33,9.226,7.4l4.91,7.949,4.209-2.091,2.2,4.067Z" transform="translate(12.5 7.5)"/></g></g></svg>
+                                            </div>
+                                            <div class="main-title-div">
+                                                <h3 class="category-name">
+                                                    <a href="/author/<%=templateVars['photoGallery']['solarResults'][homePageJson_key]['author'].toLowerCase().replace(" ","-") %>" title="<%=templateVars['photoGallery']['solarResults'][homePageJson_key]['author']%>">
+                                        <%=templateVars['photoGallery']['solarResults'][homePageJson_key]['author']%>
+                                    </a>
+                                                </h3>
+                                                <div class="main-title-text">
+                                                    <h4 class="main-title-wrap">
+                                                        <a href="<%=templateVars['photoGallery']['solarResults'][homePageJson_key]['url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL).replace("photos/sports-gallery","firstcricket/photo-gallery")%>" title="<%=templateVars['photoGallery']['solarResults'][homePageJson_key]['title']%>">
+                                                            <%=templateVars['photoGallery']['solarResults'][homePageJson_key]['title']%>
+                                                        </a>
+                                                    </h4>
+                                                    <div class="share-wrap">
+                                                        <div class="thumb-social-wrap">
+                                                            <% var shareArr = []; 
+                                                                shareArr['shareTitle'] = templateVars['photoGallery']['solarResults'][homePageJson_key]['title'];
+                                                                shareArr['shareUrl'] = templateVars['photoGallery']['solarResults'][homePageJson_key]['url']; %>
+                                                            <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <%}else{break;} }%>
+                            </ul>
+                        </div>
+                        <div class="glide__bullets" data-glide-el="controls[nav]">
+                            <button class="glide__bullet" data-glide-dir="=0"></button>
+                            <button class="glide__bullet" data-glide-dir="=1"></button>
+                          </div>
+                    </div>
+                </section>
+                <!--Top Slider Section-->
+
+                <!--Other Story Section-->
+                <section class="other-story">
+                    <% for (const [homePageJson_key, homePageJson_photos] of Object.entries(templateVars['photoGallery']['solarResults'])) { %>
+                    <%if(homePageJson_key != '0' && homePageJson_key != '1'){%>
+                    <div class="image-wrap">                        
+                        <a href="<%=homePageJson_photos['url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL).replace("photos/sports-gallery","firstcricket/photo-gallery") %>" title="<%=homePageJson_photos['title'] %>">
+                            <img src="<%-constant.PLACEHOLDER_IMG_320x180 %>" class="fp-lazy" data-src="<%-common.firstpost_imageOptimization(homePageJson_photos['image'], 320, 180, '') %>" alt="<%=homePageJson_photos['title'] %>" title="<%=homePageJson_photos['title'] %>" />
+                        </a>
+                        <div class="photo-icon">
+                            <svg width="50.45" height="45.239" viewBox="0 0 50.45 45.239"><defs><filter id="a" x="0" y="0" width="50.45" height="45.239" filterUnits="userSpaceOnUse"><feOffset dy="3" input="SourceAlpha"/><feGaussianBlur stdDeviation="4.5" result="b"/><feFlood flood-opacity="0.161"/><feComposite operator="in" in2="b"/><feComposite in="SourceGraphic"/></filter></defs><g transform="translate(13.5 10.5)"><g style="filter:url(#a);" transform="matrix(1, 0, 0, 1, -13.5, -10.5)"><path style="fill:#000;" d="M23.147,3H2.3A1.3,1.3,0,0,0,1,4.3V19.936a1.3,1.3,0,0,0,1.3,1.3H23.147a1.3,1.3,0,0,0,1.3-1.3V4.3A1.3,1.3,0,0,0,23.147,3ZM16.959,7.56A1.628,1.628,0,1,1,15.33,9.188,1.628,1.628,0,0,1,16.959,7.56ZM4.908,17.33,9.226,7.4l4.91,7.949,4.209-2.091,2.2,4.067Z" transform="translate(12.5 7.5)"/></g></g></svg>
+                        </div>
+                        <div class="title-div-wrap">
+                            <h3 class="category-name">
+                                <a href="/author/<%=homePageJson_photos['author'].toLowerCase().replace(" ","-") %>" title="<%=homePageJson_photos['author']%>">
+                                    <%=homePageJson_photos['author']%>
+                                </a>
+                            </h3>
+                            <div class="category-text">
+                                <div class="text-wrap">
+                                    <a href="<%=homePageJson_photos['url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL).replace("photos/sports-gallery","firstcricket/photo-gallery") %>" title="<%=homePageJson_photos['title'] %>">
+                                        <h2 class="title-text">
+                                            <%=homePageJson_photos['title'] %>
+                                        </h2>
+                                        <h4 class="sub-title-txt">
+                                            <%=homePageJson_photos['description'] %>
+                                        </h4>
+                                    </a>
+                                </div>
+                                <div class="share-wrap">
+                                    <div class="thumb-social-wrap">
+                                        <% var shareArr = []; 
+                                            shareArr['shareTitle'] = homePageJson_photos['title'];
+                                            shareArr['shareUrl'] = homePageJson_photos['url']; %>
+                                        <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+                                    </div>
+                                </div>
+                            </div>                           
+                        </div>
+                    </div>
+                    <% } } %>
+                </section>
+                <!--Misc Story Section-->
+                <!--Pagination-->
+                <%- include(viewpath+ '/widgets/paginationDefault'); %>
+                <!--Pagination-->
+
+                <!--Ad Slot-->
+                <% if ((typeof ads  !== 'undefined' && typeof ads['BTF_300'] !== 'undefined')){%>
+                    <div class="ad-center BTF_300" data-ad-id="<%-ads['BTF_300'][0]%>" data-ad-size="<%-ads['BTF_300'][1]%>">
+                        <%-common.displayAds(ads['BTF_300'][0]) %>
+                    </div>
+                <% } %>
+                <!--Ad Slot-->
+
+                <% if (typeof outbrain_ads  !== 'undefined' && typeof outbrain_ads['MB_2']  !== 'undefined'){%>
+                    <%-outbrain_ads['MB_2'];%>
+                <% } %>
+
+                <%- include(viewpath+ '/widgets/mailChimp'); %> 
+                <!--Most Read Widget-->
+                <%- include(viewpath+ '/widgets/most_read_widget'); %>
+                <!--Most Read Widget-->
+            </div>
+        </div>
+
+<%- include(viewpath+ '/layouts/m-footer'); %>

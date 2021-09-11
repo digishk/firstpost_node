@@ -1,0 +1,78 @@
+<%- include(viewpath+ '/layouts/m-header'); %>
+<!--Ad Slot-->
+<% if (typeof ads  !== 'undefined' && typeof ads['ATF_320']  !== 'undefined'){%>
+    <div class="ad-center">
+        <%-common.displayAds(ads['ATF_320'][0]) %>
+    </div>
+<% } %>
+<!--Ad Slot-->
+
+<!--Score-Widget-->
+<%- include(viewpath+ '/widgets/scorecard_caraousal'); %>
+<!--Score-Widget-->
+<%- include(viewpath+ '/widgets/breadCrumbs'); %>
+<!--Cricket Inner Menu-->
+<%- include(viewpath+ '/layouts/level-4-nav'); %>            
+<!--Cricket Inner Menu-->
+
+<div class="main-story-thumb-wrap">
+	<h1 class="main-story-title">
+     <a href="javascript:void(0);">Cricket News</a>
+     <span></span>
+  </h1>
+  <% for (const [tagData_key, tagData_val] of Object.entries(tagData['solarResults'])) { %>
+	<div class="big-thumb">
+        <a href="<%- tagData_val['url']%>" class="thumb-img">
+            <img src="<%-constant.PLACEHOLDER_IMG_320x180 %>" class="fp-lazy" data-src="<%-common.firstpost_imageOptimization(tagData_val['image'], 320, 180, '') %>" alt="<%- tagData_val['title']%>" title="<%- tagData_val['title']%>">
+        </a>
+		<div class="title-wrap">
+			<a href="/category/<%- tagData_val['category'].replace(/\s+/g, '-').toLowerCase()%>" class="category-name">
+				<%- tagData_val['category']%></a>
+		    </a>
+		   <h3 class="main-title">
+		      <a href="<%- tagData_val['url']%>"><%= tagData_val['title']%></a>
+		   </h3>
+		   <p class="copy">
+		     	<%= tagData_val['description']%>
+		   </p>
+		   <% var shareArr = []; 
+		        shareArr['shareTitle'] = tagData_val['title'];
+		      	shareArr['shareUrl'] = tagData_val['url']; 
+		   %>
+		<%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+		</div>
+	</div>
+ <% } %>
+	<!--Pagination-->
+    <%- include(viewpath+ '/widgets/paginationDefault'); %>                
+    <!--Pagination-->
+
+    <!--Ad Slot-->
+    <% if ((typeof ads  !== 'undefined' && typeof ads['BTF_300'] !== 'undefined')){%>
+        <div class="ad-center BTF_300" data-ad-id="<%-ads['BTF_300'][0]%>" data-ad-size="<%-ads['BTF_300'][1]%>">
+            <%-common.displayAds(ads['BTF_300'][0]) %>
+        </div>
+    <% } %>
+    <!--Ad Slot-->
+
+    <%- include(viewpath+ '/widgets/mailChimp'); %> 
+    <!--Most Read Widget-->
+    <%- include(viewpath+ '/widgets/most_read_widget'); %>
+    <!--Most Read Widget-->
+
+    <!--Cricket Scores-->
+    <section class="cricket-score common-widget">
+        <%- include(viewpath+ '/widgets/cric-score-rhs-widget'); %>
+    </section>
+    <!--Cricket Scores-->
+    <% if (typeof outbrain_ads !== 'undefined' && typeof outbrain_ads['MB_2'] !== 'undefined'){%>
+        <%-outbrain_ads['MB_2'];%>  
+    <% } %>
+    <!--Upcoming Matches-->
+    <section class="upcoming-matches common-widget">
+        <%- include(viewpath+ '/widgets/cric-upcoming-rhs-widget'); %>
+    </section>
+    <!--Upcoming Matches-->
+</div>	
+
+<%- include(viewpath + '/layouts/m-footer'); %>

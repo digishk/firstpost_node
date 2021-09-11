@@ -1,0 +1,166 @@
+<script type="text/javascript">
+
+
+	function FPgetcookieForDFP(cookiename) {
+		var cookiestring=document.cookie;
+		var index1=cookiestring.indexOf(cookiename);
+		if (index1==-1 || cookiename=='') return '';
+		var index2=cookiestring.indexOf(';',index1);
+		if (index2==-1) index2=cookiestring.length;
+		return unescape(cookiestring.substring(index1+cookiename.length+1,index2));
+	}
+	function setUserBehaviour()
+	{
+		var i, x, y, cl = document.cookie.split(";");
+		var _w18userinfo_out = {};
+		var c = 0;
+		for (i = 0; i < cl.length; i++) {
+			x = cl[i].substr(0, cl[i].indexOf("="));
+			y = cl[i].substr(cl[i].indexOf("=") + 1);
+			x = x.replace(/^\s+|\s+$/g, "");
+			if (x == "_w18userinfo") {
+				_w18userinfo_out._w18userinfo = unescape(y);
+				c = c + 1
+			}
+			if (c == 1) {
+				break;
+			}
+		}
+		if(c==1){
+			var contact = JSON.parse(_w18userinfo_out._w18userinfo);
+			for (var item in contact) {
+				googletag.pubads().setTargeting(item,contact[item]);
+			}
+		}
+	}
+	// Wrapper API(OpwenWrap) for Pubmatic Start Here
+	var PWT = {}; //Initialize Namespace
+	var googletag = googletag || {};
+	googletag.cmd = googletag.cmd || [];
+	PWT.jsLoaded = function () { //PubMatic pwt.js on load callback is used to load GPT
+		(function () {
+			var gads = document.createElement('script');
+			var useSSL = 'https:' == document.location.protocol;
+			gads.src = (useSSL ? 'https:' : 'http:') + '//securepubads.g.doubleclick.net/tag/js/gpt.js';
+			var node = document.getElementsByTagName('script')[0];
+			node.parentNode.insertBefore(gads, node);
+		})();
+	};
+	(function () {
+		var purl = window.location.href;
+		var url = '//ads.pubmatic.com/AdServer/js/pwt/113941/3204';
+		var profileVersionId = '';
+		if (purl.indexOf('pwtv=') > 0) {
+			var regexp = /pwtv=(.*?)(&|$)/g;
+			var matches = regexp.exec(purl);
+			if (matches.length >= 2 && matches[1].length > 0) {
+				profileVersionId = '/' + matches[1];
+			}
+		}
+		var wtads = document.createElement('script');
+		wtads.async = true;
+		wtads.type = 'text/javascript';
+		wtads.src = url + profileVersionId + '/pwt.js';
+		var node = document.getElementsByTagName('script')[0];
+		node.parentNode.insertBefore(wtads, node);
+	})();
+</script>
+<script type='text/javascript' id='dfp_slot_details'>
+	var width = window.innerWidth || document.documentElement.clientWidth;
+	var adKey = "";
+	var dimArr = '';
+	var n1 = '';
+	var n2 = '';
+	var adtagsvalue = '';
+	<% if(typeof adtagsvalue !== 'undefined') { %>
+		adtagsvalue = '<%-adtagsvalue %>';
+	<% } %>
+	var pageName = '<%-pageName %>';
+	
+
+	googletag.cmd.push(function() {
+		<% if(typeof ads !== 'undefined') { %>
+			<% for (const [key, value] of Object.entries(ads)){  
+				ad_key = value[0];
+				ad_size = value[1]; 
+				if(typeof adtagsvalue !== 'undefined' && adtagsvalue != "") { %>
+					googletag.defineSlot('/1039154/<%-ad_key%>', [<%-ad_size%>], '<%-ad_key%>').addService(googletag.pubads()).setTargeting('disease',[adtagsvalue]);
+				<%} else if (key == "Shosh_OOP" || key == "Skin_OOP") { %>	
+					googletag.defineOutOfPageSlot('/1039154/<%-ad_key%>', '<%-ad_key%>').addService(googletag.pubads());
+				<% } else if(key == "Video_1x1") { %>
+					googletag.defineSlot('/1039154/<%-ad_key%>', [<%-ad_size%>], 'div-gpt-ad-1601978510340-0').addService(googletag.pubads());
+				<% } else if(key == "Video_1x1_wap") { %>
+					googletag.defineSlot('/1039154/<%-ad_key%>', [<%-ad_size%>], 'div-gpt-ad-1602761115771-0').addService(googletag.pubads());
+				<% } else { %>
+					googletag.defineSlot('/1039154/<%-ad_key%>', [<%-ad_size%>], '<%-ad_key%>').addService(googletag.pubads());
+				<% } %>
+			<% } %>
+		<% } %>
+
+		<% if (pageName == 'article') { %>
+			googletag.defineSlot('/1039154/FirstPost/Firstpost_Microsite/Firstpost_Microsite_Affiliate/Firstpost_Microsite_Affiliate_300x250', [300, 250], 'div-gpt-ad-1605175602964-0').addService(googletag.pubads());
+			googletag.defineSlot('/1039154/FirstPost_Wap_New/FirstPost_Wap_New_Microsite/FirstPost_Wap_New_Microsite_Affiliate/FirstPost_Wap_New_Microsite_Affiliate_300x250', [300, 250], 'div-gpt-ad-1605176094982-0').addService(googletag.pubads());
+		<% } %>		
+		/*if(width >= 768 && pageName != "homePage") {			
+		googletag.defineSlot('/1039154/FirstPost/Firstpost_Programmatic/Firstpost_Programmatic_2x2', [2, 2], 'div-gpt-ad-1556871797346-0').addService(googletag.pubads());    
+		}*/
+    	
+		//googletag.pubads().enableSingleRequest();
+		//googletag.pubads().collapseEmptyDivs(true);
+		//setUserBehaviour();
+
+		<% if (pageName == 'article' || pageName == 'photoArticle' || pageName == 'videoArticle' || pageName == 'showsArticle' || pageName == 'firstcricket-article' || pageName == 'home' || pageName == 'firstcricket-ipl') { %>
+
+		<% if (pageName != 'home' && pageName != 'firstcricket-ipl') { %>
+			googletag.pubads().setTargeting('article_id','<%-postid%>');
+		<% } %>
+
+		<% if (pageName == 'home') { %>
+			googletag.pubads().setTargeting('section_name','Home');
+		<% } else if (pageName == 'videoArticle') { %>
+			googletag.pubads().setTargeting('section_name','Videos');
+		<% } else if (pageName == 'photoArticle')  { %>
+			googletag.pubads().setTargeting('section_name','Photos');
+		<% } else if (pageName == 'showsArticle')  { %>
+			googletag.pubads().setTargeting('section_name','Shows');
+		<% } else if (pageName == 'firstcricket-article')  { %>
+			googletag.pubads().setTargeting('section_name','firstcricket');
+		<% } else if (pageName == 'firstcricket-ipl')  { %>
+			googletag.pubads().setTargeting('section_name','<%-targeting%>');
+		<% } else { %>
+			googletag.pubads().setTargeting('section_name','<%-catSlugCapi%>');
+		<% } %>
+
+		<% if (pageName == 'home' || pageName == 'firstcricket-ipl') { %>
+			googletag.pubads().setTargeting('meta_keywords', ['']);
+		<% } else { %>	
+        	googletag.pubads().setTargeting('meta_keywords', ['<%-tags_data_new%>']);
+        <% } %>	
+
+        googletag.pubads().setTargeting('title_name', ['<%-newPostSlug%>']);
+
+        <% if (pageName == 'home') { %>
+        	googletag.pubads().setTargeting('Content_Type','News');
+        <% } else if (pageName == 'firstcricket-article') { %>
+        	googletag.pubads().setTargeting('Content_Type','Sports-news');
+        <% } else if (pageName == 'firstcricket-ipl') { %>
+        	googletag.pubads().setTargeting('Content_Type','IPLT20_firstpost');
+        <% } else { %>
+        	googletag.pubads().setTargeting('Content_Type','<%-catSlugCapi%>');
+       	<% } %> 	
+
+        googletag.pubads().setTargeting('DFP', 'okay');
+        googletag.pubads().setTargeting('page_url', '<%-seoData['pageUrl']%>');
+        googletag.pubads().setTargeting('excerpt_description', '<%=seoData['metaDesc'].replace(/[^a-zA-Z ]/g, "")%>');
+        <% } %>
+					
+		googletag.pubads().enableLazyLoad({
+			fetchMarginPercent: 200,  // Fetch slots within 5 viewports. Orignally 200
+			renderMarginPercent: 200,  // Render slots within 2 viewports. Orignally 200
+			mobileScaling: 1.5  // Double the above values on mobile. Orignally 1.5
+		});
+
+		_w18sub();
+		googletag.enableServices();
+	});
+</script>

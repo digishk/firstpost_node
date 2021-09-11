@@ -1,0 +1,51 @@
+<!--Orange Cap Widget-->
+    <div class="orange-cap common-widget cap-table">
+        <h2 class="cap-title">
+            <svg width="35" height="36.636" viewBox="0 0 46.529 36.636"><path style="fill:#fff;" d="M45.888,23.528a18.409,18.409,0,0,0-9.542-6.674c-.27-.089-6.151-1.07-6.437-1.077-10.384-.321-17.705,6.358-18.677,17.8a1.129,1.129,0,0,1-.262.638c-1.293,1.52-7.514,8.846-7.738,9.192a3.048,3.048,0,0,0,.589,4.149,3.809,3.809,0,0,0,2.266.777c2.226,0,4.3-2.044,5.862-3.636a.756.756,0,0,1,.746-.2c5.507,1.595,9.494,5.95,12.078,7.31a5.336,5.336,0,0,0,3.445.5c4.65-.766,9.581-6.42,11.407-8.709a2.368,2.368,0,0,1,1.956-.883c.955.042,1.993.045,2.96.038a4.407,4.407,0,0,0,4.309-3.809C49.663,33.176,49.276,28.47,45.888,23.528ZM6.087,47.2a2.685,2.685,0,0,1-1.6-.563,1.68,1.68,0,0,1-.692-1.173,1.962,1.962,0,0,1,0-.471c1.787-1.109,4.176-1.455,7.157-.9C9.563,45.5,7.77,47.2,6.087,47.2ZM38.23,41.983a.585.585,0,0,1-.767.319,66.661,66.661,0,0,1-7.09-3.642,36.859,36.859,0,0,0-10.024-4.417,18,18,0,0,0-7.508-.136.568.568,0,0,1-.678-.543.587.587,0,0,1,.485-.578,19.108,19.108,0,0,1,7.96.15,37.751,37.751,0,0,1,10.324,4.535c1.863,1.058,5.661,2.912,7.011,3.567a.582.582,0,0,1,.284.745Z" transform="translate(-2.682 -15.766)"/><path style="fill:none;stroke:#fff;stroke-linecap:round;" d="M28.949,58.721A29.092,29.092,0,0,0,32.6,62.227c1.169.73,4.383.146,6.866-1.607" transform="translate(-9.762 -27.345)"/><path style="fill:none;stroke:#fff;stroke-linecap:round;" d="M28.949,58.721A22.093,22.093,0,0,0,31.6,61.5c.848.578,3.181.115,4.983-1.272" transform="translate(-8.156 -28.118)"/><path style="fill:none;stroke:#fff;stroke-linecap:round;" d="M28.949,58.721A18.239,18.239,0,0,0,30.978,61.1c.649.5,2.435.1,3.814-1.09" transform="translate(-6.975 -29.147)"/></svg>
+            <span><%= seriesName %> orange CAP</span>
+        </h2>
+
+        <table class="general-tbl ipl-points-table">
+            <thead>
+                <tr>
+                    <th>Pos</th>
+                    <th>Players</th>
+                    <th>Matches</th>
+                    <th>Runs</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% var i=1; if(orangeCap != "no-data") { for (const [cap_key, cap_val] of Object.entries(orangeCap['leaderboard'])) { %>
+                <tr>
+                    <td><%= i %></td>
+                    <td><%= cap_val['player_name'] %></td>
+                    <td><%= cap_val['matches_played'] %></td>
+                    <td><%= cap_val['runs_scored'] %></td>
+                </tr>
+                <%
+                    i++;
+                    if(cap_key >= 4){
+                    break;
+                    }
+                %>
+                <% } } %>
+            </tbody>
+        </table>
+
+        <div class="table-bottom-div">
+            <a href="<%= constant.SITE_URL %>firstcricket/orange-cap-holder/series/<%= seriesSlug %>.html" title="<%= seriesName %> Orange Cap" class="full-tbl-btn">
+                View Full table
+            </a>
+
+            <% var shareArr = [];
+            if(seriesSlug == "ipl-2020"){ 
+                shareArr['shareTitle'] = "Orange Cap 2020: IPL Orange Cap Holder, Winners List and Table | Highest Run Scorer of IPL 2020";
+                shareArr['shareUrl'] = "https://www.firstpost.com/firstcricket/orange-cap-holder/series/ipl-2020.html";
+            } else { 
+                shareArr['shareTitle'] = "Orange Cap 2019: IPL Orange Cap Holder, Winners List and Table | Highest Run Scorer of IPL 2019";
+                shareArr['shareUrl'] = "https://www.firstpost.com/firstcricket/orange-cap-holder/series/ipl-2019.html";
+            } %>
+            <%- include(viewpath+ '/widgets/ipl_social_share_widget',{shareArr:shareArr}); %>
+        </div>
+    </div>
+<!--Orange Cap Widget-->

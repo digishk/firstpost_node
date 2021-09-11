@@ -1,0 +1,75 @@
+<%- include(viewpath+ '/layouts/m-header'); %>
+<script type="text/javascript">
+  $('#sticky-share .fb, .tw, .wa, .mail').attr('title', <%- JSON.stringify(postPageJson['post']['post_title']) %>);
+    $('#sticky-share .fb, .tw, .wa, .mail').attr('data-url', <%- JSON.stringify(postPageJson['post']['post_url']) %>);
+    $('#sticky-share .fb, .tw, .wa, .mail').attr('data-title', <%- JSON.stringify(postPageJson['post']['post_title']) %>);
+    $("#sticky-share .mail").attr('href','mailto:?subject='+<%- JSON.stringify(postPageJson['post']['post_title']) %>+'&body='+<%- JSON.stringify(postPageJson['post']['post_url']) %>); 
+</script>
+<div class="longread-wrap">
+	<% if (typeof ads  !== 'undefined' && typeof ads['ATF_320']  !== 'undefined'){%>
+	    <div class="ad-center"  data-ad-id="<%-ads['ATF_320'][0]%>" data-ad-size="<%-ads['ATF_320'][1]%>">
+		<%-common.displayAds(ads['ATF_320'][0]) %>
+	    </div>
+	<% } %>
+	<%- include(viewpath+ '/widgets/breadCrumbs'); %>
+	<div class="article-content clearfix">
+		<%# include(viewpath+ '/widgets/floating_social_share_widget'); %>
+		<div class="article-sect">
+			<div class="long-read-sect">
+				<div class="innerpage-share">
+					<h2 class="category-name"><a class="section-btn" href="<%-constant.SITE_URL%>tag/long-reads">Long Reads</a></h2>
+					<%# include(viewpath+ '/widgets/social_share_widget'); %>
+				</div>
+			</div>
+			<h1 class="long-read-title">
+				<%-postPageJson['post']['post_title']%>
+			</h1>
+		
+			<ul class="article-details-list"><li><a href="<%-constant.SITE_URL%>author/<%-postPageJson['post']['post_authorslug']%>"><%-postPageJson['post']['post_authorname']%></a></li><li><%=dateFormat(postPageJson['post']['post_date'] , "mmmm dd',' yyyy HH:MM:ss")%> IST</li></ul>
+		
+			   <img class="longread-bigimg" src="<%-postPageJson['post']['post_image']%>" alt="<%=postPageJson['post']['post_title']%>">  
+			<%-newPostContent%>
+			<% if(typeof postPageJson['tag'] !== 'undefined' && postPageJson['tag'] !== null && postPageJson['tag'] != '' ){ %>
+			<div class="tag-flex">
+				<div class="tag-label">
+					Tags:
+				</div>
+				<% for (const [tag_key, tag_val] of Object.entries(postPageJson['tag'])) { %>
+				<span>
+					<a href="<%=tag_val.url%>">
+					<%= common.capitalizeEWLetter(tag_val.name) %>
+					</a>
+				</span>
+				<%}%>
+			</div>
+			<%}%>
+			<!-- <div class="share-page innerpage-share">
+				<p>Share this article</p>
+				<%- include(viewpath+ '/widgets/social_share_widget'); %>
+			  </div>  -->
+			<% if (typeof outbrain_ads  !== 'undefined' && typeof outbrain_ads['MB_1']  !== 'undefined'){%>
+				<%-outbrain_ads['MB_1'];%>	
+			<% } %>
+		</div>
+	</div>
+	
+</div>
+<% if (constant.IO_SCRIPT_FLAG == 1){ %>
+<script>
+    window._io_config = window._io_config || {};
+    window._io_config["0.2.0"] = window._io_config["0.2.0"] || [];
+    window._io_config["0.2.0"].push({
+	    page_url: "<%=postPageJson['post']['post_url']%>",
+	    page_url_canonical: "<%=postPageJson['post']['post_url']%>",
+	    page_title: "<%=postPageJson['post']['post_title']%>",
+	    page_type: "article",
+	    page_language: "en",
+	    article_authors: ["<%=postPageJson['post']['post_authorname']%>"],
+	    article_categories: ["<%=postPageJson['category'][0]['cat_name']%>"],
+	    article_type: "longread",
+	    article_word_count: "<%=postPageJson.post.post_content.split(" ").length%>",
+	    article_publication_date: "<%=dateFormat(postPageJson.post.post_date , 'ddd, dd mmm yyyy HH:MM:ss')%> IST"
+    });	
+</script>
+<% } %>
+<%- include(viewpath+ '/layouts/m-footer'); %>

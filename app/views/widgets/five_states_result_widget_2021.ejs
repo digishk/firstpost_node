@@ -1,0 +1,492 @@
+<style>
+    body {margin: 0; }
+    * {padding: 0; margin: 0; }
+    .result_widget_row_election {overflow: hidden;}
+    .result_widget_row_election .glide__slides {display: flex; align-items: center; }
+    .election-tallywidget-table {font-family: 'Fira Sans'; position: relative; }
+    .election-tallywidget-table table {width: calc(100% - 30px); text-align: center; position: relative; }
+    .election-tallywidget-table table tr th {height: 24px; vertical-align: middle; color: #FFFFFF; text-shadow: 0px 3px 6px #00000029; font-size: 14px; border-right: 1px #fff solid; border-bottom: 1px #fff solid; text-transform: uppercase; }
+    .election-tallywidget-table table tr th:nth-child(1),.election-tallywidget-table table tr td:nth-child(1) {color: #46463D; font-weight: bold; font-size: 12px; background: #e7e7e7; text-shadow: none; width: 116px; }
+    .election-tallywidget-table table tr td {height: 52px; color: #FFFFFF; text-shadow: 0px 3px 6px #00000029; font-size: 32px; font-weight: bold; border-bottom: 1px #fff solid; text-transform: uppercase; border-right: 1px #fff solid; width: 110px; vertical-align: middle;}
+    .election-tallywidget-table table tr:nth-child(3) td {border-bottom: 2px solid #d0d0d0; background: #e7e7e7; height: 20px; color: #7A7A7A; font-size: 12px; font-weight: normal; text-shadow: none; }
+    .election-tallywidget-table table tr:nth-child(3) td:first-child {font-weight: bold;color: #46463D; }
+    .brcountday-tallywidget-right:before {width: 18px; height: 4px; background: #464646; top: 50%; margin-top: -2px; left: 50%; margin-left: -9px; }
+    .brcountday-tallywidget-right:after {width: 4px; height: 18px; background: #464646; top: 50%; margin-top: -9px; left: 50%; margin-left: -2px; }
+    .brcountday-tallywidget-right:before, .brcountday-tallywidget-right:after {content: ""; position: absolute; }
+    .brcountday-tallywidget-right {background: #e7e7e7; width: 30px; position: absolute; right: 0; border-bottom: 2px solid #d0d0d0; bottom: 0px; height: 98px; }
+    .tallywidget-table-top {display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 7px 0; }
+    .table-top-title {font-family: 'Fira Sans Condensed'; text-transform: uppercase; font-size: 18px; color: #E1261C; font-weight: 500; }
+    .table-top-title span {color: #001D42; }
+    .table-top-seats {font-family: 'Fira Sans'; font-size: 18px; font-weight: 500; display: flex; align-items: baseline; }
+    .table-top-seats sub {color: #767676; font-size: 14px; font-weight: normal; }
+    .table-top-seats span {color: #999999; font-size: 12px; font-weight: normal; padding-left: 10px; }
+    .election_day_widget {max-width: 1244px; margin: auto; padding-bottom: 30px; background: #FAFAFA 0% 0% no-repeat padding-box; border: 1px solid #D7D7D7; border-bottom: 5px #001D42 solid; padding: 10px 20px; box-sizing: border-box;margin-bottom: 10px; }
+    .result_widget_row_election .glide__bullets {width: 100%; text-align: center; padding-top: 6px; }
+    .result_widget_row_election button.glide__bullet {width: 26px; height: 4px; background: #B0B0B0; border-radius: 2px; border: 0; outline: none; cursor: pointer; padding:0;margin:0 3px;}
+    .result_widget_row_election button.glide__bullet:hover {background: #E1261C; }
+    .result_widget_row_election button.glide__bullet.glide__bullet--active {background: #E1261C; }
+    .for_mobile_seats {display: none; }
+    .election-tallywidget-table table tr td br {display: none; }
+    .by_poll_data {font-family: 'Fira Sans'; text-transform: uppercase; font-size: 13px; font-weight: bold; position: absolute; bottom: 8px; left: 20px; }
+    .election_day_widget { position: relative; }
+    .by_poll_data span {width: 98px; height: 20px; display: inline-block; line-height: 20px; text-align: center; color: #fff; margin: 0 6px; }
+    .by_poll_data p {display: flex; align-items: center; }
+    .all_seats_poll {font-size: 12px; color: #E1261C; padding-right: 20px; margin-left: 5px; position: relative;width: 60px;  }
+    a.all_seats_poll:after {content: ""; width: 13px; height: 2px; position: absolute; background: #E1261C; top: 6px; right: 2px;    }
+    a.all_seats_poll:before {content: ''; border-top: 2px solid #E1261C; border-left: 2px solid #E1261C; width: 6px; height: 6px; transform: rotate(132deg ); position: absolute; right: 4px; top: 3px; }
+    .by_poll_data p code {font-family: 'Fira Sans'; display: flex; }
+    .tallywidget-table-top p {margin: 0; line-height: inherit; }
+    @media screen and (max-width:767px) {
+      .election_day_widget {padding: 5px 10px; border-bottom: 3px #001D42 solid;overflow: hidden; }
+      .table-top-seats {display: none; }
+      .table-top-title {font-size: 16px; }
+      .election-tallywidget-table table tr th:nth-child(1), .election-tallywidget-table table tr td:nth-child(1) {font-size: 11px; width: 65px; }
+      .election-tallywidget-table table tr td {width: 62px; height: 42px; font-size: 24px; }
+      .election-tallywidget-table table tr th {font-size: 12px; }
+      .brcountday-tallywidget-right {height: 66px; }
+      .election-tallywidget-table table tr:last-child {display: none; }
+      .tallywidget-table-top {padding: 0 0 5px; }
+      .for_mobile_seats {display: flex; align-items: center; position: absolute; bottom: -20px; justify-content: space-between; width: 100%; }
+      .seats_no {font-size: 12px; font-weight: 500; color: #474747;margin: 0; }
+      .seats_no span {font-weight: normal; color: #767676; }
+      p.seats_win {color: #999999; font-size: 11px; margin: 0;}
+      .result_widget_row_election .glide__bullets {margin-top: 8px; }
+      .election-tallywidget-table table tr td br {display: block; }
+      .election-tallywidget-table table tr td:nth-child(1) {line-height: 10px; }
+      .by_poll_data {position: static; margin-top: 8px; border-top: 1px #DEDEDE solid; padding-top: 10px; }
+      .block-one{width:100% !important;}
+      .block-two{display: none;}
+    }
+    @keyframes loading {100% {background-position: 100% 0;}}
+    @keyframes bouncedelay {0%, 80%, 100% {-webkit-transform: scale(0);transform: scale(0)}
+    40% {transform: scale(1);-webkit-transform: scale(1)}}
+    .skelAnimation {position:relative;}
+    .skelAnimation:after {position: absolute;transform: translateY(-50%);top: 50%;left: 0;content: "";display: block;width: 100%;height: 100%;background-image: linear-gradient(100deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5) 60%, rgba(255, 255, 255, 0) 80%);background-size: 110px 100%;background-position: -100px 0;background-repeat: no-repeat;animation: loading 1s infinite;}
+    .three-bounce {right: 0;z-index: 10;display: flex;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);justify-content: space-between;width: 35px;opacity: 0.5;}
+    .three-bounce>div {width: 10px;height: 10px;border-radius: 100%;background-color: #fff;-webkit-animation: bouncedelay 1.4s infinite ease-in-out both;animation: bouncedelay 1.4s infinite ease-in-out both;}
+    .three-bounce .one {-webkit-animation-delay: -0.32s;animation-delay: -0.32s;}
+    .three-bounce .two {-webkit-animation-delay: -0.16s;animation-delay: -0.16s;}
+ </style>
+ <div class="election_day_widget" id="election_day_widget">
+    <!--skeleton html start-->
+    <div class="skeleton" id="fallback">
+       <ul style="display: flex;list-style: none;padding: 0 0px;justify-content: center;">
+          <li class="block-one" style="width: 48%;padding: 16px 10px 0;background: #FFFFFF 0% 0% no-repeat padding-box;box-sizing: border-box;margin-right: 15px;">
+             <div style="display: flex;align-items: center;justify-content: space-between;width: 100%;padding-bottom: 7px;">
+                <div class="skelAnimation" style="width: 180px;height: 25px;border-radius:6px;background:#dadada;"></div>
+                <div style="width:180px;height: 25px;background:#001D42;border-radius: 11px;position:relative;">
+                   <div class="three-bounce">
+                      <div class="one"></div>
+                      <div class="two"></div>
+                      <div class="three"></div>
+                   </div>
+                </div>
+             </div>
+             <table width="100%" style="border-collapse: collapse;border-spacing: 0;">
+                <tbody>
+                   <tr>
+                      <th style="background:#e7e7e7;position:relative; height: 22px;letter-spacing: -0.28px;font-size: 14px;color: #fff;font-weight: 500;vertical-align: middle;border: 1px #fff solid;text-transform: uppercase;text-align: center">
+                         <div class="three-bounce">
+                            <div class="one"></div>
+                            <div class="two"></div>
+                            <div class="three"></div>
+                         </div>
+                      </th>
+                      <th style="background: #83C700;position:relative; height: 22px;letter-spacing: -0.28px;font-size: 14px;color: #fff;font-weight: 500;vertical-align: middle;border: 1px #fff solid;text-transform: uppercase;text-align: center">
+                         <div class="three-bounce">
+                            <div class="one"></div>
+                            <div class="two"></div>
+                            <div class="three"></div>
+                         </div>
+                      </th>
+                      <th style="background:#F97D09;position:relative; height: 22px;letter-spacing: -0.28px;font-size: 14px;color: #fff;font-weight: 500;vertical-align: middle;border: 1px #fff solid;text-transform: uppercase;text-align: center">
+                         <div class="three-bounce">
+                            <div class="one"></div>
+                            <div class="two"></div>
+                            <div class="three"></div>
+                         </div>
+                      </th>
+                      <th style="background:#B80D2E;position:relative; height: 22px;letter-spacing: -0.28px;font-size: 14px;color: #fff;font-weight: 500;vertical-align: middle;border: 1px #fff solid;text-transform: uppercase;text-align: center">
+                         <div class="three-bounce">
+                            <div class="one"></div>
+                            <div class="two"></div>
+                            <div class="three"></div>
+                         </div>
+                      </th>
+                      <th style="background:#464646;position:relative; height: 22px;letter-spacing: -0.28px;font-size: 14px;color: #fff;font-weight: 500;vertical-align: middle;border: 1px #fff solid;text-transform: uppercase;text-align: center">
+                         <div class="three-bounce">
+                            <div class="one"></div>
+                            <div class="two"></div>
+                            <div class="three"></div>
+                         </div>
+                      </th>
+                   </tr>
+                   <tr>
+                      <td style="background:#e7e7e7;position:relative;height:53px;letter-spacing: -0.28px;font-size: 20px;color: #fff;font-weight: 500;vertical-align: middle;border: 1px #fff solid;text-transform: uppercase;text-align: center">
+                         <div class="three-bounce">
+                            <div class="one"></div>
+                            <div class="two"></div>
+                            <div class="three"></div>
+                         </div>
+                      </td>
+                      <td style="background:#83C700;position:relative;height: 42px;letter-spacing: -0.28px;font-size: 20px;color: #fff;font-weight: 500;vertical-align: middle;border: 1px #fff solid;text-transform: uppercase;text-align: center">
+                         <div class="three-bounce">
+                            <div class="one"></div>
+                            <div class="two"></div>
+                            <div class="three"></div>
+                         </div>
+                      </td>
+                      <td style="background:#F97D09;position:relative;height: 42px;letter-spacing: -0.28px;font-size: 20px;color: #fff;font-weight: 500;vertical-align: middle;border: 1px #fff solid;text-transform: uppercase;text-align: center">
+                         <div class="three-bounce">
+                            <div class="one"></div>
+                            <div class="two"></div>
+                            <div class="three"></div>
+                         </div>
+                      </td>
+                      <td style="background:#B80D2E;position:relative;height: 42px;letter-spacing: -0.28px;font-size: 20px;color: #fff;font-weight: 500;vertical-align: middle;border: 1px #fff solid;text-transform: uppercase;text-align: center">
+                         <div class="three-bounce">
+                            <div class="one"></div>
+                            <div class="two"></div>
+                            <div class="three"></div>
+                         </div>
+                      </td>
+                      <td style="background:#464646;position:relative;height: 42px;letter-spacing: -0.28px;font-size: 20px;color: #fff;font-weight: 500;vertical-align: middle;border: 1px #fff solid;text-transform: uppercase;text-align: center">
+                         <div class="three-bounce">
+                            <div class="one"></div>
+                            <div class="two"></div>
+                            <div class="three"></div>
+                         </div>
+                      </td>
+                   </tr>
+                   <tr>
+                      <td style="background:#e7e7e7;position:relative;height:22px;letter-spacing: -0.28px;font-size: 20px;color: #fff;font-weight: 500;vertical-align: middle;border: 1px #fff solid;text-transform: uppercase;text-align: center">
+                         <div class="three-bounce">
+                            <div class="one"></div>
+                            <div class="two"></div>
+                            <div class="three"></div>
+                         </div>
+                      </td>
+                      <td style="background:#e7e7e7;position:relative;height:22px;letter-spacing: -0.28px;font-size: 20px;color: #fff;font-weight: 500;vertical-align: middle;border: 1px #fff solid;text-transform: uppercase;text-align: center">
+                         <div class="three-bounce">
+                            <div class="one"></div>
+                            <div class="two"></div>
+                            <div class="three"></div>
+                         </div>
+                      </td>
+                      <td style="background:#e7e7e7;position:relative;height:22px;letter-spacing: -0.28px;font-size: 20px;color: #fff;font-weight: 500;vertical-align: middle;border: 1px #fff solid;text-transform: uppercase;text-align: center">
+                         <div class="three-bounce">
+                            <div class="one"></div>
+                            <div class="two"></div>
+                            <div class="three"></div>
+                         </div>
+                      </td>
+                      <td style="background:#e7e7e7;position:relative;height: 22px;letter-spacing: -0.28px;font-size: 20px;color: #fff;font-weight: 500;vertical-align: middle;border: 1px #fff solid;text-transform: uppercase;text-align: center">
+                         <div class="three-bounce">
+                            <div class="one"></div>
+                            <div class="two"></div>
+                            <div class="three"></div>
+                         </div>
+                      </td>
+                      <td style="background:#e7e7e7;position:relative;height: 22px;letter-spacing: -0.28px;font-size: 20px;color: #fff;font-weight: 500;vertical-align: middle;border: 1px #fff solid;text-transform: uppercase;text-align: center">
+                         <div class="three-bounce">
+                            <div class="one"></div>
+                            <div class="two"></div>
+                            <div class="three"></div>
+                         </div>
+                      </td>
+                   </tr>
+                </tbody>
+             </table>
+          </li>
+          <li class="block-two" style="width: 48%;padding: 16px 10px 0;background: #FFFFFF 0% 0% no-repeat padding-box;box-sizing: border-box;margin-right: 15px;">
+             <div style="display: flex;align-items: center;justify-content: space-between;width: 100%;padding-bottom: 7px;">
+                <div class="skelAnimation" style="width: 180px;height: 25px;border-radius:6px;background:#dadada;"></div>
+                <div style="width:180px;height: 25px;background:#001D42;border-radius: 11px;position:relative;">
+                   <div class="three-bounce">
+                      <div class="one"></div>
+                      <div class="two"></div>
+                      <div class="three"></div>
+                   </div>
+                </div>
+             </div>
+             <table width="100%" style="border-collapse: collapse;border-spacing: 0;">
+                <tbody>
+                   <tr>
+                      <th style="background:#e7e7e7;position:relative; height: 22px;letter-spacing: -0.28px;font-size: 14px;color: #fff;font-weight: 500;vertical-align: middle;border: 1px #fff solid;text-transform: uppercase;text-align: center">
+                         <div class="three-bounce">
+                            <div class="one"></div>
+                            <div class="two"></div>
+                            <div class="three"></div>
+                         </div>
+                      </th>
+                      <th style="background: #83C700;position:relative; height: 22px;letter-spacing: -0.28px;font-size: 14px;color: #fff;font-weight: 500;vertical-align: middle;border: 1px #fff solid;text-transform: uppercase;text-align: center">
+                         <div class="three-bounce">
+                            <div class="one"></div>
+                            <div class="two"></div>
+                            <div class="three"></div>
+                         </div>
+                      </th>
+                      <th style="background:#F97D09;position:relative; height: 22px;letter-spacing: -0.28px;font-size: 14px;color: #fff;font-weight: 500;vertical-align: middle;border: 1px #fff solid;text-transform: uppercase;text-align: center">
+                         <div class="three-bounce">
+                            <div class="one"></div>
+                            <div class="two"></div>
+                            <div class="three"></div>
+                         </div>
+                      </th>
+                      <th style="background:#B80D2E;position:relative; height: 22px;letter-spacing: -0.28px;font-size: 14px;color: #fff;font-weight: 500;vertical-align: middle;border: 1px #fff solid;text-transform: uppercase;text-align: center">
+                         <div class="three-bounce">
+                            <div class="one"></div>
+                            <div class="two"></div>
+                            <div class="three"></div>
+                         </div>
+                      </th>
+                      <th style="background:#464646;position:relative; height: 22px;letter-spacing: -0.28px;font-size: 14px;color: #fff;font-weight: 500;vertical-align: middle;border: 1px #fff solid;text-transform: uppercase;text-align: center">
+                         <div class="three-bounce">
+                            <div class="one"></div>
+                            <div class="two"></div>
+                            <div class="three"></div>
+                         </div>
+                      </th>
+                   </tr>
+                   <tr>
+                      <td style="background:#e7e7e7;position:relative;height:53px;letter-spacing: -0.28px;font-size: 20px;color: #fff;font-weight: 500;vertical-align: middle;border: 1px #fff solid;text-transform: uppercase;text-align: center">
+                         <div class="three-bounce">
+                            <div class="one"></div>
+                            <div class="two"></div>
+                            <div class="three"></div>
+                         </div>
+                      </td>
+                      <td style="background:#83C700;position:relative;height: 42px;letter-spacing: -0.28px;font-size: 20px;color: #fff;font-weight: 500;vertical-align: middle;border: 1px #fff solid;text-transform: uppercase;text-align: center">
+                         <div class="three-bounce">
+                            <div class="one"></div>
+                            <div class="two"></div>
+                            <div class="three"></div>
+                         </div>
+                      </td>
+                      <td style="background:#F97D09;position:relative;height: 42px;letter-spacing: -0.28px;font-size: 20px;color: #fff;font-weight: 500;vertical-align: middle;border: 1px #fff solid;text-transform: uppercase;text-align: center">
+                         <div class="three-bounce">
+                            <div class="one"></div>
+                            <div class="two"></div>
+                            <div class="three"></div>
+                         </div>
+                      </td>
+                      <td style="background:#B80D2E;position:relative;height: 42px;letter-spacing: -0.28px;font-size: 20px;color: #fff;font-weight: 500;vertical-align: middle;border: 1px #fff solid;text-transform: uppercase;text-align: center">
+                         <div class="three-bounce">
+                            <div class="one"></div>
+                            <div class="two"></div>
+                            <div class="three"></div>
+                         </div>
+                      </td>
+                      <td style="background:#464646;position:relative;height: 42px;letter-spacing: -0.28px;font-size: 20px;color: #fff;font-weight: 500;vertical-align: middle;border: 1px #fff solid;text-transform: uppercase;text-align: center">
+                         <div class="three-bounce">
+                            <div class="one"></div>
+                            <div class="two"></div>
+                            <div class="three"></div>
+                         </div>
+                      </td>
+                   </tr>
+                   <tr>
+                      <td style="background:#e7e7e7;position:relative;height:22px;letter-spacing: -0.28px;font-size: 20px;color: #fff;font-weight: 500;vertical-align: middle;border: 1px #fff solid;text-transform: uppercase;text-align: center">
+                         <div class="three-bounce">
+                            <div class="one"></div>
+                            <div class="two"></div>
+                            <div class="three"></div>
+                         </div>
+                      </td>
+                      <td style="background:#e7e7e7;position:relative;height:22px;letter-spacing: -0.28px;font-size: 20px;color: #fff;font-weight: 500;vertical-align: middle;border: 1px #fff solid;text-transform: uppercase;text-align: center">
+                         <div class="three-bounce">
+                            <div class="one"></div>
+                            <div class="two"></div>
+                            <div class="three"></div>
+                         </div>
+                      </td>
+                      <td style="background:#e7e7e7;position:relative;height:22px;letter-spacing: -0.28px;font-size: 20px;color: #fff;font-weight: 500;vertical-align: middle;border: 1px #fff solid;text-transform: uppercase;text-align: center">
+                         <div class="three-bounce">
+                            <div class="one"></div>
+                            <div class="two"></div>
+                            <div class="three"></div>
+                         </div>
+                      </td>
+                      <td style="background:#e7e7e7;position:relative;height: 22px;letter-spacing: -0.28px;font-size: 20px;color: #fff;font-weight: 500;vertical-align: middle;border: 1px #fff solid;text-transform: uppercase;text-align: center">
+                         <div class="three-bounce">
+                            <div class="one"></div>
+                            <div class="two"></div>
+                            <div class="three"></div>
+                         </div>
+                      </td>
+                      <td style="background:#e7e7e7;position:relative;height: 22px;letter-spacing: -0.28px;font-size: 20px;color: #fff;font-weight: 500;vertical-align: middle;border: 1px #fff solid;text-transform: uppercase;text-align: center">
+                         <div class="three-bounce">
+                            <div class="one"></div>
+                            <div class="two"></div>
+                            <div class="three"></div>
+                         </div>
+                      </td>
+                   </tr>
+                </tbody>
+             </table>
+          </li>
+       </ul>
+    </div>
+    <!--skeleton html end-->
+    <div class="result_widget_row_election" style="display: none;" id="main-container">
+       <div data-glide-el="track">
+          <div class="glide__slides" id="result-container">
+            <!-- Data will render here programmatically -->
+          </div>
+          <div class="glide__bullets" data-glide-el="controls[nav]">
+             <button class="glide__bullet" data-glide-dir="=0"></button>
+             <button class="glide__bullet" data-glide-dir="=1"></button>
+             <button class="glide__bullet" data-glide-dir="=2"></button>
+             <button class="glide__bullet" data-glide-dir="=3"></button>
+             <button class="glide__bullet" data-glide-dir="=4"></button>
+          </div>
+       </div>
+    </div>
+    <!-- <div class="by_poll_data">
+       <p><code>Noida (ASSEMBLY) BYPOLL</code> <span style="background:#F58734">BJP - Wins</span> <a href="#" class="all_seats_poll">All Seats</a></p>
+    </div> -->
+ </div>
+
+
+<script type="text/javascript" src="<%-constant.SITE_URL%>static/js/jquery-3.4.0.min.js"></script>
+<script async type="text/javascript" src="<%-constant.SITE_URL%>static/js/glide.min.js"></script>
+ <script>
+
+	// AJAX
+	$(document).ready(function(){ // Created Block Scope
+	
+       const switchDataURL = 'https://election.nw18.com/electiondata/electionjson/five_states_assembly_election_2021/live/switchdata.json';
+       
+       const glideOptions = {
+         autoplay: 5000,
+         type: 'carousel',
+         perView:2,
+         gap:20,
+         slidesToShow: 2,
+         dots: '#dots',
+         draggable: true,     
+         breakpoints: {
+            767: {
+               perView: 1,
+               gap:10,
+               slidesToShow: 1,
+            }
+         }
+      }
+
+      let glide = new Glide(document.querySelector('.result_widget_row_election'), glideOptions)
+    	// Fetch Data on Load
+    	getResultData(switchDataURL);
+      
+      setInterval(function(){
+         // Destroying old instance
+         glide.destroy()
+			getResultData(switchDataURL);
+      },60000);
+
+		function getResultData(switchDataURL){
+			$.ajax({
+				url: switchDataURL,
+				type: 'GET',
+				cache: true,
+				dataType: 'jsonp',
+				jsonp: 'jsonp',
+				jsonpCallback: 'switchdata_five_states_assembly_election_2021',
+				crossDomain: true,
+				success: function (response) {
+					if(!response) {
+						$('#fallback').remove()
+						$('#main-container').remove()
+						return false
+					}
+
+               const {seat_party_summary_all} = response
+					
+					if(!seat_party_summary_all) {
+						$('#fallback').remove()
+						$('#main-container').remove()
+						return false
+               }
+
+               $.ajax({
+                  url: seat_party_summary_all,
+                  type: 'GET',
+                  cache: true,
+                  dataType: 'jsonp',
+                  jsonp: 'jsonp',
+                  jsonpCallback:'election_assembly_2021_all',
+                  crossDomain: true,
+                  success: function(response){
+                     let dataBlock = ''
+                     for(let key in response) {
+                        const state = response[key]
+                        let th = ''
+                        let td = ''
+                        let changesTD = ''
+                        state.alliance.forEach(alliance => {
+                           th += `<th style="background:${alliance.color}">${alliance.display_name}</th>`
+                           td += `<td style="background:${alliance.color}">${alliance.wonlead}</td>`
+                           changesTD += `<td>${alliance.changes}</td>`
+                        })
+         
+                        dataBlock += `<div class="election-tallywidget-table">
+                           <a href="https://www.firstpost.com/${key}-assembly-election-2021/alliance-party-wise-tally-live-results-updates">
+                           <div class="tallywidget-table-top">
+                              <p class="table-top-title">${key.split('-').join(' ').toLocaleUpperCase()}</p>
+                              <p class="table-top-seats">${state.total_seats.wonlead}<sub>/${state.total_seats.seats} SEATS</sub> <span>(${Math.ceil(Number(state.total_seats.seats) / 2 + 1)} SEATS TO WIN)</span></p>
+                           </div>
+                           <table cellpadding="0" cellspacing="0">
+                              <tbody>
+                                 <tr>
+                                    <th>Alliance</th>
+                                    ${th} 
+                                 </tr>
+                                 <tr>
+                                    <td>Wins <br/> + <br/> Leads</td>
+                                    ${td}
+                                 </tr>
+                                 <tr>
+                                    <td>+/- 2016</td>
+                                    ${changesTD}
+                                 </tr>
+                              </tbody>
+                           </table>
+                           <div class="brcountday-tallywidget-right"></div>
+                              <div class="for_mobile_seats">
+                                 <p class="seats_no">${state.total_seats.wonlead}<span>/${state.total_seats.seats} Seats</span></p>
+                                 <p class="seats_win">(${Math.ceil(Number(state.total_seats.seats) / 2 + 1)} Seats to Win)</p>
+                              </div>
+                           </a>
+                        </div>`
+
+                     }
+
+                     // Render HTML
+                     $('#result-container').html(dataBlock)
+               
+                     $('#fallback').remove()
+                     $('#main-container').show()
+
+                     // new Glide instance made
+                     glide = new Glide(document.querySelector('.result_widget_row_election'), glideOptions)
+                     glide.mount()
+                  },
+                  error: function(x, y, error) {
+                     $('#fallback').remove()
+					      $('#main-container').remove()
+                     console.log('error', error.message)
+                  }
+               })
+
+				},
+				error: function (x, y, error) {
+					$('#fallback').remove()
+					$('#main-container').remove()
+					console.log("error", error.message);
+				}
+			});
+		}  
+   })
+ 
+</script>
+ </html>

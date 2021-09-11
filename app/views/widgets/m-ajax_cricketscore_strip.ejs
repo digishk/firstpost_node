@@ -1,0 +1,172 @@
+<!--New Cricket Strip-->
+<style>
+    .new-cricket-strip{ margin: 30px 0; background: #112e6e;overflow: hidden;}
+    .new-ticker-slider{ position: relative;}
+    .new-ticker-slider {  -moz-animation: marquee 25s linear infinite;-webkit-animation: marquee 25s linear infinite;animation: marquee 25s linear infinite; }
+    .new-ticker-slider:hover {
+        animation-play-state: paused;
+      }
+    .new-ticker-slider.single-match-ticker{ -moz-animation: marqueeOne 10s linear infinite;-webkit-animation: marqueeOne 10s linear infinite;animation: marqueeOne 10s linear infinite; }
+    .glide-wrap{font-family: Arial, Helvetica, sans-serif;  margin: 5px 10px 6px; display: flex;  align-items: center;justify-content: space-evenly; }
+    .g-ipl-title{ font-size: 19px; font-weight: 800; color: #fff; white-space: nowrap; }
+    .g-match-name{ font-size: 15px; color: #fff; display: flex; align-items: center; margin: 2px 10px 0;white-space: nowrap;  }
+    .g-inn-txt{ margin: 0 10px 0 5px;white-space: nowrap; }
+    .g-team-name-one{ font-size: 25px; color:#f7b921; text-transform: uppercase; font-weight: 700; margin: 0 5px; }
+    .g-score-div{ font-size: 25px; font-weight: 500; color: #fff;white-space: nowrap; margin: 0 10px 0 0;  }
+    .g-score-div span{ font-size: 15px; font-weight: 400; opacity: 0.8; }
+    .g-vs-text{ font-size: 20px; font-weight: 900; color: #112e6e; background: #fff; padding: 2px 7px 3px; margin: 0 10px; display: flex; justify-content: center; align-items: center; border-radius: 50%; line-height: 22px; }
+    .g-team-name-two{ font-size: 25px; color:#e31638; text-transform: uppercase; font-weight: 700; margin: 0 10px; }
+    .g-match-status{ color: #e1e5e4; font-size: 15px; font-weight: 400;white-space: nowrap;margin: 0 10px;  }
+    .g-live-blog-div{ margin: 0 10px; }
+    .g-live-blog-div a{white-space: nowrap; display: flex; align-items: center;background: #e41414; padding: 1px 5px 1px 10px; border-radius: 5px; font-size: 14px; color: #fff; text-transform: uppercase; }
+    .g-live-blog-div a img{width: 47px; display: inline; position: relative; top:0;margin: 0 0 0 5px; }
+    .comp-link{ display: flex;  align-items: center;justify-content: space-evenly;  }
+    
+
+    @-moz-keyframes marquee {
+        0% {
+          transform: translateX(10%);
+        }
+        100% {
+          transform: translateX(-400%);
+        }
+      }
+      @-webkit-keyframes marquee {
+        0% {
+          transform: translateX(10%);
+        }
+        100% {
+          transform: translateX(-400%);
+        }
+      }
+      @keyframes marquee {
+        0% {
+          -moz-transform: translateX(10%);
+          -webkit-transform: translateX(10%);
+          transform: translateX(10%)
+        }
+        100% {
+          -moz-transform: translateX(-400%);
+          -webkit-transform: translateX(-400%);
+          transform: translateX(-400%);
+        }
+      }
+
+      @-moz-keyframes marqueeOne {
+        0% {
+          transform: translateX(10%);
+        }
+        100% {
+          transform: translateX(-210%);
+        }
+      }
+      @-webkit-keyframes marqueeOne {
+        0% {
+          transform: translateX(10%);
+        }
+        100% {
+          transform: translateX(-210%);
+        }
+      }
+      @keyframes marqueeOne {
+        0% {
+          -moz-transform: translateX(10%);
+          -webkit-transform: translateX(10%);
+          transform: translateX(10%)
+        }
+        100% {
+          -moz-transform: translateX(-210%);
+          -webkit-transform: translateX(-210%);
+          transform: translateX(-210%);
+        }
+      }
+</style>
+<div class="new-cricket-strip">
+    <div class="new-ticker-slider single-match-ticker" id="newtickerslider"> <!--Add the single match class "single-match-ticker" on div "new-ticker-slider"-->
+        <div class="slider">
+            <% for (const [match_key, match_val] of Object.entries(liveMatchList)) { %>
+            <% if(match_val['teama'] != undefined && match_val['live'] == '1' && match_val['series_Id'] == '4165'){ %>
+            <div class="glide-slide">
+                <div class="glide-wrap">
+                    <a href="<%= constant.SITE_URL %>firstcricket/cricket-live-score/<%-match_val['teama'].replace(/\s+/g, '-').toLowerCase() %>-vs-<%-match_val['teamb'].replace(/\s+/g, '-').toLowerCase() %>-<%= match_val['matchtype'].replace(/\s+/g, '-').toLowerCase() %>-live-cricket-score-full/<%= match_val['series_Id']%>/<%= match_val['match_Id']%>.html" title="<%-match_val['teama'] %> vs <%-match_val['teamb'] %> Full Scorecard"  class="comp-link">
+                        <div class="g-match-name">
+                            <p class="g-match-txt">
+                                <%=match_val["matchnumber"]%>
+                            </p>
+                            <% if(typeof match_val['inn_team_4'] !== 'undefined' && match_val['inn_team_4'] != '' ) { %>
+                            <p class="g-inn-txt">
+                                4th Inns
+                            </p>
+                            <% }else if(typeof match_val['inn_team_3'] !== 'undefined' && match_val['inn_team_3'] != '' ) { %>
+                            <p class="g-inn-txt">
+                                3rd Inns
+                            </p>
+                            <% }else if(typeof match_val['inn_team_2'] !== 'undefined' && match_val['inn_team_2'] != '' ) { %>
+                            <p class="g-inn-txt">
+                                2nd Inns
+                            </p>
+                            <% }else { %>
+                            <p class="g-inn-txt">
+                                1st Inns
+                            </p>
+                            <% } %>
+                        </div>
+                        <div class="g-team-name-one">
+                            <%= match_val['teama_short'] %>
+                        </div>
+    
+                        <% 
+                        if(match_val['current_batting_team'] == match_val['teama_Id']){
+                        %>
+                        <div class="g-score-div">
+                            <p>
+                                <%= match_val['current_score'] %>
+                                <!-- <span class="g-over">(15.4)</span> -->
+                            </p>
+                        </div>
+                        <%}%>
+    
+                        <div class="g-vs-text">
+                            v
+                        </div>
+    
+                        <div class="g-team-name-two">
+                            <%= match_val['teamb_short'] %>
+                        </div>
+    
+                        <% 
+                        if(match_val['current_batting_team'] == match_val['teamb_Id']){
+                        %>
+                        <div class="g-score-div">
+                            <p>
+                                <%= match_val['current_score'] %>
+                                <!-- <span class="g-over">(15.4)</span> -->
+                            </p>
+                        </div>
+                        <%}%>
+    
+                        <div class="g-match-status">
+                            <% if(match_val['matchstatus'] == 'Match Ended') { %>
+                                <%= match_val['matchstatus'] %>
+                            <% } else if(match_val['equation'] != '') { %>
+                                <%= match_val['equation'] %>
+                            <% } else { %>
+                                <%= match_val['matchstatus'] %>
+                            <%}%>
+                        </div>
+                    </a>
+                    
+
+                    <div class="g-live-blog-div">
+                        <a href="<%=cricketLive%>" title="<%-match_val['teama'] %> vs <%-match_val['teamb'] %> Live Score">
+                            LIVE BLOG
+                            <img src="/static/images/live-img.png" alt="" width='47'>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <% } } %>
+        </div>
+    </div>    
+</div>
+<!--New Cricket Strip-->

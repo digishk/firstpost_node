@@ -1,0 +1,76 @@
+<%- include(viewpath+ '/layouts/header'); %>
+
+
+
+<div class="longread-wrap">
+	<% if (typeof ads  !== 'undefined' && typeof ads['ATF_728']  !== 'undefined'){%>
+		<div class="ad-center ATF_728"  data-ad-id="<%-ads['ATF_728'][0]%>" data-ad-size="<%-ads['ATF_728'][1]%>">
+		    <%-common.displayAds(ads['ATF_728'][0]) %>
+		</div>
+	<% } %>
+	<%- include(viewpath+ '/widgets/breadCrumbs'); %>
+
+	<div class="long-read-sect">
+		<div class="innerpage-share">
+			<h2 class="category-name"><a class="section-btn" href="<%-constant.SITE_URL%>tag/long-reads">Long Reads</a></h2>
+			<%- include(viewpath+ '/widgets/social_share_widget'); %>
+		</div>
+	</div>
+	<div class="big-img-content">
+		<img class="longread-bigimg" src="<%-postPageJson['post']['post_image']%>" alt="<%=postPageJson['post']['post_title']%>">  
+
+		
+			<div class="big-img-title wow fadeIn" data-wow-duration="3s">
+				<h1><a><%-postPageJson['post']['post_title']%></a></h1>
+				<h3 class="long-read-auth">By: <span><a href="<%-constant.SITE_URL%>author/<%-postPageJson['post']['post_authorslug']%>"><%-postPageJson['post']['post_authorname']%></a><div>
+				<%=dateFormat(postPageJson['post']['post_date'] , "mmmm dd',' yyyy HH:MM:ss")%> IST</div></span></h3>
+			</div>
+	</div>
+   	
+	<%-newPostContent%>
+	<% if(typeof postPageJson['tag'] !== 'undefined' && postPageJson['tag'] !== null && postPageJson['tag'] != '' ){ %>
+	<div class="tag-flex">
+		<div class="tag-label">
+		    Tags:
+		</div>
+		<div class="tag-holder">
+			<% for (const [tag_key, tag_val] of Object.entries(postPageJson['tag'])) { %>
+				<span>
+					<a href="<%=tag_val.url%>">
+					<%= common.capitalizeEWLetter(tag_val.name) %>
+					</a>
+				</span>
+			<%}%>
+		</div>
+		
+	</div>
+	<%}%>
+	<% if (typeof outbrain_ads  !== 'undefined' && typeof outbrain_ads['AR_1']  !== 'undefined'){%>
+		<div class="container">
+		<%-outbrain_ads['AR_1'];%>
+		</div>
+	<% } %>
+	<div class="share-page innerpage-share below-share">
+		<p>Share this article</p>
+		<%- include(viewpath+ '/widgets/social_share_widget'); %>
+	</div>
+</div>
+<% if (constant.IO_SCRIPT_FLAG == 1){ %>
+<script>
+    window._io_config = window._io_config || {};
+    window._io_config["0.2.0"] = window._io_config["0.2.0"] || [];
+    window._io_config["0.2.0"].push({
+	    page_url: "<%=postPageJson['post']['post_url']%>",
+	    page_url_canonical: "<%=postPageJson['post']['post_url']%>",
+	    page_title: "<%=postPageJson['post']['post_title']%>",
+	    page_type: "article",
+	    page_language: "en",
+	    article_authors: ["<%=postPageJson['post']['post_authorname']%>"],
+	    article_categories: ["<%=postPageJson['category'][0]['cat_name']%>"],
+	    article_type: "longread",
+	    article_word_count: "<%=postPageJson.post.post_content.split(" ").length%>",
+	    article_publication_date: "<%=dateFormat(postPageJson.post.post_date , 'ddd, dd mmm yyyy HH:MM:ss')%> IST"
+    });	
+</script>
+<% } %>
+<%- include(viewpath+ '/layouts/footer'); %>

@@ -1,0 +1,129 @@
+<%- include(viewpath+ '/layouts/header'); %>
+
+        <div class="main-wrapper">
+
+            <!--728x90 Ad Space-->
+            <% if (typeof ads  !== 'undefined' && typeof ads['BTF_728']  !== 'undefined'){%>
+            <div class="ad-slot">
+                <%-common.displayAds(ads['ATF_728'][0]) %>
+            </div>
+            <% } %>
+            <!--728x90 Ad Space-->
+
+            <!--Cricket Ticker-->
+            <%- include(viewpath+ '/widgets/scorecard_caraousal'); %>
+            <!--Cricket Ticker-->
+
+            <!--Bread crumb-->
+            <%- include(viewpath+ '/widgets/breadCrumbs'); %>
+            <!--Bread crumb-->
+
+            <!--Cricket Inner Menu-->
+            <%- include(viewpath+ '/layouts/level-4-nav'); %>
+            <!--Cricket Inner Menu-->
+
+            <!--Main Page Content-->
+            <div class="content-wrap" id="teamPage">
+                <div class="left-content">
+                    <!--Player Profile Section-->
+                    <section class="profile-section">
+                        <h1 class="page-title"><span><%=team_name%> National Cricket Team</span></h1>
+
+                        <div class="player-profile-wrap">
+                            <!--Share Div-->
+                            <div class="share-btn">
+                                <div class="share-wrap">
+                                    <div class="thumb-social-wrap">
+                                        <% var shareArr = []; 
+                                                shareArr['shareTitle'] = "";
+                                                shareArr['shareUrl'] = ""; 
+                                        %>
+                                        <%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Share Div-->
+
+                            <!--Slider wrap for flags-->
+                            <div class="glide" id="flagSlider">
+                                <div class="glide__track" data-glide-el="track">
+                                    <ul class="glide__slides">
+                                        <li class="glide__slide <% if('india' == team_name) { %> active <% } %>">
+                                            <div class="flag-wrap">
+                                                <a href="<%= constant.SITE_URL %>firstcricket/players/india-national-cricket-team" title="India">
+                                                    <div class="flag-img">
+                                                        <img src="https://xmlns.cricketnext.com/cktnxt/scorecard/crk_player_images/flags/90x50/4.png" alt="India" title="India" />
+                                                    </div>
+                                                    <h4 class="country-txt">
+                                                        Ind
+                                                    </h4>
+                                                </a>
+                                            </div>
+                                        </li>
+                                        <% for (const [country_key, country_val] of Object.entries(countries)) { %>
+                                        <li class="glide__slide <% if(country_key == team_name) { %> active <% } %>">
+                                            <div class="flag-wrap">
+                                                <a href="<%= constant.SITE_URL %>firstcricket/players/<%=country_val['name'].toLowerCase().replace(' ','-') %>-national-cricket-team" title="<%=country_val['name']%>">
+                                                    <div class="flag-img">
+                                                        <img src="https://xmlns.cricketnext.com/cktnxt/scorecard/crk_player_images/flags/90x50/<%=country_val['id']%>.png" alt="<%=country_val['name']%>" title="<%=country_val['name']%>" />
+                                                    </div>
+                                                    <h4 class="country-txt">
+                                                        <%=country_val['short_name']%>
+                                                    </h4>
+                                                </a>
+                                            </div>
+                                        </li>
+                                        <% } %>
+                                    </ul>
+                                </div>
+                                <div class="glide__arrows" data-glide-el="controls">
+                                    <button class="glide__arrow glide__arrow--left prev-btn" data-glide-dir="<">&lt;</button>
+                                    <button class="glide__arrow glide__arrow--right next-btn" data-glide-dir=">">&gt;</button>
+                                </div>
+                            </div>
+                            <!--Slider wrap for flags-->
+
+                            <!--Team Player List-->
+                            <div class="team-player-wrap">
+                                <ul class="team-player-list">
+                                    <% if(typeof players !== 'undefined' && players !== 'null'){%>
+                                    <% for (const [players_key, players_val] of Object.entries(players)) { %>
+                                    <li>
+                                        <a href="<%= constant.SITE_URL %>firstcricket/player-profile/<%=players_val['name'].replace(/\s+/g, '-').toLowerCase() %>-<%=players_val['id']%>" title="<%=players_val['name']%>">
+                                            <img src="https://xmlns.cricketnext.com/cktnxt/scorecard/crk_player_images/players/128X128/<%=players_val['id']%>.png" title="<%=players_val['name']%>" alt="<%=players_val['name']%>" />
+                                            <h4 class="team-player-name">
+                                                <%=players_val['name']%>
+                                            </h4>
+                                        </a>
+                                    </li>
+                                    <% } %>
+                                    <% } %>
+                                </ul>
+                            </div>
+                            <!--Team Player List-->
+                        </div>
+                        <% if (typeof ads  !== 'undefined' && (typeof ads['MID1_300']  !== 'undefined' || typeof ads['MID2_300']  !== 'undefined')){%>
+                        <div class="two-ad-slot">
+                        <% if (typeof ads  !== 'undefined' && typeof ads['MID1_300'] !== 'undefined'){%>
+                        <div class="ad-slot">
+                        <%-common.displayAds(ads['MID1_300'][0]) %>
+                        </div>
+                        <% } %> 
+                        <% if (typeof ads  !== 'undefined' && typeof ads['MID2_300'] !== 'undefined'){%>
+                        <div class="ad-slot">
+                        <%-common.displayAds(ads['MID2_300'][0]) %>
+                        </div>
+                        <% } %>  
+                        </div>                        
+                    <% }%>
+                    </section>
+                    <!--Player Profile Section-->
+                    <% if (typeof outbrain_ads  !== 'undefined' && typeof outbrain_ads['AR_2']  !== 'undefined'){%>
+                        <%-outbrain_ads['AR_2'];%>
+                    <% } %>
+                </div>
+                <%- include(viewpath+ '/'+device+'/firstpost/rhs'); %>
+            </div>
+            <!--Main Page Content-->
+        </div>
+<%- include(viewpath+ '/layouts/footer'); %>

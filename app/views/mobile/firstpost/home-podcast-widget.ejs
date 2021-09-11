@@ -1,0 +1,40 @@
+<% if(typeof homePageJson['HPPodcastArticles'] !== 'undefined' && homePageJson['HPPodcastArticles'].length > 0) { %>
+<!--Podcast Widget-->
+<div class="podcast-widget common-widget">
+    <div class="podcast-title">
+        <img src="/static/images/podcast.jpg" alt="Podcast" title="Podcast"/>
+    </div>
+
+    <div class="content">
+        <div class="glide podcast-glide" id="podcastSlider">
+            <div class="glide__track" data-glide-el="track">
+                <ul class="glide__slides">
+                    <% for (const [homePageJson_key, homePageJson_val] of Object.entries(homePageJson['HPPodcastArticles'])) { %>
+                    <li class="glide__slide">
+                        <a href="<%-homePageJson_val['PostURL'].replace(constant.MAIN_SITE_URL, constant.SITE_URL) %>" title="<%-homePageJson_val['PostTitle'] %>">
+                            <img src="<%-constant.PLACEHOLDER_IMG_192x104 %>" data-src="<%-common.firstpost_imageOptimization(homePageJson_val['PostImage'], 192, 104, '') %>" class="fp-lazy" alt="<%-homePageJson_val['PostTitle'] %>" title="<%-homePageJson_val['PostTitle'] %>" />
+                            <h4 class="podcast-title">
+                                <%-homePageJson_val['PostTitle'] %>
+                            </h4>
+                        </a>
+                    </li>
+                    <% } %>
+                </ul>
+            </div>
+            <div class="glide">
+                <div class="glide__arrows" data-glide-el="controls">
+                    <button class="glide__arrow glide__arrow--prev" data-glide-dir="<">&lt;</button>
+                    <button class="glide__arrow glide__arrow--next" data-glide-dir=">">&gt;</button>
+                </div>
+
+                <div class="glide__bullets" data-glide-el="controls[nav]">
+                    <% for (const [homePageJson_key, homePageJson_val] of Object.entries(homePageJson['HPPodcastArticles'])) { %>
+                    <button class="glide__bullet" data-glide-dir="=<%=homePageJson_key %>"></button>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+     </div>
+</div>
+<!--Podcast Widget-->
+<% } %>

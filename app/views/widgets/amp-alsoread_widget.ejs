@@ -1,0 +1,44 @@
+<% if(typeof alsoSee !== 'undefined' && alsoSee != ''){ %>
+    <h3 class="main-story-title">
+        <a>also read</a>
+        <span></span>
+    </h3>
+    <%
+	var img_w = '';
+	var img_h = '';
+	var img_place_holder = '';
+	    img_w = '320';
+	    img_h = '180';
+	    img_place_holder = constant.PLACEHOLDER_IMG_320x180
+
+    %>
+    <% for (const [alsoSee_key, alsoSee_val] of Object.entries(alsoSee)) { %>
+
+    <div class="big-thumb">
+        <a href="<%=alsoSee_val['url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" class="thumb-img">
+            <amp-img width="320" height="180" alt="<%-alsoSee_val['title']%>" src="<%-common.firstpost_imageOptimization(alsoSee_val['image'], 320, 180 , '') %>" layout="responsive" >
+	    <% if(alsoSee_val['ContentType'] == 'Video'){%>
+		<div class="video-icon">
+		    <svg width="70.182" height="70.182" viewBox="0 0 70.182 70.182"><defs><filter id="a" x="0" y="0" width="70.182" height="70.182" filterUnits="userSpaceOnUse"><feOffset dy="3" input="SourceAlpha"/><feGaussianBlur stdDeviation="4.5" result="b"/><feFlood flood-opacity="0.294"/><feComposite operator="in" in2="b"/><feComposite in="SourceGraphic"/></filter></defs><g transform="matrix(1, 0, 0, 1, 0, 0)"><path fill="#fff" d="M23.591,2A21.591,21.591,0,1,0,45.182,23.591,21.6,21.6,0,0,0,23.591,2ZM19.273,33.307V13.875l12.955,9.716Z" transform="translate(11.5 8.5)"/></g></svg>
+		</div>
+	    <% } %>
+        </a>
+        <div class="title-wrap">
+            <a href="<%=constant.SITE_URL%>category/<%=alsoSee_val['category'].toLowerCase().replace(/ /g , '')%>" class="category-name"><%=alsoSee_val['category'].replace(/-/g , ' ')%></a>
+            <h3 class="main-title">
+                <a href="<%=alsoSee_val['url'].replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>"><%=alsoSee_val['title']%></a>
+            </h3>
+            <p class="copy">
+                <%=alsoSee_val['description']%>
+            </p>
+            <% var shareArr = []; 
+            shareArr['shareTitle'] = alsoSee_val['title'];
+            shareArr['shareUrl'] = alsoSee_val['url']; %>
+            <!--%- include(viewpath+ '/widgets/popup_social_share_widget',{shareArr:shareArr}); %-->
+        </div>
+    </div>
+    <% } %>
+<% } %>
+
+
+	   

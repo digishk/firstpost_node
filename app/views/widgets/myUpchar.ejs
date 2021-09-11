@@ -1,0 +1,14 @@
+<div class="myupchar_widget">
+    <a target='_blank' href='https://www.myupchar.com/en?utm_source=firstpost&utm_medium=banner'><img src="https://asset.myupchar.com/loading1.gif" style="margin-top:26px;" class="myupchar_img"/></a>
+</div>
+<style>.myupchar_widget {height: 250px;width: 300px;border: 1px solid #e1e1e1;text-align: center; margin: 0 auto;}</style>
+
+<% if (pageName != 'article'){%>
+<script type='text/javascript'>
+var time = new Date().getTime() / 1000;var dataString='t='+parent.document.title+'&u='+parent.location.href+'&ord='+ time;
+jQuery.ajax({url: 'https://www.myupchar.com/widget/index',type: "GET",dataType: 'text',data: dataString,cache: false,success: function (response_data) {jQuery('.myupchar_img').attr("src",response_data);jQuery('.myupchar_img').css("margin-top","0px");},error: function(response_data) {jQuery('.myupchar_img').attr("src",response_data);jQuery('.myupchar_img').css("margin-top","0px");}
+    }); 
+</script>
+<% } %>
+
+

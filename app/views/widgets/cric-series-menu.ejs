@@ -1,0 +1,19 @@
+<div class="livescore-tabs">
+	<div class="tab">
+	    <a href="<%= constant.SITE_URL %>firstcricket/series/<%= seriesSlug %>.html" title="<%= seriesName %>" class="tablinks <% if(menuHighlight == 'seriesHome'){%>active<%}%>"><%= seriesName %></a>
+	    <a href="<%= constant.SITE_URL %>firstcricket/cricket-schedule/series/<%= seriesSlug %>.html" title="<%= seriesName %> Schedule"  class="tablinks <% if(template2 == 'seriesSchedule'){%>active<%}%>">Schedule</a>
+	    <a href="<%= constant.SITE_URL %>firstcricket/results/series/<%= seriesSlug %>.html" title="<%= seriesName %> Results"  class="tablinks <% if(template2 == 'seriesResult'){%>active<%}%>">Results</a>
+	    <% if(typeof iplYear !== 'undefined' && iplYear != ""){ %>
+	    	<a href="<%= constant.SITE_URL %>firstcricket/points-table/series/<%= seriesSlug %>.html" title="<%= seriesName %> Points Table"  class="tablinks <% if(menuHighlight == 'points-table'){%>active<%}%>">Points Table</a>
+	    <%}%>
+		<a href="<%= constant.SITE_URL %>firstcricket/sports-news/series/<%= seriesSlug %>" title="<%= seriesName %> News"  class="tablinks <% if(menuHighlight == 'seriesNews'){%>active<%}%>">News</a>		
+		<% if(typeof iplYear !== 'undefined' && iplYear != ""){ %>
+			<a href="<%= constant.SITE_URL %>firstcricket/teams/series/<%= seriesSlug %>.html" title="<%= seriesName %> Teams"  class="tablinks <% if(menuHighlight == 'teams'){%>active<%}%>">Teams</a>
+			<a href="<%= constant.SITE_URL %>firstcricket/orange-cap-holder/series/<%= seriesSlug %>.html" title="<%= seriesName %> Orange Cap"  class="tablinks <% if(menuHighlight == 'orange'){%>active<%}%>">Orange Cap</a>
+			<a href="<%= constant.SITE_URL %>firstcricket/purple-cap-holder/series/<%= seriesSlug %>.html" title="<%= seriesName %> Purple Cap"  class="tablinks <% if(menuHighlight == 'purple'){%>active<%}%>">Purple Cap</a>	    
+		<%}%>
+		<% if(typeof seriesSlug !== 'undefined' && seriesSlug == "ipl-2021"){ %>
+			<a href="<%= constant.SITE_URL %>firstcricket/trivia/series/<%= seriesSlug %>.html" title="Trivia" class="tablinks <% if(menuHighlight == 'trivia'){%>active<%}%>">Trivia</a>	
+		<%}%>
+	</div>                                              
+</div>

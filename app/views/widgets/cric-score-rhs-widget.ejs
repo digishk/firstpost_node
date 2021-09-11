@@ -1,0 +1,87 @@
+<!--Cricket Scores-->
+<div class="cricket-score common-widget">
+<div class="double-title">
+    <h3 class="title-txt">Cricket scores</h3>
+    <span class="title-shadow">Cricket scores</span>
+</div>
+<div class="cricket-score-wrap widget-wrapper">
+    <div class="">
+        <div class="glide" id="cricketScore">
+            <div class="glide__track" data-glide-el="track">
+                <ul class="glide__slides">                    
+                  <li class="glide__slide">
+                      <div class="cric-score-wrap">
+                        <h2 class="cric-title">
+                            Current & Recent
+                            <% var totalCount = Object.entries(liveMatchList).length+Object.entries(resultMatchList).length %>                            
+                            <% var liCount = totalCount/4 %>                                                        
+                        </h2>
+                        <div class="cric-high-wrap">
+                            <% var count = 0; %>                            
+                            <% for (const [live_match_key, match_val] of Object.entries(liveMatchList)) { %>                            
+                            <div class="match-link-div">
+                                <a href="<%= constant.SITE_URL %>firstcricket/cricket-live-score/<%-match_val['teama'].replace(/\s+/g, '-').toLowerCase() %>-vs-<%-match_val['teamb'].replace(/\s+/g, '-').toLowerCase() %>-<%= match_val['matchtype'].replace(/\s+/g, '-').toLowerCase() %>-live-cricket-score-full/<%= match_val['series_Id']%>/<%= match_val['match_Id']%>.html" title="<%-match_val['teama'] %> vs <%-match_val['teamb'] %> Full Scorecard">
+                                    <span class="match-type">
+                                       <%= match_val['seriesname']%>
+                                    </span>
+                                    <h5 class="match-teams">
+                                        <%= match_val['teama_short']%> Vs <%= match_val['teamb_short']%>
+                                    </h5>
+                                    <p class="match-summ">
+                                        <%= match_val['equation'] %>
+                                    </p>
+                                    <p class="match-summ"><%= match_val['matchstatus'] %></p>
+                                </a>
+                            </div>                            
+                            <% count=count+1 %>                            
+                            <% if(count%4 == 0){ %>
+                                </div></div></li>  
+                                <% if(totalCount > count){ %>
+                                 <li class="glide__slide aa"><div class="cric-score-wrap"><h2 class="cric-title">Current & Recent</h2><div class="cric-high-wrap">
+                                <%}%>                                        
+                            <%} else if(totalCount == count){%>
+                                </div></div></li>
+                            <% } } %>                                         
+                            <% var reverseMatchList = Object.entries(resultMatchList).reverse();
+                            for (const [match_key, match_val] of reverseMatchList) { %>                             
+                            <div class="match-link-div">
+                                <a href="<%= constant.SITE_URL %>firstcricket/cricket-live-score/<%-match_val['teama'].replace(/\s+/g, '-').toLowerCase() %>-vs-<%-match_val['teamb'].replace(/\s+/g, '-').toLowerCase() %>-<%= match_val['matchtype'].replace(/\s+/g, '-').toLowerCase() %>-live-cricket-score-full/<%= match_val['series_Id']%>/<%= match_val['match_Id']%>.html" title="<%-match_val['teama'] %> vs <%-match_val['teamb'] %> Full Scorecard">
+                                    <span class="match-type">
+                                       <%= match_val['seriesname']%>
+                                    </span>
+                                    <h5 class="match-teams">
+                                        <%= match_val['teama_short']%> Vs <%= match_val['teamb_short']%>
+                                    </h5>
+                                    <p class="match-summ">                                       
+                                        <%= match_val['matchresult'] %>                                                
+                                    </p>
+                                </a>
+                            </div>              
+                            <% count=count+1 %>    
+                            <% if(count%4 == 0){ %>
+                                </div></div></li>              
+                                <% if(totalCount > count){ %>
+                                 <li class="glide__slide aa"><div class="cric-score-wrap"><h2 class="cric-title">Current & Recent</h2><div class="cric-high-wrap">
+                                <%}%>        
+                            <%} else if(totalCount == count){%>
+                                </div></div></li>
+                            <% } } %>
+                </ul>
+              </div>
+          
+              <div class="glide__arrows" data-glide-el="controls">
+                <button class="glide__arrow glide__arrow--prev" data-glide-dir="<">&lt;</button>
+                <button class="glide__arrow glide__arrow--next" data-glide-dir=">">&gt;</button>
+            </div>        
+            <div class="glide__bullets" data-glide-el="controls[nav]">
+                <% for(let j=0 ;j<liCount ;j++){ %>
+                <button class="glide__bullet" data-glide-dir="=<%= j %>"></button>
+                <%}%>
+                <!-- <button class="glide__bullet" data-glide-dir="=1"></button> -->
+                <!-- <button class="glide__bullet" data-glide-dir="=2"></button> -->
+            </div>
+          </div>
+    </div>
+</div>
+</div>
+<!--Cricket Scores-->

@@ -1,0 +1,55 @@
+<style>
+.main-menu-wrap .sub-menu li.hdfc-events, .main-menu-wrap .sub-menu li.hdfc-events a{
+    padding: 0;
+}
+
+.main-menu-wrap .sub-menu li.hdfc-events img{
+    width: 103px;
+    height: 25px;
+}
+
+</style>
+<nav class="main-menu-wrap">
+	<div class="menu-wrap container">
+		<ul class="main-menu">
+			<% i = 0 %>
+			<% for (const [menuKey, menuitems] of Object.entries(constant.fp_menu[2]['section'])) { %>
+			<% if(menuitems.displayOnTopNav != 'undefined' && menuitems.displayOnTopNav == '1') { %>
+				<li class="nav-events <% if(typeof active_level2_nav_slug !== 'undefined' && menuitems.menu_slug == active_level2_nav_slug){ %>active<% } %>">
+					<a href="<%=menuitems.menu_url.replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" title="<%=menuitems.menu_name%>" <% if(menuitems.menu_target != 'undefined'){ %><%=menuitems.menu_target%><% } %> class="<% if(menuitems.menu_class != 'undefined'){ %><%=menuitems.menu_class%><% } %>"><%=menuitems.menu_name%></a>
+				</li>
+				<% if(i >= 7) { break; } %>
+				<% i++ %>
+			<% } %>
+			<% } %>
+		</ul>
+		<ul class="sub-menu">
+			<% i = 0 %>
+			<% for (const [key, items] of Object.entries(constant.fp_menu[2])) { %>
+			<% if(key != "section") { %>
+			<% for (const [menuKey, menuitems] of Object.entries(items)) { %>
+			<% if(menuitems.displayOnTopNav != 'undefined' && menuitems.displayOnTopNav == '1') { %>
+				<li class="nav-events <% if(typeof active_level2_nav_slug !== 'undefined' && menuitems.menu_slug == active_level2_nav_slug){ %>active<% } %>">
+					<a href="<%=menuitems.menu_url.replace(constant.MAIN_SITE_URL, constant.SITE_URL)%>" title="<%=menuitems.menu_name%>" <% if(menuitems.menu_target != 'undefined'){ %><%=menuitems.menu_target%><% } %> class="<% if(menuitems.menu_class != 'undefined'){ %><%=menuitems.menu_class%><% } %>" ><strong><%=menuitems.menu_name%></strong></a>
+				</li>
+				<% if(i >= 3) { break; } %>
+				<% i++ %>
+			<% } %>
+			<% } %>
+			<% } %>
+			<% } %>
+			<li class="hdfc-events">
+				<a href="https://www.firstpost.com/hdfc-life-Insurance-made-simple/" title="HDFC Life"><img src="<%-constant.SITE_URL%>static/images/hdfc-web.png" alt="HDFC Life" title="HDFC Life">
+				</a>
+			</li>
+			<!--<li>
+				<div class="covid-tracker">
+					<a href="javascript:void(0);" title="">
+						<img src="https://images.news18.com/static_news18/pix/ibnhome/news18/images/corona-toolbar/virus.png" alt="corona virus">
+						<span>Tracker</span>
+					</a>
+				</div>
+			</li>-->
+		</ul>
+	</div>
+</nav>

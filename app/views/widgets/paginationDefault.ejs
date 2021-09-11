@@ -1,0 +1,58 @@
+<% var items = pagination;  %>
+<div class="pagination-wrap">
+    <ul class="pagination">
+        <% if(items['pageNo'] !='' && items['pageNo'] >= 2) { %> 
+            <li class="prev disabled">
+                <% if(items['pageNo'] == 2) { %>
+                    <%/* if (typeof getCurrentURL !== 'undefined' && getCurrentURL.lastIndexOf('amp')) { %> 
+                        <a href="<%-pgUrl %>1/amp" title="">
+                    <% } else { %>
+                        <a href="<%-pgUrl %>1" title="">
+                    <% } */%>
+                        <a href="<%-pgUrl %>1" title="">
+                        &lt;                                    
+                    </a>
+                <% } else { %>
+                    <%/* if (typeof getCurrentURL !== 'undefined' && getCurrentURL.lastIndexOf('amp')) { %>
+                        <a href="<%-pgUrl %><%-items['pageNo']-1%>/amp" title="">
+                    <% } else { %>
+                        <a href="<%-pgUrl %><%-items['pageNo']-1%>" title="">
+                    <% } */%>
+                        <a href="<%-pgUrl %><%-items['pageNo']-1%>" title="">
+                        &lt;                                    
+                    </a>
+                <% } %>
+            </li>
+        <% } %>
+
+        <% for (const [key, val] of Object.entries(items['pages'])) { %>
+            <% if (key >= 1)  { %>
+                <% var active = "";  %>
+                <% if(items['pageNo'] == key) { %>
+                    <% var active = "active";  %>
+                <% } %>
+                    <li class="<%-active %>">
+                        <%/* if (typeof getCurrentURL !== 'undefined' && getCurrentURL.lastIndexOf('amp')) { %> 
+                            <a href="<%-val%>/amp"><%-key %></a>
+                        <% } else { %>
+                            <a href="<%-val%>"><%-key %></a>
+                        <% } */%>
+                        <a href="<%-val%>"><%-key %></a>
+                    </li>
+            <% } %>
+        <% } %>
+
+        <% if(items['next'] !='' && items['next'] != items['pageNo']) { %> 
+            <li class="next">
+                <%/* if (typeof getCurrentURL !== 'undefined' && getCurrentURL.lastIndexOf('amp')) { %>
+                    <a href="<%-pgUrl %><%=Number(items['pageNo'])+1%>/amp" title="">
+                <% } else { %>
+                    <a href="<%-pgUrl %><%=Number(items['pageNo'])+1%>" title="">
+                <% } */%>   
+                    <a href="<%-pgUrl %><%=Number(items['pageNo'])+1%>" title="">     
+                    &gt;
+                </a>
+            </li>
+        <% } %>
+    </ul>
+</div>

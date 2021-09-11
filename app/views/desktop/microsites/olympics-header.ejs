@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include(viewpath+ '/util/header-meta'); %>
+	
+    <link href="//b.scorecardresearch.com" rel="dns-prefetch"/>
+	<link href="//b.scorecardresearch.com" rel="preconnect"/>
+    <link href="https://securepubads.g.doubleclick.net" rel="dns-prefetch"/>
+	<link href="https://securepubads.g.doubleclick.net" rel="preconnect"/>
+	<link href="https://pubads.g.doubleclick.net" rel="dns-prefetch"/>
+	<link href="https://pubads.g.doubleclick.net" rel="preconnect"/>
+    <link href="https://www.google-analytics.com" rel="dns-prefetch"/>
+	<link href="https://www.google-analytics.com" rel="preconnect"/>
+	<link href="//www.googletagservices.com" rel="dns-prefetch"/>
+	<link href="//www.googletagservices.com" rel="preconnect"/>
+	<link href="//tpc.googlesyndication.com" rel="dns-prefetch"/>
+	<link href="//tpc.googlesyndication.com" rel="preconnect"/>
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,500;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="<%-desktopPageCss%>?v=<%-constant.config_flags.VERSION_NO%>">
+    <link rel="stylesheet" type="text/css" href="<%-constant.SITE_URL%>static/css/olympics.css?v=<%-constant.config_flags.VERSION_NO%>">
+
+    <script async type="text/javascript" src="<%-constant.SITE_URL%>static/js/jquery-3.4.0.min.js"></script>
+	<script async type="text/javascript" src="<%-constant.SITE_URL%>static/js/search.js?v=<%-constant.config_flags.VERSION_NO%>"></script>
+	
+    <%- include(viewpath+ '/util/ga-scripts'); %>
+    <!-- <%- include(viewpath+ '/layouts/header-css'); %> -->
+</head>
+<body>
+	<div class="top-container">
+        <div class="left-column" id="dsktopleft">
+            <!-- <div class="addbanner-170">170 x 90</div> -->
+            <div class="fp-logo-wrap">
+                <!-- <span class="vertext">PRESENTS</span> -->
+                <div class="toktext"><img src="<%-constant.SITE_URL %>static/images/olympics/fp-logo.png" alt=""> <p>TOKYO <br>OLYMPICS <em>2020</em></p></div>
+            </div>
+        </div>
+        <div class="left-column" id="mbtopleft">
+            <div class="hamburger">
+                <div class="mbnav" onclick="openNav()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <!-- <div class="addbanner-170">105 x 45</div> -->
+            <div class="fp-logo-wrap">
+                <!-- <span class="vertext">PRESENTS</span> -->
+                <div class="toktext"><img src="<%-constant.SITE_URL %>static/images/olympics/fp-logo.png" alt=""> <p>TOKYO <br>OLYMPICS <em>2020</em></p></div>
+            </div>
+            <div class="partner-box" id="copartner">
+                <!-- <div class="part-ttl">CO PARTNERS</div>
+                <div class="flex-wrap">
+                    <div class="box">
+                        <a href="http://pubads.g.doubleclick.net/gampad/clk?id=5745357963&iu=/1039154/FSTPST_ENG/FSTPST_ENG_Desktop_TRACKER/FSTPST_ENG_DTP_NIPPON_CLK_1x1" target="_blank">
+                            <img src="<%-constant.SITE_URL %>static/images/olympics/nippon.jpg">
+                        </a>
+                    </div>
+                    <div class="box">105x45</div>
+                </div> -->
+            </div>
+        </div>
+        <div class="right-column" id="dsktopright">
+            <div class="partner-box" id="copartner">
+                <!-- <div class="part-ttl">CO PARTNERS</div>
+                <div class="flex-wrap">
+                    <div class="box">
+                        <a href="http://pubads.g.doubleclick.net/gampad/clk?id=5745357963&iu=/1039154/FSTPST_ENG/FSTPST_ENG_Desktop_TRACKER/FSTPST_ENG_DTP_NIPPON_CLK_1x1" target="_blank">
+                            <img src="<%-constant.SITE_URL %>static/images/olympics/nippon.jpg">
+                        </a>
+                    </div>
+                    <div class="box">105x45</div>
+                </div> -->
+            </div>
+            <div class="partner-box">
+                <!-- <div class="part-ttl">ASSOCIATE PARTNERS</div>
+                <div class="flex-wrap">
+                    <div class="box">105x45</div>
+                    <div class="box">105x45</div>
+                </div> -->
+            </div>
+        </div>
+        <div class="right-column" id="mbtopright">
+            <div class="glide" id="partlogoslider">
+                <div class="glide__track" data-glide-el="track">
+                     <ul class="glide__slides">
+                        <li class="glide__slide">
+                            <div class="partner-box" id="copartner">
+                                <!-- <div class="part-ttl">CO PARTNERS</div>
+                                <div class="flex-wrap">
+                                    <div class="box">84x36</div>
+                                    <div class="box">84x36</div>
+                                </div> -->
+                            </div>
+                        </li>
+                        <li class="glide__slide">
+                            <div class="partner-box">
+                                <!-- <div class="part-ttl">ASSOCIATE PARTNERS</div>
+                                <div class="flex-wrap">
+                                    <div class="box">84x36</div>
+                                    <div class="box">84x36</div>
+                                </div> -->
+                            </div>
+                        </li>
+                     </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <header id="olympics">
+        <div class="header-wrap">
+            <div class="menu">
+                <a class="<% if(template2 == 'olympics-home'){ %>active<% } %>" href="<%=constant.SITE_URL%>sports/olympics/">Tokyo Olympics 2020</a>
+                <a href="<%=constant.SITE_URL%>tag/tokyo-olympics-2020" target="_blank">News</a>
+                <a class="<% if(template2 == 'olympics-games'){ %>active<% } %>" href="<%=constant.SITE_URL%>sports/olympics/games">Sports</a>
+                <a href="<%=constant.SITE_URL%>tag/tokyo-olympics-2020-coronavirus" target="_blank">COVID-19</a>
+                <a class="<% if(template2 == 'olympics-schedule'){ %>active<% } %>" href="<%=constant.SITE_URL%>sports/olympics/schedule">Schedule</a>
+                <!-- <a href="#">Results</a> -->
+                <a class="<% if(template2 == 'olympics-medaltally'){ %>active<% } %>" href="<%=constant.SITE_URL%>sports/olympics/medal-tally">Medal Tally</a>
+                <a class="<% if(template2 == 'olympics-photos'){ %>active<% } %>" href="<%=constant.SITE_URL%>sports/olympics/photos">Photos</a>
+                <!-- <a class="<% if(template2 == 'olympics-videos'){ %>active<% } %>" href="<%=constant.SITE_URL%>sports/olympics/videos">Videos</a> -->
+                <a href="<%=constant.SITE_URL%>tag/tokyo-paralympics-2020" target="_blank">Tokyo Paralympics</a>
+                <a class="<% if(template2 == 'olympics-history'){ %>active<% } %>" href="<%=constant.SITE_URL%>sports/olympics/history">History</a>
+            </div>
+            <div class="rt-social-wrap">
+                <ul>
+                    <li class="fb ic-social"><a href="https://www.facebook.com/firstpostin">Facebook</a></li>
+                    <li class="twt ic-social"><a href="https://twitter.com/firstpost">Twitter</a></li>
+                    <li class="insta ic-social"><a href="https://www.instagram.com/firstpost/">Instagram</a></li>
+                    <li class="ytube ic-social"><a href="https://www.youtube.com/user/Firstpostin">Youtube</a></li>
+                </ul>
+                <!-- <ul>
+                    <li class="fb ic-social"><a
+                        href="https://www.facebook.com/sharer/sharer.php?u=<%= seoData['pageUrl'] %>"
+                        target="_blank"
+                        rel="noreferrer"
+                        >Facebook</a></li>
+                    <li class="twt ic-social"><a
+                        href="https://twitter.com/share?url=<%= seoData['pageUrl'] %>"
+                        target="_blank"
+                        rel="noreferrer"
+                        >Twitter</a></li>
+                    <li class="insta ic-social"><a href="https://www.instagram.com/firstpost/">Instagram</a></li>
+                    <li class="ytube ic-social"><a href="https://www.youtube.com/user/Firstpostin">Youtube</a></li>
+                </ul> -->
+                
+                <div class="back-wrap">
+                    <a href="<%=constant.SITE_URL%>">Back to</a>
+                    <a href="<%=constant.SITE_URL%>"> <img src="<%-constant.SITE_URL %>static/images/olympics/fp-logo1.png" alt=""> </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div id="menunav-wrap" onclick="closeNav()">
+        <div id="mymenunav" onclick="event.stopPropagation();">
+            <div onclick="closeNav()" class="close-menunav">
+            <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" class="close" fill="#C7C7C7"><path d="m256 512c-141.160156 0-256-114.839844-256-256s114.839844-256 256-256 256 114.839844 256 256-114.839844 256-256 256zm0-475.429688c-120.992188 0-219.429688 98.4375-219.429688 219.429688s98.4375 219.429688 219.429688 219.429688 219.429688-98.4375 219.429688-219.429688-98.4375-219.429688-219.429688-219.429688zm0 0"></path><path d="m347.429688 365.714844c-4.679688 0-9.359376-1.785156-12.929688-5.359375l-182.855469-182.855469c-7.144531-7.144531-7.144531-18.714844 0-25.855469 7.140625-7.140625 18.714844-7.144531 25.855469 0l182.855469 182.855469c7.144531 7.144531 7.144531 18.714844 0 25.855469-3.570313 3.574219-8.246094 5.359375-12.925781 5.359375zm0 0"></path><path d="m164.570312 365.714844c-4.679687 0-9.355468-1.785156-12.925781-5.359375-7.144531-7.140625-7.144531-18.714844 0-25.855469l182.855469-182.855469c7.144531-7.144531 18.714844-7.144531 25.855469 0 7.140625 7.140625 7.144531 18.714844 0 25.855469l-182.855469 182.855469c-3.570312 3.574219-8.25 5.359375-12.929688 5.359375zm0 0"></path></svg>
+        </div>
+            <ul>
+                <li><a class="<% if(template2 == 'olympics-home'){ %>active<% } %>" href="<%=constant.SITE_URL%>sports/olympics/">Tokyo Olympics 2020</a></li>
+                <li> <a href="<%=constant.SITE_URL%>tag/tokyo-olympics-2020">News</a></li>
+                <li><a class="<% if(template2 == 'olympics-games'){ %>active<% } %>" href="<%=constant.SITE_URL%>sports/olympics/games">Sports</a></li>
+                <li><a href="<%=constant.SITE_URL%>tag/tokyo-olympics-2020-coronavirus">COVID-19</a></li> 
+                <li><a class="<% if(template2 == 'olympics-schedule'){ %>active<% } %>" href="<%=constant.SITE_URL%>sports/olympics/schedule">Schedule</a></li>
+                <!-- <a href="#">Results</a> -->
+                <li><a class="<% if(template2 == 'olympics-medaltally'){ %>active<% } %>" href="<%=constant.SITE_URL%>sports/olympics/medal-tally">Medal Tally</a></li>
+                <li><a class="<% if(template2 == 'olympics-photos'){ %>active<% } %>" href="<%=constant.SITE_URL%>sports/olympics/photos">Photos</a></li>
+               <!-- <li><a class="<% if(template2 == 'olympics-videos'){ %>active<% } %>" href="<%=constant.SITE_URL%>sports/olympics/videos">Videos</a></li>  -->
+                <li><a href="<%=constant.SITE_URL%>tag/tokyo-paralympics-2020">Tokyo Paralympics</a></li>
+                <li><a class="<% if(template2 == 'olympics-history'){ %>active<% } %>" href="<%=constant.SITE_URL%>sports/olympics/history">History</a></li> 
+            </ul>
+        </div>
+    </div>
+
+    <!-- ads-->
+    <% if (typeof ads  !== 'undefined' && typeof ads['Shosh_OOP']  !== 'undefined'){%>
+        <div>
+            <%-common.displayAds(ads['Shosh_OOP'][0]) %>
+        </div>
+    <% } %>
+
+    <% if (typeof ads  !== 'undefined' && typeof ads['Skin_OOP']  !== 'undefined'){%>
+        <div>
+            <%-common.displayAds(ads['Skin_OOP'][0]) %>
+        </div>
+    <% } %>
+
+    <% if(device === 'mobile') { %>
+        <% if ((typeof ads  !== 'undefined' && typeof ads['ATF_320'] !== 'undefined')){%>
+            <div class="ad-slot m-fixed-ad-banner" data-ad-id="<%-ads['ATF_320'][0]%>" data-ad-size="<%-ads['ATF_320'][1]%>">
+                <%-common.displayAds(ads['ATF_320'][0]) %>
+            </div>
+        <% } %>
+    <% }else { %>
+        <% if ((typeof ads  !== 'undefined' && typeof ads['ATF_728'] !== 'undefined')){%>
+            <div class="ad-center fixed-ad-banner">
+                <%-common.displayAds(ads['ATF_728'][0]) %>
+            </div>
+        <% } %> 
+    <%}%>
